@@ -1,0 +1,231 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická RCE zranitelnost v Oracle E-Business Suite aktivně zneužívána",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-101767",
+        "CVE-2025-61882",
+        "CVE-2026-46817"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/10/hackers-target-critical-oracle-e.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Nová kritická zranitelnost v Oracle E-Business Suite (EBS) umožňuje neautentizovaným útočníkům provádět SQL injection skrze Thin Client Framework servlet, což vede k RCE na aplikačním hostiteli.",
+        "cil": "Enterprise systémy Oracle E-Business Suite (finanční, HR a mzdové agendy)."
+      },
+      "technicky_kontext": {
+        "jak_to_funguje": "Zranitelnost CVE-2026-101767 spočívá v nesprávné autentizaci v Thin Client Framework (TCF) servletu na cestě /OA_HTML/AppsTCFServer. Útočník může odeslat crafted POST požadavek (např. instanciací Gantt data-serveru), provést SQL příkazy pod účtem databázového uživatele APPS a následně spustit systémové příkazy OS pod oprávněním aplikačního účtu EBS.",
+        "mitre": [
+          "T1190",
+          "T1059",
+          "T1505"
+        ],
+        "mitigace": [
+          "Okamžitě aplikovat nejnovější Critical Patch Update od Oracle.",
+          "Odstranit servlet AppsTCFServer z URL firewall allowlistu.",
+          "Omezit přístup k webové vrstvě EBS pouze na důvěryhodné sítě."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Servlet",
+          "vysvetleni": "Java komponenta běžeckého prostředí webového serveru, která zpracovává požadavky klientů."
+        },
+        {
+          "pojem": "Thin Client Framework (TCF)",
+          "vysvetleni": "Architektonický framework v Oracle EBS určený pro komunikaci mezi klientem a aplikačním serverem."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Řetězec zranitelností PHP2Shell a Fragnesia zneužit k rootnutí desítek serverů",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-109618",
+        "CVE-2026-109619",
+        "CVE-2026-46300"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-fragnesia-linux-flaw-chained-in-php2shell-attacks/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/10/php2shell-attack-roots-25-servers.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci řetězí kritické RCE zranitelnosti PHP2Shell s lokální Privilege Escalation chybou v Linux kernelu zvanou Fragnesia k nasazení webshellů a získání root oprávnění na firewallech a serverech.",
+        "cil": "Internetem vystavená rozhraní firewalů a servery běžící na ohrožených verzích PHP a Linuxu."
+      },
+      "technicky_kontext": {
+        "jak_to_funguje": "Útok využívá PHP2Shell (CVE-2026-109618 a CVE-2026-109619) k dosažení neautentizovaného RCE přes mechanizmus session.upload_progress v appweb management serveru. Následně je zneužita zranitelnost Fragnesia (CVE-2026-46300) v linuxovém subsystému XFRM ESP-in-TCP pro Privilege Escalation na root.",
+        "mitre": [
+          "T1190",
+          "T1068",
+          "T1505.003"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat PHP a Linux kernel na opravené verze.",
+          "Omezit přístup k management rozhraním zařízení pouze na interní a důvěryhodné sítě."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Webshell",
+          "vysvetleni": "Skript umístěný na webovém serveru, který útočníkovi poskytuje vzdálené ovládání systému přes webové rozhraní."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Technika získání vyšších oprávnění v systému (např. z běžného uživatele na root)."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Kritická zranitelnost v Linux TCP podvrhuje root příkazy, AI odhalila exploit",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-98432"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/10/linux-kernel-tcp-flaw-with-98-cvss.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Závažná use-after-free zranitelnost v TCP kódu Linux kernelu (CVE-2026-98432) umožňuje vzdálenému útočníkovi bez autentizace spouštět příkazy jako root.",
+        "cil": "Linuxové servery s aktivním multipath TCP listenerem napříč distribucemi."
+      },
+      "technicky_kontext": {
+        "jak_to_funguje": "Jde o race condition při TCP handshake, kdy kernel předává IP volby uložené v pending požadavku na nový socket bez jejich zkopírování. Pokud je socket zničen v momentě, kdy jiné CPU čte volby pro odpověď na požadavek, dochází k čtení uvolněné paměti (use-after-free). Model AI od Anthropicu úspěšně sestavil funkční exploit.",
+        "mitre": [
+          "T1211",
+          "T1068"
+        ],
+        "mitigace": [
+          "Sledovat vydání aktualizací od správců distribucí (Ubuntu, RHEL) a okamžitě aplikovat opravené balíčky kernelu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Use-After-Free",
+          "vysvetleni": "Typ softwarové zranitelnosti paměti, kdy program pokračuje v přístupu k paměti po její uvolnění, což může vést ke korupci dat nebo RCE."
+        },
+        {
+          "pojem": "Race Condition",
+          "vysvetleni": "Chyba souběhu, kdy chování systému závisí na nekontrolovaném pořadí provádění operací v reálném čase."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 4,
+      "titulek": "APT skupina UAT-11473 zneužila Cisco SD-WAN zero-day k nasazení KeyDrift malwaru",
+      "kategorie": "apt",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-20127"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-cisco-sd-wan-flaw-to-deploy-custom-keydrift-malware/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Státem podporovaná APT skupina zneužila autentizační bypass v Cisco Catalyst SD-WAN Controlleru k nasazení pokročilého malwarového frameworku KeyDrift krádežícího šifrovací klíče.",
+        "cil": "Vojenský, kosmický a letecký průmysl, výzkumné organizace využívající Cisco SD-WAN."
+      },
+      "technicky_kontext": {
+        "jak_to_funguje": "Útočníci zneužili CVE-2026-20127 (Authentication Bypass) k získání administrátorského přístupu na SD-WAN řadiče. Následně nainstalovali framework KeyDrift s moduly PolyFlame (injekce do vdaemon procesů jako TinyShell backdoor) a LittleFilch (hookování SSL_read pro zachytávání dešifrovaného provozu a klíčů IPsec data-plane).",
+        "mitre": [
+          "T1190",
+          "T1573",
+          "T1071",
+          "T1543"
+        ],
+        "mitigace": [
+          "Nainstalovat oficiální bezpečnostní záplaty od Cisca pro CVE-2026-20127.",
+          "Implementovat doporučené bezpečnostní hardening průvodce pro SD-WAN prostředí."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Control Plane",
+          "vysvetleni": "Část síťové architektury, která zpracovává řídicí signály a routovací informace odděleně od samotného přenosu dat."
+        },
+        {
+          "pojem": "DLL Sideloading",
+          "vysvetleni": "Technika zneužívající legitimní aplikaci k načtení podvržené škodlivé knihovny namísto originální."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 5,
+      "titulek": "Kritická zranitelnost v Cisco Firewallech způsobuje DoS útoky",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-76418"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/10/cisco-patches-actively-exploited-asa.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Cisco vydalo záplaty pro vysoce závažnou zranitelnost v ASA a FTD software, kterou útočníci aktivně zneužívají k neočekávanému restartu zařízení a vyvolání DoS stavu.",
+        "cil": "Cisco Secure Firewall ASA a FTD s povolenou SSL VPN a sekundární autentizací."
+      },
+      "technicky_kontext": {
+        "jak_to_funguje": "Chyba (CVE-2026-76418) spočívá v logických chybách při zpracování sekundární autentizace v tunelové skupině SSL remote access VPN. Neautentizovaný útočník může zaslat speciálně upravený požadavek, který způsobí neočekávaný reload firewallu.",
+        "mitre": [
+          "T1499"
+        ],
+        "mitigace": [
+          "Aplikovat aktualizované verze softwaru vydané společností Cisco.",
+          "Dočasně vypnout seznam tunelových skupin nebo sekundární autentizaci podle doporučení dodavatele."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Denial of Service (DoS)",
+          "vysvetleni": "Útok, jehož cílem je vyřadit službu nebo zařízení z provozu a znemožnit přístup oprávněným uživatelům."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}

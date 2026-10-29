@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CTI Svodka">
+    <title>Threat Intel Svodka | 2026-10-29</title>
+    <style>
+        :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            padding: calc(1.5rem + env(safe-area-inset-top)) calc(1rem + env(safe-area-inset-right)) calc(2.5rem + env(safe-area-inset-bottom)) calc(1rem + env(safe-area-inset-left));
+        }
+        .container { max-width: 920px; margin: 0 auto; }
+        header.site-header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+        header.site-header h1 { font-size: 1.45rem; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--sev-color); border-radius: 10px; padding: 1.1rem; margin-bottom: 1rem; }
+        .card-header { display: flex; gap: 0.9rem; margin-bottom: 0.9rem; align-items: flex-start; }
+        .score-box { background: var(--bg-acc); border: 1px solid var(--sev-color); color: var(--sev-color); padding: 0.45rem 0.5rem; border-radius: 8px; text-align: center; min-width: 64px; flex-shrink: 0; }
+        .score-num { font-size: 1.35rem; font-weight: 800; display: block; line-height: 1.1; }
+        .score-word { font-size: 0.65rem; font-weight: 700; display: block; margin-top: 2px; }
+        .title-box h2 { font-size: 1.1rem; margin-top: 0.35rem; line-height: 1.35; }
+        .meta-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .badge { font-size: 0.72rem; padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; color: inherit; font-family: ui-monospace, SFMono-Regular, monospace; }
+        .badge-cat { background: #21262d; }
+        .badge-itw { background: rgba(255,59,48,0.2); color: #ff6b6b; border-color: #ff3b30; }
+        .badge-cve { background: rgba(88,166,255,0.12); color: var(--accent); border-color: rgba(88,166,255,0.4); }
+        .quick-summary { background: rgba(255,255,255,0.02); padding: 0.85rem; border-radius: 6px; margin-bottom: 0.9rem; font-size: 0.94rem; }
+        .quick-summary p + p { margin-top: 0.35rem; }
+        details { background: var(--bg-acc); border: 1px solid var(--border); border-radius: 6px; }
+        summary { padding: 0.75rem 0.9rem; cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.92rem; }
+        .accordion-content { padding: 0.9rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
+        .section-block + .section-block { margin-top: 0.9rem; }
+        .section-block h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+        .section-block ul { padding-left: 1.2rem; }
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.9rem; }
+        .score-reason { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted); }
+        .glossary-item { background: rgba(255,255,255,0.04); padding: 0.45rem 0.6rem; margin-bottom: 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+        .card-footer { margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted); word-break: break-word; }
+        .card-footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 600px) { .grid-2col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
+            <span style="color: var(--accent); font-family: monospace;">2026-10-29 • 5 hrozeb</span>
+        </header>
+        <main>
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">10<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-101767" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-101767</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-61882" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2025-61882</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-46817" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-46817</a></div>
+                    <h2>#1 Kritická RCE zranitelnost v Oracle E-Business Suite aktivně zneužívána</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Enterprise systémy Oracle E-Business Suite (finanční, HR a mzdové agendy).</p>
+                <p><strong>⚡ Podstata:</strong> Nová kritická zranitelnost v Oracle E-Business Suite (EBS) umožňuje neautentizovaným útočníkům provádět SQL injection skrze Thin Client Framework servlet, což vede k RCE na aplikačním hostiteli.</p>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block"><h3>⚙️ Jak to funguje</h3><p>Zranitelnost CVE-2026-101767 spočívá v nesprávné autentizaci v Thin Client Framework (TCF) servletu na cestě /OA_HTML/AppsTCFServer. Útočník může odeslat crafted POST požadavek (např. instanciací Gantt data-serveru), provést SQL příkazy pod účtem databázového uživatele APPS a následně spustit systémové příkazy OS pod oprávněním aplikačního účtu EBS.</p></div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aplikovat nejnovější Critical Patch Update od Oracle.</li><li>Odstranit servlet AppsTCFServer z URL firewall allowlistu.</li><li>Omezit přístup k webové vrstvě EBS pouze na důvěryhodné sítě.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1059</code></li><li><code>T1505</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Servlet:</strong> Java komponenta běžeckého prostředí webového serveru, která zpracovává požadavky klientů.</div><div class='glossary-item'><strong>Thin Client Framework (TCF):</strong> Architektonický framework v Oracle EBS určený pro komunikaci mezi klientem a aplikačním serverem.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/10/hackers-target-critical-oracle-e.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">10<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109618" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109618</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109619" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109619</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-46300" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-46300</a></div>
+                    <h2>#2 Řetězec zranitelností PHP2Shell a Fragnesia zneužit k rootnutí desítek serverů</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Internetem vystavená rozhraní firewalů a servery běžící na ohrožených verzích PHP a Linuxu.</p>
+                <p><strong>⚡ Podstata:</strong> Útočníci řetězí kritické RCE zranitelnosti PHP2Shell s lokální Privilege Escalation chybou v Linux kernelu zvanou Fragnesia k nasazení webshellů a získání root oprávnění na firewallech a serverech.</p>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block"><h3>⚙️ Jak to funguje</h3><p>Útok využívá PHP2Shell (CVE-2026-109618 a CVE-2026-109619) k dosažení neautentizovaného RCE přes mechanizmus session.upload_progress v appweb management serveru. Následně je zneužita zranitelnost Fragnesia (CVE-2026-46300) v linuxovém subsystému XFRM ESP-in-TCP pro Privilege Escalation na root.</p></div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizovat PHP a Linux kernel na opravené verze.</li><li>Omezit přístup k management rozhraním zařízení pouze na interní a důvěryhodné sítě.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1505.003</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Webshell:</strong> Skript umístěný na webovém serveru, který útočníkovi poskytuje vzdálené ovládání systému přes webové rozhraní.</div><div class='glossary-item'><strong>Privilege Escalation:</strong> Technika získání vyšších oprávnění v systému (např. z běžného uživatele na root).</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-warns-of-fragnesia-linux-flaw-chained-in-php2shell-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/10/php2shell-attack-roots-25-servers.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">10<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-98432" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-98432</a></div>
+                    <h2>#3 Kritická zranitelnost v Linux TCP podvrhuje root příkazy, AI odhalila exploit</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Linuxové servery s aktivním multipath TCP listenerem napříč distribucemi.</p>
+                <p><strong>⚡ Podstata:</strong> Závažná use-after-free zranitelnost v TCP kódu Linux kernelu (CVE-2026-98432) umožňuje vzdálenému útočníkovi bez autentizace spouštět příkazy jako root.</p>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block"><h3>⚙️ Jak to funguje</h3><p>Jde o race condition při TCP handshake, kdy kernel předává IP volby uložené v pending požadavku na nový socket bez jejich zkopírování. Pokud je socket zničen v momentě, kdy jiné CPU čte volby pro odpověď na požadavek, dochází k čtení uvolněné paměti (use-after-free). Model AI od Anthropicu úspěšně sestavil funkční exploit.</p></div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Sledovat vydání aktualizací od správců distribucí (Ubuntu, RHEL) a okamžitě aplikovat opravené balíčky kernelu.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1211</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Use-After-Free:</strong> Typ softwarové zranitelnosti paměti, kdy program pokračuje v přístupu k paměti po její uvolnění, což může vést ke korupci dat nebo RCE.</div><div class='glossary-item'><strong>Race Condition:</strong> Chyba souběhu, kdy chování systému závisí na nekontrolovaném pořadí provádění operací v reálném čase.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/10/linux-kernel-tcp-flaw-with-98-cvss.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">APT</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-20127" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-20127</a></div>
+                    <h2>#4 APT skupina UAT-11473 zneužila Cisco SD-WAN zero-day k nasazení KeyDrift malwaru</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Vojenský, kosmický a letecký průmysl, výzkumné organizace využívající Cisco SD-WAN.</p>
+                <p><strong>⚡ Podstata:</strong> Státem podporovaná APT skupina zneužila autentizační bypass v Cisco Catalyst SD-WAN Controlleru k nasazení pokročilého malwarového frameworku KeyDrift krádežícího šifrovací klíče.</p>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block"><h3>⚙️ Jak to funguje</h3><p>Útočníci zneužili CVE-2026-20127 (Authentication Bypass) k získání administrátorského přístupu na SD-WAN řadiče. Následně nainstalovali framework KeyDrift s moduly PolyFlame (injekce do vdaemon procesů jako TinyShell backdoor) a LittleFilch (hookování SSL_read pro zachytávání dešifrovaného provozu a klíčů IPsec data-plane).</p></div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Nainstalovat oficiální bezpečnostní záplaty od Cisca pro CVE-2026-20127.</li><li>Implementovat doporučené bezpečnostní hardening průvodce pro SD-WAN prostředí.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1573</code></li><li><code>T1071</code></li><li><code>T1543</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Umožňuje Privilege Escalation/Lateral Movement, +1 Chybí patch</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Control Plane:</strong> Část síťové architektury, která zpracovává řídicí signály a routovací informace odděleně od samotného přenosu dat.</div><div class='glossary-item'><strong>DLL Sideloading:</strong> Technika zneužívající legitimní aplikaci k načtení podvržené škodlivé knihovny namísto originální.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-cisco-sd-wan-flaw-to-deploy-custom-keydrift-malware/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-high" style="--sev-color: #ff9500;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76418" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76418</a></div>
+                    <h2>#5 Kritická zranitelnost v Cisco Firewallech způsobuje DoS útoky</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Cisco Secure Firewall ASA a FTD s povolenou SSL VPN a sekundární autentizací.</p>
+                <p><strong>⚡ Podstata:</strong> Cisco vydalo záplaty pro vysoce závažnou zranitelnost v ASA a FTD software, kterou útočníci aktivně zneužívají k neočekávanému restartu zařízení a vyvolání DoS stavu.</p>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block"><h3>⚙️ Jak to funguje</h3><p>Chyba (CVE-2026-76418) spočívá v logických chybách při zpracování sekundární autentizace v tunelové skupině SSL remote access VPN. Neautentizovaný útočník může zaslat speciálně upravený požadavek, který způsobí neočekávaný reload firewallu.</p></div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikovat aktualizované verze softwaru vydané společností Cisco.</li><li>Dočasně vypnout seznam tunelových skupin nebo sekundární autentizaci podle doporučení dodavatele.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1499</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Chybí patch</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Denial of Service (DoS):</strong> Útok, jehož cílem je vyřadit službu nebo zařízení z provozu a znemožnit přístup oprávněným uživatelům.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/10/cisco-patches-actively-exploited-asa.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        </main>
+    </div>
+</body>
+</html>
