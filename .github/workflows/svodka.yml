@@ -7,10 +7,15 @@ on:
 
 permissions:
   contents: write
+  pages: write      # Povolení pro nasazení Pages
+  id-token: write   # Povolení pro bezpečné ověření Pages
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Stažení repozitáře
@@ -32,7 +37,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python svodka.py
 
-      - name: Commit a Push vygenerované svodky do docs/
+      - name: Commit a Push JSON archivu (záloha dat)
         run: |
           git config --global user.name "svodka-bot"
           git config --global user.email "svodka-bot@users.noreply.github.com"
@@ -40,6 +45,15 @@ jobs:
           if git diff --staged --quiet; then
             echo "Žádné změny k uložení."
           else
-            git commit -m "chore(intel): automatická aktualizace svodky $(date -u +'%Y-%m-%d')"
+            git commit -m "chore(intel): automatická záloha svodky $(date -u +'%d.%m.%Y')"
             git push
           fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
