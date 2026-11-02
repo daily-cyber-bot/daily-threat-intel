@@ -1,0 +1,205 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritické zranitelnosti v Langflow umožňují RCE a obejití autentizace",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace +2 Dopad na enterprise software / kritickou infrastrukturu +1 Veřejný PoC exploit +1 Umožňuje Privilege Escalation nebo Lateral Movement +1 Chybí patch",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-93680",
+        "CVE-2026-110186",
+        "CVE-2026-110193",
+        "CVE-2026-110192",
+        "CVE-2026-9198",
+        "CVE-2026-104339"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/critical-langflow-flaws-could-let.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Nástroj Langflow pro budování AI agentů obsahuje kritické zranitelnosti umožňující útočníkům obejít přihlášení a spouštět libovolný kód.",
+        "cil": "Open-source platforma Langflow (verze 1.0.0 až 1.12.8).",
+        "dopad_laici": "Útočníci mohou bez znalosti hesla převzít kontrolu nad servery, které firmy a organizace používají pro správu svých umělých inteligencí."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní analytici IBM upozornili na závažné zranitelnosti v open-source frameworku Langflow, který slouží k vytváření agentů umělé inteligence a pracovních postupů. Problém se týká všech verzí v rozmezí 1.0.0 až 1.12.8. Mezi nejzávažnější patří CVE-2026-93680 (CVSS 9.8) umožňující obejití autentizace a CVE-2026-110186 (CVSS 9.8) vedoucí k RCE na serveru. Výrobce vydal opravnou verze 1.13.0, která vrací výchozí nastavení pro automatické přihlášení do vypnutého stavu.\n\nKromě autentizačních chyb figuruje v hlášení také zranitelnost CVE-2026-110193, která dává nízko privilegovanému uživateli možnost skrze Agentic Assistant spouštět systémové příkazy na operačním systému serveru. Modul v Metasploit Frameworku již obsahuje exploit pro ověření stavu koncových bodů pomocí Model Context Protocol. Vývojáři důrazně doporučují provést zálohu databáze a okamžitý upgrade na verzi 1.13.0.",
+        "jak_to_funguje": "Chyba CVE-2026-93680 spočívá v nesprávném ověřování identity, kde výchozí konfigurační proměnná LANGFLOW_AUTO_LOGIN ve verzi 1.12.8 automaticky přihlašuje uživatele jako superusery bez ověření. CVE-2026-110186 pak skrze model context protocol (MCP) nástroje umožňuje neautentizovaným útočníkům generovat a spouštět kód.",
+        "mitre": [
+          "T1592",
+          "T1190",
+          "T1068"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat Langflow na verzi 1.13.0 či vyšší.",
+          "Zkontrolovat nastavení konfigurační proměnné LANGFLOW_AUTO_LOGIN a ujistit se, že je vypnutá."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému."
+        },
+        {
+          "pojem": "Model Context Protocol",
+          "vysvetleni": "Protokol umožňující aplikacím umělé inteligence bezpečně komunikovat a volat externí nástroje."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Kritická zranitelnost v LXD a MicroCloud umožňuje impersonaci klientů",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+2 Dopad na enterprise software / kritickou infrastrukturu +1 Umožňuje Privilege Escalation nebo Lateral Movement +1 Chybí patch",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-112816"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/critical-lxd-and-microcloud-flaw-cvss.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost v linuxové správě kontejnerů LXD a MicroCloud dovoluje útočníkům vydávat se za důvěryhodné klienty bez nutnosti vlastnit jejich soukromý klíč.",
+        "cil": "Virtualizační a kontejnerové platformy LXD a MicroCloud od společnosti Canonical.",
+        "dopad_laici": "Útočníci s přístupem k síti mohou získat plnou kontrolu nad virtuálními stroji a v nejhorším případě i nad celým hostitelským serverem."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost Canonical vydala bezpečnostní záplaty pro kritickou zranitelnost (CVE-2026-112816) s maximálním skóre CVSS 10.0, která postihuje nástroje LXD a MicroCloud. Chyba spočívá v nesprávné validaci certifikátů při vzájemné TLS komunikaci (mTLS). Server totiž kontroloval všechny certifikáty v řetězu, aniž by ověřil, zda klient skutečně vlastní soukromý klíč k listovému certifikátu. Útočník tak mohl připojit veřejný certifikát legitimního klienta ke svému řetězu a server jej bezvýhradně akceptoval.\n\nZranitelnost objevili vývojáři komunitního projektu Incus, odkud se rozšířila i do LXD. K zneužití je nutný přístup k HTTPS API přes síť a znalost veřejného certifikátu důvěryhodného klienta. Canonical uvolnil opravné snap balíčky (např. verze 6.10.1, 5.21.9, 5.0.11 atd.) a americká agentura CISA potvrdila, že zranitelnost nebyla v době zveřejnění aktivně zneužívána.",
+        "jak_to_funguje": "Server provádí porovnání certifikátů poslaných v řetězu proti svému trust store. Vzhledem k absenci striktní kontroly vlastnictví privátního klíče pro každý článek kromě primárního leaf certifikátu stačí podstrčit veřejný klíč oběti do řetězu a server povolí přístup k API.",
+        "mitre": [
+          "T1588",
+          "T1550"
+        ],
+        "mitigace": [
+          "Aktualizovat LXD a MicroCloud balíčky prostřednictvím snap kanálů na opravené verze.",
+          "Omezit síťový přístup k HTTPS API rozhraním pouze na důvěryhodné subjekty."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "mTLS",
+          "vysvetleni": "Mutual TLS – oboustranné ověřování pomocí digitálních certifikátů mezi klientem a serverem."
+        },
+        {
+          "pojem": "Leaf certifikát",
+          "vysvetleni": "Koncový certifikát v certifikátovém řetězu, který patří konkrétnímu subjektu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Kritická zranitelnost v GitLab RCE zneužívána v útocích",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild +2 Remote exploit bez autentizace +2 Dopad na enterprise software / kritickou infrastrukturu",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-97229",
+        "CVE-2026-85706",
+        "CVE-2026-110264"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/over-1-000-gitlab-servers-vulnerable-to-code-execution-attacks/"
+        },
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/alpine-linux-rebuilds-gitlab-after-attempted-rce-attack/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Přes 1 000 internetem vystavených serverů GitLab je zranitelných vůči aktivně zneužívané chybě umožňující vzdálené spuštění kódu.",
+        "cil": "GitLab Community Edition (CE) a Enterprise Edition (EE) verze před 19.4.2, 19.3.5 a 19.2.8.",
+        "dopad_laici": "Útočníci mohou skrze chybu v konfiguracích ovládnout vývojové servery firem, což ohrožuje zdrojový kód a celkový dodavatelský řetězec softwaru."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní díra označená jako CVE-2026-97229 vzniká v důsledku integer overflow slabiny v CI/CD kompilátoru regulárních výrazů Onigmo (součást jazyka Ruby). Umožňuje neautentizovaným útočníkům odeslat speciálně upravenou konfiguraci a spustit libovolný kód na serveru. Americká agentura CISA zařadila chybu do katalogu KEV a monitorovací služba Shadowserver eviduje přes tisíc neopravených instancí.\n\nÚtoky již zasáhly například infrastrukturu projektu Alpine Linux, kde útočníci opakovaně bourali procesy GitLabu pomocí zákeřných CI konfigurací. Přestože forenzní analýza neodhalila přímé pozměnění balíčků, projekt musel kvůli chybějícím logům kompletně přebudovat celý GitLab server od základu a vynutit reset hesel. Opravy vydal GitLab již v říjnu pro verze 19.4.2, 19.3.5 a 19.2.8.",
+        "jak_to_funguje": "Chyba typu integer overflow v kompilátoru regulárních výrazů zpracovávajícím CI/CD konfigurační soubory vede k narušení paměti, které neautentizovaný útočník dokáže využít k RCE.",
+        "mitre": [
+          "T1190",
+          "T1203"
+        ],
+        "mitigace": [
+          "Neprodleně aktualizovat vlastní instalace GitLabu na verze 19.4.2, 19.3.5, 19.2.8 nebo novější.",
+          "Zkontrolovat integritu CI/CD pipeline konfigurací a revidovat logy přístupů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Integer Overflow",
+          "vysvetleni": "Stav, kdy výpočet překročí maximální povolenou hodnotu datového typu, což vede k neočekávanému chování programu."
+        },
+        {
+          "pojem": "CI/CD",
+          "vysvetleni": "Continuous Integration / Continuous Deployment – automatizované procesy pro sestavování a nasazování softwaru."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 4,
+      "titulek": "Útoky C3RB3R ransomware míří na neopravená zařízení Synology NAS",
+      "kategorie": "malware",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+2 Dopad na enterprise software / kritickou infrastrukturu +1 Veřejný PoC exploit +1 Umožňuje Privilege Escalation nebo Lateral Movement +1 Chybí patch",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2024-10441",
+        "CVE-2024-50629",
+        "CVE-2024-10445",
+        "CVE-2021-22205",
+        "CVE-2021-26084",
+        "CVE-2023-22518"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/synology-warns-customers-of-ongoing-c3rb3r-ransomware-attacks/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Výrobce úložišť Synology varuje před vlnou útoků ransomwaru C3RB3R zneužívajícího starší, již opravené zranitelnosti.",
+        "cil": "Síťová úložiska Synology NAS se zastaralou verzí systému DiskStation Manager (DSM).",
+        "dopad_laici": "Domácí i firemní uživatelé přicházejí o svá uložená data, fotky a dokumenty, které útočníci šifrují a požadují výkupné."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost Synology vydala varování kvůli nárůstu útoků ransomwaru C3RB3R, které cílí na zařízení NAS běžící na nepatchovaných verzích operačního systému DiskStation Manager (DSM). Útočníci zneužívají zranitelnosti opravené již v prosinci 2024, které umožňují vzdálené spuštění kódu (CVE-2024-10441), čtení souborů (CVE-2024-50629) a zápis souborů (CVE-2024-10445).\n\nPo úspěšném proniknutí do zařízení šifruje ransomware soubory, přidává jim příponu .L0CK3D a zanechává textovou výzvu k zaplacení výkupného prostřednictvím dark web portálu. Synology vyzývá uživatele k okamžité aktualizaci DSM na podporované verze (např. 7.2.2-72806-1 a vyšší), zapnutí automatických aktualizací a odpojení administračního rozhraní přímo do internetu.",
+        "jak_to_funguje": "Útočníci skrze kombinaci chyb umožňujících čtení a zápis souborů či RCE proniknou do neopraveného zařízení NAS, kde následně spustí šifrovací proces dat.",
+        "mitre": [
+          "T1486",
+          "T1190"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat systém DiskStation Manager (DSM) na nejnovější verzi.",
+          "Zablokovat přímý přístup k administračnímu webovému rozhraní NAS z veřejného internetu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Ransomware",
+          "vysvetleni": "Škodlivý software, který šifruje data v systému a vynucuje platbu výkupného za jejich dešifrování."
+        },
+        {
+          "pojem": "NAS",
+          "vysvetleni": "Network-Attached Storage – síťově připojené úložiště dat."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
