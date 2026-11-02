@@ -2,27 +2,25 @@ name: Denní Threat Intelligence Svodka
 
 on:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '17 5 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pages: write      # Povolení pro nasazení Pages
-  id-token: write   # Povolení pro bezpečné ověření Pages
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: write
 
     steps:
       - name: Stažení repozitáře
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Nastavení Pythonu 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
         with:
           python-version: '3.12'
           cache: 'pip'
@@ -37,7 +35,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python svodka.py
 
-      - name: Commit a Push JSON archivu (záloha dat)
+      - name: Commit a Push vygenerované svodky do docs/
         run: |
           git config --global user.name "svodka-bot"
           git config --global user.email "svodka-bot@users.noreply.github.com"
@@ -45,15 +43,26 @@ jobs:
           if git diff --staged --quiet; then
             echo "Žádné změny k uložení."
           else
-            git commit -m "chore(intel): automatická záloha svodky $(date -u +'%d.%m.%Y')"
+            git commit -m "chore(intel): automatická aktualizace svodky $(date -u +'%Y-%m-%d')"
             git push
           fi
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: ./docs
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
