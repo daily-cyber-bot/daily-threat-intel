@@ -2,7 +2,8 @@ name: Denní Threat Intelligence Svodka
 
 on:
   schedule:
-    - cron: '17 5 * * *'
+    # 05:40 UTC = 06:40 v ČR v zimním čase (UTC+1), 07:40 v letním čase (UTC+2)
+    - cron: '40 5 * * *'
   workflow_dispatch:
 
 permissions:
