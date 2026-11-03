@@ -1,0 +1,151 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v GitLabu zneužívaná k RCE",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (neopravený zero-day)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-97229"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/over-1-000-gitlab-servers-vulnerable-to-code-execution-attacks/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost typu integer overflow v GitLab CI/CD kompilátoru umožňuje neautorizovaným útočníkům spustit libovolný kód na serveru.",
+        "cil": "Self-managed GitLab servery.",
+        "dopad_laici": "Útočníci mohou ovládnout váš server, pokud používáte GitLab a neaktualizovali jste jej. Je nutné okamžitě nainstalovat bezpečnostní záplatu."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Více než 1 000 GitLab serverů vystavených do internetu zůstává neopravených proti kritické zranitelnosti, která je aktivně zneužívána k RCE. Zranitelnost CVE-2026-97229 pramení z chyby typu integer overflow v CI/CD Regular Expression Compileru, který analyzuje regulární výrazy v konfiguračních souborech pipeline. GitLab opravil tuto chybu 12. října ve verzích 19.4.2, 19.3.5 a 19.2.8. CISA potvrdila, že útočníci zranitelnost aktivně zneužívají a zařadila ji do katalogu KEV. Shadowserver monitoruje přes 1 000 zranitelných instancí.",
+        "jak_to_funguje": "Integer overflow v kompilátoru regulárních výrazů umožňuje obejít validaci vstupu. Útočník vloží speciálně vytvořený regulární výraz do CI/CD konfigurace, což vede k přetečení paměti a následnému spuštění libovolného kódu (RCE) s právy uživatele, pod kterým běží GitLab proces.",
+        "mitre": [
+          "T1190",
+          "T1203"
+        ],
+        "mitigace": [
+          "Okamžitá aktualizace GitLab na verze 19.4.2, 19.3.5, 19.2.8 nebo novější.",
+          "Omezení přístupu k GitLab instancím z veřejného internetu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka spustit libovolný kód na cílovém systému na dálku."
+        },
+        {
+          "pojem": "Integer overflow",
+          "vysvetleni": "Chyba v programu, kdy aritmetická operace překročí maximální hodnotu, kterou může datový typ uložit, což vede k neočekávanému chování."
+        },
+        {
+          "pojem": "CI/CD",
+          "vysvetleni": "Continuous Integration/Continuous Deployment – automatizované procesy pro vývoj a nasazování softwaru."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Zneužívání kritických zranitelností v Ivanti Connect Secure",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Privilege Escalation, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-104935",
+        "CVE-2026-111357",
+        "CVE-2026-118527"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/ivanti-patches-two-more-connect-secure-zero-days-chained-in-attacks/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci řetězí několik zranitelností v Ivanti Connect Secure k získání root přístupu bez autentizace.",
+        "cil": "Ivanti Connect Secure (ICS) brány.",
+        "dopad_laici": "Útočníci mohou získat plnou kontrolu nad vaší VPN bránou. Pokud používáte Ivanti, okamžitě aktualizujte systém."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Ivanti vydalo záplaty pro dvě další zranitelnosti v Connect Secure (ICS), které byly od 1. října zneužívány v řetězci s dříve opravenou chybou CVE-2026-104935. CVE-2026-111357 umožňuje eskalaci privilegií a CVE-2026-118527 umožňuje autentizovaným útočníkům nahrávat soubory. Útočník (UTA0576) řetězil tyto chyby k získání root přístupu bez autentizace. Útočníci nezanechávali malware, ale manipulovali s logy, aby se vyhnuli detekci.",
+        "jak_to_funguje": "Útočníci využívají autentizační bypass k průniku, následně eskalují privilegia na root a využívají možnost nahrávání souborů k trvalému přístupu. K obcházení detekce používají re-exploataci při každém příkazu namísto instalace trvalého malwaru.",
+        "mitre": [
+          "T1068",
+          "T1190",
+          "T1078"
+        ],
+        "mitigace": [
+          "Instalace nejnovějších bezpečnostních aktualizací od výrobce.",
+          "Monitorování integrity systému a logů pro neobvyklou aktivitu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Technika, při které útočník získá vyšší oprávnění v systému, než mu byla původně přidělena."
+        },
+        {
+          "pojem": "Root",
+          "vysvetleni": "Uživatelský účet s nejvyššími možnými oprávněními v operačním systému typu Unix/Linux."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Ransomware útoky na Synology NAS zařízení",
+      "kategorie": "malware",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit, +2 Dopad na enterprise/SOHO, +1 Privilege Escalation",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2024-10441",
+        "CVE-2024-10445",
+        "CVE-2024-50629"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/synology-warns-customers-of-ongoing-c3rb3r-ransomware-attacks/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci zneužívají starší zranitelnosti v systému DSM k instalaci ransomware C3RB3R na NAS zařízení.",
+        "cil": "Synology NAS zařízení s neaktualizovaným systémem DSM.",
+        "dopad_laici": "Vaše data na NAS úložišti mohou být zašifrována a útočníci budou požadovat výkupné. Okamžitě aktualizujte systém DSM."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Synology varuje před vlnou útoků ransomware C3RB3R, které zneužívají zranitelnosti opravené v prosinci 2024. Útočníci využívají chyby umožňující RCE (CVE-2024-10441), čtení souborů (CVE-2024-50629) a zápis souborů (CVE-2024-10445). Ransomware přidává příponu .L0CK3D a zanechává soubor read-me3.txt.",
+        "jak_to_funguje": "Útočníci využívají RCE zranitelnost k získání přístupu k systému, následně pomocí dalších chyb manipulují se souborovým systémem a šifrují uživatelská data.",
+        "mitre": [
+          "T1486",
+          "T1190"
+        ],
+        "mitigace": [
+          "Aktualizace systému DSM na nejnovější verzi.",
+          "Blokování přístupu k webovému rozhraní NAS z veřejného internetu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "NAS",
+          "vysvetleni": "Network Attached Storage – síťové úložiště dat připojené k počítačové síti."
+        },
+        {
+          "pojem": "Ransomware",
+          "vysvetleni": "Typ malwaru, který zašifruje data oběti a požaduje výkupné za jejich dešifrování."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
