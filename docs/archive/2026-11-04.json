@@ -1,0 +1,457 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v Siemens SIMATIC IoT2050 je aktivně zneužívána k nasazování zadních vrátných",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno společností VulnCheck v honeypotech), +2 Remote exploit bez autentizace, +2 Dopad na enterprise a průmyslovou infrastrukturu (Siemens SIMATIC Industrial OS), +1 Umožňuje Privilege Escalation a spouštění příkazů s maximálním oprávněním.",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-58115"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/attackers-exploit-critical-siemens.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost s maximálním skóre závažnosti v průmyslových zařízeních Siemens SIMATIC IoT2050 je aktivně zneužívána útočníky k neoprávněnému spouštění kódu a instalaci trvalých zadních vrátných (backdoor).",
+        "cil": "Průmyslová IoT zařízení Siemens SIMATIC IoT2050 Advanced využívající Industrial OS s nainstalovaným rozhraním Node-RED.",
+        "dopad_laici": "Útočníci mohou dálkově ovládnout řídicí jednotky v továrnách či infrastruktuře. Běžní uživatelé nemusí dělat nic, ale provozovatelé průmyslových systémů musejí okamžitě aktualizovat softwarové vybavení."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní chyba s nejvyšším stupněm závažnosti, která zasahuje zařízení Siemens SIMATIC IoT2050 Advanced, se stala terčem aktivního zneužívání v reálném světě, jak odhalila společnost VulnCheck. Zranitelnost sledovaná pod označením CVE-2026-58115 má hodnotu CVSS 10.0 a spočívá v chybějící autentizaci pro kritickou funkci, což neautentizovanému vzdálenému útočníkovi umožní spustit libovolný kód.\n\nPodle bezpečnostního varování, které společnost Siemens vydala v srpnu 2026, obsahují zařízení SIMATIC IoT2050 Advanced s operačním systémem Industrial OS a nainstalovaným nástrojem Node-RED zranitelné rozhraní HTTP. Chybějící ověření totožnosti v rozhraní Node-RED HTTP dovoluje vzdálenému útočníkovi vytvářet zákeřná datová proudění (flows) a vykonávat libovolné příkazy na podkladovém serveru s maximálními přístupovými právy. Výrobce zranitelnost opravil ve verzi 4.3.4.1 a novějších.\n\nK 30. říjnu 2026 zaznamenal výzkumník Patrick Garrity ze společnosti VulnCheck pokusy o zneužití CVE-2026-58115 v síti honeypotů. Útočníci odeslali kompletní exploit, který nasadil Node-RED flow, automaticky jej spustil a ze svého serveru stáhl binární soubor pro architekturu AMD64 za použití tří vrstev kódování. K stažení škodlivého skriptu použil požadavek nástroj wget s fallbackem na curl, pričemž výsledný soubor byl uložen do cesta /dev/shm/.b a spuštěn.\n\nV navazujících vlnách útočníci přešli na dvoufázový proces stahování skriptu wget.sh a spouštění binárního souboru maskovaného za legitimní systémové vlákno jádra pod názvem /tmp/.kworker. V některých případech útočníci ani nestahovali externí soubory, ale pouze exponovali HTTP endpoint (např. /cmd) propojený přes exec node. Tím si na zařízení vytvořili trvalý backdoor umožňující spouštět libovolné příkazy předávané v parametrech dotazu, který přežije i restart zařízení.",
+        "jak_to_funguje": "Zranitelnost se nachází v HTTP rozhraní vývojového nástroje Node-RED běžíčího na Siemens Industrial OS. Rozhraní nepotžaduje autentizaci, což vzdálenému útočníkovi umožňuje odeslat požadavek POST na administrativní API a vštípit zákeřný Node-RED flow. Tento flow obsahuje uzly typu 'exec', které spouštějí systémové příkazy rovnou pod uživatelem root. Útočníci využívali trojité kódování příkazů, nástroje wget/curl k stažení payloadu do paměťově mapovaného adresáře /dev/shm nebo /tmp a vytvoření neautentizovaného HTTP endpointu pro trvalé RCE.",
+        "mitre": [
+          "T1190",
+          "T1059.004",
+          "T1543",
+          "T1027"
+        ],
+        "mitigace": [
+          "Aktualizovat software na zařízení Siemens SIMATIC IoT2050 Advanced na verzi 4.3.4.1 nebo novější.",
+          "Pokud Node-RED není nezbytně nutný, zcela jej odinstalovat.",
+          "Zabezpečit rozhraní Node-RED zapnutím protokolu HTTPS a vynucením autentizace uživatelů (Basic auth nebo OAuth/OpenID).",
+          "Omezit síťový přístup k administrativnímu rozhraní IoT zařízení pouze z důvěryhodných segmentů sítě."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka spustit libovolný kód nebo příkazy na vzdáleném počítači či zařízení bez fyzického přístupu."
+        },
+        {
+          "pojem": "backdoor",
+          "vysvetleni": "Zadní vrátka – tajný způsob přístupu do systému, který útočníkovi umožňuje obcházet běžné bezpečnostní mechanizmy a zachovat si přístup i do budoucna."
+        },
+        {
+          "pojem": "honeypot",
+          "vysvetleni": "Bezpečnostní past – záměrně zranitelný systém nasazený do sítě za účelem přilákání a monitorování činnosti útočníků."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – proces, při kterém útočník získá vyšší úroveň přístupu (např. práva správce/root), než do jaké měl původně povolen přístup."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Útočníci zneužívají bezpečnostní mezeru ve WordPress Core během aktualizací k RCE",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno CISA zařazením do KEV a zjištěním Wordfence), +2 Remote exploit bez autentizace, +2 Dopad na enterprise webovou infrastrukturu (WordPress Core), +1 Umožňuje Privilege Escalation a spouštění libovolného kódu na serveru.",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-119977"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/cisa-confirms-hackers-exploiting.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Kritická zranitelnost typu TOCTOU v jádru redakčního systému WordPress umožňuje neovereným útočníkům spustit libovolný kód na webovém serveru v krátkém časovém okně během provádění aktualizace.",
+        "cil": "Webové servery a portály provozující redakční systém WordPress Core.",
+        "dopad_laici": "Majitelé a správci webů na WordPressu musí okamžitě zkontrolovat a dokončit bezpečnostní aktualizace, jinak hrozí kompletní převzetí kontroly nad jejich webovými stránkami útočníky."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Americká agentura pro kybernetickou bezpečnost CISA zařadila bezpečnostní zranitelnost v jásru redakčního systému WordPress Core do katalogu známých zneužívaných zranitelností (KEV) na základě důkazů o probíhajících útocích. Vysoce závažná chyba sledovaná jako CVE-2026-119977 dosahuje skóre CVSS 8.1 a představuje souběh podmínek typu Time-of-check Time-of-use (TOCTOU), který lze zneužít k získání možnosti spouštění libovolného kódu na serveru.\n\nPodle vyjádření agentury CISA chyba spočívá v předvídatelných a webově přístupných dočasných cestách (staging paths), které se používají během kompletní aktualizace jádra WordPress Core. Neautentizovaný útočník tak může využít krátké časové okno při probíhajícím upgradu a nahrát či spustit vlastni kód. Bezpečnostní opravy byly vydány na konci minulého měsíce.\n\nBezpečnostní společnost Wordfence uvedla, že během prvních 21 hodin od zveřejnění zranitelnosti zaznamenala více než 18 500 požadavků cílených na dočasné instalační cesty setup-config.php. Telemetrické údaje společnosti Previdian navíc potvrdily pokusy o zneužití přímo v honeypotech již od 30. října 2026. Úřady americké federální civilní správy (FCEB) dostaly za úkol aplikovat opravy nejpozději do 6. listopadu 2026.",
+        "jak_to_funguje": "Zranitelnost využívá principu TOCTOU (Time-of-check Time-of-use) v procesu aktualizace jádra WordPressu. Během stahování a rozbalování nového balíčku vytvoří WordPress dočasné adresáře s předvídatelnými názvy, které jsou přístupné přes webové rozhraní bez nutnosti přihlášení. Pokud útočník v přesně daném časovém okně odešle HTTP požadavek na tyto dočasné instalační skripty (např. setup-config.php v dočasné cestě), dokáže přepsat konfiguraci nebo vpravit vlastní PHP kód, čímž dosáhne unauthenticated RCE.",
+        "mitre": [
+          "T1190",
+          "T1059.006",
+          "T1505.003"
+        ],
+        "mitigace": [
+          "Neprodleně aktualizovat instalaci WordPress Core na nejnovější záplatovanou verzi.",
+          "Zablokovat přístup k dočasným souborům a instalačním cestám na úrovni webového serveru (Nginx/Apache).",
+          "Využít Web Application Firewall (WAF) k detekci a blokování neoprávněných požadavků směřujících na instalační skripty typu setup-config.php."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "TOCTOU",
+          "vysvetleni": "Time-of-check Time-of-use – softwarová zranitelnost vznikající v důsledku nesprávné synchronizace, kdy se stav systému změní mezi prověřením podmínky a samotným použitím výsledku prověření."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – možnost spuštění kódu na vzdáleném serveru bez fyzického přístupu."
+        },
+        {
+          "pojem": "KEV",
+          "vysvetleni": "Known Exploited Vulnerabilities – katalog aktivně zneužívaných zranitelností spravovaný americkou bezpečnostní agenturou CISA."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – neoprávněné získání vyšších uživatelských práv v systému."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Útok na distribuční kanál cPGuard infikoval tisíce Linuxových serverů zákeřným skriptem",
+      "kategorie": "malware",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno společností OpsShield na téměř 3000 serverech), +2 Remote exploit bez autentizace (kompromitace autoupdate kanálu), +2 Dopad na enterprise hostingovou infrastrukturu (Linuxové servery s cPanel/Plesk), +1 Umožňuje Privilege Escalation a krádež root přihlašovacích údajů.",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-hijack-cpguard-autoupdate-to-deploy-backdoor-steal-data/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/cpguard-update-channel-hijacked-to.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci zneužili kompromitované přihlašovací údaje k infrastruktuře automatických aktualizací bezpečnostního balíku cPGuard a doručili na tisíce Linuxových serverů zákeřný skript stahující root hesla, databáze a SSH klíče.",
+        "cil": "Linuxové webové servery a hostingové platformy spravované pomocí cPanel, DirectAdmin nebo Plesk s nainstalovaným cPGuard.",
+        "dopad_laici": "Incident přímo ohrožuje provozovatele webhostingů a jejich zákazníky. Správci serverů musí neprodleně aktualizovat software cPGuard a zneplatnit všechna hesla i SSH klíče."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Útočníci kompromitovali aktualizační infrastrukturu bezpečnostního balíku cPGuard pro webové servery a využili ji k distribuci zadních vrátných (backdoor) a skriptu určeného ke krádeži citlivých dat. Vývojářská společnost OpsShield zveřejnila varování, že útok začal 2. listopadu v 02:06 UTC a zasáhl verze 5.88.12 až 5.88.19. Výrobce zachytil narušení a zastavil distribuci škodlivé aktualizace do 12 hodin od jejího spuštění.\n\nK získání neoprávněného přístupu k distribuční síti obsahu (CDN) OpsShield použil dosud neidentifikovaný útočník zneužité legitimní přihlašovací údaje. cPGuard je bezpečnostní suita pro Linux servery zajišťující skenování malwaru a firewall, kterou běžně využívají hostingové společnosti společně s rozhraními cPanel, DirectAdmin a Plesk.\n\nUživatelé, jejichž servery stáhly aktualizaci v daném časovém okně, obdrželi škodlivý skript zaměřený na získání vysoce citlivých systémových dat. Skript cílil na soubory /etc/shadow a /etc/passwd s haši hesel Linuxu, konfiguraci databází MariaDB/MySQL pro uživatele root (my.cnf), historii příkazové řádky rootu a soubory SSH autorizací i známých hostitelů (known_hosts).\n\nUkradená data byla nahrána na licenční server OpsShield prostřednictvím kompromitovaného účtu, odkud si je útočník následně stáhl. Společnost OpsShield potvrdila, že útok zasáhl nejméně 2 946 serverů, přičemž z každého zasaženého stroje útočník získa přibližně 32 souborů. Správcům se důrazně doporučuje aktualizovat cPGuard na verzi 5.88.25 nebo novější, provést reset všech hesel a rotaci databázových přístupů i SSH klíčů.",
+        "jak_to_funguje": "Útočník využil odcizené přihlašovací údaje k infrastruktuře CDN společnosti OpsShield a nahradil legitimní balíčky aktualizací cPGuard (verze 5.88.12 až 5.88.19) skriptem obsahujícím backdoor. Poci automatické aktualizace démon cPGuard stáhl a spustil tento skript s právy rootu. Skript vyextrahoval soubory /etc/shadow, konfigurační soubory databází a SSH klíče a odeslal je šifrovaným kanálem zpět na licenční server OpsShield, kde útočník zneužil další legitimní účet ke stažení vyexfiltrovaných dat.",
+        "mitre": [
+          "T1195.002",
+          "T1003.008",
+          "T1552.001",
+          "T1041"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat cPGuard na verzi 5.88.25 nebo vyšší pomocí příkazu 'cpgcli update --start'.",
+          "Provést reset hesel pro uživatele root a všechny lokální uživatelské účty na dotčených Linuxových serverech.",
+          "Zneplatnit a vygenerovat nové SSH privátní a veřejné klíče uložené v /root/.ssh.",
+          "Rotovat všechna hesla k databázím MariaDB/MySQL, API klíče a přístupové tokeny k cloudovým službám."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "backdoor",
+          "vysvetleni": "Zadní vrátka – tajný způsob přístupu do systému, který útočníkovi umožňuje obcházet běžné bezpečnostní mechanizmy."
+        },
+        {
+          "pojem": "CDN",
+          "vysvetleni": "Content Delivery Network – geograficky distribuovaná síť serverů zajišťující rychlé doručování obsahu nebo aktualizací software."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – proces získání vyšších přístupových práv v systému."
+        },
+        {
+          "pojem": "SSH",
+          "vysvetleni": "Secure Shell – síťový protokol pro bezpečné vzdálené připojení k příkazové řádce serveru."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 4,
+      "titulek": "Severokorejští útočníci odcizili z burzy Binance kryptoměny za 6,4 miliardy dolarů pomocí falešných pohovorů a škodlivého kódu",
+      "kategorie": "apt",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (masivní reálný útok na kryptoměnovou burzu Binance), +2 Dopad na enterprise finanční infrastrukturu, +1 Umožňuje Privilege Escalation a Lateral Movement uvnitř sítě, +1 Využití neznámého zero-day malwaru.",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/binance-says-fake-job-interview-led-to-63-billion-crypto-heist/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/binance-reveals-how-fake-job-interviews.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Severokorejská státní hackerská skupina Lazarus zneužila falešné pracovní pohovory a kompromitované vývojářské nástroje k infikování počítačů inženýrů Binance zero-day malwerem, což vedlo k krádeži kryptoměn v hodnotě 6,43 miliardy dolarů.",
+        "cil": "Kryptoměnová burza Binance, její vývojáři a podepisovací infrastruktura kryptoměnových peněženek.",
+        "dopad_laici": "Jde o rekordní krádež kryptoměn. Uživatelé Binance nemusí podnikat přímé kroky, protože burza většinu prostředků dokázala doplnit a zmrazit, ale incident ukazuje vysokou nebezpečnost sociálního inženýrství."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Kryptoměnová burza Binance zveřejnila zprávu o incidentu z 29. října, při kterém severokorejští hackeři odcizili digitální aktiva v hodnotě přibližně 6,43 miliardy dolarů. FBI připsala útok státem sponzorované skupině TraderTraitor (známé také jako Lazarus Group nebo APT38). Útok započal v červnu 2026 kompromitací vývojáře z týmu Wallet DevOps, který stáhl trojanizovaný instalátor Homebrew při hledání nástroje umělé inteligence.\n\nV září 2026 útočníci kontaktovali dalšího inženýra přes profesionální síť pod záminkou nabídky práce. Útočníci uspořádali dva rozhovory – první s falešnou náborářkou, která sdílela profil na sociálních sítích k získání důvěry, a druhý přes chatovací aplikaci s osobou vystupující jako ředitel firmy. Během druhého kola byl inženýr instruován ke stažení kódovacího zadání z online repozitáře, které obsahovalo pokročilý zero-day malware.\n\nMalware nahradil legitimní vývojářskou komponentu pyenv v adresáři Homebrew na systému macOS škodlivou verzí pyenv_, pozměnil symbolické odkazy a spustil příkazový proces Z shell (zsh). Antivirové nástroje v té době tuto infekci nedokázaly detekovat. Do 20. října útočníci využili kompromitovaný počítač a interní nástroj AI k narušení účtů dalších dvou inženýrů a získali token pro nasazování kontejnerů.\n\nDne 29. října hackeři použili odcizená přístupová práva k nasazení škodlivého skriptu a získali neoprávněný přístup k interní službě podepisování peněženek Binance. Následně zneužili autorizační mechanizmus Ethereum EIP-7702, což jim umožnilo pokračovat v převodech i po pozastavení výběrů. Do 3. listopadu se podařilo zmrazit či zachytit přibližně 2,85 miliardy dolarů.",
+        "jak_to_funguje": "Útok začal sociálním inženýrstvím (kampaň Operation Dream Job / Contagious Interview). Vytvořením trojanizovaného repozitáře spustili útočníci při sestavování projektu kód, který modifikoval systémové cesty správy verzí Pythonu (pyenv) v prostředí macOS Homebrew. Vytvořením falešného binárního souboru pyenv navázal malware C2 spojení. Útočníci následně využívali interní nástroje AI pro Lateral Movement a vyhledávání přihlašovacích údajů, získali kontejnerový deployment token a zneužili službu podepisování transakcí peněženek spolu s protokolem EIP-7702 k obcházení transakčních limitů.",
+        "mitre": [
+          "T1566.002",
+          "T1546",
+          "T1055",
+          "T1078",
+          "T1021"
+        ],
+        "mitigace": [
+          "Zavedení přísné kontroly integrity vývojářského prostředí a zákaz spouštění neprověřených repozitářů z neznámých zdrojů.",
+          "Zpřísnění bezpečnostních politik pro nasazování kontejnerů a separace přístupových práv k podepisovacím službám peněženek.",
+          "Využití pokročilé detekce anomálií chování založené na AI na všech koncových bodech zaměstnanců.",
+          "Provádění pravidelných školení zaměřených na techniky sociálního inženýrství při fiktivních náborových procesech."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "zero-day",
+          "vysvetleni": "Zranitelnost nebo malware, pro který v době jeho zneužití dosud neexistuje oficiální oprava ani antivirová detekce."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Postupný posun útočníka uvnitř sítě z jednoho kompromitovaného systému na další s cílem dosáhnout hlavního cíle."
+        },
+        {
+          "pojem": "C2",
+          "vysvetleni": "Command and Control – řídicí server ovládaný útočníkem, ze kterého jsou zasílány instrukce infikovanému malwaru."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – proces získání vyšších uživatelských práv v systému."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 5,
+      "titulek": "Kybernetické útoky na chladicí systémy supermarketů v Evropě znehodnotily potraviny",
+      "kategorie": "apt",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzené útoky v Belgii, Švédsku, Estonsku, Irsku a dalších zemích), +2 Remote exploit bez autentizace (vzdálená manipulace rozhraní chladicích jednotek), +2 Dopad na kritickou infrastrukturu a potravinářský sektor.",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/second-wave-of-cyberattacks-hits.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Neznámí útočníci vzdáleně přenastavili řídicí jednotky chlazení v supermarketech po celé Evropě, přičemž zvýšili teploty v mrazácích a lednicích až na 50 °C, což vedlo k znehodnocení potravin.",
+        "cil": "Průmyslová řídicí zařízení chlazení (Danfoss) v evropských supermarketech (Delhaize, Carrefour, ICA, Coop, SuperValu a další).",
+        "dopad_laici": "Běžní spotřebitelé se mohou v zasažených obchodech setkat s dočasným nedostatkem chlazeného a mraženého zboží. Provozovatelé sítě prodejen musí okamžitě prověřit zabezpečení vzdáleného přístupu k OT systémům."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Útočníci přes noc na pondělí 2. listopadu vzdáleně změnili nastavení řídicích jednotek chlazení v supermarketech v Belgii, Švédsku, Estonsku a dalších evropských zemích, což vedlo k ohřátí chladicích a mrazicích boxů. Zasaženo bylo několik desítek prodejen různých řetězců, které musely vyhodit nebo stáhnout z prodeje chlazené a mražené potraviny. Dánský výrobce řídicích jednotek chlazení Danfoss potvrdil, že útoky zasáhly jeho produkty, podobně jako při incidentu před třemi týdny ve Francii.\n\nV Belgii přepnuli útočníci chladicí jednotky do režimu odmrazování (defrost mode). Tento režim má běžně odstraňovat námrazu, avšak při útoku způsobil zahřívání jednotek namísto chlazení. V jiných případech byla přímo zvýšena požadovaná teplota. Například v prodejně ICA ve Švédsku byly mrazáky nastaveny až na 50 °C a personál musel zničené zboží zlikvidovat. Podobný případ byl zaznamenán i v Estonsku u prodejny Selver.\n\nMezi zasažené společnosti patří řetězce Delhaize, Carrefour, Intermarché, IKEA v Monsu, Coop, SuperValu v Irsku či řada soukromých řeznictví a menších obchodů v Nizozemsku. Útoky cílily na řídicí počítače chlazení přpojené k internetu, které běžně využívají servisní dodavatelé k vzdálenému monitorování a opravám závad.",
+        "jak_to_funguje": "Chladicí systémy v obchodech využívají průmyslové řídicí jednotky (OT/ICS) od výrobců jako Danfoss, které disponují vzdáleným rozhraním pro správy a diagnostiku přes internet. Útočníci zneužili nechráněná vzdálená rozhraní nebo kompromitované přihlašovací údaje dodavatelských servisních firem. Po získání přístupu odeslali konfiguraci měnící požadovanou teplotu (setpoint) na extremní hodnoty (až 50 °C) nebo aktivovali cyklus odmrazování, čímž vyřadili chladicí okruh z provozu.",
+        "mitre": [
+          "T1190",
+          "T1078",
+          "T0855"
+        ],
+        "mitigace": [
+          "Okamžitě odpojit řídicí jednotky chlazení a OT systémy od přímého přístupu z veřejného internetu.",
+          "Využít zabezpečené rozhraní VPN s povinnou vícefaktorovou autentizací (MFA) pro jakýkoliv vzdálený přístup servisních techniků.",
+          "Změnit výchozí a slabá hesla na všech řídicích jednotkách a aplikovat doporučené bezpečnostní pokyny dle národních CSIRT/CERT týmů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "OT",
+          "vysvetleni": "Operational Technology – hardwarové a softwarové systémy používané k monitorování a řízení fyzických zařízení a průmyslových procesů."
+        },
+        {
+          "pojem": "VPN",
+          "vysvetleni": "Virtual Private Network – šifrované síťové spojení umožňující bezpečný vzdálený přístup do soukromé sítě."
+        },
+        {
+          "pojem": "MFA",
+          "vysvetleni": "Multi-Factor Authentication – vícefaktorové ověření totožnosti uživatele vyžadující kombinaci více nezávislých bezpečnostních prvků."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 6,
+      "titulek": "Ruská skupina APT29 využívá n-day zranitelnosti k zero-click útokům na iOS a Android",
+      "kategorie": "apt",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno společností Sekoia), +2 Dopad na enterprise/vládní organizace a webové služby (kompromitace služby Plerdy), +1 Umožňuje Privilege Escalation a extrakci dat z aplikací, +1 Využití veřejných exploitů zranitelností.",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2024-27834",
+        "CVE-2025-14174",
+        "CVE-2025-27038",
+        "CVE-2025-43510",
+        "CVE-2025-43520",
+        "CVE-2025-43529",
+        "CVE-2026-20700",
+        "CVE-2026-3910"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-use-n-day-exploits-in-zero-click-attacks-on-ios-android-devices/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Ruská APT skupina APT29 zneužívá řetězce n-day zranitelností v prohlížečích Safari a Chrome k provádění zero-click útoků na mobilní zařízení s operačními systémy iOS a Android.",
+        "cil": "Mobilní zařízení iPhone (iOS) a Android přistupující na kompromitované zpravodajské, energetické a vojenské weby.",
+        "dopad_laici": "Útočníci mohou bez jakéhokoliv kliknutí ze strany uživatele získat z mobilního telefonu zprávy z aplikací WhatsApp a Telegram, fotky či hesla. Běžní uživatelé musí neprodleně aktualizovat iOS a Android na nejnovější verzi."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Rozsáhlá kampaň typu watering hole spojovaná s ruskými hackery se zaměřila na uživatele systémů iOS a Android navštěvující kompromitované legitimní nebo podvržené webové stránky. Kampaň využívala vysoce navštěvované servery v USA, Ukrajině, České republice a Bulharsku, které doručovaly JavaScriptový kód profilující zařízení návštěvníků. Bezpečnostní výzkumníci ze společnosti Sekoia přisuzují útoky s střední až vysokou mírou jistoty skupině APT29 (Midnight Blizzard).\n\nZasaženy byly weby ukrajinského producenta plynu, americké chemické asociace, bulharský vojenský portál a kompromitována byla také ukrajinská analytická služba Plerdy. Její upravený SEO tracker načítaly tisíce webů mezi 27. srpnem a 3. zářím. Prvotní JavaScriptový payload vyhodnotil typ zařízení a verzi prohlížeče a následně z C2 serveru stáhl odpovídající exploit chain.\n\nPodle zprávy společnosti Sekoia využívali útočníci zranitelnosti k extrakci souborů cookies, databází komunikátorů a přihlašovacích údajů:\n- CVE-2025-43529 a CVE-2024-27834 (v iOS 16.7) pro krádež cookies ze Safari.\n- CVE-2025-43529, CVE-2026-20700, CVE-2025-14174, CVE-2025-43510 a CVE-2025-43520 (v iOS 18.5) pro stahování databází aplikací WhatsApp a Telegram, údajů z Keychainu, polohy a fotografií.\n- CVE-2026-3910 a CVE-2025-27038 (v Chrome pro Android verze 139 až 145) s využitím nástroje AndroSnitch ke sběru cookies, historie a upložených WiFi hesel.\n\nNasazené zákeřné kódy nezajišťovaly trvalost v systému (persistence), takže restart zařízení škodlivou aktivitu ukončil až do další návštěvy kompromitovaného webu. Společnosti Apple i Google již na všechny zneužívané zranitelnosti vydaly bezpečnostní záplaty.",
+        "jak_to_funguje": "Útok využívá techniku Watering Hole spojenou se Supply Chain útokem na skript Plerdy. Po načtení zákeřného JavaScriptu v prohlížeči dochází k detekci verze OS a WebKit/Blink jádra. C2 server následně doručí n-day exploit řetězec, který zneužije paměťové chyby v prohlížeči k obcházení sandboxu a získání přístupu k úložišti aplikací. Dále dochází k vytvoření kopie databází SQLite (WhatsApp/Telegram) a klíčenky Keychain bez nutnosti interakce s uživatelem (zero-click).",
+        "mitre": [
+          "T1189",
+          "T1195.002",
+          "T1068",
+          "T1409",
+          "T1539"
+        ],
+        "mitigace": [
+          "Aktualizovat mobilní operační systémy iOS a Android na nejnovější dostupné verze s bezpečnostními záplatami.",
+          "Pravidelně restartovat mobilní zařízení pro vyčištění paměti od případných nepřetržitých procesů bez persistence.",
+          "Provozovatelům webů doporučujeme prověřit integritu externě načítaných skriptů (např. SEO a analytické nástroje Plerdy)."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "zero-click",
+          "vysvetleni": "Typ kybernetického útoku, který nevyžaduje žádnou interakci ze strany oběti (např. kliknutí na odkaz nebo stažení souboru)."
+        },
+        {
+          "pojem": "C2",
+          "vysvetleni": "Command and Control – řídicí server útočníka vysílající příkazy malwaru."
+        },
+        {
+          "pojem": "n-day",
+          "vysvetleni": "Zranitelnost, pro kterou již byla oprava zveřejněna, ale na mnoha zařízeních dosud nebyla nainstalována."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – neoprávněné získání vyšších uživatelských práv v systému."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 7,
+      "titulek": "Neopravená kritická zranitelnost v pluginu CryptoPayment Gateway pro WordPress vystavuje klíče kryptoměnových peněženek",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno společností Defused Cyber), +2 Remote exploit bez autentizace, +1 Chybí patch (neopravený zero-day, plugin byl stažen z adresáře), +1 Umožňuje Privilege Escalation a mazání souborů.",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-81648"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/attackers-target-unpatched.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "V pluginu CryptoPayment Gateway pro WordPress byla odhalena kritická neopravená chyba umožňující neovereným útočníkům mazat soubory a získávat přístupová hesla ke kryptoměnovým peněženkám.",
+        "cil": "Webové stránky na platformě WordPress s nainstalovaným pluginem CryptoPayment Gateway ve verzi 1.2.1 až 1.2.2.",
+        "dopad_laici": "Majitelé e-shopů přijímajících kryptoměny by měli plugin okamžitě odinstalovat a změnit klíče k peněženkám, jinak hrozí ztráta uložených kryptoměnových prostředků."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Útočníci se pokoušejí zneužít neopravenou bezpečnostní zranitelnost s maximální závažností v pluginu CryptoPayment Gateway pro WordPress, jak zjistila bezpečnostní firma Defused Cyber. Zranitelnost označená jako CVE-2026-81648 dosahuje skóre CVSS 10.0. Její úspěšné zneužití umožňuje neautentizovaným uživatelům mazat libovolné soubory na serveru a získávat citlivá data včetně upložených přihlašovacích údajů k peněženkám.\n\nPodle popisu v databázi NVD plugin od verze 1.2.1 do 1.2.2 neprovádí kontroly oprávnění na jednom ze svých AJAX endpointů. Neautentizovaný útočník tak může vyvolat administrativní operace, přepsat konfiguraci platební brány nebo získat přihlašovací údaje k peněženkám v nešifrované podobě. Zranitelnost postihuje i nejnovější verzi 1.2.2 a pro chybu neexistuje žádná oprava.\n\nPlugin byl 28. srpna 2026 uzavřen v oficiálním adresáři WordPress Plugin Directory a již není k dispozici ke stažení. Defused Cyber zaznamenala pokusy o zneužití pocházející z infrastruktury anonymních VPS služeb bez KYC. Správcům webů se důrazně doporučuje plugin okamžitě odstranit.",
+        "jak_to_funguje": "Zranitelnost spočívá v chybějící autorizační kontrole (Broken Access Control) u funkcí obsluhujících požadavky na rozhraní WordPress AJAX API. Útočník odesláním neautorizovaného HTTP POST požadavku zavolá interní funkce pluginu, které vrací zprávy obsahující plaintextové klíče k peněženkám nebo spouštějí operace mazání souborů bez ověření přístupových práv uživatele.",
+        "mitre": [
+          "T1190",
+          "T1068",
+          "T1552.001"
+        ],
+        "mitigace": [
+          "Zcela odinstalovat a odstranit plugin CryptoPayment Gateway ze serveru.",
+          "Rotovat a změnit všechny klíče a přihlašovací údaje ke kryptoměnovým peněženkám, které byly v pluginu zadané.",
+          "Provést bezpečnostní audit webu zaměřený na neoprávněné změny v souborovém systému."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "AJAX",
+          "vysvetleni": "Asynchronous JavaScript and XML – technologie umožňující webovým stránkám odesílat a přijímat data ze serveru na pozadí bez nutnosti načítat celou stránku."
+        },
+        {
+          "pojem": "plaintext",
+          "vysvetleni": "Otevřený nešifrovaný text – data uložená nebo přenášená bez jakéhokoliv šifrování."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – získání přístupu k administrativním funkcím bez patřičných práv."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 8,
+      "titulek": "Kritická chyba Use-After-Free v TCP zásobníku Linuxu umožňuje Remote Code Execution",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise operační systémy (RHEL, Ubuntu), +1 Veřejný PoC exploit (interní model Claude od Anthropic vytvořil funkční PoC), +1 Umožňuje Privilege Escalation na úrovni root.",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-98432"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/red-hat-patches-98-rated-linux-tcp-rce.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "V operačním systému Linux byla v síťovém kódů IPv4 TCP objevena kritická chyba Use-After-Free, která vzdálenému útočníkovi umožňuje získat práva uživatele root bez nutnosti přihlášení.",
+        "cil": "Enterprise servery využívající operační systémy Red Hat Enterprise Linux (RHEL 8, 9, 10) a Ubuntu (22.04, 24.04, 26.04).",
+        "dopad_laici": "Chyba postihuje servery řídící internetové služby. Běžní uživatelé přímo ohroženi nejsou, ale správci Linuxových serverů by měli co nejdříve nainstalovat aktualizace jádra."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Pro zranitelnost Use-After-Free v IPv4 TCP kódu Linuxového jádra jsou již k dispozici opravená jádra pro Red Hat Enterprise Linux (RHEL 8, 9 a 10), zatímco opravy pro Ubuntu zůstávají v testovacím kanálu. Zranitelnost sledovaná pod označením CVE-2026-98432 může být dosažitelná vzdáleným neautentizovaným útočníkem a vést ke spuštění vzdáleného kódu (RCE). Tým správců jádra Linux oceňuje zranitelnost skóre 9.8 z 10 na škále CVSS a Red Hat ji označil za kritickou. Chyba se v jádře nachází od verze Linux 4.4.\n\nKdyž server přijme IPv4 TCP spojení, jádro předá volby IP z příchozího požadavku novému soketu bez jejich zkopírování. Pokud klient zopakuje požadavek na připojení v momentě, kdy jiný procesor tyto volby stále čte, jádro může přistoupit k paměti, která již byla uvolněna. Útočník vyvolá tento souběh odesláním požadavků na připojení s volbami Record Route nebo Timestamp na jakýkoli naslouchající port TCP.\n\nRed Hat vydal opravné balíčky 1. listopadu a vyžaduje restart systému. Společnost Canonical zařadila opravy do balíčků -proposed. Žádný dodavatel dosud nehlásí aktivní zneužívání v reálném světě, avšak společnost Anthropic uvedla, že její výzkumný model Claude dokázal vytvořit funkční vzdálený root exploit fungující proti serverům s posluchačem MPTCP.",
+        "jak_to_funguje": "Jedná se o Use-After-Free (UAF) zranitelnost v IPv4 TCP vrstvě jádra. Při zpracování příchozích SYN paketů s volbami IP (Record Route nebo Timestamp) sdílí vytvořený soket ukazatel na tyto volby bez navýšení čítače odkazů nebo vytvoření hluboké kopie. Opakovaným odesíláním retransmisních paketů z více vláken dochází ke freed memory uvolnění a následnému čtení/zápisu do již uvolněné struktury sk_buff, což umožňuje přepsat ukazatele v jádře a dosáhnout RCE a Privilege Escalation.",
+        "mitre": [
+          "T1210",
+          "T1068"
+        ],
+        "mitigace": [
+          "Nainstalovat aktualizované balíčky jádra (RHEL: RHSA-2026:93412/3/4, Ubuntu: balíčky z kanálu -proposed nebo nadcházející stabilní verze) a restartovat systém.",
+          "Jako dočasnou mitigaci lze použít pravidlo nftables drops pro příchozí IPv4 TCP pakety s hlavičkou delší než 5 slov (obsahující IP options).",
+          "Pravidlo nftables: 'table inet cve_2026_98432 { chain input { type filter hook input priority -310; policy accept; ip protocol tcp ip hdrlength > 5 counter drop } }'."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Use-After-Free",
+          "vysvetleni": "Zranitelnost správy paměti, ke které dochází, když se program pokusí použít paměťové místo poté, co již bylo uvolněno."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – možnost spuštění kódu na vzdáleném počítači."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvýšení oprávnění – neoprávněné získání přístupových práv správce (root)."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
