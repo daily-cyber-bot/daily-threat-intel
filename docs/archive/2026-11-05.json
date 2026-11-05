@@ -1,0 +1,123 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v Zyxel switchích umožňuje vzdálené spuštění kódu",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (původní verze)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-107441",
+        "CVE-2026-7273"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/zyxel-fixes-zero-day-exploited-to-hack-nearly-1-000-network-switches/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost typu out-of-bounds write ve webovém rozhraní switchů Zyxel GS1900 umožňuje útočníkům bez autentizace spustit libovolné příkazy s právy roota.",
+        "cil": "Síťové switche Zyxel řady GS1900.",
+        "dopad_laici": "Útočníci mohou převzít plnou kontrolu nad vaším síťovým zařízením, což jim umožní sledovat provoz v síti nebo krást data. Je nutné okamžitě aktualizovat firmware na nejnovější verzi."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost Zyxel vydala opravu pro zero-day zranitelnost v síťových switchích řady GS1900, kterou hackeři zneužili ke kompromitaci téměř 1 000 zařízení po celém světě. Zranitelnost, označená jako CVE-2026-107441, je typu out-of-bounds write ve webovém rozhraní pro správu, což umožňuje neautorizovanému útočníkovi s přístupem k síti spustit příkazy operačního systému pomocí speciálně vytvořených HTTP požadavků.\n\nVýzkumníci z firmy Binarly zjistili, že předchozí oprava (CVE-2026-7273) byla nedostatečná, protože útočníci mohli obejít kontrolu parametrů tím, že poškodili čítač parametrů před jeho validací. To umožnilo přepsání paměti a spuštění kódu s právy roota. Zyxel vydal 22. října nový firmware, který omezuje velikost parametrů a validuje jejich počet před zápisem do paměti.\n\nÚtočníci, spojovaní s kampaní Red Heron, zneužívali tuto chybu k získání konfigurací a přihlašovacích údajů. I když byla chyba nahlášena jako zero-day, útočníci již měli funkční exploit, který fungoval i na zařízeních s předchozí opravou. Správcům se důrazně doporučuje instalace nejnovějšího firmwaru (Patch 3).",
+        "jak_to_funguje": "Zranitelnost spočívá v nedostatečné kontrole velikosti HTTP parametrů při jejich zpracování ve webovém rozhraní. Útočník pošle 140. parametr, který je příliš velký, čímž dojde k přetečení vyhrazené paměti a přepsání čítače parametrů. Následný zápis proběhne mimo vyhrazený prostor, což umožní přepsat řídicí struktury programu a přesměrovat tok provádění kódu na útočníkův příkaz.",
+        "mitre": [
+          "T1068",
+          "T1190",
+          "T1203"
+        ],
+        "mitigace": [
+          "Aktualizovat firmware na verzi Patch 3 (např. 2.90(AAHH.3)C0 pro GS1900-8).",
+          "Omezit přístup k webovému rozhraní switchů pouze na důvěryhodné IP adresy."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Out-of-bounds write",
+          "vysvetleni": "Chyba v softwaru, kdy program zapíše data mimo vyhrazenou oblast paměti, což může vést k pádu systému nebo spuštění škodlivého kódu."
+        },
+        {
+          "pojem": "Root",
+          "vysvetleni": "Uživatelský účet v systémech typu Unix/Linux s nejvyššími možnými oprávněními."
+        },
+        {
+          "pojem": "Zero-day",
+          "vysvetleni": "Zranitelnost, pro kterou v době objevení neexistuje žádná oprava."
+        },
+        {
+          "pojem": "Exploit",
+          "vysvetleni": "Kód nebo technika, která zneužívá softwarovou chybu k získání neoprávněného přístupu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Kritická zranitelnost v Rails umožňuje vzdálené čtení a zápis souborů",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (pro starší verze), +2 Kritická závažnost (CVSS 9.8)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-66066"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/critical-rails-flaw-lets-attackers.html"
+        },
+        {
+          "nazev": "Dark Reading",
+          "url": "https://www.darkreading.com/application-security/critical-rails-bug-derail-vulnerable-servers"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost v komponentě Active Storage frameworku Ruby on Rails umožňuje útočníkům nahrát speciálně vytvořený soubor, který při zpracování knihovnou ImageMagick umožní čtení nebo zápis libovolných souborů na serveru.",
+        "cil": "Aplikace postavené na frameworku Ruby on Rails využívající ImageMagick.",
+        "dopad_laici": "Útočník může získat přístup k citlivým souborům na serveru, včetně hesel a šifrovacích klíčů, což může vést k úplnému ovládnutí aplikace. Vývojáři musí okamžitě aktualizovat Rails."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Kritická zranitelnost v Ruby on Rails umožňuje neautorizovanému útočníkovi číst nebo zapisovat libovolné soubory na serveru prostřednictvím nahraných obrázků, pokud aplikace využívá integraci Active Storage s knihovnou ImageMagick. Rails vydal opravy ve verzích 8.1.4.1 a 8.0.5.2.\n\nZranitelnost spočívá v tom, že Active Storage neomezuje typy 'coderů' (zpracovatelů), které ImageMagick používá. Útočník může nahrát SVG soubor, který zneužije MSL coder k manipulaci se soubory na disku. To může vést k získání přístupu k tajným klíčům aplikace (secret_key_base) a následnému vzdálenému spuštění kódu.\n\nRails hodnotí tuto chybu skóre 9.8 z 10. Aplikace jsou zranitelné, pokud používají ImageMagick pro zpracování obrázků a přijímají soubory od nedůvěryhodných uživatelů. Doporučuje se okamžitý upgrade a kontrola bezpečnostních politik ImageMagick.",
+        "jak_to_funguje": "Active Storage předává nahrané soubory knihovně ImageMagick k analýze. Pokud je soubor typu SVG, ImageMagick jej může zpracovat pomocí MSL (Magick Scripting Language), který umožňuje čtení a zápis souborů na základě skriptu obsaženého v obrázku. Protože Active Storage neaplikuje dostatečné restrikce na tyto operace, útočník může přinutit server k manipulaci s libovolnými soubory.",
+        "mitre": [
+          "T1190",
+          "T1068"
+        ],
+        "mitigace": [
+          "Aktualizovat Rails na verzi 8.1.4.1 nebo 8.0.5.2.",
+          "Aktualizovat gem mini_magick na verzi 5.1 nebo novější.",
+          "Implementovat přísné bezpečnostní politiky pro ImageMagick."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Active Storage",
+          "vysvetleni": "Součást frameworku Ruby on Rails pro správu nahrávání a ukládání souborů."
+        },
+        {
+          "pojem": "ImageMagick",
+          "vysvetleni": "Softwarová sada pro vytváření, úpravu a konverzi rastrových obrázků."
+        },
+        {
+          "pojem": "SVG",
+          "vysvetleni": "Formát vektorové grafiky založený na XML, který může obsahovat skripty."
+        },
+        {
+          "pojem": "MSL",
+          "vysvetleni": "Magick Scripting Language, skriptovací jazyk používaný v ImageMagicku pro automatizaci úloh."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
