@@ -1,0 +1,220 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Zyxel GS1900 Switche: Neopravená zero-day zranitelnost umožňuje vzdálené spuštění příkazů jako root",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild (aktivně zneužíváno), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch (předchozí oprava selhala)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-7273",
+        "CVE-2026-107441"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Síťové přepínače Zyxel GS1900 obsahují kritickou zero-day zranitelnost v administračním webovém rozhraní, která selhala v předchozí opravě a umožňuje útočníkům bez přihlášení spouštět příkazy s oprávněním root.",
+        "cil": "Spravované síťové přepínače Zyxel GS1900 (celkem 10 modelů).",
+        "dopad_laici": "Útočníci mohou zcela ovládnout síťové prvky firem a poskytovatelů internetu, přičemž předchozí bezpečnostní aktualizace tento problém nedokázala plně vyřešit."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Síťové přepínače Zyxel GS1900, které obdržely dřívější oficiální opravu pro aktivně zneužívanou zranitelnost, jsou stále zranitelné vůči stejnému útoku. Exploit umožňuje komukoliv s přístupem k webovému rozhraní přepínače spouštět příkazy bez nutnosti přihlášení. Společnost Zyxel proto vydala nový firmware pro 10 modelů řady GS1900, který tuto díru definitivně uzavírá.\n\nPředchozí oprava s názvem 2.90 Patch 2 reagovala na chybu CVE-2026-7273 z červnového poradenství. Nový firmware 2.90 Patch 3 pak řeší související zranitelnost označenou jako CVE-2026-107441, na níž je exploit přímo závislý. Výzkumníci z firmy Binarly objevili tuto slabinu 29. září a označili ji za zero-day, jelikož útočníci již v té době disponovali funkčním exploitem. Senzory společnosti GreyNoise navíc detekovaly kompromitace tisíců switchů již v srpnu.\n\nTechnická analýza Binarly ukazuje, že problém spočívá v přetečení paměti typu out-of-bounds write uvnitř programu zpracovávajícího webové požadavky. Program ukládá parametry do pevně alokovaného prostoru pro 140 hodnot, avšak nekontroluje jejich velikost ani celkový počet předchozí kontrolou. Speciálně crafted požadavek s nadměrně velkým 140. parametrem přeteče vyhrazenou paměť, přičemž Patch 2 přidal kontrolu počitadla až po samotném zkopírování dat, což útok nezastaví.\n\nVýzkumníci ohodnotili zranitelnost skóre 9.8 z 10 na škále CVSS. Útočník potřebuje pouze síťovou dosažitelnost administrační služby. Zyxel nyní důrazně doporučuje okamžitý upgrade na verzi Patch 3 pro všechny dotčené modely řady GS1900.",
+        "jak_to_funguje": "Chyba typu out-of-bounds write vzniká tím, že webový server na switchi nevaliduje délku vstupních parametrů HTTP požadavků. Útočník zašle nadměrně velký parametr, který přepíše interní čítače a paměťové struktury (parametr counter). Následně může podvrhnout ukazatel na funkce v paměti a dosáhnout RCE s právy root.",
+        "mitre": [
+          "T1211",
+          "T1190"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat firmware přepínačů řady GS1900 na verzi 2.90 Patch 3 (respektive odpovídající verzi pro daný model).",
+          "Omezit přístup k administračnímu webovému rozhraní switchů pouze na izolované a důvěryhodné správy sítě."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Zero-day",
+          "vysvetleni": "Zranitelnost v softwaru, o které výrobce ještě neví nebo pro ni nemá oficiální záplatu v době, kdy ji útočníci aktivně zneužívají."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution - schopnost útočníka vzdáleně spouštět libovolný kód na napadeném zařízení."
+        },
+        {
+          "pojem": "Out-of-bounds write",
+          "vysvetleni": "Chyba správy paměti, kdy program zapisuje data za hranice vyhrazeného paměťového bloku, což vede k přepsání sousedních dat."
+        },
+        {
+          "pojem": "Root",
+          "vysvetleni": "Administrátorský účet s nejvyššími možnými oprávněními v operačních systémech typu Linux/Unix."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "OpenSSH: Kritická zranitelnost ve správě paměti allowne obcházení přihlášení na Alpine Linux",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +3 Chybí patch / nouzový fix (vydáno nouzově)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2016-6210"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/openssh-issues-emergency-fix-for-flaw.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Závažná chyba v OpenSSH běžícím na linuxových distribucích využívajících knihovnu musl (např. Alpine Linux) umožňuje útočníkům přihlásit se do účtů se zakázaným heslem pouhým zadáním příliš dlouhého hesla.",
+        "cil": "OpenSSH servery na systémech s C knihovnou musl (Alpine Linux, OpenWrt, Buildroot, Yocto).",
+        "dopad_laici": "Některé linuxové servery a cloudové kontejnery mohou být napadeny bez znalosti hesla, pokud používají specifickou výchozí konfiguraci."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Nová zranitelnost v OpenSSH a knihovně musl, nazvaná '*sshole', umožňuje útočníkům přihlásit se k určitým účtům na Alpine Linuxu a dalších musl-based systémech, které mají blokované ověřování heslem. Stačí k tomu zadat nadměrně dlouhé heslo přesahující 256 bytů. Chyba se týká OpenSSH serverů běžících na distribucích s musl C knihovnou, pokud nemají zapnutý modul PAM a mají povolené přihlašování heslem.\n\nJádro problému sahá do roku 2016, kdy byla do OpenSSH zavedena oprava proti enumeraci uživatelů (CVE-2016-6210). Kvůli utajení existence uživatelských jmen provádí OpenSSH hašování hesla i v případech, kdy má účet v souboru /etc/shadow nastavenou hvězdičku (*) namísto hashovacího řetězce, což značí zákaz přihlášení heslem. Knihovna musl však vrací hvězdičku také tehdy, pokud je zadané heslo příliš dlouhé a dojde k chybě funkce crypt(). Výsledkem je, že OpenSSH porovná dvě hvězdičky a vyhodnotí přihlášení jako úspěšné.\n\nVýzkumník Özgün Kültekin upozornil, že oficiální cloudové image Alpine Linuxu pro AWS a Azure obsahují výchozí účet 'alpine' s bezheslovými 'doas' oprávněními, což může vést k okamžitému získání root přístupu. Standardní distribuce s glibc (Debian, Ubuntu, Fedora) zranitelné nejsou. Projekt OpenSSH vydal nouzovou verzi 10.6p2 a distribuční týmy uvolnily opravené balíčky.",
+        "jak_to_funguje": "OpenSSH provádí verifikaci hesel i pro účty s neplatným hashem (*). Pokud knihovna musl selže při zpracování nadměrně dlouhého vstupu (přes 256 bytů), vrátí shodně znak '*', čímž dojde ke shodě řetězců a obejití autentizační logiky.",
+        "mitre": [
+          "T1078",
+          "T1190"
+        ],
+        "mitigace": [
+          "Aktualizovat balíček OpenSSH na verzi 10.6p2 nebo novější (případně provést apk upgrade na Alpine Linuxu).",
+          "Zakázat ověřování heslem v konfiguračním souboru nastavením 'PasswordAuthentication no'."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Musl",
+          "vysvetleni": "Lehká implementace standardní C knihovny, která se často používá v minimalistických linuxových distribucích jako je Alpine Linux."
+        },
+        {
+          "pojem": "Glibc",
+          "vysvetleni": "GNU C Library, standardní C knihovna používaná ve většině velkých linuxových distribucí (Ubuntu, Debian, RedHat)."
+        },
+        {
+          "pojem": "PAM",
+          "vysvetleni": "Pluggable Authentication Modules - mechanismus v Linuxu pro modularitu správu přihlašování a ověřování uživatelů."
+        },
+        {
+          "pojem": "/etc/shadow",
+          "vysvetleni": "Konfigurační soubor v unixových systémech bezpečně uchovávající šifrované hashes hesel uživatelů."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Barracuda Email Security Gateway: Zřetězení chyb umožňuje root přístup bez přihlášení",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +2 Jiné (zřetězení auth bypassu a command injection)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2023-2868",
+        "CVE-2026-111560",
+        "CVE-2026-116606"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/experts-demonstrate-barracuda-email.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Bezpečnostní firma watchTowr demonstrovala útok řetězící dvě zranitelnosti v Barracuda Email Security Gateway, který umožňuje neověřeným útočníkům získat plná administrátorská oprávnění (root) bez přihlášení.",
+        "cil": "Zařízení Barracuda Email Security Gateway a související podnikové e-mailové filtry.",
+        "dopad_laici": "Firmy využívající podnikové e-mailové brány Barracuda čelí riziku úplného převzetí zařízení útočníky, pokud neaplikují nejnovější aktualizace firmwaru."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní výzkumníci ze společnosti watchTowr detailně popsali útok řetězící dvě zranitelnosti v produktové řadě Barracuda Email Security Gateway. První zranitelnost, CVE-2026-116606 (ohodnocená Mandiantem skóre 9.3), představuje authorization bypass. Neověřený útočník ji může zneužít k nahrání zmanipulované konfigurační zálohy a změně globálního nastavení zařízení. Druhá zranitelnost, CVE-2026-111560 (skóre 8.6), je command injection, která běžně vyžaduje administrátorská oprávnění.\n\nDíky propojení obou chyb získává útočník možnost vzdáleného spouštění příkazů pod účtem root bez nutnosti jakékoliv autentizace. Analýza kódu odhalila, že selhání při změně hesla vrací útočníkovi roli s nízkými oprávněními namísto zamítnutí požadavku, což otevírá přístup k funkci obnovy ze zálohy. Tato funkce akceptuje zálohu obsahující časové pásmo, které je následně interpretováno operačním systémem jako shell příkaz s nejvyššími právy. Společnost Barracuda vydala bezpečnostní záplaty a firmware verze 9.4.0.030.",
+        "jak_to_funguje": "Útočník nejprve využije authorization bypass k otevření rozhraní pro obnovu záloh bez platného přihlášení. Následně nahraje upravený záložní soubor obsahující v poli časového pásma systémový příkaz, který je při zpracování předán interpretu příkazového řádku a spuštěn s právy root.",
+        "mitre": [
+          "T1190",
+          "T1078",
+          "T1059"
+        ],
+        "mitigace": [
+          "Aktualizovat firmware Email Security Gateway na verzi 9.4.0.030 nebo novější.",
+          "Omezit přístup k administračnímu rozhraní zařízení výhradně na interní a zabezpečené sítě."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Authorization bypass",
+          "vysvetleni": "Chyba v aplikační logice, která umožňuje obejít bezpečnostní kontroly a přistupovat k funkcím určeným pouze oprávněným osobám."
+        },
+        {
+          "pojem": "Command injection",
+          "vysvetleni": "Typ zranitelnosti, kdy aplikace předává uživatelský vstup přímo do systémového shellu bez dostatečné sanitace, což umožňuje spuštění vlastních příkazů."
+        },
+        {
+          "pojem": "Checksum",
+          "vysvetleni": "Kontrolní součet sloužící k ověření integrity a pravosti dat nebo souborů."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 4,
+      "titulek": "CWPdoor: Útočníci skrytě infikují linuxové servery trojanizovaným webovým serverem Control Web Panel",
+      "kategorie": "malware",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+2 Dopad na enterprise software / kritickou infrastrukturu, +1 Privilege Escalation / Lateral Movement, +2 Jiné (skrytý pasivní backdoor s šifrovanou komunikací a mazáním logů), +2 Remote exploit / backdoor",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-backdoor-linux-servers-using-trojanized-cwp-web-server/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/hackers-hide-linux-backdoor-in-control.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Nový linuxový malware zvaný CWPdoor se šíří prostřednictvím zmanipulované verze webového serveru cwpsrv pro Control Web Panel a slouží jako vysoce stealth pasivní backdoor.",
+        "cil": "Linuxové servery využívající Control Web Panel (CWP) správu hostingů.",
+        "dopad_laici": "Provozovatelé webových serverů mohou mít na svých strojích nepozorovaně nainstalovaný backdoor, který útočníkům umožňuje plnou kontrolu nad serverem bez zanechání stop v logách."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní výzkumníci z laboratoře XLab společnosti QiAnXin Technology Group objevili nový linuxový malware nazvaný CWPdoor, který je distribuován skrze trojanizovanou verzi serveru cwpsrv používaného v administračním rozhraní Control Web Panel (CWP, dříve CentOS Web Panel). CWPdoor funguje jako pasivní backdoor, jenž vyčkává na speciálně zformulovaný požadavek od útočníka.\n\nInstalační skript nahrazuje legitimní binární soubory cwpsrv ve verzích 1.15.10 a 1.24.0, přičemž pečlivě obnovuje časová razítka souborů, odstraňuje dočasné stopy a maže historii příkazů, aby skryl svou přítomnost. Malware se aktivuje na základě HTTP hlaviček obsahujících časové razítko a RSA podpis (X-Ngx-Integrity-Data, X-Ngx-Integrity-Time, X-Ngx-Integrity-Sig). Příkazy a jejich výstupy jsou šifrovány pomocí AES-256-CBC.\n\nBackdoor ověřuje, zda časové razitéko spadá do pětiminutového okna, a brání tak přehrání starých požadavků. Zároveň manipuluje se serverovým logovacím modulem, takže spouštěcí požadavek nezanechá v přístupových logách žádný záznam. Výzkumníci zaznamenali vzorky spojené rovněž s infikováním starým linuxovým botnetem Ebury.",
+        "jak_to_funguje": "Modifikovaný binární soubor cwpsrv obsahuje skrytý kód naslouchající na unixovém soketu ngx_http_integrity_helper. Jakmile přijde HTTP požadavek s validními kryptografickými hlavičkami, backdoor požadavek dešifruje přes AES-256 a předá jej pomocnému procesu ke spuštění, aniž by došlo k zápisu do standardních logů webového serveru.",
+        "mitre": [
+          "T1071",
+          "T1574",
+          "T1070"
+        ],
+        "mitigace": [
+          "Prověřit systém na přítomnost unixového soketu ngx_http_integrity_helper pomocí příkazu 'ss -axp | grep integrity'.",
+          "Zkontrolovat integritu binárního souboru cwpsrv a porovnat jej s oficiálními hashi.",
+          "V případě kompromitace obnovit binární soubor ze zálohy, aktualizovat CWP na nejnovější verzi a provést kompletní rotaci přihlašovacích údajů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Backdoor",
+          "vysvetleni": "Zadní vrátka; skrytý mechanismus v softwaru obcházející standardní bezpečnostní mechanismy a autentizaci."
+        },
+        {
+          "pojem": "AES-256-CBC",
+          "vysvetleni": "Silný symetrický šifrovací algoritmus využívající 256bitový klíč v režimu Cipher Block Chaining."
+        },
+        {
+          "pojem": "Unixový soket",
+          "vysvetleni": "Meziprocesní komunikační mechanismus v operačních systémech Unix/Linux umožňující výměnu dat mezi aplikacemi na témže stroji."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
