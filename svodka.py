@@ -1,4 +1,5 @@
 import calendar
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 import html
@@ -70,10 +71,12 @@ MODELS = (
     "gemini-3.5-flash-lite",
     "gemini-3.1-flash-lite",
 )
-RETRYABLE_HTTP_CODES = {429, 500, 502, 503, 504}
+FATAL_HTTP_CODES = {400, 401, 403}
+RETRYABLE_HTTP_CODES = {408, 429, 500, 502, 503, 504}
 
 # --- Bezpečnostní limity (ochrana proti resource exhaustion) ---
 MAX_ENTRIES_PER_FEED = 20
+MAX_WORKERS = 8
 MAX_REDIRECTS = 3
 CONNECT_TIMEOUT = 5              # s
 READ_TIMEOUT = 10                # s (na jedno čtení ze socketu)
@@ -99,8 +102,12 @@ def is_http_url(url: str) -> bool:
     return False
   try:
     p = urlsplit(url)
-    return (p.scheme.lower() in ("http", "https") and bool(p.hostname)
-            and p.username is None and p.password is None)
+    return (
+        p.scheme.lower() in ("http", "https")
+        and bool(p.hostname)
+        and p.username is None
+        and p.password is None
+    )
   except ValueError:
     return False
 
@@ -154,6 +161,8 @@ _HEADERS["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;
 _HEADERS["Accept-Language"] = "en-US,en;q=0.9,cs;q=0.8"
 
 _HTTP = urllib3.PoolManager(
+    num_pools=16,
+    maxsize=MAX_WORKERS,
     timeout=urllib3.Timeout(connect=CONNECT_TIMEOUT, read=READ_TIMEOUT),
     retries=False,
     headers=_HEADERS,
@@ -166,10 +175,10 @@ def safe_fetch(url: str, max_bytes: int = MAX_ARTICLE_BYTES) -> bytes | None:
   for _ in range(MAX_REDIRECTS + 1):
     remaining = deadline - time.monotonic()
     if remaining <= 0:
-      logger.warning(f"Vypršel celkový časový limit (deadline): {url[:120]}")
+      logger.warning("Vypršel celkový časový limit (deadline): %s", url[:120])
       return None
     if not is_safe_url(url):
-      logger.warning(f"Zablokováno (nebezpečná nebo nepovolená URL): {url[:120]}")
+      logger.warning("Zablokováno (nebezpečná nebo nepovolená URL): %s", url[:120])
       return None
     req_timeout = urllib3.Timeout(
         connect=min(CONNECT_TIMEOUT, remaining),
@@ -178,7 +187,7 @@ def safe_fetch(url: str, max_bytes: int = MAX_ARTICLE_BYTES) -> bytes | None:
     try:
       resp = _HTTP.request("GET", url, redirect=False, preload_content=False, timeout=req_timeout)
     except (urllib3.exceptions.HTTPError, ValueError) as e:
-      logger.warning(f"Chyba stahování {url[:120]}: {e}")
+      logger.warning("Chyba stahování %s: %s", url[:120], e)
       return None
     try:
       if resp.status in (301, 302, 303, 307, 308):
@@ -188,26 +197,26 @@ def safe_fetch(url: str, max_bytes: int = MAX_ARTICLE_BYTES) -> bytes | None:
         url = urljoin(url, location)
         continue  # další hop se znovu validuje (allowlist domén + veřejná IP)
       if resp.status != 200:
-        logger.warning(f"HTTP status {resp.status} pro {url[:120]}")
+        logger.warning("HTTP status %s pro %s", resp.status, url[:120])
         return None
       ctype = resp.headers.get("Content-Type", "").lower()
       if ctype and not any(t in ctype for t in ("html", "xml", "text/", "rss", "atom", "octet-stream")):
-        logger.warning(f"Nepovolený Content-Type '{ctype}' pro {url[:120]}")
+        logger.warning("Nepovolený Content-Type '%s' pro %s", ctype, url[:120])
         return None
       clen = resp.headers.get("Content-Length")
       if clen and clen.isdigit() and int(clen) > max_bytes:
-        logger.warning(f"Odpověď odmítnuta podle Content-Length ({clen} B > {max_bytes} B): {url[:120]}")
+        logger.warning("Odpověď odmítnuta podle Content-Length (%s B > %s B): %s", clen, max_bytes, url[:120])
         return None
       chunks, size = [], 0
       for chunk in resp.stream(65536, decode_content=True):
         size += len(chunk)
         if size > max_bytes or time.monotonic() > deadline:
-          logger.warning(f"Překročen limit velikosti/času při čtení: {url[:120]}")
+          logger.warning("Překročen limit velikosti/času při čtení: %s", url[:120])
           return None
         chunks.append(chunk)
       return b"".join(chunks)
     except (urllib3.exceptions.HTTPError, OSError) as e:
-      logger.warning(f"Chyba čtení {url[:120]}: {e}")
+      logger.warning("Chyba čtení %s: %s", url[:120], e)
       return None
     finally:
       resp.close()
@@ -228,12 +237,14 @@ _INJECTION_RE = re.compile(
 def sanitize_untrusted(text: str, max_len: int) -> str:
   """Sanitizace nedůvěryhodného textu z internetu před vložením do promptu."""
   text = unicodedata.normalize("NFKC", text)
-  text = "".join(c for c in text
-                 if c in "\n\t" or unicodedata.category(c) not in ("Cc", "Cf", "Co", "Cs"))
+  text = "".join(
+      c for c in text
+      if c in "\n\t" or unicodedata.category(c) not in ("Cc", "Cf", "Co", "Cs")
+  )
   text = text.replace("<", "‹").replace(">", "›")
   text, n = _INJECTION_RE.subn("[REDACTED]", text)
   if n:
-    logger.warning(f"Sanitizace: vyřazeno {n} podezřelých frází (možná prompt injection).")
+    logger.warning("Sanitizace: vyřazeno %d podezřelých frází (možná prompt injection).", n)
   text = re.sub(r"[ \t]+", " ", text)
   text = re.sub(r"\n{3,}", "\n\n", text)
   return text.strip()[:max_len]
@@ -283,6 +294,13 @@ class Zprava(BaseModel):
   slovnicek: list[PolozkaSlovnicku] = Field(description="Slovníček VŠECH odborných pojmů a zkratek použitých v textu zprávy.")
   jistota_extrakce: Literal["VYSOKÁ", "STŘEDNÍ", "NÍZKÁ"] = Field(description="Míra jistoty modelu ohledně extrahovaných dat.")
 
+  @field_validator("zavaznost_skore", mode="before")
+  @classmethod
+  def _clamp_score(cls, v):
+    if isinstance(v, (int, float)):
+      return max(1, min(10, int(v)))
+    return v
+
   @field_validator("zdroje", mode="before")
   @classmethod
   def _drop_bad_sources(cls, v):
@@ -303,7 +321,7 @@ class DenniSvodka(BaseModel):
   zpravy: list[Zprava] = Field(description="Seznam zpracovaných a deduplikovaných bezpečnostních zpráv.")
 
 # =====================================================================
-# KROK 1 & 2: STAŽENÍ RSS A EXTRAKCE TEXTU (TRAFILATURA)
+# KROK 1 & 2: STAŽENÍ RSS A EXTRAKCE TEXTU (PARALELNĚ + IZOLACE CHYB)
 # =====================================================================
 
 def parse_entry_date(entry) -> datetime | None:
@@ -313,57 +331,82 @@ def parse_entry_date(entry) -> datetime | None:
     return datetime.fromtimestamp(timestamp, tz=timezone.utc)
   return None
 
+
+def _process_single_entry(source_name: str, entry, cutoff_time: datetime) -> dict | None:
+  """Zpracuje jednu položku RSS feedu; výjimka v jedné položce neovlivní zbytek feedu."""
+  try:
+    pub_date = parse_entry_date(entry)
+    if pub_date and pub_date < cutoff_time:
+      return None
+
+    url = str(getattr(entry, "link", "")).strip()
+    title = str(getattr(entry, "title", "Bez názvu")).strip()
+    if not is_allowed_url(url):
+      logger.warning("Přeskakuji článek s nepovolenou/cizí URL: %s", url[:120])
+      return None
+
+    downloaded = safe_fetch(url)
+    full_text = ""
+    if downloaded:
+      full_text = trafilatura.extract(
+          downloaded, include_comments=False, include_tables=True, no_fallback=False
+      ) or ""
+
+    if not full_text:
+      summary = str(getattr(entry, "summary", ""))[:20000]
+      full_text = re.sub(r"<[^>]+>", " ", summary).strip()
+
+    if len(full_text) < 100:
+      return None
+
+    cves = sorted(
+        set(c.upper() for c in re.findall(r"CVE-\d{4}-\d{4,7}", f"{title} {full_text}", re.IGNORECASE))
+    )
+
+    return {
+        "source": source_name,
+        "title": sanitize_untrusted(title, 200),
+        "url": url,
+        "text": sanitize_untrusted(full_text, MAX_CHARS_PER_ARTICLE),
+        "cves": cves,
+    }
+  except Exception as e:
+    logger.error("Chyba při zpracování položky z %s (%s): %s", source_name, getattr(entry, "link", "?"), e)
+    return None
+
+
 def fetch_articles() -> list[dict]:
   cutoff_time = datetime.now(timezone.utc) - timedelta(hours=HOURS_LOOKBACK)
-  raw_articles = []
+  raw_articles: list[dict] = []
 
-  for source_name, feed_url in RSS_FEEDS.items():
-    logger.info(f"Stahuji RSS: {source_name} ({feed_url})")
-    kept_for_feed = 0
-    try:
-      feed_bytes = safe_fetch(feed_url, MAX_FEED_BYTES)
-      if not feed_bytes:
-        logger.warning(f"Feed {source_name} se nepodařilo bezpečně stáhnout.")
+  with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+    for source_name, feed_url in RSS_FEEDS.items():
+      logger.info("Stahuji RSS: %s (%s)", source_name, feed_url)
+      try:
+        feed_bytes = safe_fetch(feed_url, MAX_FEED_BYTES)
+      except Exception as e:
+        logger.error("Nelze stáhnout feed %s: %s", source_name, e)
         continue
+
+      if not feed_bytes:
+        logger.warning("Feed %s se nepodařilo bezpečně stáhnout (None).", source_name)
+        continue
+
       feed = feedparser.parse(feed_bytes)
+      if getattr(feed, "bozo", False):
+        logger.warning("Feed %s má příznak 'bozo' (nečisté XML): %r", source_name, getattr(feed, "bozo_exception", None))
 
-      for entry in feed.entries[:MAX_ENTRIES_PER_FEED]:
-        pub_date = parse_entry_date(entry)
-        if pub_date and pub_date < cutoff_time:
-          continue
+      entries = feed.entries[:MAX_ENTRIES_PER_FEED]
+      futures = [pool.submit(_process_single_entry, source_name, entry, cutoff_time) for entry in entries]
 
-        url = str(getattr(entry, "link", "")).strip()
-        title = str(getattr(entry, "title", "Bez názvu")).strip()
-        if not is_allowed_url(url):
-          logger.warning(f"Přeskakuji článek s nepovolenou/cizí URL: {url[:120]}")
-          continue
+      kept_for_feed = 0
+      for f in futures:
+        item = f.result()
+        if item:
+          raw_articles.append(item)
+          kept_for_feed += 1
 
-        downloaded = safe_fetch(url)
-        full_text = ""
-        if downloaded:
-          full_text = trafilatura.extract(downloaded, include_comments=False, include_tables=True, no_fallback=False) or ""
-
-        if not full_text:
-          summary = str(getattr(entry, "summary", ""))[:20000]
-          full_text = re.sub(r"<[^>]+>", " ", summary).strip()
-
-        if len(full_text) < 100:
-          continue
-
-        cves = sorted(set(c.upper() for c in re.findall(r"CVE-\d{4}-\d{4,7}", f"{title} {full_text}", re.IGNORECASE)))
-
-        raw_articles.append({
-            "source": source_name,
-            "title": sanitize_untrusted(title, 200),
-            "url": url,
-            "text": sanitize_untrusted(full_text, MAX_CHARS_PER_ARTICLE),
-            "cves": cves,
-        })
-        kept_for_feed += 1
-
-      logger.info(f"Feed {source_name}: použito {kept_for_feed} článků (celkem v RSS: {len(feed.entries)}).")
-    except Exception as e:
-      logger.error(f"Chyba při zpracování feedu {source_name}: {e}")
+      logger.info("Feed %s: použito %d článků (celkem v RSS: %d).", source_name, kept_for_feed, len(feed.entries))
 
   return raw_articles
 
@@ -410,13 +453,15 @@ def deduplicate_and_format(articles: list[dict]) -> str:
 def _is_retryable(e: Exception) -> bool:
   if isinstance(e, genai_errors.ServerError):
     return True
-  return getattr(e, "code", None) in RETRYABLE_HTTP_CODES
+  if isinstance(e, genai_errors.APIError):
+    return getattr(e, "code", None) in RETRYABLE_HTTP_CODES
+  return isinstance(e, (ValidationError, ValueError, OSError))
 
 
 def analyze_with_gemini(raw_rss_text: str, today_display: str) -> DenniSvodka:
   api_key = os.environ.get("GEMINI_API_KEY")
   if not api_key:
-    logger.error("Kritická chyba: Chybí proměnná prostředí GEMINI_API_KEY.")
+    logger.critical("Kritická chyba: Chybí proměnná prostředí GEMINI_API_KEY.")
     sys.exit(1)
 
   system_instruction = PROMPT_FILE.read_text(encoding="utf-8").replace("{{DNES}}", today_display)
@@ -442,8 +487,8 @@ def analyze_with_gemini(raw_rss_text: str, today_display: str) -> DenniSvodka:
     for model_name in MODELS:
       try:
         logger.info(
-            f"Odesílám data ({len(user_content)} znaků) do modelu {model_name} "
-            f"(kolo {round_idx + 1}/{max_rounds})..."
+            "Odesílám data (%d znaků) do modelu %s (kolo %d/%d)...",
+            len(user_content), model_name, round_idx + 1, max_rounds,
         )
         response = client.models.generate_content(model=model_name, contents=user_content, config=config)
         if getattr(response, "parsed", None) and isinstance(response.parsed, DenniSvodka):
@@ -455,25 +500,30 @@ def analyze_with_gemini(raw_rss_text: str, today_display: str) -> DenniSvodka:
       except genai_errors.APIError as e:
         last_error = e
         code = getattr(e, "code", None)
-        logger.warning(f"Model {model_name} vrátil chybu API ({code}): {getattr(e, 'message', e)}")
-        if code in (400, 401, 403):
-          logger.error("Trvalá chyba API (400/401/403 - špatný klíč nebo request). Ukončuji bez dalších pokusů.")
-          raise RuntimeError("Neretriovatelná chyba Gemini API.") from e
-        # U jakékoliv jiné chyby (429/5xx/404/neznámý kód) zkusíme hned další model v kaskádě.
-        logger.info("Zkouším další model v kaskádě...")
+        logger.warning("Model %s vrátil chybu API (%s): %s", model_name, code, getattr(e, "message", e))
+        if code in FATAL_HTTP_CODES:
+          logger.error("Trvalá chyba API (%s - špatný klíč nebo neplatný request). Ukončuji bez opakování.", code)
+          raise RuntimeError(f"Neretriovatelná chyba Gemini API (kód {code}).") from e
+        if code == 404:
+          logger.warning("Model %s nebyl nalezen (404), přeskakuji na další model v kaskádě...", model_name)
+          continue
+        if _is_retryable(e):
+          logger.info("Dočasná chyba u %s, zkouším další model v kaskádě...", model_name)
+          continue
+        logger.warning("Neočekávaný stav API (%s) u %s, zkouším další model...", code, model_name)
 
-      except (ValidationError, ValueError, TypeError, OSError) as e:
+      except (ValidationError, ValueError, OSError) as e:
         last_error = e
-        logger.warning(f"Model {model_name} nevrátil platný výstup: {e}")
+        logger.warning("Model %s nevrátil platný výstup (%s): %s", model_name, type(e).__name__, e)
         logger.info("Zkouším další model v kaskádě...")
 
     if round_idx < max_rounds - 1:
       wait = int(base_delay * (2 ** round_idx) + random.uniform(3, 10))
-      logger.info(f"Všechny modely v tomto kole selhaly, čekám {wait}s před dalším kolem...")
+      logger.info("Všechny modely v tomto kole selhaly, čekám %ds před dalším kolem...", wait)
       time.sleep(wait)
 
   logger.error("Žádný z modelů (ani po opakovaných pokusech) nevrátil použitelný výstup.")
-  raise RuntimeError("Volání Gemini API selhalo.") from last_error
+  raise RuntimeError("Volání Gemini API selhalo po vyčerpání všech kol a modelů.") from last_error
 
 
 def _norm_url(u: str) -> str:
@@ -511,7 +561,7 @@ def finalize_svodka(svodka: DenniSvodka, articles: list[dict]) -> DenniSvodka:
         verified.append(s)
     z.zdroje = verified
     if not z.zdroje:
-      logger.warning(f"Zahazuji zprávu bez ověřitelného zdroje: {z.titulek[:80]!r}")
+      logger.warning("Zahazuji zprávu bez ověřitelného zdroje: %r", z.titulek[:80])
       continue
     z.cve = [c for c in z.cve if c in allowed_cves]
     z.zavaznost_slova = score_to_word(z.zavaznost_skore)
@@ -598,102 +648,3 @@ def generate_html(svodka: DenniSvodka, today_display: str) -> str:
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0d1117">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | {today_display}</title>
-    <style>
-        :root {{ --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }}
-        * {{ box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }}
-        body {{
-            background: var(--bg-main);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            padding: calc(1.5rem + env(safe-area-inset-top)) calc(1rem + env(safe-area-inset-right)) calc(2.5rem + env(safe-area-inset-bottom)) calc(1rem + env(safe-area-inset-left));
-        }}
-        .container {{ max-width: 920px; margin: 0 auto; }}
-        header.site-header {{ border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }}
-        header.site-header h1 {{ font-size: 1.45rem; }}
-        .card {{ background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--sev-color); border-radius: 10px; padding: 1.1rem; margin-bottom: 1rem; }}
-        .card-header {{ display: flex; gap: 0.9rem; margin-bottom: 0.9rem; align-items: flex-start; }}
-        .score-box {{ background: var(--bg-acc); border: 1px solid var(--sev-color); color: var(--sev-color); padding: 0.45rem 0.5rem; border-radius: 8px; text-align: center; min-width: 64px; flex-shrink: 0; }}
-        .score-num {{ font-size: 1.35rem; font-weight: 800; display: block; line-height: 1.1; }}
-        .score-word {{ font-size: 0.65rem; font-weight: 700; display: block; margin-top: 2px; }}
-        .title-box h2 {{ font-size: 1.1rem; margin-top: 0.35rem; line-height: 1.35; }}
-        .meta-tags {{ display: flex; flex-wrap: wrap; gap: 0.35rem; }}
-        .badge {{ font-size: 0.72rem; padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; color: inherit; font-family: ui-monospace, SFMono-Regular, monospace; }}
-        .badge-cat {{ background: #21262d; }}
-        .badge-itw {{ background: rgba(255,59,48,0.2); color: #ff6b6b; border-color: #ff3b30; }}
-        .badge-cve {{ background: rgba(88,166,255,0.12); color: var(--accent); border-color: rgba(88,166,255,0.4); }}
-        .quick-summary {{ background: rgba(255,255,255,0.02); padding: 0.85rem; border-radius: 6px; margin-bottom: 0.9rem; font-size: 0.94rem; }}
-        .quick-summary p + p {{ margin-top: 0.35rem; }}
-        .layman-impact {{ margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px dashed var(--border); color: #c9d1d9; }}
-        details {{ background: var(--bg-acc); border: 1px solid var(--border); border-radius: 6px; }}
-        summary {{ padding: 0.75rem 0.9rem; cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.92rem; }}
-        .accordion-content {{ padding: 0.9rem; border-top: 1px solid var(--border); font-size: 0.9rem; }}
-        .long-text {{ white-space: pre-line; line-height: 1.65; }}
-        .section-block + .section-block {{ margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(48,54,61,0.5); }}
-        .section-block h3 {{ font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem; }}
-        .section-block ul {{ padding-left: 1.2rem; }}
-        .grid-2col {{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(48,54,61,0.5); }}
-        .score-reason {{ margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted); }}
-        .glossary-item {{ background: rgba(255,255,255,0.04); padding: 0.45rem 0.6rem; margin-bottom: 0.4rem; border-radius: 4px; font-size: 0.85rem; }}
-        .card-footer {{ margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted); word-break: break-word; }}
-        .card-footer a {{ color: var(--accent); text-decoration: none; }}
-        @media (max-width: 600px) {{ .grid-2col {{ grid-template-columns: 1fr; }} }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header class="site-header">
-            <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">{today_display} • {len(svodka.zpravy)} hrozeb</span>
-        </header>
-        <main>{"".join(cards_html)}</main>
-    </div>
-</body>
-</html>"""
-
-def save_outputs(svodka: DenniSvodka, today_iso: str, today_display: str) -> None:
-  DOCS_DIR.mkdir(parents=True, exist_ok=True)
-  ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
-
-  (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
-
-  archive_path = ARCHIVE_DIR / f"{today_iso}.json"
-  archive_path.write_text(json.dumps(svodka.model_dump(), ensure_ascii=False, indent=2), encoding="utf-8")
-
-  index_path = DOCS_DIR / "index.html"
-  index_path.write_text(generate_html(svodka, today_display), encoding="utf-8")
-
-# =====================================================================
-# MAIN PIPELINE
-# =====================================================================
-
-def main() -> None:
-  now = datetime.now(timezone.utc)
-  today_iso = now.strftime("%Y-%m-%d")       # archiv: 2026-11-03.json
-  today_display = now.strftime("%d.%m.%Y")   # web: 03.11.2026
-  logger.info(f"Spouštím Threat Intelligence pipeline pro den {today_display} ({today_iso})...")
-
-  articles = fetch_articles()
-  if not articles:
-    logger.error("Nebyl stažen žádný článek (feedy nedostupné nebo blokované?). Končím bez přepsání svodky.")
-    sys.exit(1)
-
-  raw_rss_text = deduplicate_and_format(articles)
-
-  try:
-    svodka = analyze_with_gemini(raw_rss_text, today_display)
-  except Exception:
-    logger.exception("Nepodařilo se získat platnou analýzu od Gemini. Končím bez přepsání svodky.")
-    sys.exit(1)
-
-  svodka = finalize_svodka(svodka, articles)
-  save_outputs(svodka, today_iso, today_display)
-  logger.info("Pipeline úspěšně dokončena.")
-
-if __name__ == "__main__":
-  main()
