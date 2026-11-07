@@ -58,25 +58,25 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">07.11.2026 • 5 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">07.11.2026 • 2 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-num">10<small>/10</small></span>
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-19868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-19868</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-102255" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-102255</a></div>
-                    <h2>#1 SonicWall opravuje kritickou MFA bypass zranitelnost ve firewallech zneužívanou v útocích</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-2868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2023-2868</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-111560" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-111560</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-116606" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-116606</a></div>
+                    <h2>#1 Kritická zranitelnost v Barracuda Email Security Gateway umožňuje RCE pod právy root</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Firewally SonicOS Gen7 a Gen8 využívající SSL-VPN služby se SAML autentizací.</p>
-                <p><strong>⚡ Podstata:</strong> Společnost SonicWall vydala bezpečnostní aktualizace pro sedm zranitelností ve firewallech SonicOS, přičemž jedno z nich (CVE-2026-19868) umožňuje obejít SAML autentizaci a multifaktorové ověření (MFA) v SSL-VPN službách.</p>
+                <p><strong>🎯 Cíl:</strong> Barracuda Email Security Gateway (enterprise e-mailové brány).</p>
+                <p><strong>⚡ Podstata:</strong> Řetězení dvou zranitelností v Barracuda Email Security Gateway umožňuje neautentizovanému útočníkovi získat plnou kontrolu nad zařízením s právy root.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou obejít bezpečnostní kontrolu a přihlásit se do firemní sítě bez nutnosti znát ověřovací kód z MFA. Firmy používající tyto produkty by měly okamžitě provést aktualizaci systému.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočník může ovládnout firemní e-mailový systém bez nutnosti znát heslo, což může vést k úniku veškeré e-mailové komunikace. Je nutné okamžitě aktualizovat firmware.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,24 +84,26 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">SonicWall vydal bezpečnostní aktualizace k opravě sedmi zranitelností ve firewallech SonicOS, včetně chyby obcházení autentizace v SSL-VPN, která je aktivně zneužívána v útocích. Zranitelnost, označená jako CVE-2026-19868, umožňuje útočníkům s platnými přihlašovacími údaji pro alternativní metodu ověřování obejít kontrolu SAML autentizace, což potenciálně zahrnuje i vícefaktorové ověření (MFA) vynucené přes SAML. Chyba má skóre závažnosti CVSS 7.1 a ovlivňuje pouze služby SonicOS SSL-VPN nakonfigurované pro použití SAML autentizace. V bezpečnostním upozornění zveřejněném v pátek SonicWall varoval, že vyšetřoval hlášení o zneužití této zranitelnosti v útocích, a naléhavě vyzval zákazníky k instalaci nejnovějších bezpečnostních aktualizací. Bezpečnostní tým SonicWall PSIRT vyšetřil hlášení naznačující potenciální zneužití této zranitelnosti a doporučil zákazníkům co nejdříve provést upgrade.
+                        <p class="long-text">Dvě zranitelnosti v Barracuda Email Security Gateway, zařízení pro filtrování e-mailů, lze zřetězit k provádění příkazů pod právy root, tedy s nejvyšší úrovní přístupu, bez nutnosti přihlášení. Společnost vydala opravy v pondělí a bezpečnostní firma watchTowr podrobně popsala útočný řetězec ve čtvrtek.
 
-Objevení zranitelnosti nahlásil Ryan Harris ze společnosti The Electronic Office. Přestože SonicWall nezveřejnil podrobnosti o hlášeném zneužití, americká agentura CISA přidala CVE-2026-19868 do svého katalogu zneužitých zranitelností (KEV), čímž potvrdila, že chyba byla zneužita v reálném prostředí (in the wild). CISA nařídila federálním civilním agenturám zabezpečit zasažené systémy do 20. listopadu 2026. Poradní dokument rovněž opravuje šest dalších zranitelností v SonicOS, včetně dvou chyb rozhraní pro správu ohodnocených závažností 8.8, které neověřeným útočníkům umožňují provádět neoprávněné operace za určitých podmínek. Mezi zbývající nedostatky patří pre-autentizační Buffer Overflow v SSL-VPN a TACACS+ službách, které by mohly způsobit Denial-of-Service stav, a zranitelnost slabého hashování hesla ovlivňující virtuální appliance.
+Jedna zranitelnost, CVE-2026-116606, je obcházení autorizace. Neautentizovaný útočník ji může využít k obnovení vytvořeného konfiguračního zálohovacího souboru a změně globálního nastavení zařízení. Druhá zranitelnost, CVE-2026-111560, je injekce příkazů. Ta spouští příkazy jako root, ale běžně vyžaduje účet správce, ke kterému útočník získá přístup právě díky obcházení autorizace.
 
-Zranitelnosti se týkají zařízení SonicOS Gen7 ve verzích 7.3.3-7015 a starších a Gen8 ve verzích 8.2.2-8015 a starších. Společnost SonicWall problémy opravila ve verzích 7.3.4-7013 a 8.2.3-8015 a uvedla, že žádná náhradní řešení (workarounds) nejsou k dispozici. Toto varování přichází po sérii útoků zaměřených na zabezpečená vzdálená přístupová zařízení SonicWall SMA1000. V říjnu bezpečnostní výzkumníci zaznamenali pokusy o zneužití CVE-2026-102255, což je zranitelnost s maximální závažností, která by mohla neověřeným útočníkům umožnit přístup k interním funkcím a provádění neoprávněných operací. Tyto pokusy následovaly po zářijových útocích, které řetězily dva zero-day v SMA1000 k dosažení RCE, a červencových útocích, které zneužívaly další dva zero-day k nasazení malwaru.</p>
+Společnost Mandiant, která přidělila oba záznamy CVE, hodnotí obcházení autorizace 9,3 body z 10 a injekci příkazů 8,6 body. Barracuda vydala opravu pro každý zasažený produkt. Email Security Gateway je opravena ve verzi 9.4.0.030 a novějších.
+
+Analýza watchTowr odhalila, že selhání změny hesla vrací útočníkovi roli s nízkými oprávněními namísto zastavení požadavku, což ponechává funkci obnovy zálohy otevřenou. Tato funkce přijímá nahranou zálohu, jejíž součástí je hodnota časového pásma, kterou zařízení následně spustí jako shell příkaz s právy root. Barracuda chrání zálohy kontrolním součtem, ale tajný klíč použitý k jeho výpočtu je součástí kódu, což útočníkovi umožňuje vytvořit platný kontrolní součet.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba CVE-2026-19868 spočívá v logice zpracování SAML odpovědí, kdy útočník mající platné přihlašovací údaje pro alternativní autentizační metodu dokáže podsunout nebo obejít ověřovací řetězec a vyhnout se tak vynucenému MFA kroku v SSL-VPN relaci. Buffer Overflow v SSL-VPN a TACACS+ službách zase vzniká nedostatečnou validací vstupní délky dat před jejich zkopírováním do alokované paměti v heapu nebo stacku, což vede k přepsání paměťových struktur a pádu démona (Denial-of-Service).</p>
+                        <p>Útok využívá chybu v logice autorizace, která po neúspěšné změně hesla nesprávně udělí útočníkovi roli s nízkými právy. To umožní přístup k funkci obnovy zálohy. Útočník nahraje zmanipulovanou zálohu, která obsahuje škodlivý příkaz v poli časového pásma. Protože je tajný klíč pro validaci kontrolního součtu zálohy hardcoded v binárce, útočník jej může snadno obejít a spustit libovolný kód pod rootem.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizovat SonicOS na verze 7.3.4-7013, 8.2.3-8015 nebo novější.</li><li>Omezení přístupu k rozhraní pro správu na důvěryhodné interní sítě.</li><li>Monitorování systémových logů kvůli neobvyklým pokusům o obcházení autentizace.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1556</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Chybí patch</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat firmware na verzi 9.4.0.030 nebo novější.</li><li>Omezit přístup k administračnímu rozhraní pouze na důvěryhodné vnitřní sítě.</li><li>Povolit automatické aktualizace.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1068</code></li><li><code>T1190</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Privilege Escalation, +1 Chybí patch (v době nálezu), +2 Kritická zranitelnost (RCE), +2 Řetězení zranitelností</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SAML:</strong> Security Assertion Markup Language, standard pro výměnu autentizačních a autorizačních dat mezi identitním providerem a aplikací.</div><div class='glossary-item'><strong>Buffer Overflow:</strong> Chyba správy paměti, kdy program zapíše více dat do vyrovnávací paměti, než kolik se jí vejde, což vede k přepsání sousedních paměťových míst.</div><div class='glossary-item'><strong>Denial-of-Service:</strong> Útok nebo stav vedoucí k vyřazení služby z provozu, obvykle způsobený pádem aplikace nebo vyčerpáním zdrojů.</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution, schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>Root:</strong> Uživatelský účet v systémech typu Unix, který má neomezená oprávnění k systému.</div><div class='glossary-item'><strong>Hardcoded:</strong> Hodnota (např. heslo nebo klíč) napevno vložená přímo do zdrojového kódu programu.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/experts-demonstrate-barracuda-email.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -111,15 +113,15 @@ Zranitelnosti se týkají zařízení SonicOS Gen7 ve verzích 7.3.3-7015 a star
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-96652" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-96652</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-96654" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-96654</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-96655" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-96655</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-96656" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-96656</a></div>
-                    <h2>#2 Kritická zranitelnost v Plex Media Serveru zneužívána v útocích na QNAP NAS zařízení</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-102255" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-102255</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-19868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-19868</a></div>
+                    <h2>#2 SonicWall opravuje kritickou zranitelnost obcházení MFA v SSL-VPN</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Síťová úložná zařízení QNAP NAS s běžícím Plex Media Serverem vystaveným do veřejného internetu.</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci aktivně zneužívají řetězec čtyř zranitelností v aplikaci Plex Media Server (známý jako Plex2Shell) k proniknutí do síťových úložišť QNAP NAS.</p>
+                <p><strong>🎯 Cíl:</strong> SonicWall firewally (SSL-VPN služby).</p>
+                <p><strong>⚡ Podstata:</strong> Zranitelnost v SonicOS umožňuje útočníkům obejít SAML autentizaci a MFA, což vede k neoprávněnému přístupu do VPN.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Pokud provozujete domácí nebo firemní úložžiště s aplikací Plex a máte jej přístupné zvenčí, útočníci mohou získat plnou kontrolu nad zařízením a uloženými daty. Je nutné okamžitě aktualizovat aplikaci a odpojit porty z internetu.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat přístup do firemní sítě i přes zapnuté dvoufázové ověření. Firmy musí okamžitě aktualizovat svá zařízení.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -127,153 +129,26 @@ Zranitelnosti se týkají zařízení SonicOS Gen7 ve verzích 7.3.3-7015 a star
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost QNAP naléhavě vyzývá uživatele, aby aktualizovali Plex Media Server na nejnovější verzi dostupnou v QNAP App Center, protože hackeři zneužívají zranitelnostní řetězec Plex2Shell. Vendor uvedl, že obdržel několik hlášení o podezřelých kompromitacích síťových úložišť (NAS) zákazníků. QNAP obdržel zprávy od některých uživatelů, že Plex Media Server na jejich NAS se zdá být kompromitován prostřednictvím zranitelností Plex2Shell, a technická podpora QNAP těmto uživatelům pomáhá.
+                        <p class="long-text">SonicWall vydal bezpečnostní aktualizace pro opravu sedmi zranitelností v firewallech SonicOS, včetně chyby obcházení autentizace SSL-VPN, která je aktivně zneužívána. Zranitelnost, sledovaná jako CVE-2026-19868, umožňuje útočníkům s platnými přihlašovacími údaji pro alternativní metodu autentizace obejít SAML kontrolu, což může zahrnovat i MFA.
 
-Plex2Shell je řetězec čtyř zranitelností v Plex Media Serveru, evidovaných pod CVE-2026-96652, CVE-2026-96654, CVE-2026-96655 a CVE-2026-96656. Bezpečnostní výzkumník Zach Main objevil a nahlásil tyto chyby společnosti Plex 27. července. K zneužívání došlo krátce poté, co se 16. října objevily veřejné technické detaily. Agentura CISA přidala všechny čtyři chyby do svého katalogu zneužitých zranitelností 20. října 2026 a vyzvala federální agentury k upgradu na Plex 1.43.3.10861 nebo novější během tří dnů s maximální prioritou.
+Chyba má skóre CVSS 7.1 a ovlivňuje pouze služby SonicOS SSL-VPN nakonfigurované pro použití SAML autentizace. V bezpečnostním doporučení SonicWall varoval, že vyšetřil zprávu o zneužití této zranitelnosti v útoku a naléhavě vyzval zákazníky k instalaci nejnovějších aktualizací.
 
-Zařízení QNAP NAS jsou specializované počítače s vestavěným úložištěm, které uživatelům umožňují ukládat, přistupovat a sdílet soubory po síti, obvykle pro zálohování a multimédia. Uživatelé mohou rozšiřovat funkce instalací aplikací z QNAP App Center, jako je Plex Media Server pro streamování filmů a hudby. QNAP radí aktualizovat Plex Media Server na aktuální verzi 1.43.3.10861. QNAP PSIRT potvrdil, že zranitelnosti se týkají výhradně Plex Media Serveru; samotné operační systémy QTS, QuTS hero a další systémy QNAP zasaženy nejsou.
+Americká agentura CISA přidala CVE-2026-19868 do svého katalogu známých zneužitých zranitelností (KEV) a nařídila federálním agenturám zabezpečit systémy do 20. listopadu 2026. Aktualizace také opravuje šest dalších zranitelností, včetně dvou chyb v rozhraní pro správu s hodnocením 8.8, které umožňují neautentizovaným útočníkům provádět neautorizované operace.
 
-QNAP varuje, že uživatelé by měli svá zařízení a veškerý osobní obsah považovat za kompromitované, pokud provozují zranitelný server Plex vystavený na veřejném webu. Aktualizace neodstraní škodlivý payload, který již útočníci na zařízení nainstalovali. Doporučeným postupem je zkontrolovat známky kompromitace, provést čistou reinstalaci OS (QTS nebo QuTS hero) a resetovat přihlašovací údaje do Plexu i NASu. Uživatelé, kteří nepotřebují vzdálený přístup k Plexu, by měli vypnout související funkce a přestat přesměrovávat port 32400. Ti, kdo vzdálený přístup potřebují, by měli používat VPN.</p>
+Zranitelnosti ovlivňují SonicOS Gen7 verze 7.3.3-7015 a starší a Gen8 verze 8.2.2-8015 a starší. SonicWall opravil problémy ve verzích 7.3.4-7013 a 8.2.3-8015 a uvádí, že neexistují žádná náhradní řešení.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnostní řetězec Plex2Shell kombinuje nedostatky v aplikační logice Plex Media Serveru při zpracování požadavků, které neověřenému útočníkovi umožňují obejít autentizaci a vykonávat libovolné příkazy (RCE) v kontextu běžícího serveru, což na zařízeních QNAP NAS často vede k získání administrátorských práv.</p>
+                        <p>Zranitelnost spočívá v nesprávné validaci SAML tokenů při použití alternativních autentizačních metod. Útočník, který disponuje platnými primárními údaji, může manipulovat s procesem ověření tak, že systém přeskočí vynucení MFA, které je jinak vázáno na SAML odpověď.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat Plex Media Server na verzi 1.43.3.10861 nebo novější.</li><li>Zrušit přesměrování portu 32400 na routeru pro přístup z veřejného internetu.</li><li>V případě podezření na kompromitaci provést čistou reinstalaci operačního systému NAS a změnit veškerá hesla.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1078</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Chybí patch</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat SonicOS na verze 7.3.4-7013 nebo 8.2.3-8015.</li><li>Monitorovat logy SSL-VPN na podezřelé přihlašovací aktivity.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1556</code></li><li><code>T1190</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Chybí patch (v době nálezu), +1 Privilege Escalation</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>NAS:</strong> Network-Attached Storage, síťové datové úložiště připojené k lokální síti nebo internetu.</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution, schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SAML:</strong> Security Assertion Markup Language – standard pro výměnu autentizačních a autorizačních dat mezi stranami.</div><div class='glossary-item'><strong>MFA:</strong> Multi-Factor Authentication – vícefaktorové ověření identity uživatele.</div><div class='glossary-item'><strong>CVSS:</strong> Common Vulnerability Scoring System – standard pro hodnocení závažnosti zranitelností.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/qnap-says-hackers-breaching-nas-devices-in-plex2shell-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123158" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123158</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2016-6210" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2016-6210</a></div>
-                    <h2>#3 Kritická zranitelnost v OpenSSH umožňující přihlášení bez hesla skrze SSHole</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Linuxové distribuce používající OpenSSH na musl C knihovně s vypnutým PAM (např. výchozí konfigurace Alpine Linuxu).</p>
-                <p><strong>⚡ Podstata:</strong> Bezpečnostní chyba v OpenSSH běžícím na knihovně musl C (známá jako SSHole) umožňuje neověřeným útočníkům přihlásit se do účtů bez nastaveného hesla pomocí nadměrně dlouhého hesla.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Serverové systémy s konkrétní výchozí konfigurací jsou zranitelné vůči vzdálenému proniknutí bez znalosti hesla. Útočníci tuto chybu začali aktivně zneužívat hodinách po zveřejnění.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Hrozba se týká nedávno zveřejněné zranitelnosti v OpenSSH, označované jako CVE-2026-123158 (CVSS 8.1) a kódovým označením SSHole (nebo *sshole). Zasahuje Linuxové systémy provozující OpenSSH nad knihovnou musl C se zakázanými moduly PAM (Pluggable Authentication Modules), což zahrnuje i výchozí nastavení OpenSSH serveru v Alpine Linuxu. Neověřený útočník může zadat nadměrně velké heslo a získat přístup k účtům, které jsou záměrně konfigurovány bez použitelných hesel, aniž by musel krást přihlašovací údaje nebo SSH klíče. Problém, který objevil výzkumník Ozgun Kultekin, byl opraven v OpenSSH 10.6p2. Základní problém sahá až k opravě z roku 2016, která řešila enumeraci uživatelských jmen (CVE-2016-6210). Za určitých podmínek chování při zpracování hesla v OpenSSH omylem interpretuje selhání hašování hesla jako úspěšnou autentizaci tím, že vyprodukuje stejnou hodnotu (&#x27;*&#x27;), která se používá k označení účtu se zakázaným heslem na úrovni systému.
-
-Útočník může tuto zranitelnost vyvolat a přihlásit se k určitým účtům se zakázaným heslem pomocí libovolného hesla dlouhého 257 až 1 024 bytů, což způsobí selhání pokusu o hash a vrátí hvězdičku. Demon pak porovná tuto hodnotu s hvězdičkou uloženou v poli hesla účtu, což vede k úspěšnému přihlášení. Úspěšné zneužití vyžaduje alespoň jeden účet s hvězdičkou (*) jako hashem hesla. Neumožňuje obcházet hesla u účtů s platnými hashi. Společnost Previdian zaznamenala první pokus o zneužití necelých devět hodin po zveřejnění CVE a potvrdila root přístup na honeypotu s Alpine Linuxem. Telemetrie ukázala osm pokusů o zneužití z IP adresy v Japonsku.
-
-Doporučeným opatřením je instalace OpenSSH 10.6p2 nebo opraveného balíčku od distribuce a restartování sshd. Alpine doporučuje prozkoumat logy v /var/log/messages na výskyty &#x27;Accepted password for&#x27; u účtů, které nemají přijímat hesla (root, alpine apod.).</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba spočívá v chybné interpretaci návratové hodnoty při hašování extrémně dlouhých řetězců v kombinaci s musl C knihovnou. Pokud délka hesla přesáhne určitý limit, funkce hašování selže a vrátí speciální řetězec (&#x27;*&#x27;). SSH démon tento výsledek vyhodnotí shodně s interní reprezentací prázdného hesla účtu, čímž umožní neověřený vstup.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat OpenSSH na verzi 10.6p2 nebo vyšší.</li><li>Povolit moduly PAM a zajistit, aby žádné systémové účty neměly prázdné nebo zakázané heslo reprezentované hvězdičkou.</li><li>Revidovat systémové logy na podezřelé přihlašovací pokusy.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>PAM:</strong> Pluggable Authentication Modules, mechanismus v Linuxu pro modularizaci systémových autentizačních služeb.</div><div class='glossary-item'><strong>Honeypot:</strong> Cíleně vystavený pastový systém sloužící k detekci a analýze útoků.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploited-openssh-sshole-flaw.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">7<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span></div>
-                    <h2>#4 Chainalysis potvrdila únik pověření a živých tokenů pro všechny zákazníky po agentním útoku</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Infrastruktura a zákaznický portál společnosti Chainalysis, využívaný vládními agenturami a finančními institucemi.</p>
-                <p><strong>⚡ Podstata:</strong> Firma Chainalysis, zabývající se analýzou blockchainu, přiznala, že nedávný kybernetický útok pomocí pokročilých AI agentů odhalil uživatelská jména, hashe hesel a živé tokeny všech zákazníků.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Bezpečnostní incident u klíčového poskytovatele analýz kryptoměnových transakcí ohrozil přihlašovací údaje všech uživatelů včetně vládních institucí. Uživatelé musí provést reset hesel a výměnu API klíčů.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Firma Chainalysis uvedla, že nedávný útok na její systémy a interní nástroje odhalil přihlašovací údaje a živé tokeny pro všechny zákazníky. Chainalysis poskytuje nástroje pro sledování transakcí a vyšetřování zločinů, přičemž mezi její zákazníky patří orgány činné v trestním řízení, vládní agentury, finanční instituce a kryptofirmy. Tento incident navazuje na dřívější oznámení, že útočníci využívající AI nástroje získali přístup k jménům, e-mailům, ID uživatelů a rolím pomocí ofenzivních agentních technik.
-
-Zatímco společnost zpočátku tvrdila, že dopad byl omezený a týkal se pouze necitlivých metadat, pozdější aktualizace odhalily, že uživatelská jména a hashe hesel pro všechny zákazníky byly vystaveny v rámci Man-in-the-Middle (MITM) útoku označovaného jako on-path attack. Firma však nezaznamenala žádné důkazy o přístupu k vyšetřovacím datům nebo manipulaci s databázemi. Jako opatření Chainalysis uzamkla účty a následně odpojila přihlášení, rozhraní Reactor a Data Solutions, rozhraní KYT API a další screeningové produkty.
-
-Pro obnovení přístupu nyní zákazníci musí poskytnout důvěryhodné IP adresy pro allowlist, po čemž proběhne reset hesel a rotace API klíčů. Incident zapadá do širší vlny kampaní, kde autonomní AI frameworky jako ARTEX skenují veřejná úložiště a systémy s cílem získat pověření a provádět následné útoky.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Útočníci využili sofistikované agentní techniky a on-path (Man-in-the-Middle) síťový odposlech k zachycení komunikace a získání citlivých tokenů a hashů hesel. Automatizované AI nástroje dokázaly efektivně vyhledat slabá místa v autentizačních tocích a exfiltraci údajů.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Vynucený globální reset hesel a rotace API klíčů pro všechny uživatele.</li><li>Implementace striktních IP allowlistů pro přístup k administrativním portálům.</li><li>Rozšířené monitorování síťového provozu na anomálie v autentizačních procesech.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1557</code></li><li><code>T1588</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na enterprise software / kritickou infrastrukturu</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Man-in-the-Middle:</strong> Typ útočné techniky, kdy se útočník postaví mezi komunikující strany a může odposlouchávat či pozměňovat provoz.</div><div class='glossary-item'><strong>API:</strong> Application Programming Interface, rozhraní pro programové propojení aplikací.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/chainalysis-says-breach-exposed-credentials-for-all-customers/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/chainalysis-breach-exposes-all-users.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-medium" style="--sev-color: #ffcc00;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">5<small>/10</small></span>
-                    <span class="score-word">STŘEDNÍ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span></div>
-                    <h2>#5 D-Link varuje před více unpatchovanými zero-day zranitelnostmi v přepínačích DGS-3130</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Gigabitové stohovatelné přepínače D-Link DGS-3130 používané v malých a středních firmách.</p>
-                <p><strong>⚡ Podstata:</strong> Společnost D-Link vydala varování a doporučení ohledו několika nezáplatovaných zero-day zranitelností v managed přepínačích řady DGS-3130.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Chyby v síťových prvcích mohou útočníkům uvnitř sítě umožnit získat citlivé konfigurační údaje nebo resetovat zařízení. Výrobce zatím nemá hotovou opravu, proto je nutné aplikovat dočasná bezpečnostní opatření.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">D-Link sdílel opatření ke zmírnění dopadů několika neopravených bezpečnostních chyb ovlivňujících managed stohovatelné gigabitové přepínače řady DGS-3130. Tyto modely poskytují multi-gigabitové uplinky pro eliminaci úzkých hrdel a jsou určeny především pro malé až střední podniky a metro Ethernet nasazení. Ačkoli D-Link nezveřejnil podrobnosti ani CVE identifikátory, síťový inženýr Giresh Kumar Enugu našel chyby v autentizaci D-Link Discovery Protocolu (DDP), řízení přístupu a zpracování informací.
-
-Úspěšné zneužití by mohlo útočníkům umožnit získat citlivá data zařízení, provádět neoprávněné změny pověření či konfigurace, uniknout SNMP komunity nebo způsobit výpadky služeb a restarty zařízení. Zero-day se týkají několika verzí firmwaru DGS-3130-30TS. Společnost stále vyšetřuje dopad na další platformy. Dokud nevydá nový firmware, D-Link doporučuje správcům zakázat DDP, odstranit nepotřebné SNMP komunity a omezit přístup k SSH, webovému rozhraní a SNMP výhradně na izolované manažerské sítě.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnosti se nacházejí v proprietárním protokolu DDP (D-Link Discovery Protocol) a v architektuře zabezpečení firmwaru. Nedostatečná validace paketů a slabá autentizace v DDP umožňují útočníkovi v lokální síti posílat speciálně crafted zprávy, které vedou k úniku informací nebo neautorizované konfiguraci.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Zakázat protokol DDP na zasažených přepínačích.</li><li>Omezit přístup k management rozhraním (SSH, Web UI, SNMP) pouze na dedikovanou správcovskou síť.</li><li>Pravidelně zálohovat konfiguraci zařízení mimo samotný switch.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1040</code></li><li><code>T1557</code></li><li><code>T1499</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Chybí patch</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SNMP:</strong> Simple Network Management Protocol, protokol pro správu a monitoring síťových zařízení.</div><div class='glossary-item'><strong>Zero-day:</strong> Zranitelnost v softwaru, o které její tvůrce ještě neví nebo na ni nemá vydanou opravu.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
         </article>
         </main>
     </div>
