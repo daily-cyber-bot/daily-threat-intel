@@ -6,6 +6,7 @@ on:
     - cron: '40 5 * * *'
   workflow_dispatch:
 
+# Výchozí oprávnění pro celý workflow: jen čtení.
 permissions:
   contents: read
 
@@ -14,13 +15,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  generate:
+    # Job má přístup k GEMINI_API_KEY a zpracovává nedůvěryhodná data z internetu,
+    # ale NEMÁ právo zapisovat do repozitáře (contents: read, persist-credentials: false) ani nasazovat Pages.
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
-      contents: write
+      contents: read
     steps:
-      - name: Stažení repozitáře
+      - name: Stažení repozitáře (bez uložení tokenu na disk)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Nastavení Pythonu 3.12
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
@@ -31,15 +37,42 @@ jobs:
       - name: Instalace závislostí
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -rRequirements.txt 2>/dev/null || pip install -r requirements.txt
 
       - name: Spuštění Threat Intel skriptu
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python svodka.py
 
+      - name: Upload vygenerovaného docs/ (bez API klíče)
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-output
+          path: docs/
+          include-hidden-files: true
+          retention-days: 1
+
+  commit:
+    # Samostatný job s právem zápisu do repozitáře, který ale nevidí GEMINI_API_KEY
+    # a nespouští žádný externí Python kód z PyPI.
+    needs: generate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Stažení repozitáře
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Stažení vygenerovaného docs/
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-output
+          path: docs/
+
       - name: Commit a Push JSON archivu (záloha dat)
         run: |
+          touch docs/.nojekyll
           git config --global user.name "svodka-bot"
           git config --global user.email "svodka-bot@users.noreply.github.com"
           git add docs/
@@ -56,8 +89,10 @@ jobs:
           path: ./docs
 
   deploy:
-    needs: build
+    # Samostatný job jen pro nasazení na GitHub Pages.
+    needs: commit
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pages: write
       id-token: write
