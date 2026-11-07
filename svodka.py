@@ -648,3 +648,102 @@ def generate_html(svodka: DenniSvodka, today_display: str) -> str:
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CTI Svodka">
+    <title>Threat Intel Svodka | {today_display}</title>
+    <style>
+        :root {{ --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }}
+        * {{ box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }}
+        body {{
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            padding: calc(1.5rem + env(safe-area-inset-top)) calc(1rem + env(safe-area-inset-right)) calc(2.5rem + env(safe-area-inset-bottom)) calc(1rem + env(safe-area-inset-left));
+        }}
+        .container {{ max-width: 920px; margin: 0 auto; }}
+        header.site-header {{ border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }}
+        header.site-header h1 {{ font-size: 1.45rem; }}
+        .card {{ background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--sev-color); border-radius: 10px; padding: 1.1rem; margin-bottom: 1rem; }}
+        .card-header {{ display: flex; gap: 0.9rem; margin-bottom: 0.9rem; align-items: flex-start; }}
+        .score-box {{ background: var(--bg-acc); border: 1px solid var(--sev-color); color: var(--sev-color); padding: 0.45rem 0.5rem; border-radius: 8px; text-align: center; min-width: 64px; flex-shrink: 0; }}
+        .score-num {{ font-size: 1.35rem; font-weight: 800; display: block; line-height: 1.1; }}
+        .score-word {{ font-size: 0.65rem; font-weight: 700; display: block; margin-top: 2px; }}
+        .title-box h2 {{ font-size: 1.1rem; margin-top: 0.35rem; line-height: 1.35; }}
+        .meta-tags {{ display: flex; flex-wrap: wrap; gap: 0.35rem; }}
+        .badge {{ font-size: 0.72rem; padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; color: inherit; font-family: ui-monospace, SFMono-Regular, monospace; }}
+        .badge-cat {{ background: #21262d; }}
+        .badge-itw {{ background: rgba(255,59,48,0.2); color: #ff6b6b; border-color: #ff3b30; }}
+        .badge-cve {{ background: rgba(88,166,255,0.12); color: var(--accent); border-color: rgba(88,166,255,0.4); }}
+        .quick-summary {{ background: rgba(255,255,255,0.02); padding: 0.85rem; border-radius: 6px; margin-bottom: 0.9rem; font-size: 0.94rem; }}
+        .quick-summary p + p {{ margin-top: 0.35rem; }}
+        .layman-impact {{ margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px dashed var(--border); color: #c9d1d9; }}
+        details {{ background: var(--bg-acc); border: 1px solid var(--border); border-radius: 6px; }}
+        summary {{ padding: 0.75rem 0.9rem; cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.92rem; }}
+        .accordion-content {{ padding: 0.9rem; border-top: 1px solid var(--border); font-size: 0.9rem; }}
+        .long-text {{ white-space: pre-line; line-height: 1.65; }}
+        .section-block + .section-block {{ margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(48,54,61,0.5); }}
+        .section-block h3 {{ font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem; }}
+        .section-block ul {{ padding-left: 1.2rem; }}
+        .grid-2col {{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(48,54,61,0.5); }}
+        .score-reason {{ margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted); }}
+        .glossary-item {{ background: rgba(255,255,255,0.04); padding: 0.45rem 0.6rem; margin-bottom: 0.4rem; border-radius: 4px; font-size: 0.85rem; }}
+        .card-footer {{ margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted); word-break: break-word; }}
+        .card-footer a {{ color: var(--accent); text-decoration: none; }}
+        @media (max-width: 600px) {{ .grid-2col {{ grid-template-columns: 1fr; }} }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
+            <span style="color: var(--accent); font-family: monospace;">{today_display} • {len(svodka.zpravy)} hrozeb</span>
+        </header>
+        <main>{"".join(cards_html)}</main>
+    </div>
+</body>
+</html>"""
+
+def save_outputs(svodka: DenniSvodka, today_iso: str, today_display: str) -> None:
+  DOCS_DIR.mkdir(parents=True, exist_ok=True)
+  ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+
+  (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
+
+  archive_path = ARCHIVE_DIR / f"{today_iso}.json"
+  archive_path.write_text(json.dumps(svodka.model_dump(), ensure_ascii=False, indent=2), encoding="utf-8")
+
+  index_path = DOCS_DIR / "index.html"
+  index_path.write_text(generate_html(svodka, today_display), encoding="utf-8")
+
+# =====================================================================
+# MAIN PIPELINE
+# =====================================================================
+
+def main() -> None:
+  now = datetime.now(timezone.utc)
+  today_iso = now.strftime("%Y-%m-%d")       # archiv: 2026-11-07.json
+  today_display = now.strftime("%d.%m.%Y")   # web: 07.11.2026
+  logger.info("Spouštím Threat Intelligence pipeline pro den %s (%s)...", today_display, today_iso)
+
+  articles = fetch_articles()
+  if not articles:
+    logger.error("Nebyl stažen žádný článek (feedy nedostupné nebo blokované?). Končím bez přepsání svodky.")
+    sys.exit(1)
+
+  raw_rss_text = deduplicate_and_format(articles)
+
+  try:
+    svodka = analyze_with_gemini(raw_rss_text, today_display)
+  except Exception:
+    logger.exception("Analýza přes Gemini selhala po vyčerpání všech kol a modelů. Končím bez přepsání svodky.")
+    sys.exit(1)
+
+  svodka = finalize_svodka(svodka, articles)
+  save_outputs(svodka, today_iso, today_display)
+  logger.info("Pipeline úspěšně dokončena.")
+
+if __name__ == "__main__":
+  main()
