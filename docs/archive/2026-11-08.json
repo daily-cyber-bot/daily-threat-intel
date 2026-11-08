@@ -1,0 +1,125 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Útok na dodavatele francouzské banky Crédit Mutuel Arkéa vedl k neoprávněným transakcím za 133 milionů dolarů",
+      "kategorie": "data-breach",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Aktivní zneužití v reálném světě (potvrzený finanční útok), +2 Dopad na kritickou infrastrukturu / enterprise banking, +2 Vzdálený přístup přes dodavatelský řetězec bez autentizace v bance, +1 Přístup k interním systémům a Lateral Movement k provádění transakcí.",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-pull-off-133-million-french-bank-heist-via-service-provider/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Francouzská družstevní bankovní skupina Crédit Mutuel Arkéa se stala terčem kybernetického útoku vedeného přes platformu externího dodavatele služeb, při kterém útočníci vyvedli až 133 milionů dolarů v kryptoměnách.",
+        "cil": "Enterprise bankovní infrastruktura a institucionální účty bankovní skupiny Crédit Mutuel Arkéa.",
+        "dopad_laici": "Pro běžné klienty banky útok neznamená ztrátu jejich úspor ani osobních financí. Jediným dopadem bylo dočasné zpoždění některých převodních transakcí z důvodu preventivního pozastavení systémů."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Francouzská družstevní banka Crédit Mutuel Arkéa se stala terčem kybernetického útoku, který umožnil podvodné transakce v hodnotě až 133 milionů dolarů a donutil banku v reakci pozastavit některé své systémy. Banka uvádí, že útočník použil její vlastní účet k zahájení transakcí vůči jiným bankovním organizacím, nicméně aktiva zákazníků zůstávají nedotčena. Crédit Mutuel Arkéa je významná francouzská bankovní skupina s více než 5,8 milionu členů a aktivy ve výši 211,5 miliardy eur.\n\nZprávy o incidentu se poprvé objevily 2. listopadu od vyšetřovatele podvodů na blockchainu vystupujícího pod přezdívkou ZachXBT, který varoval před rozsáhlým neoprávněným výběrem z účtů na několika centralizovaných burzách, ke kterému došlo o den dříve. Podle vyšetřovatele mohlo být ukradeno až 118 milionů eur (133 milionů dolarů) a vybráno ve formě stablecoinů USDC a USDT. V té době ZachXBT nejmenoval konkrétní subjekt, ale uvedl, že absence veřejného zveřejnění umožnila útočníkovi do 3. listopadu vyprat 30 milionů dolarů, které by jinak orgány činné v trestním řízení EU zmrazily.\n\nSpolečnost Crédit Mutuel Arkéa incident zveřejnila 4. listopadu a ujistila zákazníky, že je v současnosti uzavřen a pod kontrolou a provoz se postupně vrací do normálu. Banka uvedla: „Crédit Mutuel Arkéa si přeje ujistit všechny své klienty ve všech svých federacích a dceřiných společnostech, že tento incident nemá žádný dopad na jejich aktiva; způsobil pouze zpoždění při provádění některých převodních transakcí.“ Organizace však zároveň varovala před zvýšeným rizikem Phishing a vyzvala zákazníky k ostražitosti před nevyžádanou komunikací a sdílením citlivých údajů po telefonu či e-mailu s tím, že všechna podezřelá hlášení by měla být ověřena přímým telefonátem bankovnímu poradci.\n\nNa samostatné stránce s nejčastějšími dotazy banka vysvětlila, že útočník se dostal do její sítě přímo přes platformu poskytovatele služeb, přičemž vyloučila společnost Fortuneo. Útočník následně použil vlastní účet banky Arkéa, nikoli účty klientů, k provádění transakcí s jinými bankovními institucemi a k převodu prostředků na kryptoměny. Přestože banka nepotvrdila odhad ukradené částky uváděný ZachXBT, přiznala, že částka byla významná a některé prostředky byly zablokovány. Banka vyloučila lidskou chybu na své straně a incident popsala jako sofistikovaný útok. V současnosti spolupracuje se soudními orgány a policií na zjištění přesného původu a způsobu provedení útoku.",
+        "jak_to_funguje": "Útočníci neoprávněně pronikli do sítě banky přes přístupové rozhraní externího poskytovatele služeb (Supply Chain Compromise). Po zisku přístupu využili Lateral Movement k dosažení interních transakčních systémů banky. Místo kompromitace jednotlivých klientských účtů zneužili přímo institucionální účet banky Arkéa, ze kterého iniciovali autorizované transakce do jiných finančních institucí. Tyto prostředky následně neprodleně konvertovali na kryptoměny (stablecoiny USDC a USDT) přes Centralized Exchange platformy, čímž ztížili okamžité zmrazení kapitálu ze strany orgánů činných v trestním řízení.",
+        "mitre": [
+          "T1199",
+          "T1078"
+        ],
+        "mitigace": [
+          "Striktní izolace a segmentace rozhraní pro dodavatele a třetí strany.",
+          "Zavedení principů Zero Trust a víceúrovňové schvalování pro velkoobjemové institucionální převody.",
+          "Průběžný monitoring neobvyklých odlivů kapitálu a okamžité automatické blokování podezřelých transakcí v reálném čase."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Phishing",
+          "vysvetleni": "Podvodná technika sociálního inženýrství sloužící k vylákání citlivých údajů od obětí pod záminkou komunikace s důvěryhodnou institucí."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Technika, při níž se útočník po proniknutí do sítě posouvá mezi vnitřními systémy a získává vyšší oprávnění."
+        },
+        {
+          "pojem": "Centralized Exchange",
+          "vysvetleni": "Centralizovaná kryptoměnová burza provozovaná konkrétní společností umožňující obchodování a směnu kryptoměn."
+        },
+        {
+          "pojem": "Stablecoin",
+          "vysvetleni": "Typ kryptoměny, jejíž hodnota je navázána na reálné aktívum (např. americký dolar)."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Nástroj Claude Code ukládá přístupové klíče a hesla v čistém textu do souboru nastavení verzovaného na GitHubu",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+2 Únik data a klíčů přístupných zdaleka bez autentizace přes veřejný GitHub, +2 Dopad na enterprise prostředí a cloudové databáze, +1 Veřejně dostupné přístupové údaje v otevřených repozitářích, +1 Získané klíče umožňují Privilege Escalation a Lateral Movement do interních databází firem.",
+      "aktivne_zneuzivano": false,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "AI asistent Claude Code od společnosti Anthropic ukládá při schválení příkazu s volbou neptat se znovu celý příkaz včetně hesel a API klíčů v prostém textu do lokálního souboru, který vývojáři omylem commitují do veřejných repozitářů.",
+        "cil": "Softwaroví vývojáři a enterprise organizace využívající CLI nástroj Claude Code a verzovací systém Git.",
+        "dopad_laici": "Běžní uživatelé internetu nejsou přímo ohroženi. Problém se týká vývojářů používajících AI asistenta Claude Code, kterým mohou z účtů uniknout hesla a přístupové klíče k firemním serverům a databázím."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Hesla a klíče API, které vývojáři zadali do příkazů schválených v nástroji Claude Code, se nacházejí ve veřejných repozitářích na platformě GitHub, kde si je může přečíst kdokoliv. Pokud uživatel zvolí možnost „Yes, and don't ask again“, AI asistent pro kódování od společnosti Anthropic může uložit příkaz slovo od slova, včetně tajného údaje, do souboru nastavení projektu. Bezpečnostní společnost Apiiro uvedla, že 1 122 veřejných kopií tohoto souboru obsahuje alespoň jeden tajný údaj, ačkoliv netestovala, zda jsou stále funkční. Jedna ze společností, kterou výzkumníci informovali počátkem týdne, potvrdila, že její klíč byl aktivní.\n\nJedná se o soubor .claude/settings.local.json. Jeho pouhé odstranění z projektu únik nenapraví, protože starší verze zůstávají v historii systému Git a ve forkech repozitáře. Doporučení výzkumníků zní nejprve provést rotaci: změnit každé heslo, token a klíč, které kdy soubor obsahoval, a teprve poté provést úklid. Ve výchozím nastavení se Claude Code před spuštěním většiny příkazů v shellu dotazuje. Pokud uživatel vybere možnost „Yes, and don't ask again“, uloží se pravidlo povolení do souboru .claude/settings.local.json uvnitř projektu. Odpovídající příkazy se pak v dalších relacích spouštějí bez dotazování.\n\nPravidlo pokrývá pouze to, co nabídla výzva – někdy jde o vzor (např. npm test *), jindy o jeden přesný příkaz. Pokud jde o přesný příkaz, jakékoliv heslo nebo token do něj vepsané se uloží v čistém textu. Ve veřejných souborech výzkumníci našli uložené příkazy se stále přítomným tajným údajem a chování reprodukovali i na nejnovějších modelech Opus 5.5 a Fable 5.1. Claude Code se snaží soubor udržet mimo Git tím, že při prvním zápisu přidá soubor do globálních výjimek Gitu daného uživatele. Ochrana však zůstává pouze v nastavení Gitu jednoho uživatele na jednom počítači a nefunguje pro soubor, který již byl commitnut. Claude Code navíc soubor nikdy nepřidá do vlastního .gitignore projektu.\n\nV 539 z 1 105 repozitářů, které výzkumníci sledovali, změnil tento soubor commit uvádějící Claude jako spoluautora. Výzkumníci z toho vyvozují, že Claude často soubor commituje sám. Vyhledávání Apiiro na veřejném GitHubu odhalilo 104 185 kopií souboru v 103 617 repozitářích. Přibližně 1,1 % z nich (1 122 kopií) obsahuje alespoň jeden secret, přičemž dohromady obsahují 1 379 různých secretů. Více než třetina z nich otevírá přímo databázi, včetně 379 heslem chráněných databází. Mezi majiteli souborů je 63 organizací, většinou softwarových firem všech velikostí, včetně admin klíče poskytovatele databází a hesla vlastníka databáze zdravotnických záznamů.",
+        "jak_to_funguje": "Claude Code CLI při potvrzení volby 'Yes, and don't ask again' ukládá schválené příkazy doslova v prostém textu do projektu v `.claude/settings.local.json`. Pokud příkaz obsahuje citlivé údaje (API klíče, hesla k databázím, AWS tokeny), uloží se nešifrovaně. Nástroj přidává soubor pouze do globálního souboru výjimek `.git/info/exclude` konkrétního uživatele na jeho lokálním stroji, nikoli do repozitářového `.gitignore`. V důsledku toho při sdílení nebo při automatických commitech (např. když samotný AI agent vytvoří commit) dojde k odeslání souboru do vzdáleného repozitáře na GitHubu, kde zůstává trvale v historii verze a v jejích forkech, což vede k úniku tajných údajů a riziku Privilege Escalation a Lateral Movement.",
+        "mitre": [
+          "T1552.001"
+        ],
+        "mitigace": [
+          "Okamžitě provést rotaci (změnu) všech hesel, API klíčů a tokenů zasažených soubory .claude/settings.local.json.",
+          "Odstranit soubor z verzování Gitu pomocí `git rm --cached .claude/settings.local.json` a explicitně jej přidat do projektu v `.gitignore`.",
+          "Provést prohledání a vyčištění historie projektu i všech forků pomocí nástrojů pro scrubbing historie (např. BFG Repo-Cleaner nebo git-filter-repo)."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "CLI",
+          "vysvetleni": "Command Line Interface - textové uživatelské rozhraní pro zadávání příkazů v terminálu."
+        },
+        {
+          "pojem": "Git",
+          "vysvetleni": "Distribuovaný systém řízení verzí používaný pro sledování změn v zdrojovém kódu."
+        },
+        {
+          "pojem": "GitHub",
+          "vysvetleni": "Webová platforma pro hostování a správy projektů využívajících systém Git."
+        },
+        {
+          "pojem": "API",
+          "vysvetleni": "Application Programming Interface - rozhraní pro programování aplikací umožňující komunikaci mezi systémy."
+        },
+        {
+          "pojem": "SSH",
+          "vysvetleni": "Secure Shell - síťový protokol umožňující šifrované a bezpečné připojení k vzdáleným počítačům."
+        },
+        {
+          "pojem": "AWS",
+          "vysvetleni": "Amazon Web Services - cloudová platforma poskytující výpočetní a databázové služby."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Získání vyšších uživatelských nebo správcovských oprávnění v systému, než jaká byla původně přidělena."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Technika, při níž se útočník po proniknutí do sítě posouvá mezi vnitřními systémy a získá přístup k dalším zdrojům."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}

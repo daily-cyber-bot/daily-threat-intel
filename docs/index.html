@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 07.11.2026</title>
+    <title>Threat Intel Svodka | 08.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,25 +58,25 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">07.11.2026 • 2 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">08.11.2026 • 2 hrozeb</span>
         </header>
         <main>
-        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+        <article class="card sev-high" style="--sev-color: #ff9500;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">10<small>/10</small></span>
-                    <span class="score-word">KRITICKÁ</span>
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-2868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2023-2868</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-111560" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-111560</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-116606" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-116606</a></div>
-                    <h2>#1 Kritická zranitelnost v Barracuda Email Security Gateway umožňuje RCE pod právy root</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
+                    <h2>#1 Útok na dodavatele francouzské banky Crédit Mutuel Arkéa vedl k neoprávněným transakcím za 133 milionů dolarů</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Barracuda Email Security Gateway (enterprise e-mailové brány).</p>
-                <p><strong>⚡ Podstata:</strong> Řetězení dvou zranitelností v Barracuda Email Security Gateway umožňuje neautentizovanému útočníkovi získat plnou kontrolu nad zařízením s právy root.</p>
+                <p><strong>🎯 Cíl:</strong> Enterprise bankovní infrastruktura a institucionální účty bankovní skupiny Crédit Mutuel Arkéa.</p>
+                <p><strong>⚡ Podstata:</strong> Francouzská družstevní bankovní skupina Crédit Mutuel Arkéa se stala terčem kybernetického útoku vedeného přes platformu externího dodavatele služeb, při kterém útočníci vyvedli až 133 milionů dolarů v kryptoměnách.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočník může ovládnout firemní e-mailový systém bez nutnosti znát heslo, což může vést k úniku veškeré e-mailové komunikace. Je nutné okamžitě aktualizovat firmware.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Pro běžné klienty banky útok neznamená ztrátu jejich úspor ani osobních financí. Jediným dopadem bylo dočasné zpoždění některých převodních transakcí z důvodu preventivního pozastavení systémů.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,44 +84,44 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Dvě zranitelnosti v Barracuda Email Security Gateway, zařízení pro filtrování e-mailů, lze zřetězit k provádění příkazů pod právy root, tedy s nejvyšší úrovní přístupu, bez nutnosti přihlášení. Společnost vydala opravy v pondělí a bezpečnostní firma watchTowr podrobně popsala útočný řetězec ve čtvrtek.
+                        <p class="long-text">Francouzská družstevní banka Crédit Mutuel Arkéa se stala terčem kybernetického útoku, který umožnil podvodné transakce v hodnotě až 133 milionů dolarů a donutil banku v reakci pozastavit některé své systémy. Banka uvádí, že útočník použil její vlastní účet k zahájení transakcí vůči jiným bankovním organizacím, nicméně aktiva zákazníků zůstávají nedotčena. Crédit Mutuel Arkéa je významná francouzská bankovní skupina s více než 5,8 milionu členů a aktivy ve výši 211,5 miliardy eur.
 
-Jedna zranitelnost, CVE-2026-116606, je obcházení autorizace. Neautentizovaný útočník ji může využít k obnovení vytvořeného konfiguračního zálohovacího souboru a změně globálního nastavení zařízení. Druhá zranitelnost, CVE-2026-111560, je injekce příkazů. Ta spouští příkazy jako root, ale běžně vyžaduje účet správce, ke kterému útočník získá přístup právě díky obcházení autorizace.
+Zprávy o incidentu se poprvé objevily 2. listopadu od vyšetřovatele podvodů na blockchainu vystupujícího pod přezdívkou ZachXBT, který varoval před rozsáhlým neoprávněným výběrem z účtů na několika centralizovaných burzách, ke kterému došlo o den dříve. Podle vyšetřovatele mohlo být ukradeno až 118 milionů eur (133 milionů dolarů) a vybráno ve formě stablecoinů USDC a USDT. V té době ZachXBT nejmenoval konkrétní subjekt, ale uvedl, že absence veřejného zveřejnění umožnila útočníkovi do 3. listopadu vyprat 30 milionů dolarů, které by jinak orgány činné v trestním řízení EU zmrazily.
 
-Společnost Mandiant, která přidělila oba záznamy CVE, hodnotí obcházení autorizace 9,3 body z 10 a injekci příkazů 8,6 body. Barracuda vydala opravu pro každý zasažený produkt. Email Security Gateway je opravena ve verzi 9.4.0.030 a novějších.
+Společnost Crédit Mutuel Arkéa incident zveřejnila 4. listopadu a ujistila zákazníky, že je v současnosti uzavřen a pod kontrolou a provoz se postupně vrací do normálu. Banka uvedla: „Crédit Mutuel Arkéa si přeje ujistit všechny své klienty ve všech svých federacích a dceřiných společnostech, že tento incident nemá žádný dopad na jejich aktiva; způsobil pouze zpoždění při provádění některých převodních transakcí.“ Organizace však zároveň varovala před zvýšeným rizikem Phishing a vyzvala zákazníky k ostražitosti před nevyžádanou komunikací a sdílením citlivých údajů po telefonu či e-mailu s tím, že všechna podezřelá hlášení by měla být ověřena přímým telefonátem bankovnímu poradci.
 
-Analýza watchTowr odhalila, že selhání změny hesla vrací útočníkovi roli s nízkými oprávněními namísto zastavení požadavku, což ponechává funkci obnovy zálohy otevřenou. Tato funkce přijímá nahranou zálohu, jejíž součástí je hodnota časového pásma, kterou zařízení následně spustí jako shell příkaz s právy root. Barracuda chrání zálohy kontrolním součtem, ale tajný klíč použitý k jeho výpočtu je součástí kódu, což útočníkovi umožňuje vytvořit platný kontrolní součet.</p>
+Na samostatné stránce s nejčastějšími dotazy banka vysvětlila, že útočník se dostal do její sítě přímo přes platformu poskytovatele služeb, přičemž vyloučila společnost Fortuneo. Útočník následně použil vlastní účet banky Arkéa, nikoli účty klientů, k provádění transakcí s jinými bankovními institucemi a k převodu prostředků na kryptoměny. Přestože banka nepotvrdila odhad ukradené částky uváděný ZachXBT, přiznala, že částka byla významná a některé prostředky byly zablokovány. Banka vyloučila lidskou chybu na své straně a incident popsala jako sofistikovaný útok. V současnosti spolupracuje se soudními orgány a policií na zjištění přesného původu a způsobu provedení útoku.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Útok využívá chybu v logice autorizace, která po neúspěšné změně hesla nesprávně udělí útočníkovi roli s nízkými právy. To umožní přístup k funkci obnovy zálohy. Útočník nahraje zmanipulovanou zálohu, která obsahuje škodlivý příkaz v poli časového pásma. Protože je tajný klíč pro validaci kontrolního součtu zálohy hardcoded v binárce, útočník jej může snadno obejít a spustit libovolný kód pod rootem.</p>
+                        <p>Útočníci neoprávněně pronikli do sítě banky přes přístupové rozhraní externího poskytovatele služeb (Supply Chain Compromise). Po zisku přístupu využili Lateral Movement k dosažení interních transakčních systémů banky. Místo kompromitace jednotlivých klientských účtů zneužili přímo institucionální účet banky Arkéa, ze kterého iniciovali autorizované transakce do jiných finančních institucí. Tyto prostředky následně neprodleně konvertovali na kryptoměny (stablecoiny USDC a USDT) přes Centralized Exchange platformy, čímž ztížili okamžité zmrazení kapitálu ze strany orgánů činných v trestním řízení.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat firmware na verzi 9.4.0.030 nebo novější.</li><li>Omezit přístup k administračnímu rozhraní pouze na důvěryhodné vnitřní sítě.</li><li>Povolit automatické aktualizace.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1068</code></li><li><code>T1190</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Privilege Escalation, +1 Chybí patch (v době nálezu), +2 Kritická zranitelnost (RCE), +2 Řetězení zranitelností</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Striktní izolace a segmentace rozhraní pro dodavatele a třetí strany.</li><li>Zavedení principů Zero Trust a víceúrovňové schvalování pro velkoobjemové institucionální převody.</li><li>Průběžný monitoring neobvyklých odlivů kapitálu a okamžité automatické blokování podezřelých transakcí v reálném čase.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1199</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužití v reálném světě (potvrzený finanční útok), +2 Dopad na kritickou infrastrukturu / enterprise banking, +2 Vzdálený přístup přes dodavatelský řetězec bez autentizace v bance, +1 Přístup k interním systémům a Lateral Movement k provádění transakcí.</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>Root:</strong> Uživatelský účet v systémech typu Unix, který má neomezená oprávnění k systému.</div><div class='glossary-item'><strong>Hardcoded:</strong> Hodnota (např. heslo nebo klíč) napevno vložená přímo do zdrojového kódu programu.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Phishing:</strong> Podvodná technika sociálního inženýrství sloužící k vylákání citlivých údajů od obětí pod záminkou komunikace s důvěryhodnou institucí.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Technika, při níž se útočník po proniknutí do sítě posouvá mezi vnitřními systémy a získává vyšší oprávnění.</div><div class='glossary-item'><strong>Centralized Exchange:</strong> Centralizovaná kryptoměnová burza provozovaná konkrétní společností umožňující obchodování a směnu kryptoměn.</div><div class='glossary-item'><strong>Stablecoin:</strong> Typ kryptoměny, jejíž hodnota je navázána na reálné aktívum (např. americký dolar).</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/experts-demonstrate-barracuda-email.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/hackers-pull-off-133-million-french-bank-heist-via-service-provider/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
         </article>
         
-        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+        <article class="card sev-medium" style="--sev-color: #ffcc00;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">9<small>/10</small></span>
-                    <span class="score-word">KRITICKÁ</span>
+                    <span class="score-num">6<small>/10</small></span>
+                    <span class="score-word">STŘEDNÍ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-102255" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-102255</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-19868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-19868</a></div>
-                    <h2>#2 SonicWall opravuje kritickou zranitelnost obcházení MFA v SSL-VPN</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span></div>
+                    <h2>#2 Nástroj Claude Code ukládá přístupové klíče a hesla v čistém textu do souboru nastavení verzovaného na GitHubu</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> SonicWall firewally (SSL-VPN služby).</p>
-                <p><strong>⚡ Podstata:</strong> Zranitelnost v SonicOS umožňuje útočníkům obejít SAML autentizaci a MFA, což vede k neoprávněnému přístupu do VPN.</p>
+                <p><strong>🎯 Cíl:</strong> Softwaroví vývojáři a enterprise organizace využívající CLI nástroj Claude Code a verzovací systém Git.</p>
+                <p><strong>⚡ Podstata:</strong> AI asistent Claude Code od společnosti Anthropic ukládá při schválení příkazu s volbou neptat se znovu celý příkaz včetně hesel a API klíčů v prostém textu do lokálního souboru, který vývojáři omylem commitují do veřejných repozitářů.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat přístup do firemní sítě i přes zapnuté dvoufázové ověření. Firmy musí okamžitě aktualizovat svá zařízení.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Běžní uživatelé internetu nejsou přímo ohroženi. Problém se týká vývojářů používajících AI asistenta Claude Code, kterým mohou z účtů uniknout hesla a přístupové klíče k firemním serverům a databázím.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -129,26 +129,26 @@ Analýza watchTowr odhalila, že selhání změny hesla vrací útočníkovi rol
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">SonicWall vydal bezpečnostní aktualizace pro opravu sedmi zranitelností v firewallech SonicOS, včetně chyby obcházení autentizace SSL-VPN, která je aktivně zneužívána. Zranitelnost, sledovaná jako CVE-2026-19868, umožňuje útočníkům s platnými přihlašovacími údaji pro alternativní metodu autentizace obejít SAML kontrolu, což může zahrnovat i MFA.
+                        <p class="long-text">Hesla a klíče API, které vývojáři zadali do příkazů schválených v nástroji Claude Code, se nacházejí ve veřejných repozitářích na platformě GitHub, kde si je může přečíst kdokoliv. Pokud uživatel zvolí možnost „Yes, and don&#x27;t ask again“, AI asistent pro kódování od společnosti Anthropic může uložit příkaz slovo od slova, včetně tajného údaje, do souboru nastavení projektu. Bezpečnostní společnost Apiiro uvedla, že 1 122 veřejných kopií tohoto souboru obsahuje alespoň jeden tajný údaj, ačkoliv netestovala, zda jsou stále funkční. Jedna ze společností, kterou výzkumníci informovali počátkem týdne, potvrdila, že její klíč byl aktivní.
 
-Chyba má skóre CVSS 7.1 a ovlivňuje pouze služby SonicOS SSL-VPN nakonfigurované pro použití SAML autentizace. V bezpečnostním doporučení SonicWall varoval, že vyšetřil zprávu o zneužití této zranitelnosti v útoku a naléhavě vyzval zákazníky k instalaci nejnovějších aktualizací.
+Jedná se o soubor .claude/settings.local.json. Jeho pouhé odstranění z projektu únik nenapraví, protože starší verze zůstávají v historii systému Git a ve forkech repozitáře. Doporučení výzkumníků zní nejprve provést rotaci: změnit každé heslo, token a klíč, které kdy soubor obsahoval, a teprve poté provést úklid. Ve výchozím nastavení se Claude Code před spuštěním většiny příkazů v shellu dotazuje. Pokud uživatel vybere možnost „Yes, and don&#x27;t ask again“, uloží se pravidlo povolení do souboru .claude/settings.local.json uvnitř projektu. Odpovídající příkazy se pak v dalších relacích spouštějí bez dotazování.
 
-Americká agentura CISA přidala CVE-2026-19868 do svého katalogu známých zneužitých zranitelností (KEV) a nařídila federálním agenturám zabezpečit systémy do 20. listopadu 2026. Aktualizace také opravuje šest dalších zranitelností, včetně dvou chyb v rozhraní pro správu s hodnocením 8.8, které umožňují neautentizovaným útočníkům provádět neautorizované operace.
+Pravidlo pokrývá pouze to, co nabídla výzva – někdy jde o vzor (např. npm test *), jindy o jeden přesný příkaz. Pokud jde o přesný příkaz, jakékoliv heslo nebo token do něj vepsané se uloží v čistém textu. Ve veřejných souborech výzkumníci našli uložené příkazy se stále přítomným tajným údajem a chování reprodukovali i na nejnovějších modelech Opus 5.5 a Fable 5.1. Claude Code se snaží soubor udržet mimo Git tím, že při prvním zápisu přidá soubor do globálních výjimek Gitu daného uživatele. Ochrana však zůstává pouze v nastavení Gitu jednoho uživatele na jednom počítači a nefunguje pro soubor, který již byl commitnut. Claude Code navíc soubor nikdy nepřidá do vlastního .gitignore projektu.
 
-Zranitelnosti ovlivňují SonicOS Gen7 verze 7.3.3-7015 a starší a Gen8 verze 8.2.2-8015 a starší. SonicWall opravil problémy ve verzích 7.3.4-7013 a 8.2.3-8015 a uvádí, že neexistují žádná náhradní řešení.</p>
+V 539 z 1 105 repozitářů, které výzkumníci sledovali, změnil tento soubor commit uvádějící Claude jako spoluautora. Výzkumníci z toho vyvozují, že Claude často soubor commituje sám. Vyhledávání Apiiro na veřejném GitHubu odhalilo 104 185 kopií souboru v 103 617 repozitářích. Přibližně 1,1 % z nich (1 122 kopií) obsahuje alespoň jeden secret, přičemž dohromady obsahují 1 379 různých secretů. Více než třetina z nich otevírá přímo databázi, včetně 379 heslem chráněných databází. Mezi majiteli souborů je 63 organizací, většinou softwarových firem všech velikostí, včetně admin klíče poskytovatele databází a hesla vlastníka databáze zdravotnických záznamů.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost spočívá v nesprávné validaci SAML tokenů při použití alternativních autentizačních metod. Útočník, který disponuje platnými primárními údaji, může manipulovat s procesem ověření tak, že systém přeskočí vynucení MFA, které je jinak vázáno na SAML odpověď.</p>
+                        <p>Claude Code CLI při potvrzení volby &#x27;Yes, and don&#x27;t ask again&#x27; ukládá schválené příkazy doslova v prostém textu do projektu v `.claude/settings.local.json`. Pokud příkaz obsahuje citlivé údaje (API klíče, hesla k databázím, AWS tokeny), uloží se nešifrovaně. Nástroj přidává soubor pouze do globálního souboru výjimek `.git/info/exclude` konkrétního uživatele na jeho lokálním stroji, nikoli do repozitářového `.gitignore`. V důsledku toho při sdílení nebo při automatických commitech (např. když samotný AI agent vytvoří commit) dojde k odeslání souboru do vzdáleného repozitáře na GitHubu, kde zůstává trvale v historii verze a v jejích forkech, což vede k úniku tajných údajů a riziku Privilege Escalation a Lateral Movement.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat SonicOS na verze 7.3.4-7013 nebo 8.2.3-8015.</li><li>Monitorovat logy SSL-VPN na podezřelé přihlašovací aktivity.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1556</code></li><li><code>T1190</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Chybí patch (v době nálezu), +1 Privilege Escalation</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě provést rotaci (změnu) všech hesel, API klíčů a tokenů zasažených soubory .claude/settings.local.json.</li><li>Odstranit soubor z verzování Gitu pomocí `git rm --cached .claude/settings.local.json` a explicitně jej přidat do projektu v `.gitignore`.</li><li>Provést prohledání a vyčištění historie projektu i všech forků pomocí nástrojů pro scrubbing historie (např. BFG Repo-Cleaner nebo git-filter-repo).</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1552.001</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Únik data a klíčů přístupných zdaleka bez autentizace přes veřejný GitHub, +2 Dopad na enterprise prostředí a cloudové databáze, +1 Veřejně dostupné přístupové údaje v otevřených repozitářích, +1 Získané klíče umožňují Privilege Escalation a Lateral Movement do interních databází firem.</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SAML:</strong> Security Assertion Markup Language – standard pro výměnu autentizačních a autorizačních dat mezi stranami.</div><div class='glossary-item'><strong>MFA:</strong> Multi-Factor Authentication – vícefaktorové ověření identity uživatele.</div><div class='glossary-item'><strong>CVSS:</strong> Common Vulnerability Scoring System – standard pro hodnocení závažnosti zranitelností.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>CLI:</strong> Command Line Interface - textové uživatelské rozhraní pro zadávání příkazů v terminálu.</div><div class='glossary-item'><strong>Git:</strong> Distribuovaný systém řízení verzí používaný pro sledování změn v zdrojovém kódu.</div><div class='glossary-item'><strong>GitHub:</strong> Webová platforma pro hostování a správy projektů využívajících systém Git.</div><div class='glossary-item'><strong>API:</strong> Application Programming Interface - rozhraní pro programování aplikací umožňující komunikaci mezi systémy.</div><div class='glossary-item'><strong>SSH:</strong> Secure Shell - síťový protokol umožňující šifrované a bezpečné připojení k vzdáleným počítačům.</div><div class='glossary-item'><strong>AWS:</strong> Amazon Web Services - cloudová platforma poskytující výpočetní a databázové služby.</div><div class='glossary-item'><strong>Privilege Escalation:</strong> Získání vyšších uživatelských nebo správcovských oprávnění v systému, než jaká byla původně přidělena.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Technika, při níž se útočník po proniknutí do sítě posouvá mezi vnitřními systémy a získá přístup k dalším zdrojům.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>
