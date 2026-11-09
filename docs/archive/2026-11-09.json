@@ -1,0 +1,115 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v SonicWall SonicOS umožňuje obcházení MFA a RCE útoky",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild (aktivně zneužíváno), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch (neopravené/nové zranitelnosti v KEV)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-19868",
+        "CVE-2026-107155",
+        "CVE-2026-107154",
+        "CVE-2026-82308",
+        "CVE-2026-109593",
+        "CVE-2026-109594"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/cisa-flags-sonicwall-sonicos-mfa-bypass.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Agentura CISA zařadila do katalogu zneužívaných zranitelností chybu v SonicOS (CVE-2026-19868), která umožňuje obejít SAML autentizaci a vícefaktorové ověření (MFA). Spolu s ní bylo opraveno několik dalších závažných chyb včetně přetečení haldy (heap-based buffer overflow).",
+        "cil": "Podnikové brány a SSL-VPN zařízení SonicWall SonicOS.",
+        "dopad_laici": "Útočníci mohou získat neoprávněný přístup do firemních sítí přes VPN brány i přes zapnuté ověřování dvěma fázemi. Firmy musí ihned aktualizovat svá zařízení."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Americká agentura pro kybernetickou bezpečnost a infrastrukturu (CISA) přidala do svého katalogu zneužívaných zranitelností (KEV) vysoce závažnou chybu postihující systém SonicWall SonicOS poté, co obdržela zprávy o jejím možném aktivním zneužívání v reálných útocích.\n\nTato zranitelnost, evidovaná pod označením CVE-2026-19868 s CVSS skóre 7.1 až 7.5, je popsána jako problém vynucování autentizace prostřednictvím alternativních metod ověřování. Podle vyjádření společnosti SonicWall může chyba v SSL-VPN službě SonicOS umožnit uživateli s platnými přihlašovacími údaji pro alternativní metodu obejít řízení SAML autentizace a případně překonat i vícefaktorové ověření (MFA) vynucované přes SAML.\n\nSpolečnost SonicWall potvrdila, že prošetřila hlášení naznačující potenciální zneužití této zranitelnosti, a vyzvala zákazníky k okamžité aktualizaci na nejnovější verzi. Výrobce nezveřejnil žádné další podrobnosti o povaze útoků ani o tom, kdo za nimi stojí.\n\nKromě toho SonicWall opravil řadu dalších závažných chyb. Mezi nimi figurují CVE-2026-107155 a CVE-2026-107154 (obě s CVSS skóre 8.8), které představují chybu v politikách napříč doménami a chybu validace relace v administračním rozhraní SonicOS. Tyto nedostatky by za určitých podmínek mohly vzdálenému neautentizovanému útočníkovi umožnit provádět neautorizované operace. Další opravenou chybou je CVE-2026-82308 (CVSS skóre 7.5), což je pre-autentizační heap-based buffer overflow v SSL-VPN službě, schopná způsobit odepření služby (DoS) na aplikační úrovni.\n\nFederálním civilním úřadům v USA bylo doporučeno aplikovat záplaty do 20. listopadu 2026. Tento krok přichází jen několik dní poté, co SonicWall detailně popsal dvě neopravené zranitelnosti (CVE-2026-109593 a CVE-2026-109594) v již nepodporovaných systémech Global Management System (GMS) a vyzval uživatele k přechodu na Network Security Manager (NSM).",
+        "jak_to_funguje": "Chyba CVE-2026-19868 spočívá v nedostatečném vynucení primární autentizační logiky v SSL-VPN modulu SonicOS při použití alternativních metod. Útočník schopen předložit specifické tokeny či požadavky dokáže přesměrovat validační rutinu a přeskočit SAML/MFA kontrolu. Heap-based buffer overflow (CVE-2026-82308) pak umožňuje zápis dat mimo alokovanou paměť na haldě skrze špatně ošetřený síťový vstup před samotným ověřením uživatele, což vede k pádu aplikace.",
+        "mitre": [
+          "T1190",
+          "T1556",
+          "T1211"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat SonicOS na nejnovější verzi poskytnutou výrobcem.",
+          "Zkontrolovat přístupnost administračních rozhraní a SSL-VPN služeb z nedůvěryhodných sítí (internetu).",
+          "Nahradit legacy systémy GMS moderním řešením Network Security Manager (NSM)."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "SAML",
+          "vysvetleni": "Security Assertion Markup Language, standard pro výměnu autentizačních a autorizačních dat mezi identitními providery a aplikacemi."
+        },
+        {
+          "pojem": "MFA",
+          "vysvetleni": "Multi-Factor Authentication, vícefaktorové ověřování vyžadující k přihlášení více nezávislých důkazů totožnosti."
+        },
+        {
+          "pojem": "Heap-Based Buffer Overflow",
+          "vysvetleni": "Chyba správy paměti, kdy zápis dat překročí vyhrazenou velikost paměťového bloku na haldě, což může vést k pádu programu nebo spuštění kódu."
+        },
+        {
+          "pojem": "CVSS",
+          "vysvetleni": "Common Vulnerability Scoring System, standardizovaný systém hodnocení závažnosti kybernetických zranitelností."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Celosvětové útoky na průmyslové chladicí systémy hrozí požáry a zkázou zásob",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild (aktivně zneužíváno v Evropě), +2 Remote exploit bez autentizace (slabé konfigurace/chyby), +2 Dopad na kritickou infrastrukturu a OT systémy",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/us-agencies-warn-refrigeration.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci celosvětově zneužívají nezabezpečené a veřejně přístupné ovladače průmyslového chlazení. Úmyslně mění nastavení teplot a spouštějí odmrazovací cykly, což ničí uskladněné zásoby a vytváří riziko požárů.",
+        "cil": "Průmyslová zařízení pro chlazení a monitoring chladicího řetězce (cold-chain), supermarkety a zdravotnická zařízení v Evropě i globálně.",
+        "dopad_laici": "Útočníci dokáží na dálku rozbít chladicí boxy v obchodech nebo nemocnicích, znehodnotit potraviny a léky (např. krevní plazmu) a způsobit materiální škody."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Americké vládní agentury vydaly varování před útočníky, kteří aktivně zneužívají průmyslové chladicí systémy a systémy pro sledování chladicího řetězce po celém světě s cílem způsobit výpadky provozu, požární nebezpečí a ztrátu zásob. Podle společného varování mohou útočníci využít zranitelností nebo slabin v neopravených či k internetu připojených ovladačích k vzdálené změně nastavení a vynucení nepřetržitého vytápění a odmrazovacích cyklů.\n\nAgentura CISA, FBI, HHS, USDA a DOT upozorňují, že hackeři spoléhají na obcházení autentizace, injekce libovolného kódu a slabé konfigurace. Tyto útoky mohou vést k radikální změně teplot, ohrožení životnosti zařízení, vzniku požárů nebo zničení citlivých produktů. V posledních týdnech útočníci zasáhli stovky supermarketů a menších obchodů v mnoha evropských zemích (např. ve Francii, Estonsku, Finsku, Německu a dalších), kde zvýšili teploty v chladicích jednotkách až na 50 stupňů Celsia.\n\nMezi zasaženými subjekty byla i Francouzská krevní agentura, která potvrdila incident na zařízeních uchovávajících krevní plazmu. Platforma Censys eviduje stovky veřejně exponovaných instancí jako Danfoss StoreView či Copeland/Dixell XWEB, což potvrzuje rozsáhlý problém zabezpečení operační technologie (OT) a průmyslových řídicích systémů (ICS).",
+        "jak_to_funguje": "Útočníci vyhledávají veřejně exponovaná rozhraní chladicích jednotek (např. přes vyhledávače Shodan či Censys), která postihuje absence autentizace nebo výchozí přihlašovací údaje. Skrze webová rozhraní nebo API moduly posílají příkazy měnící parametry PLC/regulátorů, čímž donutí kompresory pracovat v opačném režimu (odmrazování/topení).",
+        "mitre": [
+          "T1190",
+          "T0855",
+          "T1078"
+        ],
+        "mitigace": [
+          "Okamžitě odpojit zařízení průmyslového chlazení a OT sítě od přímého přístupu z veřejného internetu.",
+          "Změnit všechna výchozí hesla a nasadit silnou autentizaci.",
+          "Izolovat řídicí systémy do segmentovaných interních sítí a provést audit expozice přes portálové skenery."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "OT",
+          "vysvetleni": "Operational Technology, hardwarové a softwarové systémy pro monitorování a řízení fyzických zařízení a průmyslových procesů."
+        },
+        {
+          "pojem": "ICS",
+          "vysvetleni": "Industrial Control Systems, průmyslové řídicí systémy používané v infrastruktuře a výrobních závodech."
+        },
+        {
+          "pojem": "PLC",
+          "vysvetleni": "Programmable Logic Controller, průmyslový počítač určený pro řízení technologických procesů."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
