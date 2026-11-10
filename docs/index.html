@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 09.11.2026</title>
+    <title>Threat Intel Svodka | 10.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +58,7 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">09.11.2026 • 2 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">10.11.2026 • 1 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -68,15 +68,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-19868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-19868</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-107155" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-107155</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-107154" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-107154</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-82308" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-82308</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109593" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109593</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109594" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109594</a></div>
-                    <h2>#1 Kritická zranitelnost v SonicWall SonicOS umožňuje obcházení MFA a RCE útoky</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123158" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123158</a></div>
+                    <h2>#1 Kritická zranitelnost v OpenSSH umožňuje obejití autentizace na systémech s musl knihovnou</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Podnikové brány a SSL-VPN zařízení SonicWall SonicOS.</p>
-                <p><strong>⚡ Podstata:</strong> Agentura CISA zařadila do katalogu zneužívaných zranitelností chybu v SonicOS (CVE-2026-19868), která umožňuje obejít SAML autentizaci a vícefaktorové ověření (MFA). Spolu s ní bylo opraveno několik dalších závažných chyb včetně přetečení haldy (heap-based buffer overflow).</p>
+                <p><strong>🎯 Cíl:</strong> Linuxové systémy využívající knihovnu musl C a OpenSSH (např. Alpine Linux) bez aktivních PAM modulů.</p>
+                <p><strong>⚡ Podstata:</strong> Zranitelnost s kódovým označením SSHole v OpenSSH umožňuje útočníkům vzdáleně obejít přihlášení a získat přístup k systémům bez znalosti hesla.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat neoprávněný přístup do firemních sítí přes VPN brány i přes zapnuté ověřování dvěma fázemi. Firmy musí ihned aktualizovat svá zařízení.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad servery a cloudovými systémy bez nutnosti znát heslo správce. Je nutné neprodleně aktualizovat software.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,71 +84,28 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Americká agentura pro kybernetickou bezpečnost a infrastrukturu (CISA) přidala do svého katalogu zneužívaných zranitelností (KEV) vysoce závažnou chybu postihující systém SonicWall SonicOS poté, co obdržela zprávy o jejím možném aktivním zneužívání v reálných útocích.
+                        <p class="long-text">Hackers are actively exploiting the &quot;SSHole&quot; vulnerability (CVE-2026-123158) in OpenSSH to execute commands, steal credentials, and establish persistent access. Multiple cybersecurity firms have confirmed the attacks, reporting that exploitation attempts began on November 5, the day a proof-of-concept exploit became available, with successful exploitation recorded the following day.
 
-Tato zranitelnost, evidovaná pod označením CVE-2026-19868 s CVSS skóre 7.1 až 7.5, je popsána jako problém vynucování autentizace prostřednictvím alternativních metod ověřování. Podle vyjádření společnosti SonicWall může chyba v SSL-VPN službě SonicOS umožnit uživateli s platnými přihlašovacími údaji pro alternativní metodu obejít řízení SAML autentizace a případně překonat i vícefaktorové ověření (MFA) vynucované přes SAML.
+Disclosed by security researcher Ozgun Kultekin last week, SSHole allows bypassing authentication in OpenSSH running on certain musl-based Linux systems, including the lightweight Alpine distribution used in cloud and virtual environments. The flaw lets attackers log in to accounts with a password hash is set to an asterisk (*) to prevent password logins.
 
-Společnost SonicWall potvrdila, že prošetřila hlášení naznačující potenciální zneužití této zranitelnosti, a vyzvala zákazníky k okamžité aktualizaci na nejnovější verzi. Výrobce nezveřejnil žádné další podrobnosti o povaze útoků ani o tom, kdo za nimi stojí.
+An oversized password causes musl’s password-hashing function to return * on error, which OpenSSH mistakenly treats as a match for the account’s stored value. Kultekin explained that exploitation requires specific authentication settings, does not affect accounts with valid password hashes, and can lead to root access where the compromised account has passwordless administrative privileges.
 
-Kromě toho SonicWall opravil řadu dalších závažných chyb. Mezi nimi figurují CVE-2026-107155 a CVE-2026-107154 (obě s CVSS skóre 8.8), které představují chybu v politikách napříč doménami a chybu validace relace v administračním rozhraní SonicOS. Tyto nedostatky by za určitých podmínek mohly vzdálenému neautentizovanému útočníkovi umožnit provádět neautorizované operace. Další opravenou chybou je CVE-2026-82308 (CVSS skóre 7.5), což je pre-autentizační heap-based buffer overflow v SSL-VPN službě, schopná způsobit odepření služby (DoS) na aplikační úrovni.
+OpenSSH maintainers fixed the vulnerability in version 10.6p2 released on November 5, while exploit code became available roughly four hours later. Finnish security company Defused said over the weekend that it had observed &quot;a small amount of actors&quot; trying to exploit SSHole, although the activity was not widespread.
 
-Federálním civilním úřadům v USA bylo doporučeno aplikovat záplaty do 20. listopadu 2026. Tento krok přichází jen několik dní poté, co SonicWall detailně popsal dvě neopravené zranitelnosti (CVE-2026-109593 a CVE-2026-109594) v již nepodporovaných systémech Global Management System (GMS) a vyzval uživatele k přechodu na Network Security Manager (NSM).</p>
+Threat intelligence company GreyNoise recorded the first successful exploitation of SSHole in the wild on November 7 at 00:46 UTC, approximately 40 hours after the fix. The researchers logged 16 successful exploitation chains targeting networks protected by GreyNoise from six source IP addresses linked to post-exploitation activity.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba CVE-2026-19868 spočívá v nedostatečném vynucení primární autentizační logiky v SSL-VPN modulu SonicOS při použití alternativních metod. Útočník schopen předložit specifické tokeny či požadavky dokáže přesměrovat validační rutinu a přeskočit SAML/MFA kontrolu. Heap-based buffer overflow (CVE-2026-82308) pak umožňuje zápis dat mimo alokovanou paměť na haldě skrze špatně ošetřený síťový vstup před samotným ověřením uživatele, což vede k pádu aplikace.</p>
+                        <p>Chyba spočívá v chybném zpracování chybových stavů hashovací funkce v knihovně musl v kombinaci s OpenSSH. Pokud je heslo účtu nastaveno na hvězdičku (*) a útočník pošle specificky dlouhý vstup, funkce pro hašování vrátí chybový řetězec odpovídající hvězdičce. OpenSSH tento výsledek vyhodnotí jako platnou shodu s uloženým hashem, což vede k úspěšnému přihlášení bez zadání hesla.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizovat SonicOS na nejnovější verzi poskytnutou výrobcem.</li><li>Zkontrolovat přístupnost administračních rozhraní a SSL-VPN služeb z nedůvěryhodných sítí (internetu).</li><li>Nahradit legacy systémy GMS moderním řešením Network Security Manager (NSM).</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1556</code></li><li><code>T1211</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (aktivně zneužíváno), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch (neopravené/nové zranitelnosti v KEV)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizujte OpenSSH na verzi 10.6p2 nebo novější.</li><li>Dočasně zakažte přihlášení heslem (PasswordAuthentication no) v konfiguračním souboru sshd_config.</li><li>Zkontrolujte systémové protokoly (/var/log/auth.log nebo journald) na podezřelé úspěšné přihlášení k účtům s hashem nastaveným na *.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1210</code></li><li><code>T1078</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild zneužívání, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / Linux infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / RCE, +1 Chybí patch v době zveřejnění</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SAML:</strong> Security Assertion Markup Language, standard pro výměnu autentizačních a autorizačních dat mezi identitními providery a aplikacemi.</div><div class='glossary-item'><strong>MFA:</strong> Multi-Factor Authentication, vícefaktorové ověřování vyžadující k přihlášení více nezávislých důkazů totožnosti.</div><div class='glossary-item'><strong>Heap-Based Buffer Overflow:</strong> Chyba správy paměti, kdy zápis dat překročí vyhrazenou velikost paměťového bloku na haldě, což může vést k pádu programu nebo spuštění kódu.</div><div class='glossary-item'><strong>CVSS:</strong> Common Vulnerability Scoring System, standardizovaný systém hodnocení závažnosti kybernetických zranitelností.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>OpenSSH:</strong> Otevřená implementace protokolu SSH sloužící pro bezpečné vzdálené připojení k serverům.</div><div class='glossary-item'><strong>musl:</strong> Lehká standardní knihovna jazyka C navržená pro linuxové distribuce orientované na efektivitu (např. Alpine Linux).</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>Privilege Escalation:</strong> Eskalace oprávnění – technika, kterou útočník získá vyšší práva (např. administrátorská) z běžného uživatelského účtu.</div><div class='glossary-item'><strong>PoC:</strong> Proof of Concept – funkční ukázka zranitelnosti prokazující její reálnou zneužitelnost.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/cisa-flags-sonicwall-sonicos-mfa-bypass.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">7<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
-                    <h2>#2 Celosvětové útoky na průmyslové chladicí systémy hrozí požáry a zkázou zásob</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Průmyslová zařízení pro chlazení a monitoring chladicího řetězce (cold-chain), supermarkety a zdravotnická zařízení v Evropě i globálně.</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci celosvětově zneužívají nezabezpečené a veřejně přístupné ovladače průmyslového chlazení. Úmyslně mění nastavení teplot a spouštějí odmrazovací cykly, což ničí uskladněné zásoby a vytváří riziko požárů.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci dokáží na dálku rozbít chladicí boxy v obchodech nebo nemocnicích, znehodnotit potraviny a léky (např. krevní plazmu) a způsobit materiální škody.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Americké vládní agentury vydaly varování před útočníky, kteří aktivně zneužívají průmyslové chladicí systémy a systémy pro sledování chladicího řetězce po celém světě s cílem způsobit výpadky provozu, požární nebezpečí a ztrátu zásob. Podle společného varování mohou útočníci využít zranitelností nebo slabin v neopravených či k internetu připojených ovladačích k vzdálené změně nastavení a vynucení nepřetržitého vytápění a odmrazovacích cyklů.
-
-Agentura CISA, FBI, HHS, USDA a DOT upozorňují, že hackeři spoléhají na obcházení autentizace, injekce libovolného kódu a slabé konfigurace. Tyto útoky mohou vést k radikální změně teplot, ohrožení životnosti zařízení, vzniku požárů nebo zničení citlivých produktů. V posledních týdnech útočníci zasáhli stovky supermarketů a menších obchodů v mnoha evropských zemích (např. ve Francii, Estonsku, Finsku, Německu a dalších), kde zvýšili teploty v chladicích jednotkách až na 50 stupňů Celsia.
-
-Mezi zasaženými subjekty byla i Francouzská krevní agentura, která potvrdila incident na zařízeních uchovávajících krevní plazmu. Platforma Censys eviduje stovky veřejně exponovaných instancí jako Danfoss StoreView či Copeland/Dixell XWEB, což potvrzuje rozsáhlý problém zabezpečení operační technologie (OT) a průmyslových řídicích systémů (ICS).</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Útočníci vyhledávají veřejně exponovaná rozhraní chladicích jednotek (např. přes vyhledávače Shodan či Censys), která postihuje absence autentizace nebo výchozí přihlašovací údaje. Skrze webová rozhraní nebo API moduly posílají příkazy měnící parametry PLC/regulátorů, čímž donutí kompresory pracovat v opačném režimu (odmrazování/topení).</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě odpojit zařízení průmyslového chlazení a OT sítě od přímého přístupu z veřejného internetu.</li><li>Změnit všechna výchozí hesla a nasadit silnou autentizaci.</li><li>Izolovat řídicí systémy do segmentovaných interních sítí a provést audit expozice přes portálové skenery.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T0855</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (aktivně zneužíváno v Evropě), +2 Remote exploit bez autentizace (slabé konfigurace/chyby), +2 Dopad na kritickou infrastrukturu a OT systémy</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>OT:</strong> Operational Technology, hardwarové a softwarové systémy pro monitorování a řízení fyzických zařízení a průmyslových procesů.</div><div class='glossary-item'><strong>ICS:</strong> Industrial Control Systems, průmyslové řídicí systémy používané v infrastruktuře a výrobních závodech.</div><div class='glossary-item'><strong>PLC:</strong> Programmable Logic Controller, průmyslový počítač určený pro řízení technologických procesů.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/us-agencies-warn-refrigeration.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>

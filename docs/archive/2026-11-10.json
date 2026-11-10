@@ -1,0 +1,68 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v OpenSSH umožňuje obejití autentizace na systémech s musl knihovnou",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild zneužívání, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / Linux infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / RCE, +1 Chybí patch v době zveřejnění",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-123158"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost s kódovým označením SSHole v OpenSSH umožňuje útočníkům vzdáleně obejít přihlášení a získat přístup k systémům bez znalosti hesla.",
+        "cil": "Linuxové systémy využívající knihovnu musl C a OpenSSH (např. Alpine Linux) bez aktivních PAM modulů.",
+        "dopad_laici": "Útočníci mohou získat plnou kontrolu nad servery a cloudovými systémy bez nutnosti znát heslo správce. Je nutné neprodleně aktualizovat software."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Hackers are actively exploiting the \"SSHole\" vulnerability (CVE-2026-123158) in OpenSSH to execute commands, steal credentials, and establish persistent access. Multiple cybersecurity firms have confirmed the attacks, reporting that exploitation attempts began on November 5, the day a proof-of-concept exploit became available, with successful exploitation recorded the following day.\n\nDisclosed by security researcher Ozgun Kultekin last week, SSHole allows bypassing authentication in OpenSSH running on certain musl-based Linux systems, including the lightweight Alpine distribution used in cloud and virtual environments. The flaw lets attackers log in to accounts with a password hash is set to an asterisk (*) to prevent password logins.\n\nAn oversized password causes musl’s password-hashing function to return * on error, which OpenSSH mistakenly treats as a match for the account’s stored value. Kultekin explained that exploitation requires specific authentication settings, does not affect accounts with valid password hashes, and can lead to root access where the compromised account has passwordless administrative privileges.\n\nOpenSSH maintainers fixed the vulnerability in version 10.6p2 released on November 5, while exploit code became available roughly four hours later. Finnish security company Defused said over the weekend that it had observed \"a small amount of actors\" trying to exploit SSHole, although the activity was not widespread.\n\nThreat intelligence company GreyNoise recorded the first successful exploitation of SSHole in the wild on November 7 at 00:46 UTC, approximately 40 hours after the fix. The researchers logged 16 successful exploitation chains targeting networks protected by GreyNoise from six source IP addresses linked to post-exploitation activity.",
+        "jak_to_funguje": "Chyba spočívá v chybném zpracování chybových stavů hashovací funkce v knihovně musl v kombinaci s OpenSSH. Pokud je heslo účtu nastaveno na hvězdičku (*) a útočník pošle specificky dlouhý vstup, funkce pro hašování vrátí chybový řetězec odpovídající hvězdičce. OpenSSH tento výsledek vyhodnotí jako platnou shodu s uloženým hashem, což vede k úspěšnému přihlášení bez zadání hesla.",
+        "mitre": [
+          "T1210",
+          "T1078",
+          "T1059"
+        ],
+        "mitigace": [
+          "Aktualizujte OpenSSH na verzi 10.6p2 nebo novější.",
+          "Dočasně zakažte přihlášení heslem (PasswordAuthentication no) v konfiguračním souboru sshd_config.",
+          "Zkontrolujte systémové protokoly (/var/log/auth.log nebo journald) na podezřelé úspěšné přihlášení k účtům s hashem nastaveným na *."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "OpenSSH",
+          "vysvetleni": "Otevřená implementace protokolu SSH sloužící pro bezpečné vzdálené připojení k serverům."
+        },
+        {
+          "pojem": "musl",
+          "vysvetleni": "Lehká standardní knihovna jazyka C navržená pro linuxové distribuce orientované na efektivitu (např. Alpine Linux)."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Eskalace oprávnění – technika, kterou útočník získá vyšší práva (např. administrátorská) z běžného uživatelského účtu."
+        },
+        {
+          "pojem": "PoC",
+          "vysvetleni": "Proof of Concept – funkční ukázka zranitelnosti prokazující její reálnou zneužitelnost."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
