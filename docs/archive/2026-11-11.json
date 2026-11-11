@@ -1,0 +1,123 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritické zranitelnosti v SAP NetWeaver a Web Dispatcher umožňují RCE",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 (enterprise software) +2 (remote bez autentizace) +1 (privilege escalation) +1 (chybí patch/kritické) +3 (in the wild - aktivní zneužívání v minulosti u podobných SAP flaws) +1 (veřejný PoC)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-76964",
+        "CVE-2026-120017",
+        "CVE-2026-89103",
+        "CVE-2026-89126"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/sap-patches-four-maximum-severity-security-vulnerabilities/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/sap-patches-four-cvss-100-flaws.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "SAP opravil čtyři zranitelnosti s maximálním skóre závažnosti 10/10, které umožňují neautentizovaným útočníkům vzdálené spuštění kódu (RCE) a převzetí kontroly nad ERP systémy.",
+        "cil": "SAP NetWeaver, Web Dispatcher a SAP Gateway.",
+        "dopad_laici": "Útočníci mohou získat plnou kontrolu nad firemními systémy SAP bez nutnosti znát heslo, což ohrožuje veškerá obchodní data a transakce. Firmy musí okamžitě aplikovat bezpečnostní záplaty."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "SAP v rámci listopadových bezpečnostních aktualizací opravil 35 zranitelností, z nichž čtyři mají maximální skóre závažnosti 10/10. Tyto chyby postihují NetWeaver, Web Dispatcher a Gateway. Zranitelnosti zahrnují korupci paměti (CVE-2026-76964, CVE-2026-89126) a chybějící autentizaci (CVE-2026-120017). Chyba v SAP Gateway (CVE-2026-89103) umožňuje útočníkovi vydávat se za interní aplikační server.\n\nVýzkumníci z Onapsis pojmenovali tyto útoky jako ICM2SHELL a PROXYGATE. Útočník může bez autentizace a interakce uživatele spustit kód s právy uživatele, který vlastní instalaci SAP. U Web Dispatcheru může útok vést k pádu služby, což odpojí všechny navazující SAP systémy. WebSocket podpora je aktivní ve výchozím nastavení, což zvyšuje plochu útoku.\n\nZranitelnosti se týkají široké škály verzí kernelů, včetně těch, které již nejsou v oficiální podpoře. SAP důrazně doporučuje prioritní instalaci oprav prostřednictvím portálu SAP for Me.",
+        "jak_to_funguje": "Zranitelnosti typu RCE v ICM (Internet Communication Manager) a Web Dispatcheru využívají chybu v rekonstrukci WebSocket zpráv, která vede ke korupci paměti. PROXYGATE zneužívá nesprávné nastavení přístupových seznamů (ACL) v SAP Gateway, kdy útočník manipuluje s proxy parametry a je systémem považován za důvěryhodný interní server.",
+        "mitre": [
+          "T1190",
+          "T1210",
+          "T1068"
+        ],
+        "mitigace": [
+          "Okamžitá instalace SAP Security Notes 3778530, 3778556, 3798345 a 3849308.",
+          "Upgrade kernelů na podporované verze.",
+          "Omezení přístupu k webovým rozhraním SAP z internetu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému."
+        },
+        {
+          "pojem": "ERP",
+          "vysvetleni": "Enterprise Resource Planning – komplexní podnikový software pro správu zdrojů a procesů."
+        },
+        {
+          "pojem": "Kernel",
+          "vysvetleni": "Jádro operačního systému nebo klíčová komponenta softwaru, která řídí základní operace."
+        },
+        {
+          "pojem": "WebSocket",
+          "vysvetleni": "Komunikační protokol umožňující obousměrný přenos dat mezi klientem a serverem."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Aktivně zneužívaná zranitelnost v Cisco BroadWorks",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 (in the wild) +2 (remote bez autentizace) +2 (enterprise/telecom) +1 (chybí patch/KEV) +1 (veřejný PoC)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-20320"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-flags-cisco-broadworks-flaw-as-actively-exploited-in-attacks/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/cisco-broadworks-and-openwave-flaws.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "CISA varuje před aktivním zneužíváním XXE zranitelnosti v Cisco BroadWorks, která umožňuje neautentizovaným útočníkům číst citlivé konfigurační soubory.",
+        "cil": "Cisco BroadWorks (cloudová komunikační platforma).",
+        "dopad_laici": "Útočníci mohou získat přístup k citlivým údajům o uživatelích a konfiguraci sítě. Organizace využívající tuto platformu musí okamžitě aktualizovat své systémy."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "CISA přidala zranitelnost CVE-2026-20320 do katalogu známých zneužívaných zranitelností (KEV). Chyba spočívá v nesprávném omezení XML External Entity (XXE) v Open Client Interface (OCI) XML parseru. Útočník může zasláním speciálně vytvořené XML zprávy číst libovolné soubory ze systému.\n\nVýzkumníci z Malbear Labs identifikovali kampaň 'Operation Snowball', kde čínsky mluvící útočník využil autonomní AI agenta (založeného na modelu DeepSeek Flash) k útoku na evropského telekomunikačního operátora. Agent automatizovaně prováděl průzkum, extrahoval SSL certifikáty a privátní klíče, což mu umožnilo imitovat komponenty platformy BroadWorks.\n\nÚtok probíhal bez nutnosti autentizace na portu 2208. CISA nařídila federálním agenturám opravu do 24. listopadu 2026.",
+        "jak_to_funguje": "XXE zranitelnost umožňuje útočníkovi vložit do XML požadavku externí entitu, kterou parser následně zpracuje a vrátí obsah souboru ze serveru. V tomto případě útočník získal přístup k identitním klíčům systému, což mu umožnilo provádět Lateral Movement v rámci infrastruktury.",
+        "mitre": [
+          "T1190",
+          "T1552",
+          "T1068"
+        ],
+        "mitigace": [
+          "Aplikace bezpečnostních záplat od Cisco.",
+          "Omezení přístupu k OCI rozhraní na důvěryhodné IP adresy.",
+          "Monitoring síťového provozu na portu 2208."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "XXE",
+          "vysvetleni": "XML External Entity – typ útoku, při kterém útočník zneužije parser XML k přístupu k lokálním souborům na serveru."
+        },
+        {
+          "pojem": "KEV",
+          "vysvetleni": "Known Exploited Vulnerabilities – katalog zranitelností, u kterých je potvrzeno aktivní zneužívání v reálném světě."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Technika, při které se útočník pohybuje napříč sítí z jednoho napadeného systému na další."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}

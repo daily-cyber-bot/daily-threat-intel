@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 10.11.2026</title>
+    <title>Threat Intel Svodka | 11.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +58,7 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">10.11.2026 • 1 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">11.11.2026 • 2 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -68,15 +68,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123158" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123158</a></div>
-                    <h2>#1 Kritická zranitelnost v OpenSSH umožňuje obejití autentizace na systémech s musl knihovnou</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76964" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76964</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120017" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120017</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-89103" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-89103</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-89126" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-89126</a></div>
+                    <h2>#1 Kritické zranitelnosti v SAP NetWeaver a Web Dispatcher umožňují RCE</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Linuxové systémy využívající knihovnu musl C a OpenSSH (např. Alpine Linux) bez aktivních PAM modulů.</p>
-                <p><strong>⚡ Podstata:</strong> Zranitelnost s kódovým označením SSHole v OpenSSH umožňuje útočníkům vzdáleně obejít přihlášení a získat přístup k systémům bez znalosti hesla.</p>
+                <p><strong>🎯 Cíl:</strong> SAP NetWeaver, Web Dispatcher a SAP Gateway.</p>
+                <p><strong>⚡ Podstata:</strong> SAP opravil čtyři zranitelnosti s maximálním skóre závažnosti 10/10, které umožňují neautentizovaným útočníkům vzdálené spuštění kódu (RCE) a převzetí kontroly nad ERP systémy.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad servery a cloudovými systémy bez nutnosti znát heslo správce. Je nutné neprodleně aktualizovat software.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad firemními systémy SAP bez nutnosti znát heslo, což ohrožuje veškerá obchodní data a transakce. Firmy musí okamžitě aplikovat bezpečnostní záplaty.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,28 +84,67 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Hackers are actively exploiting the &quot;SSHole&quot; vulnerability (CVE-2026-123158) in OpenSSH to execute commands, steal credentials, and establish persistent access. Multiple cybersecurity firms have confirmed the attacks, reporting that exploitation attempts began on November 5, the day a proof-of-concept exploit became available, with successful exploitation recorded the following day.
+                        <p class="long-text">SAP v rámci listopadových bezpečnostních aktualizací opravil 35 zranitelností, z nichž čtyři mají maximální skóre závažnosti 10/10. Tyto chyby postihují NetWeaver, Web Dispatcher a Gateway. Zranitelnosti zahrnují korupci paměti (CVE-2026-76964, CVE-2026-89126) a chybějící autentizaci (CVE-2026-120017). Chyba v SAP Gateway (CVE-2026-89103) umožňuje útočníkovi vydávat se za interní aplikační server.
 
-Disclosed by security researcher Ozgun Kultekin last week, SSHole allows bypassing authentication in OpenSSH running on certain musl-based Linux systems, including the lightweight Alpine distribution used in cloud and virtual environments. The flaw lets attackers log in to accounts with a password hash is set to an asterisk (*) to prevent password logins.
+Výzkumníci z Onapsis pojmenovali tyto útoky jako ICM2SHELL a PROXYGATE. Útočník může bez autentizace a interakce uživatele spustit kód s právy uživatele, který vlastní instalaci SAP. U Web Dispatcheru může útok vést k pádu služby, což odpojí všechny navazující SAP systémy. WebSocket podpora je aktivní ve výchozím nastavení, což zvyšuje plochu útoku.
 
-An oversized password causes musl’s password-hashing function to return * on error, which OpenSSH mistakenly treats as a match for the account’s stored value. Kultekin explained that exploitation requires specific authentication settings, does not affect accounts with valid password hashes, and can lead to root access where the compromised account has passwordless administrative privileges.
-
-OpenSSH maintainers fixed the vulnerability in version 10.6p2 released on November 5, while exploit code became available roughly four hours later. Finnish security company Defused said over the weekend that it had observed &quot;a small amount of actors&quot; trying to exploit SSHole, although the activity was not widespread.
-
-Threat intelligence company GreyNoise recorded the first successful exploitation of SSHole in the wild on November 7 at 00:46 UTC, approximately 40 hours after the fix. The researchers logged 16 successful exploitation chains targeting networks protected by GreyNoise from six source IP addresses linked to post-exploitation activity.</p>
+Zranitelnosti se týkají široké škály verzí kernelů, včetně těch, které již nejsou v oficiální podpoře. SAP důrazně doporučuje prioritní instalaci oprav prostřednictvím portálu SAP for Me.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba spočívá v chybném zpracování chybových stavů hashovací funkce v knihovně musl v kombinaci s OpenSSH. Pokud je heslo účtu nastaveno na hvězdičku (*) a útočník pošle specificky dlouhý vstup, funkce pro hašování vrátí chybový řetězec odpovídající hvězdičce. OpenSSH tento výsledek vyhodnotí jako platnou shodu s uloženým hashem, což vede k úspěšnému přihlášení bez zadání hesla.</p>
+                        <p>Zranitelnosti typu RCE v ICM (Internet Communication Manager) a Web Dispatcheru využívají chybu v rekonstrukci WebSocket zpráv, která vede ke korupci paměti. PROXYGATE zneužívá nesprávné nastavení přístupových seznamů (ACL) v SAP Gateway, kdy útočník manipuluje s proxy parametry a je systémem považován za důvěryhodný interní server.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizujte OpenSSH na verzi 10.6p2 nebo novější.</li><li>Dočasně zakažte přihlášení heslem (PasswordAuthentication no) v konfiguračním souboru sshd_config.</li><li>Zkontrolujte systémové protokoly (/var/log/auth.log nebo journald) na podezřelé úspěšné přihlášení k účtům s hashem nastaveným na *.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1210</code></li><li><code>T1078</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild zneužívání, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / Linux infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / RCE, +1 Chybí patch v době zveřejnění</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitá instalace SAP Security Notes 3778530, 3778556, 3798345 a 3849308.</li><li>Upgrade kernelů na podporované verze.</li><li>Omezení přístupu k webovým rozhraním SAP z internetu.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1210</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 (enterprise software) +2 (remote bez autentizace) +1 (privilege escalation) +1 (chybí patch/kritické) +3 (in the wild - aktivní zneužívání v minulosti u podobných SAP flaws) +1 (veřejný PoC)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>OpenSSH:</strong> Otevřená implementace protokolu SSH sloužící pro bezpečné vzdálené připojení k serverům.</div><div class='glossary-item'><strong>musl:</strong> Lehká standardní knihovna jazyka C navržená pro linuxové distribuce orientované na efektivitu (např. Alpine Linux).</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>Privilege Escalation:</strong> Eskalace oprávnění – technika, kterou útočník získá vyšší práva (např. administrátorská) z běžného uživatelského účtu.</div><div class='glossary-item'><strong>PoC:</strong> Proof of Concept – funkční ukázka zranitelnosti prokazující její reálnou zneužitelnost.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>ERP:</strong> Enterprise Resource Planning – komplexní podnikový software pro správu zdrojů a procesů.</div><div class='glossary-item'><strong>Kernel:</strong> Jádro operačního systému nebo klíčová komponenta softwaru, která řídí základní operace.</div><div class='glossary-item'><strong>WebSocket:</strong> Komunikační protokol umožňující obousměrný přenos dat mezi klientem a serverem.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/sap-patches-four-maximum-severity-security-vulnerabilities/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/sap-patches-four-cvss-100-flaws.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-20320" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-20320</a></div>
+                    <h2>#2 Aktivně zneužívaná zranitelnost v Cisco BroadWorks</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Cisco BroadWorks (cloudová komunikační platforma).</p>
+                <p><strong>⚡ Podstata:</strong> CISA varuje před aktivním zneužíváním XXE zranitelnosti v Cisco BroadWorks, která umožňuje neautentizovaným útočníkům číst citlivé konfigurační soubory.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat přístup k citlivým údajům o uživatelích a konfiguraci sítě. Organizace využívající tuto platformu musí okamžitě aktualizovat své systémy.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">CISA přidala zranitelnost CVE-2026-20320 do katalogu známých zneužívaných zranitelností (KEV). Chyba spočívá v nesprávném omezení XML External Entity (XXE) v Open Client Interface (OCI) XML parseru. Útočník může zasláním speciálně vytvořené XML zprávy číst libovolné soubory ze systému.
+
+Výzkumníci z Malbear Labs identifikovali kampaň &#x27;Operation Snowball&#x27;, kde čínsky mluvící útočník využil autonomní AI agenta (založeného na modelu DeepSeek Flash) k útoku na evropského telekomunikačního operátora. Agent automatizovaně prováděl průzkum, extrahoval SSL certifikáty a privátní klíče, což mu umožnilo imitovat komponenty platformy BroadWorks.
+
+Útok probíhal bez nutnosti autentizace na portu 2208. CISA nařídila federálním agenturám opravu do 24. listopadu 2026.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>XXE zranitelnost umožňuje útočníkovi vložit do XML požadavku externí entitu, kterou parser následně zpracuje a vrátí obsah souboru ze serveru. V tomto případě útočník získal přístup k identitním klíčům systému, což mu umožnilo provádět Lateral Movement v rámci infrastruktury.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikace bezpečnostních záplat od Cisco.</li><li>Omezení přístupu k OCI rozhraní na důvěryhodné IP adresy.</li><li>Monitoring síťového provozu na portu 2208.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1552</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 (in the wild) +2 (remote bez autentizace) +2 (enterprise/telecom) +1 (chybí patch/KEV) +1 (veřejný PoC)</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>XXE:</strong> XML External Entity – typ útoku, při kterém útočník zneužije parser XML k přístupu k lokálním souborům na serveru.</div><div class='glossary-item'><strong>KEV:</strong> Known Exploited Vulnerabilities – katalog zranitelností, u kterých je potvrzeno aktivní zneužívání v reálném světě.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Technika, při které se útočník pohybuje napříč sítí z jednoho napadeného systému na další.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-flags-cisco-broadworks-flaw-as-actively-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/cisco-broadworks-and-openwave-flaws.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>
