@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 11.11.2026</title>
+    <title>Threat Intel Svodka | 12.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +58,7 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">11.11.2026 • 2 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">12.11.2026 • 2 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -68,15 +68,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76964" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76964</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120017" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120017</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-89103" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-89103</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-89126" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-89126</a></div>
-                    <h2>#1 Kritické zranitelnosti v SAP NetWeaver a Web Dispatcher umožňují RCE</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125878" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125878</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125879" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125879</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125880" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125880</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125881" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125881</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125882" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125882</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125883" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125883</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-91000" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-91000</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-90436" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-90436</a></div>
+                    <h2>#1 Aktivní zneužívání zero-day zranitelností v N-able N-central</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> SAP NetWeaver, Web Dispatcher a SAP Gateway.</p>
-                <p><strong>⚡ Podstata:</strong> SAP opravil čtyři zranitelnosti s maximálním skóre závažnosti 10/10, které umožňují neautentizovaným útočníkům vzdálené spuštění kódu (RCE) a převzetí kontroly nad ERP systémy.</p>
+                <p><strong>🎯 Cíl:</strong> N-able N-central (RMM platforma pro správu IT infrastruktury).</p>
+                <p><strong>⚡ Podstata:</strong> Platforma N-able N-central čelí sérii kritických zero-day zranitelností, které umožňují neautentizované RCE a eskalaci privilegií až na úroveň root/SYSTEM.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad firemními systémy SAP bez nutnosti znát heslo, což ohrožuje veškerá obchodní data a transakce. Firmy musí okamžitě aplikovat bezpečnostní záplaty.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou převzít plnou kontrolu nad servery, které spravují firemní počítače. Pokud vaše IT oddělení používá N-central, je nutné okamžitě aplikovat bezpečnostní záplaty.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,24 +84,20 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">SAP v rámci listopadových bezpečnostních aktualizací opravil 35 zranitelností, z nichž čtyři mají maximální skóre závažnosti 10/10. Tyto chyby postihují NetWeaver, Web Dispatcher a Gateway. Zranitelnosti zahrnují korupci paměti (CVE-2026-76964, CVE-2026-89126) a chybějící autentizaci (CVE-2026-120017). Chyba v SAP Gateway (CVE-2026-89103) umožňuje útočníkovi vydávat se za interní aplikační server.
-
-Výzkumníci z Onapsis pojmenovali tyto útoky jako ICM2SHELL a PROXYGATE. Útočník může bez autentizace a interakce uživatele spustit kód s právy uživatele, který vlastní instalaci SAP. U Web Dispatcheru může útok vést k pádu služby, což odpojí všechny navazující SAP systémy. WebSocket podpora je aktivní ve výchozím nastavení, což zvyšuje plochu útoku.
-
-Zranitelnosti se týkají široké škály verzí kernelů, včetně těch, které již nejsou v oficiální podpoře. SAP důrazně doporučuje prioritní instalaci oprav prostřednictvím portálu SAP for Me.</p>
+                        <p class="long-text">Společnost N-able vydala opravy pro kritické zero-day zranitelnosti v platformě N-central, které byly zveřejněny výzkumníkem Seanem Balesem. Útočníci začali tyto zranitelnosti aktivně zneužívat k průzkumu a pokusům o kompromitaci systémů. Zranitelnosti zahrnují XXE, OGNL Injection, RCE prostřednictvím path traversal a eskalaci privilegií. N-able musela dočasně odstavit cloudové instance a vyzvala on-premise zákazníky k okamžitému odpojení serverů. Nové exploity (4EverAble2Shell a Agent2Shell) navíc zneužívají zranitelnost Apache Axis (CVE-2026-90436) k dosažení root přístupu.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnosti typu RCE v ICM (Internet Communication Manager) a Web Dispatcheru využívají chybu v rekonstrukci WebSocket zpráv, která vede ke korupci paměti. PROXYGATE zneužívá nesprávné nastavení přístupových seznamů (ACL) v SAP Gateway, kdy útočník manipuluje s proxy parametry a je systémem považován za důvěryhodný interní server.</p>
+                        <p>Útočníci využívají řetězec zranitelností (chaining), kde XXE (XML External Entity) vede k RCE. Zneužitím neautentizovaných IPC kanálů a path traversal v nahrávání souborů získávají útočníci možnost spouštět kód s právy uživatele &#x27;nable&#x27; nebo &#x27;root&#x27;. Následná eskalace probíhá přes zneužití konfigurace syslog-ng nebo zranitelnosti v Apache Axis.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitá instalace SAP Security Notes 3778530, 3778556, 3798345 a 3849308.</li><li>Upgrade kernelů na podporované verze.</li><li>Omezení přístupu k webovým rozhraním SAP z internetu.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1210</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 (enterprise software) +2 (remote bez autentizace) +1 (privilege escalation) +1 (chybí patch/kritické) +3 (in the wild - aktivní zneužívání v minulosti u podobných SAP flaws) +1 (veřejný PoC)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizace na verzi N-central 2026.4 HF2.</li><li>Okamžité zakázání Legacy API.</li><li>Audit autentizačních logů a záznamů o instalaci rozšíření.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1203</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 PoC exploit, +1 Privilege Escalation, +1 Chybí patch (původní zero-day)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>ERP:</strong> Enterprise Resource Planning – komplexní podnikový software pro správu zdrojů a procesů.</div><div class='glossary-item'><strong>Kernel:</strong> Jádro operačního systému nebo klíčová komponenta softwaru, která řídí základní operace.</div><div class='glossary-item'><strong>WebSocket:</strong> Komunikační protokol umožňující obousměrný přenos dat mezi klientem a serverem.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>XXE:</strong> XML External Entity – zranitelnost umožňující útočníkovi číst soubory na serveru nebo provádět SSRF útoky skrze zpracování XML dat.</div><div class='glossary-item'><strong>OGNL Injection:</strong> Vstřikování kódu do objektově orientovaného jazyka (Object-Graph Navigation Language), často používaného v Java aplikacích.</div><div class='glossary-item'><strong>Path Traversal:</strong> Technika umožňující útočníkovi přistupovat k souborům mimo zamýšlený adresář aplikace.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/sap-patches-four-maximum-severity-security-vulnerabilities/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/sap-patches-four-cvss-100-flaws.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/new-n-central-exploits-work-against.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -112,14 +108,14 @@ Zranitelnosti se týkají široké škály verzí kernelů, včetně těch, kter
                 </div>
                 <div class="title-box">
                     <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-20320" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-20320</a></div>
-                    <h2>#2 Aktivně zneužívaná zranitelnost v Cisco BroadWorks</h2>
+                    <h2>#2 Aktivní zneužívání Cisco BroadWorks prostřednictvím autonomního AI agenta</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Cisco BroadWorks (cloudová komunikační platforma).</p>
-                <p><strong>⚡ Podstata:</strong> CISA varuje před aktivním zneužíváním XXE zranitelnosti v Cisco BroadWorks, která umožňuje neautentizovaným útočníkům číst citlivé konfigurační soubory.</p>
+                <p><strong>🎯 Cíl:</strong> Cisco BroadWorks (telekomunikační platforma).</p>
+                <p><strong>⚡ Podstata:</strong> Zranitelnost v Cisco BroadWorks (XXE) je zneužívána autonomním AI agentem k exfiltraci citlivých dat a systémových klíčů.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat přístup k citlivým údajům o uživatelích a konfiguraci sítě. Organizace využívající tuto platformu musí okamžitě aktualizovat své systémy.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci využívají pokročilé AI k automatizovanému napadení telekomunikačních systémů. Pro firmy to znamená riziko úniku citlivých dat a ztráty kontroly nad komunikací.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -127,21 +123,17 @@ Zranitelnosti se týkají široké škály verzí kernelů, včetně těch, kter
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">CISA přidala zranitelnost CVE-2026-20320 do katalogu známých zneužívaných zranitelností (KEV). Chyba spočívá v nesprávném omezení XML External Entity (XXE) v Open Client Interface (OCI) XML parseru. Útočník může zasláním speciálně vytvořené XML zprávy číst libovolné soubory ze systému.
-
-Výzkumníci z Malbear Labs identifikovali kampaň &#x27;Operation Snowball&#x27;, kde čínsky mluvící útočník využil autonomní AI agenta (založeného na modelu DeepSeek Flash) k útoku na evropského telekomunikačního operátora. Agent automatizovaně prováděl průzkum, extrahoval SSL certifikáty a privátní klíče, což mu umožnilo imitovat komponenty platformy BroadWorks.
-
-Útok probíhal bez nutnosti autentizace na portu 2208. CISA nařídila federálním agenturám opravu do 24. listopadu 2026.</p>
+                        <p class="long-text">CISA zařadila zranitelnost CVE-2026-20320 v Cisco BroadWorks do katalogu aktivně zneužívaných hrozeb. Útočníci využívají autonomní framework postavený na upraveném modelu DeepSeek Flash k automatizovanému průzkumu a útoku. Agent dokáže bez autentizace číst libovolné soubory na serveru, čímž získal systémové identitní klíče a SSL certifikáty, což mu umožnilo impersonaci komponent platformy.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>XXE zranitelnost umožňuje útočníkovi vložit do XML požadavku externí entitu, kterou parser následně zpracuje a vrátí obsah souboru ze serveru. V tomto případě útočník získal přístup k identitním klíčům systému, což mu umožnilo provádět Lateral Movement v rámci infrastruktury.</p>
+                        <p>Zranitelnost spočívá v nesprávném omezení XML External Entity (XXE) v OCI XML parseru. Útočník pošle speciálně vytvořenou XML zprávu na port 2208, což donutí parser číst soubory ze souborového systému serveru.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikace bezpečnostních záplat od Cisco.</li><li>Omezení přístupu k OCI rozhraní na důvěryhodné IP adresy.</li><li>Monitoring síťového provozu na portu 2208.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1552</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 (in the wild) +2 (remote bez autentizace) +2 (enterprise/telecom) +1 (chybí patch/KEV) +1 (veřejný PoC)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikace dostupných bezpečnostních záplat od Cisco.</li><li>Implementace risk-based vulnerability managementu dle doporučení CISA.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1552</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 PoC exploit, +1 Lateral Movement</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>XXE:</strong> XML External Entity – typ útoku, při kterém útočník zneužije parser XML k přístupu k lokálním souborům na serveru.</div><div class='glossary-item'><strong>KEV:</strong> Known Exploited Vulnerabilities – katalog zranitelností, u kterých je potvrzeno aktivní zneužívání v reálném světě.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Technika, při které se útočník pohybuje napříč sítí z jednoho napadeného systému na další.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>XXE:</strong> XML External Entity – zranitelnost umožňující útočníkovi číst soubory na serveru skrze zpracování XML dat.</div><div class='glossary-item'><strong>OCI:</strong> Open Client Interface – rozhraní pro komunikaci s BroadWorks platformou.</div></div>
                 </div>
             </details>
             <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-flags-cisco-broadworks-flaw-as-actively-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/cisco-broadworks-and-openwave-flaws.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
