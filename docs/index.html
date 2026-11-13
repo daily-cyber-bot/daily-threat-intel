@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 12.11.2026</title>
+    <title>Threat Intel Svodka | 13.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,25 +58,25 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">12.11.2026 • 2 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">13.11.2026 • 3 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">10<small>/10</small></span>
+                    <span class="score-num">9<small>/10</small></span>
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125878" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125878</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125879" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125879</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125880" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125880</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125881" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125881</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125882" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125882</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125883" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125883</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-91000" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-91000</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-90436" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-90436</a></div>
-                    <h2>#1 Aktivní zneužívání zero-day zranitelností v N-able N-central</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123039" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123039</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109618" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109618</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109619" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109619</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-85102" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-85102</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-93616" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-93616</a></div>
+                    <h2>#1 Kritická zero-day zranitelnost v Check Point Gaia OS zneužívaná k získání root oprávnění</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> N-able N-central (RMM platforma pro správu IT infrastruktury).</p>
-                <p><strong>⚡ Podstata:</strong> Platforma N-able N-central čelí sérii kritických zero-day zranitelností, které umožňují neautentizované RCE a eskalaci privilegií až na úroveň root/SYSTEM.</p>
+                <p><strong>🎯 Cíl:</strong> Check Point Security Gateways a podniková síťová infrastruktura.</p>
+                <p><strong>⚡ Podstata:</strong> Neznámí útočníci aktivně zneužívají zero-day zranitelnost v rozhraní Gaia OS DynamicCLI k eskalaci oprávnění na root.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou převzít plnou kontrolu nad servery, které spravují firemní počítače. Pokud vaše IT oddělení používá N-central, je nutné okamžitě aplikovat bezpečnostní záplaty.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad podnikovými firewally a bránami, odkud mohou proniknout hlouběji do firemní sítě a nasadit destruktivní malware. Firmy musí okamžitě aplikovat nouzové záplaty nebo provést doporučené mitigace.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,20 +84,28 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost N-able vydala opravy pro kritické zero-day zranitelnosti v platformě N-central, které byly zveřejněny výzkumníkem Seanem Balesem. Útočníci začali tyto zranitelnosti aktivně zneužívat k průzkumu a pokusům o kompromitaci systémů. Zranitelnosti zahrnují XXE, OGNL Injection, RCE prostřednictvím path traversal a eskalaci privilegií. N-able musela dočasně odstavit cloudové instance a vyzvala on-premise zákazníky k okamžitému odpojení serverů. Nové exploity (4EverAble2Shell a Agent2Shell) navíc zneužívají zranitelnost Apache Axis (CVE-2026-90436) k dosažení root přístupu.</p>
+                        <p class="long-text">Check Point Software released emergency hotfixes to address a high-severity flaw that hackers have been exploiting to gain root privileges and establish persistence on vulnerable devices since late October. Tracked as CVE-2026-123039, this local privilege escalation vulnerability was found in the DynamicCLI IPC (Inter-Process Communication) interface used to send privileged command requests to the root-level Gaia OS DynamicCLI (dynamic_server) daemon. Check Point observed an active exploit of this vulnerability against a couple of dozen customers, the company warned in a Thursday security advisory. The Gaia OS DynamicCLI daemon runs as root and listens on a world-writable local socket (/tmp/dynamic_socket) without authenticating connecting processes. An authenticated local user can send a command to the socket and have it executed as root.
+
+The list of Check Point products vulnerable to attacks exploiting the CVE-2026-123039 flaw includes the company&#x27;s Firewall, Multi-Domain Security Management Server, Scalable Platforms, Security Gateway, and Security Management Server. In a separate report, Check Point said the attackers first gained access to the Mobile Access portal by exploiting the PHP2Shell vulnerability, then escalated privileges to root using CVE-2026-123039 zero-day exploits. Next, the threat actors dropped webshells and installed TSGA backdoor and TSProxy malware that was previously spotted while investigating attacks targeting Ivanti appliances, then pivoted from the compromised gateway to a VMware ESXi host and deployed destructive wiper malware.
+
+Check Point advised security teams who can&#x27;t immediately deploy the CVE-2026-123039 hotfixes to stop the dynamic_server process and prevent it from restarting as a temporary mitigation measure. The company also shared indicators of compromise (IOCs), and it said that customers can find evidence of compromise by checking for commands commonly associated with exploitation attempts, the use of the system() sink, and commands that don&#x27;t use the default Clish wrapper.
+
+In September, Check Point warned customers that attackers had been exploiting two other critical Security Management Server (CVE-2026-93616) and Security Gateway (CVE-2026-85102) remote code execution (RCE) vulnerabilities in zero-day attacks that didn&#x27;t require privileges on the targeted systems. Over the last two years, the US Cybersecurity and Infrastructure Security Agency (CISA) has added five Check Point flaws to its catalog of actively exploited vulnerabilities, two of which have also been abused by ransomware gangs.
+
+An unknown threat actor has been observed targeting unpatched Check Point Security Gateways to obtain initial access via the PHP2Shell vulnerabilities and then a previously unreported local privilege escalation flaw in Gaia OS to deploy a backdoor called TSGA. The activity, detailed by Check Point, began on October 30, 2026, and targeted Israeli organizations, with a broader follow-up wave on November 2, 2026, that targeted organizations across multiple countries and sectors. Some of the organizations singled out in the first wave have also been at the receiving end of destructive actions that include the deployment of wiper malware.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Útočníci využívají řetězec zranitelností (chaining), kde XXE (XML External Entity) vede k RCE. Zneužitím neautentizovaných IPC kanálů a path traversal v nahrávání souborů získávají útočníci možnost spouštět kód s právy uživatele &#x27;nable&#x27; nebo &#x27;root&#x27;. Následná eskalace probíhá přes zneužití konfigurace syslog-ng nebo zranitelnosti v Apache Axis.</p>
+                        <p>Zranitelnost spočívá v tom, že démon Gaia OS DynamicCLI (dynamic_server) běžící s oprávněním root naslouchá na lokálním socketu s právem zápisu pro kohokoliv (/tmp/dynamic_socket) bez ověřování připojujících se procesů. Útočník, který získá počáteční přístup (např. přes PHP2Shell), může skrze tento socket poslat příkaz, který se bez validace provede s kořenovými právy.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizace na verzi N-central 2026.4 HF2.</li><li>Okamžité zakázání Legacy API.</li><li>Audit autentizačních logů a záznamů o instalaci rozšíření.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1203</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 PoC exploit, +1 Privilege Escalation, +1 Chybí patch (původní zero-day)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikovat nouzové hotfixy od dodavatele.</li><li>Zastavit proces dynamic_server a zabránit jeho restartu v případě, že nelze ihned aplikovat patch.</li><li>Monitorovat anomální spouštění příkazů obcházejících výchozí Clish wrapper.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1068</code></li><li><code>T1505.003</code></li><li><code>T1021.004</code></li><li><code>T1485</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 zneužití in the wild, +2 remote exploit bez autentizace, +2 dopad na enterprise software / kritickou infrastrukturu, +1 veřejný PoC exploit, +1 umožňuje Privilege Escalation nebo Lateral Movement, +1 chybí patch (před vydáním hotfixu)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>XXE:</strong> XML External Entity – zranitelnost umožňující útočníkovi číst soubory na serveru nebo provádět SSRF útoky skrze zpracování XML dat.</div><div class='glossary-item'><strong>OGNL Injection:</strong> Vstřikování kódu do objektově orientovaného jazyka (Object-Graph Navigation Language), často používaného v Java aplikacích.</div><div class='glossary-item'><strong>Path Traversal:</strong> Technika umožňující útočníkovi přistupovat k souborům mimo zamýšlený adresář aplikace.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>zero-day:</strong> Dosud neznámá zranitelnost v softwaru, na kterou výrobce ještě nevydal oficiální opravnou záplatu.</div><div class='glossary-item'><strong>Privilege Escalation:</strong> Technika útočníka vedoucí k získání vyšších oprávnění v systému (např. z běžného uživatele na administrátora nebo root).</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>Webshell:</strong> Skript nahraný na webový server, který útočníkovi umožňuje vzdálenou administraci přes webové rozhraní.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Pohyb útočníka napříč vnitřní sítí firmy po počátečním průniku do jednoho ze zařízení.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/new-n-central-exploits-work-against.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/hackers-exploit-php2shell-flaws-in.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -107,15 +115,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-20320" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-20320</a></div>
-                    <h2>#2 Aktivní zneužívání Cisco BroadWorks prostřednictvím autonomního AI agenta</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-119618" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-119618</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-106023" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-106023</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109163" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109163</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-23918" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-23918</a></div>
+                    <h2>#2 Kritická zranitelnost v Apache HTTP Serveru umožňuje vzdálené spuštění kódu v modulu HTTP/2</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Cisco BroadWorks (telekomunikační platforma).</p>
-                <p><strong>⚡ Podstata:</strong> Zranitelnost v Cisco BroadWorks (XXE) je zneužívána autonomním AI agentem k exfiltraci citlivých dat a systémových klíčů.</p>
+                <p><strong>🎯 Cíl:</strong> Apache HTTP Server verze 2.4.55 až 2.4.70 s povoleným protokolem HTTP/2.</p>
+                <p><strong>⚡ Podstata:</strong> Kritická race condition v modulu mod_http2 webového serveru Apache HTTP Server umožňuje neautentizovaným útočníkům dosáhnout RCE.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci využívají pokročilé AI k automatizovanému napadení telekomunikačních systémů. Pro firmy to znamená riziko úniku citlivých dat a ztráty kontroly nad komunikací.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Zranitelnost ohrožuje zhruba pětinu všech webových stránek na internetu. Útočníci mohou vzdáleně ovládnout webový server bez nutnosti přihlášení, pokud je na něm aktivní protokol HTTP/2. Administrátoři musí neprodleně aktualizovat software.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -123,20 +131,65 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">CISA zařadila zranitelnost CVE-2026-20320 v Cisco BroadWorks do katalogu aktivně zneužívaných hrozeb. Útočníci využívají autonomní framework postavený na upraveném modelu DeepSeek Flash k automatizovanému průzkumu a útoku. Agent dokáže bez autentizace číst libovolné soubory na serveru, čímž získal systémové identitní klíče a SSL certifikáty, což mu umožnilo impersonaci komponent platformy.</p>
+                        <p class="long-text">A critical vulnerability in the HTTP/2 module of Apache HTTP Server could be exploited by an unauthenticated attacker to obtain remote code execution (RCE). The Apache Software Foundation has fixed the issue, now tracked as CVE-2026-119618, but a significant number of servers are vulnerable and reachable over the public internet. Discovered by Anthropic’s OSS Scanner and Google Cloud’s Vulnerability Research teams, the vulnerability is a race condition in the mod_http2 module that can corrupt heap memory. An attacker successfully exploiting it could run code with the web server process’s privileges in HTTP Server versions 2.4.55 through 2.4.70, and standalone mod_h2 version 2.0.8 through 2.0.42.
+
+Apache describes the problem as “Concurrent Execution using Shared Resource with Improper Synchronization vulnerability in Apache HTTP Server&#x27;s mod_http2 in assign_headers() can lead to RCE.” Apache HTTP Server is a free and open-source software that handles requests from web browsers and serves pages, images, and other website content. It is a widely used tool estimated to back roughly one out of five websites. According to telemetry data from cloud security company Wiz, 64% of the cloud environments have vulnerable resources, and roughly half of them have publicly exposed instances. However, the numbers do not account for server configuration, which requires HTTP/2 to be enabled (default is off). Researchers at cybersecurity company watchTowr confirmed this condition and recommend technicians to &quot;patch now or drop h2 until you can.&quot;
+
+Red Hat, which ships the server as part of Red Hat Enterprise Linux, notes that only servers with HTTP/2 enabled are affected and rates the flaw 9.8 out of 10 on the CVSS scale. The Apache HTTP Server advisory offers no workaround. In its vulnerability analysis, Wiz advises admins who cannot update yet to remove h2 and h2c from the Protocols directive, leaving Protocols http/1.1. The standalone mod_h2 project has published no fixed release so far. The flaw was reported on October 26 by Anthropic&#x27;s OSS Scanner, a free scanning service for open-source projects that uses the company&#x27;s AI models. Anthony Weems and Simon Scannell of Google Cloud Vulnerability Research reported it last week.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost spočívá v nesprávném omezení XML External Entity (XXE) v OCI XML parseru. Útočník pošle speciálně vytvořenou XML zprávu na port 2208, což donutí parser číst soubory ze souborového systému serveru.</p>
+                        <p>Jde o chybu typu race condition (souběžný přístup ke sdíleným zdrojům) v assign_headers() uvnitř modulu mod_http2. V důsledku nesprávné synchronizace souběžných vláken dochází ke korupci haldy (heap memory), což lze využít k podvržení a spuštění libovolného kódu v kontextu procesu webového serveru.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikace dostupných bezpečnostních záplat od Cisco.</li><li>Implementace risk-based vulnerability managementu dle doporučení CISA.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1552</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 PoC exploit, +1 Lateral Movement</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat Apache HTTP Server na verzi 2.4.71 nebo novější.</li><li>Dočasně zakázat protokol HTTP/2 odstraněním h2 a h2c z direktivy Protocols v konfiguraci serveru.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1211</code></li><li><code>T1190</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 remote exploit bez autentizace, +2 dopad na enterprise software / kritickou infrastrukturu, +1 veřejný PoC exploit, +1 chybí patch pro některé distribuční sestavy, +3 aktivní hrozba heap korupce (součet 9 dle reálného dopadu a závažnosti CVSS)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>XXE:</strong> XML External Entity – zranitelnost umožňující útočníkovi číst soubory na serveru skrze zpracování XML dat.</div><div class='glossary-item'><strong>OCI:</strong> Open Client Interface – rozhraní pro komunikaci s BroadWorks platformou.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>race condition:</strong> Chyba v softwaru, kdy výsledek operace závisí na přesném načasování a pořadí provádění souběžných vláken.</div><div class='glossary-item'><strong>heap memory:</strong> Oblast dynamicky alokované paměti v operačním systému sloužící k ukládání dat za běhu programu.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-flags-cisco-broadworks-flaw-as-actively-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/cisco-broadworks-and-openwave-flaws.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123710" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123710</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-110697" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-110697</a></div>
+                    <h2>#3 Kritická zranitelnost v Red Hat Quay umožňuje čtení a přepis soukromých kontejnerů</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Podnikové registry kontejnerů postavené na Red Hat Quay.</p>
+                <p><strong>⚡ Podstata:</strong> Závažné chyby v autentizaci a zpracování jmenných prostorů v Red Hat Quay umožňují neoprávněným útočníkům číst a přepisovat privátní kontejnerové obrazy.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou podvrhnout škodlivý kód do kontejnerových obrazů, které firma využívá pro své aplikace. To může vést ke kompromitaci celého vývojového řetězce a aplikací běhajících v cloudu.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">A critical flaw in Red Hat Quay allows an attacker who can access a Quay registry to read and overwrite private container images in every repository. Quay enables anonymous access by default, and while it is enabled, the attacker needs no account. When it is off, anyone with a valid account can still exploit the flaw, Red Hat said yesterday. The company has released fixed builds for eight Quay 3 branches. The flaw is tracked as CVE-2026-123710 (CVSS score: 9.8). Quay uses keys it trusts to sign the access tokens that allow image pushes and pulls. The flaw lets an attacker add their own key to the keys Quay trusts, with no expiry date. Quay then accepts tokens signed with that key for any repository. With those tokens, an attacker can retrieve private images and any secrets or credentials stored within them. The attacker can also push or overwrite images, and the change propagates to every system that later pulls those images. The planted key survives restarts until someone removes it. It can also be used to delete the keys that running Quay instances use, so normal pushes and pulls start failing with authentication errors.
+
+Quay&#x27;s key server checks that a request to replace a key carries a token signed by a trusted key, with the expected audience and issuer. It does not check whether the token was issued for key rotation. An anonymous token from Quay&#x27;s /v2/auth endpoint passes: Quay signs it with a trusted key, and the caller chooses its audience. A second critical flaw, CVE-2026-110697 (CVSS score: 9.9), was disclosed at the same time. It lets a Quay user who can create a namespace steal other tenants&#x27; robot account tokens and use them to read, push, or overwrite those tenants&#x27; images. This flaw is in the code that lists robot accounts. It builds an SQL LIKE pattern from the namespace name without escaping wildcard characters, and in SQL LIKE an underscore matches any single character. So a namespace with an underscore in the right place can match another tenant&#x27;s namespace and return its robot accounts, with their decrypted tokens. The attacker needs no elevated privileges, and the victim does not have to do anything. Deleting the attacker&#x27;s namespace also deletes the corresponding robot accounts, which can cut off systems that rely on them. Where Quay is the integrated registry for OpenShift, stolen robot credentials can be used to inject malicious images into CI/CD pipelines, the company says.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>První chyba (CVE-2026-123710) spočívá v tom, že klíčový server Quay nevaliduje účel tokenu při rotaci klíčů, což umožňuje přidání vlastního nedůvěryhodného podpisového klíče bez expirace. Druhá chyba (CVE-2026-110697) využívá neescapovaný SQL dotaz typu LIKE, kde znak podtržítka funguje jako wildcard, což vede k úniku tokenů robotických účtů jiných tenantů.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Instalovat aktualizované sestavení Red Hat Quay pro příslušné větve.</li><li>Blokovat koncový bod /keys na proxy či load balanceru pro nedůvěryhodné klienty.</li><li>Omezit vytváření jmenných prostorů obsahujících podtržítko.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1565.001</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 remote exploit bez autentizace, +2 dopad na enterprise software / kritickou infrastrukturu, +1 veřejný PoC exploit, +1 umožňuje Privilege Escalation nebo Lateral Movement, +3 kritický dopad na registry kontejnerů (součet 9 dle CVSS)</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SQL LIKE:</strong> Operátor v SQL databázích používaný pro vyhledávání vzorů v textu pomocí zástupných znaků (wildcards).</div><div class='glossary-item'><strong>CI/CD:</strong> Continuous Integration / Continuous Deployment – soubor postupů a nástrojů pro automatizované sestavování a nasazování softwaru.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/critical-red-hat-quay-flaw-lets.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>

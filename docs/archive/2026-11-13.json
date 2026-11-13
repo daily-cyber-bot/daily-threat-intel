@@ -1,0 +1,174 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zero-day zranitelnost v Check Point Gaia OS zneužívaná k získání root oprávnění",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 zneužití in the wild, +2 remote exploit bez autentizace, +2 dopad na enterprise software / kritickou infrastrukturu, +1 veřejný PoC exploit, +1 umožňuje Privilege Escalation nebo Lateral Movement, +1 chybí patch (před vydáním hotfixu)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-123039",
+        "CVE-2026-109618",
+        "CVE-2026-109619",
+        "CVE-2026-85102",
+        "CVE-2026-93616"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/hackers-exploit-php2shell-flaws-in.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Neznámí útočníci aktivně zneužívají zero-day zranitelnost v rozhraní Gaia OS DynamicCLI k eskalaci oprávnění na root.",
+        "cil": "Check Point Security Gateways a podniková síťová infrastruktura.",
+        "dopad_laici": "Útočníci mohou získat plnou kontrolu nad podnikovými firewally a bránami, odkud mohou proniknout hlouběji do firemní sítě a nasadit destruktivní malware. Firmy musí okamžitě aplikovat nouzové záplaty nebo provést doporučené mitigace."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Check Point Software released emergency hotfixes to address a high-severity flaw that hackers have been exploiting to gain root privileges and establish persistence on vulnerable devices since late October. Tracked as CVE-2026-123039, this local privilege escalation vulnerability was found in the DynamicCLI IPC (Inter-Process Communication) interface used to send privileged command requests to the root-level Gaia OS DynamicCLI (dynamic_server) daemon. Check Point observed an active exploit of this vulnerability against a couple of dozen customers, the company warned in a Thursday security advisory. The Gaia OS DynamicCLI daemon runs as root and listens on a world-writable local socket (/tmp/dynamic_socket) without authenticating connecting processes. An authenticated local user can send a command to the socket and have it executed as root.\n\nThe list of Check Point products vulnerable to attacks exploiting the CVE-2026-123039 flaw includes the company's Firewall, Multi-Domain Security Management Server, Scalable Platforms, Security Gateway, and Security Management Server. In a separate report, Check Point said the attackers first gained access to the Mobile Access portal by exploiting the PHP2Shell vulnerability, then escalated privileges to root using CVE-2026-123039 zero-day exploits. Next, the threat actors dropped webshells and installed TSGA backdoor and TSProxy malware that was previously spotted while investigating attacks targeting Ivanti appliances, then pivoted from the compromised gateway to a VMware ESXi host and deployed destructive wiper malware.\n\nCheck Point advised security teams who can't immediately deploy the CVE-2026-123039 hotfixes to stop the dynamic_server process and prevent it from restarting as a temporary mitigation measure. The company also shared indicators of compromise (IOCs), and it said that customers can find evidence of compromise by checking for commands commonly associated with exploitation attempts, the use of the system() sink, and commands that don't use the default Clish wrapper.\n\nIn September, Check Point warned customers that attackers had been exploiting two other critical Security Management Server (CVE-2026-93616) and Security Gateway (CVE-2026-85102) remote code execution (RCE) vulnerabilities in zero-day attacks that didn't require privileges on the targeted systems. Over the last two years, the US Cybersecurity and Infrastructure Security Agency (CISA) has added five Check Point flaws to its catalog of actively exploited vulnerabilities, two of which have also been abused by ransomware gangs.\n\nAn unknown threat actor has been observed targeting unpatched Check Point Security Gateways to obtain initial access via the PHP2Shell vulnerabilities and then a previously unreported local privilege escalation flaw in Gaia OS to deploy a backdoor called TSGA. The activity, detailed by Check Point, began on October 30, 2026, and targeted Israeli organizations, with a broader follow-up wave on November 2, 2026, that targeted organizations across multiple countries and sectors. Some of the organizations singled out in the first wave have also been at the receiving end of destructive actions that include the deployment of wiper malware.",
+        "jak_to_funguje": "Zranitelnost spočívá v tom, že démon Gaia OS DynamicCLI (dynamic_server) běžící s oprávněním root naslouchá na lokálním socketu s právem zápisu pro kohokoliv (/tmp/dynamic_socket) bez ověřování připojujících se procesů. Útočník, který získá počáteční přístup (např. přes PHP2Shell), může skrze tento socket poslat příkaz, který se bez validace provede s kořenovými právy.",
+        "mitre": [
+          "T1068",
+          "T1505.003",
+          "T1021.004",
+          "T1485"
+        ],
+        "mitigace": [
+          "Aplikovat nouzové hotfixy od dodavatele.",
+          "Zastavit proces dynamic_server a zabránit jeho restartu v případě, že nelze ihned aplikovat patch.",
+          "Monitorovat anomální spouštění příkazů obcházejících výchozí Clish wrapper."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "zero-day",
+          "vysvetleni": "Dosud neznámá zranitelnost v softwaru, na kterou výrobce ještě nevydal oficiální opravnou záplatu."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Technika útočníka vedoucí k získání vyšších oprávnění v systému (např. z běžného uživatele na administrátora nebo root)."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému."
+        },
+        {
+          "pojem": "Webshell",
+          "vysvetleni": "Skript nahraný na webový server, který útočníkovi umožňuje vzdálenou administraci přes webové rozhraní."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Pohyb útočníka napříč vnitřní sítí firmy po počátečním průniku do jednoho ze zařízení."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Kritická zranitelnost v Apache HTTP Serveru umožňuje vzdálené spuštění kódu v modulu HTTP/2",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 remote exploit bez autentizace, +2 dopad na enterprise software / kritickou infrastrukturu, +1 veřejný PoC exploit, +1 chybí patch pro některé distribuční sestavy, +3 aktivní hrozba heap korupce (součet 9 dle reálného dopadu a závažnosti CVSS)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-119618",
+        "CVE-2026-106023",
+        "CVE-2026-109163",
+        "CVE-2026-23918"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Kritická race condition v modulu mod_http2 webového serveru Apache HTTP Server umožňuje neautentizovaným útočníkům dosáhnout RCE.",
+        "cil": "Apache HTTP Server verze 2.4.55 až 2.4.70 s povoleným protokolem HTTP/2.",
+        "dopad_laici": "Zranitelnost ohrožuje zhruba pětinu všech webových stránek na internetu. Útočníci mohou vzdáleně ovládnout webový server bez nutnosti přihlášení, pokud je na něm aktivní protokol HTTP/2. Administrátoři musí neprodleně aktualizovat software."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "A critical vulnerability in the HTTP/2 module of Apache HTTP Server could be exploited by an unauthenticated attacker to obtain remote code execution (RCE). The Apache Software Foundation has fixed the issue, now tracked as CVE-2026-119618, but a significant number of servers are vulnerable and reachable over the public internet. Discovered by Anthropic’s OSS Scanner and Google Cloud’s Vulnerability Research teams, the vulnerability is a race condition in the mod_http2 module that can corrupt heap memory. An attacker successfully exploiting it could run code with the web server process’s privileges in HTTP Server versions 2.4.55 through 2.4.70, and standalone mod_h2 version 2.0.8 through 2.0.42.\n\nApache describes the problem as “Concurrent Execution using Shared Resource with Improper Synchronization vulnerability in Apache HTTP Server's mod_http2 in assign_headers() can lead to RCE.” Apache HTTP Server is a free and open-source software that handles requests from web browsers and serves pages, images, and other website content. It is a widely used tool estimated to back roughly one out of five websites. According to telemetry data from cloud security company Wiz, 64% of the cloud environments have vulnerable resources, and roughly half of them have publicly exposed instances. However, the numbers do not account for server configuration, which requires HTTP/2 to be enabled (default is off). Researchers at cybersecurity company watchTowr confirmed this condition and recommend technicians to \"patch now or drop h2 until you can.\"\n\nRed Hat, which ships the server as part of Red Hat Enterprise Linux, notes that only servers with HTTP/2 enabled are affected and rates the flaw 9.8 out of 10 on the CVSS scale. The Apache HTTP Server advisory offers no workaround. In its vulnerability analysis, Wiz advises admins who cannot update yet to remove h2 and h2c from the Protocols directive, leaving Protocols http/1.1. The standalone mod_h2 project has published no fixed release so far. The flaw was reported on October 26 by Anthropic's OSS Scanner, a free scanning service for open-source projects that uses the company's AI models. Anthony Weems and Simon Scannell of Google Cloud Vulnerability Research reported it last week.",
+        "jak_to_funguje": "Jde o chybu typu race condition (souběžný přístup ke sdíleným zdrojům) v assign_headers() uvnitř modulu mod_http2. V důsledku nesprávné synchronizace souběžných vláken dochází ke korupci haldy (heap memory), což lze využít k podvržení a spuštění libovolného kódu v kontextu procesu webového serveru.",
+        "mitre": [
+          "T1211",
+          "T1190"
+        ],
+        "mitigace": [
+          "Aktualizovat Apache HTTP Server na verzi 2.4.71 nebo novější.",
+          "Dočasně zakázat protokol HTTP/2 odstraněním h2 a h2c z direktivy Protocols v konfiguraci serveru."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "race condition",
+          "vysvetleni": "Chyba v softwaru, kdy výsledek operace závisí na přesném načasování a pořadí provádění souběžných vláken."
+        },
+        {
+          "pojem": "heap memory",
+          "vysvetleni": "Oblast dynamicky alokované paměti v operačním systému sloužící k ukládání dat za běhu programu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Kritická zranitelnost v Red Hat Quay umožňuje čtení a přepis soukromých kontejnerů",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 remote exploit bez autentizace, +2 dopad na enterprise software / kritickou infrastrukturu, +1 veřejný PoC exploit, +1 umožňuje Privilege Escalation nebo Lateral Movement, +3 kritický dopad na registry kontejnerů (součet 9 dle CVSS)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-123710",
+        "CVE-2026-110697"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/critical-red-hat-quay-flaw-lets.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Závažné chyby v autentizaci a zpracování jmenných prostorů v Red Hat Quay umožňují neoprávněným útočníkům číst a přepisovat privátní kontejnerové obrazy.",
+        "cil": "Podnikové registry kontejnerů postavené na Red Hat Quay.",
+        "dopad_laici": "Útočníci mohou podvrhnout škodlivý kód do kontejnerových obrazů, které firma využívá pro své aplikace. To může vést ke kompromitaci celého vývojového řetězce a aplikací běhajících v cloudu."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "A critical flaw in Red Hat Quay allows an attacker who can access a Quay registry to read and overwrite private container images in every repository. Quay enables anonymous access by default, and while it is enabled, the attacker needs no account. When it is off, anyone with a valid account can still exploit the flaw, Red Hat said yesterday. The company has released fixed builds for eight Quay 3 branches. The flaw is tracked as CVE-2026-123710 (CVSS score: 9.8). Quay uses keys it trusts to sign the access tokens that allow image pushes and pulls. The flaw lets an attacker add their own key to the keys Quay trusts, with no expiry date. Quay then accepts tokens signed with that key for any repository. With those tokens, an attacker can retrieve private images and any secrets or credentials stored within them. The attacker can also push or overwrite images, and the change propagates to every system that later pulls those images. The planted key survives restarts until someone removes it. It can also be used to delete the keys that running Quay instances use, so normal pushes and pulls start failing with authentication errors.\n\nQuay's key server checks that a request to replace a key carries a token signed by a trusted key, with the expected audience and issuer. It does not check whether the token was issued for key rotation. An anonymous token from Quay's /v2/auth endpoint passes: Quay signs it with a trusted key, and the caller chooses its audience. A second critical flaw, CVE-2026-110697 (CVSS score: 9.9), was disclosed at the same time. It lets a Quay user who can create a namespace steal other tenants' robot account tokens and use them to read, push, or overwrite those tenants' images. This flaw is in the code that lists robot accounts. It builds an SQL LIKE pattern from the namespace name without escaping wildcard characters, and in SQL LIKE an underscore matches any single character. So a namespace with an underscore in the right place can match another tenant's namespace and return its robot accounts, with their decrypted tokens. The attacker needs no elevated privileges, and the victim does not have to do anything. Deleting the attacker's namespace also deletes the corresponding robot accounts, which can cut off systems that rely on them. Where Quay is the integrated registry for OpenShift, stolen robot credentials can be used to inject malicious images into CI/CD pipelines, the company says.",
+        "jak_to_funguje": "První chyba (CVE-2026-123710) spočívá v tom, že klíčový server Quay nevaliduje účel tokenu při rotaci klíčů, což umožňuje přidání vlastního nedůvěryhodného podpisového klíče bez expirace. Druhá chyba (CVE-2026-110697) využívá neescapovaný SQL dotaz typu LIKE, kde znak podtržítka funguje jako wildcard, což vede k úniku tokenů robotických účtů jiných tenantů.",
+        "mitre": [
+          "T1565.001",
+          "T1078"
+        ],
+        "mitigace": [
+          "Instalovat aktualizované sestavení Red Hat Quay pro příslušné větve.",
+          "Blokovat koncový bod /keys na proxy či load balanceru pro nedůvěryhodné klienty.",
+          "Omezit vytváření jmenných prostorů obsahujících podtržítko."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "SQL LIKE",
+          "vysvetleni": "Operátor v SQL databázích používaný pro vyhledávání vzorů v textu pomocí zástupných znaků (wildcards)."
+        },
+        {
+          "pojem": "CI/CD",
+          "vysvetleni": "Continuous Integration / Continuous Deployment – soubor postupů a nástrojů pro automatizované sestavování a nasazování softwaru."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
