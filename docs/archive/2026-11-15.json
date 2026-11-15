@@ -1,0 +1,200 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Aktivně zneužívaná zranitelnost v UnrealIRCd umožňuje vykonání příkazů se serverovými oprávněními",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno CISA i vývojářem), +2 Remote exploit bez autentizace (jakýkoliv uživatel v síti propojených serverů), +2 Dopad na enterprise/infrastrukturní software (IRC servery ve vládním a firemním sektoru), +1 Umožňuje Privilege Escalation a Lateral Movement (vkládání příkazů vykonávaných se serverovými a IRCOp oprávněními).",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-114713"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/attackers-exploit-unrealircd-flaw-that.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "V populárním open-source IRC serveru UnrealIRCd byla odhalena a je aktivně zneužívána závažná zranitelnost, která útočníkům umožňuje vkládat serverové příkazy přes neodescapovaný tag zprávy IRCv3.",
+        "cil": "IRC servery provozující UnrealIRCd ve verzích 6.0.0 až 6.2.7.",
+        "dopad_laici": "Běžní uživatelé nemusí dělat nic na svých zařízeních. Provozovatelé zasažených chatovacích serverů musí bezodkladně nainstalovat bezpečnostní aktualizaci, aby zabránili převzetí kontroly nad serverem útočníky."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Americká agentura pro kybernetickou bezpečnost a bezpečnost infrastruktury (CISA) přidala v pátek na svůj seznam známých zneužívaných zranitelností (KEV) vysoce závažnou chybu v open-source IRC serveru UnrealIRCd po zprávách o jejím aktivním zneužívání v praxi.\n\nZranitelnost sledovaná jako CVE-2026-114713 s CVSS skóre 8,6 spočívá v nedostatečném ošetření oddělovačů (improper neutralization of delimiters). Tato chyba může být zneužita k vykonání libovolných příkazů s oprávněními serveru nebo operátora IRC (IRCOp).\n\nPodle popisu v databázi NVD modul labeled-response ve verzích UnrealIRCd od 6.0.0 do 6.2.7.1 neodescapuje tag zprávy 'label' protokolu IRCv3 při jeho vracení v odpovědích. To umožňuje jakémukoli uživateli v síti se dvěma nebo více propojenými servery vkládat příkazy typu server-to-server, které se spustí s oprávněním samotného serveru.\n\nK zařazení na seznam dochází necelý týden poté, co vedoucí vývojář projektu UnrealIRCd Bram Matthys (známý jako Syzop) vydal verzi 6.2.7.1 opravující několik bezpečnostních chyb nalezených za pomoci umělé inteligence. Matthys potvrdil, že útočníci chybu na internetu aktivně zneužívají, a označil ji za nejkritičtější problém nalezený v UnrealIRCd za posledních 15 let. Pokusy o zneužití začaly pouhý den po vydání opravy z 7. listopadu 2026.\n\nCivilní federální orgány v USA (FCEB) mají podle závazné operativní směrnice BOD 26-04 čas na aplikaci oprav do 16. listopadu 2026.",
+        "jak_to_funguje": "Zranitelnost se nachází v modulu labeled-response protokolu IRCv3. Při zpracování zprávy s tagem label server neověřuje a neodescapovává řídicí znaky (delimitery). Pokud je síť tvořena dvěma nebo více propojenými IRC servery, útočník může poslat speciálně upravený tag label. Při přeposílání zprávy mezi servery dochází k interpretaci vložených řídicích znaků jako samostatných serverových příkazů. Tyto příkazy se následně vykonají s nejvyššími právy serveru nebo IRCOp (IRC Operator), což útočníkovi umožňuje spouštět libovolné příkazy (Command Injection) a lateralizovat v síti.",
+        "mitre": [
+          "T1059",
+          "T1068",
+          "T1210"
+        ],
+        "mitigace": [
+          "Aktualizovat UnrealIRCd na verzi 6.2.7.1 nebo novější.",
+          "Aplikovat dočasný spamfilter jako workaround, pokud nelze server ihned aktualizovat.",
+          "Dodržet termín aktualizace pro FCEB orgány do 16. 11. 2026 podle směrnice BOD 26-04."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "IRC",
+          "vysvetleni": "Internet Relay Chat – síťový protokol pro textovou komunikaci v reálném čase."
+        },
+        {
+          "pojem": "IRCv3",
+          "vysvetleni": "Moderní rozšíření protokolu IRC podporující dodatečné funkce jako tagování zpráv nebo metadata."
+        },
+        {
+          "pojem": "Command Injection",
+          "vysvetleni": "Zranitelnost umožňující útočníkovi vložit a spustit vlastní systémové příkazy v operačním systému serveru."
+        },
+        {
+          "pojem": "IRCOp",
+          "vysvetleni": "IRC Operator – uživatel s nejvyššími správcovskými právy nad IRC serverem nebo sítí."
+        },
+        {
+          "pojem": "CVSS",
+          "vysvetleni": "Common Vulnerability Scoring System – standardizovaný systém pro hodnocení závažnosti bezpečnostních zranitelností."
+        },
+        {
+          "pojem": "CISA KEV",
+          "vysvetleni": "Katalog známých zneužívaných zranitelností udržovaný americkou agenturou CISA."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Únik klíče Fireworks AI vedl k kompromitaci platformy Cursor a šíření škodlivého rozšíření Claude Code",
+      "kategorie": "malware",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (podvržené rozšíření s SSH backdoor doručeno až 5 000 vývojářům), +2 Dopad na enterprise software (vývojářská platforma Cursor, SaaS nástroje, zasažení zákazníci jako Uber a Notion), +1 Privilege Escalation a Lateral Movement (instalace SSH backdooru pro trvalý vzdálený přístup a využití odcizených API klíčů k přístupu do dalších systémů).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci získali zneužitelný přístupový klíč z infrastruktury Fireworks AI, odcizili nešifrované API přihlašovací údaje z datových záznamů vývojářského editoru Cursor a 29. října publikovali trojanizované rozšíření Claude Code s SSH backdoorem.",
+        "cil": "Vývojáři používající AI kódovací editor Cursor a zákazníci služeb Fireworks AI (včetně společností Uber a Notion).",
+        "dopad_laici": "Útok cílil na softwarové vývojáře. Pokud používáte vývojářský nástroj Cursor a stáhli jste si 29. října rozšíření Claude Code, vaše zařízení mohlo být napadeno škodlivým kódem pro vzdálenou kontrolu."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost Cursor potvrdila bezpečnostní incident, při kterém útočníci dokázali distribuovat škodlivé rozšíření Claude Code prostřednictvím jejího tržiště rozšíření. K útoku došlo poté, co útočníci odcizili přihlašovací údaje z infrastruktury poskytovatele AI infrastruktury Fireworks AI.\n\nPodle incidentní zprávy zveřejněné v pátek útok začal získáním přístupového klíče uloženého u Fireworks AI, třetí strany využívané pro trénování a inferenci AI modelů. Útočníci tento klíč použili ke zkopírování dat z úložiště určeného pro čtení, které Cursor sdílel s Fireworks AI. Úložiště obsahovalo historii relací AI kódovacích agentů (především z roku 2025) od uživatelů, kteří neměli zapnutý Privacy Mode. Některé z těchto záznamů obsahovaly neanonymizované API přihlašovací údaje, což útočníkům umožnilo zasáhnout méně než 0,01 % zákazníků a proniknout do dalších interních SaaS nástrojů Cursoru.\n\nPomocí získaných přístupových údajů útočníci odcizili zneužité zdrojové kódy z archivovaných neprodukčních repozitářů, data zákaznické podpory, e-mailové konverzace, metriky používání produktů a přihlašovací údaje dříve sdílené se zákaznickou podporou. Dne 29. října 2026 pak útočníci zneužili získané přihlašovací údaje k nahrání škodlivých verzí (2.1.312 a 2.1.313) rozšíření Anthropic Claude Code přímo do mezipaměti tržiště rozšíření Cursor VS Code.\n\nŠkodlivá rozšíření byla dostupná přibližně 11 hodin a stáhlo si je až 5 000 vývojářů. Obsahovala JavaScriptový kód, který se pokoušel nainstalovat trvalý SSH backdoor, sbíral systémové informace a nastavoval mechanismy pro trvalé udržení přístupu. Vzhledem k chybám v kódu malware selhal na mnoha systémech Windows a macOS, kde nebyl SSH démon předem povolen. Incident se dotkl i dalších zákazníků Fireworks AI – společnost Uber potvrdila únik dat řidičských průkazů a startup Notion rovněž potvrdil odcizení dat.",
+        "jak_to_funguje": "Útok proběhl ve dvou fázích (Supply Chain Attack). Nejprve útočníci využili kompromitovaný přístupový klíč Fireworks AI k přečtení S3 storage bucketu. V něm našli neredagované API credentials obsažené v historických konverzních záznamech (traces) kódovacího asistenta. Pomocí těchto credentials získali přístup k interní správě marketplace rozšíření Cursor. Dne 29. října nahradili legitimní balíčky Anthropic Claude Code (verze 2.1.312 a 2.1.313) v mezipaměti trójským koněm. Po instalaci rozšíření spustil škodlivý JavaScriptový loader, který shromáždil systémové údaje, zapsal veřejný SSH klíč útočníka do souboru authorized_keys a pokusil se povolit SSH službu pro zajištění trvalého vzdáleného přístupu (Persistence a Lateral Movement).",
+        "mitre": [
+          "T1195.002",
+          "T1078",
+          "T1098.004",
+          "T1547"
+        ],
+        "mitigace": [
+          "Pokud jste 29. října nainstalovali nebo aktualizovali rozšíření Claude Code na Cursoru, prověřte přítomnost verzí 2.1.312 a 2.1.313 a okamžitě je odstraňte.",
+          "Zkontrolujte soubor ~/.ssh/authorized_keys na přítomnost cizích veřejných klíčů.",
+          "Proveďte rotaci všech API klíčů a přihlašovacích údajů, které mohly být zadané v prostředí Cursoru.",
+          "Zapněte funkce typu Privacy Mode pro zamezení ukládání neanonymizovaných dat do trénovacích databází."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Supply Chain Attack",
+          "vysvetleni": "Útok na dodavatelský řetězec – kompromitace důvěryhodného dodavatele nebo komponenty za účelem zasažení koncových odběratelů."
+        },
+        {
+          "pojem": "SSH",
+          "vysvetleni": "Secure Shell – síťový protokol pro bezpečné vzdálené připojení k příkazovému řádku počítače."
+        },
+        {
+          "pojem": "Backdoor",
+          "vysvetleni": "Zadní vrátka – skrytý způsob přístupu do systému vytvořený útočníkem pro obcházení běžného ověření."
+        },
+        {
+          "pojem": "API",
+          "vysvetleni": "Application Programming Interface – rozhraní umožňující propojení a komunikaci mezi různými softwarovými aplikacemi."
+        },
+        {
+          "pojem": "Persistence",
+          "vysvetleni": "Technika udržení trvalého přístupu v kompromitovaném systému i po jeho restartu."
+        },
+        {
+          "pojem": "SaaS",
+          "vysvetleni": "Software as a Service – cloudový model poskytování softwaru jako služby přístupné přes internet."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "USA narušily 18měsíční kampaň FaceStealer severokorejské skupiny BlueNoroff cílící na kryptoměny a open-source vývojáře",
+      "kategorie": "apt",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (18 měsíců trvající kampaň se škodami přes 400 mil. USD a 677 cíli v 58 zemích), +2 Dopad na enterprise software / dodavatelský řetězec (umožnila kompromitaci správců balíčků v ekosystémech npm a Rust), +1 Lateral Movement a Privilege Escalation (krádeže přihlašovacích údajů, videí a kontaktů k dalšímu šíření v organizacích).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/us-disrupts-north-korean-campaign-behind-400-million-crypto-theft/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Americké úřady odstavily cloudovou infrastrukturu severokorejské APT skupiny BlueNoroff, která pomocí deepfake videí a techniky ClickFix ukradla přes 400 milionů dolarů a cílovala i na vývojáře populárních open-source knihoven.",
+        "cil": "Zakladatelé a manažeři kryptoměnových a Web3 firem a vývojáři spravující open-source balíčky (npm, Rust crate).",
+        "dopad_laici": "Útočníci se vydávali za známé osoby na videohovorech, aby přiměli lidi ke spuštění škodlivých oprav. Pokud na videohovoru nastanou technické potíže, nikdy nespusťte doporučené skripty ani stáhnuté opravné soubory."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Vláda USA narušila sociálně inženýrskou kampaň severokorejských útočníků s názvem 'FaceStealer', která byla zodpovědná za krádež více než 400 milionů dolarů v kryptoměnách. Kampaň probíhala 18 měsíců, než americké orgány zabavily její cloudovou infrastrukturu.\n\nÚtočníci využívali kombinaci sociálního inženýrství, deepfake videí a techniky ClickFix. Cílili na jednotlivce v sektoru kryptoměn, Web3 a na vývojáře open-source softwaru. Vyšetřovatelé identifikovali přes 900 videí z webkamer, které hackerská skupina tajně nahostovala a natočila u obětí. Podle výstrahy FBI severokorejská skupina zneužívala kompromitované účty na platformách Telegram, LinkedIn, Slack a Discord k zvání obětí na videokonference pod různými záminkami.\n\nBěhem videohovoru útočníci přehrávali dříve nahraná videa známých osobností z oboru nebo kolegů. Zatímco cíl čekal na zahájení schůzky, útočník ho tajně nahrával přes webkameru a video použil při dalších útocích. Následně útočník simuloval technický problém a zobrazil falešné chybové hlášení s odkazem na 'opravu'. Uživatel byl vyzván ke spuštění skriptu nebo instalátoru, čímž do počítače nainstaloval malware pro kradení kryptoměnových peněženek a přístupových údajů k Zoomu, Google Meet či Microsoft Teams.\n\nAnalytici ze společnosti Arctic Wolf připsali kampaň skupině BlueNoroff a zjištěno bylo 677 cílů v 58 zemích. FBI také potvrdila incident, kdy byl napaden správce populární JavaScriptové knihovny v ekosystému npm s desítkami milionů týdenních stažení. Útoky cílily rovněž na správce balíčků v ekosystému Rust crate. Paralelně Ministerstvo spravedlnosti USA oznámilo zmrazení více než 2,7 miliardy dolarů z dřívější 6,4miliardové krádeže na burze Binance.",
+        "jak_to_funguje": "Útočníci ze skupiny BlueNoroff kombinovali účetní impersonaci s technikou ClickFix. Přes kompromitované účty na zprávových platformách pozvali cíl do videohovoru. V prostředí videohovoru pustili předtočené deepfake video známého kolegy. Následně vyvolali v aplikaci (nebo v prohlížeči) vizuální chybové okno a instruovali oběť, aby problém vyřešila vkládáním příkazů do terminálu nebo spuštěním škodlivého skriptu (ClickFix). Tento skript nainstaloval Infostealer malware nastavený na exfiltraci kryptoměnových privátních klíčů, tokenů relací (session tokens) a přihlašovacích údajů k vývojářským účtům npm / Rust crate.",
+        "mitre": [
+          "T1566.003",
+          "T1204.002",
+          "T1539",
+          "T1056.001"
+        ],
+        "mitigace": [
+          "Nikdy nespouštějte příkazy ani skripty nabízené během videohovorů jako 'opravu' technických problémů.",
+          "Připojujte se k videokonferencím výhradně přes oficiální klientské aplikace za použití ověřených pozvánek.",
+          "Při podezřelých výzvách ověřte identitu volajícího jiným komunikačním kanálem.",
+          "Udržujte webkameru vypnutou, pokud není explicitně vyžadována."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "APT",
+          "vysvetleni": "Advanced Persistent Threat – pokročilá trvalá hrozba, obvykle státem sponzorovaná hackerská skupina provádějící dlouhodobé cílené útoky."
+        },
+        {
+          "pojem": "Deepfake",
+          "vysvetleni": "Syntetická média (video či zvuk) vytvořená pomocí umělé inteligence k přesvědčivému napodobení vzhledu a hlasu reálné osoby."
+        },
+        {
+          "pojem": "ClickFix",
+          "vysvetleni": "Technika sociálního inženýrství, při níž je oběť přiměněna k ručnímu zkopírování a spuštění škodlivého kódu pod záminkou opravy chybového hlášení."
+        },
+        {
+          "pojem": "Infostealer",
+          "vysvetleni": "Typ škodlivého softwaru specializovaný na sběr a odcizení citlivých dat, jako jsou hesla, tokeny relací a kryptoměnové peněženky."
+        },
+        {
+          "pojem": "npm",
+          "vysvetleni": "Správce balíčků pro JavaScriptové běhové prostředí Node.js."
+        },
+        {
+          "pojem": "Crate",
+          "vysvetleni": "Softwarový balíček v ekosystému programovacího jazyka Rust."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
