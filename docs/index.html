@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 15.11.2026</title>
+    <title>Threat Intel Svodka | 16.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,25 +58,25 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">15.11.2026 • 3 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">16.11.2026 • 6 hrozeb</span>
         </header>
         <main>
-        <article class="card sev-high" style="--sev-color: #ff9500;">
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
+                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114713" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114713</a></div>
-                    <h2>#1 Aktivně zneužívaná zranitelnost v UnrealIRCd umožňuje vykonání příkazů se serverovými oprávněními</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
+                    <h2>#1 Šest neopravených zranitelností v chladicích jednotkách Danfoss umožňuje vzdálené převzetí kontroly bez přihlášení</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> IRC servery provozující UnrealIRCd ve verzích 6.0.0 až 6.2.7.</p>
-                <p><strong>⚡ Podstata:</strong> V populárním open-source IRC serveru UnrealIRCd byla odhalena a je aktivně zneužívána závažná zranitelnost, která útočníkům umožňuje vkládat serverové příkazy přes neodescapovaný tag zprávy IRCv3.</p>
+                <p><strong>🎯 Cíl:</strong> Průmyslové řídicí jednotky chlazení Danfoss AK-SM800A používané v obchodech, supermarketech a skladovacích halách napříč Evropou.</p>
+                <p><strong>⚡ Podstata:</strong> Nizozemská bezpečnostní firma Midnight Blue odhalila šest kritických zranitelností v průmyslových řídicích jednotkách chlazení Danfoss AK-SM800A. Chyby umožňují vzdálenému útočníkovi získat plnou kontrolu nad zařízením s oprávněním root bez jakékoliv autentizace.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Běžní uživatelé nemusí dělat nic na svých zařízeních. Provozovatelé zasažených chatovacích serverů musí bezodkladně nainstalovat bezpečnostní aktualizaci, aby zabránili převzetí kontroly nad serverem útočníky.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou na dálku vypnout chlazení nebo spustit odmrazovací cykly v obchodech a skladech, což vede ke zničení potravin a velkým finančním škodám. Provozovatelé musí zařízení ihned odpojit od internetu.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,28 +84,204 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Americká agentura pro kybernetickou bezpečnost a bezpečnost infrastruktury (CISA) přidala v pátek na svůj seznam známých zneužívaných zranitelností (KEV) vysoce závažnou chybu v open-source IRC serveru UnrealIRCd po zprávách o jejím aktivním zneužívání v praxi.
+                        <p class="long-text">Šest zranitelností v řídicích jednotkách chlazení Danfoss AK-SM800A by mohlo vzdálenému útočníkovi umožnit převzít kontrolu nad řídicí jednotkou bez přihlášení, uvedla začátkem tohoto týdne nizozemská bezpečnostní poradenská společnost Midnight Blue. Žádný opravný balíček není k dispozici a výzkumníci tvrdí, že ani nejnovější firmware verze 5.4.0 tyto chyby neopravuje.
 
-Zranitelnost sledovaná jako CVE-2026-114713 s CVSS skóre 8,6 spočívá v nedostatečném ošetření oddělovačů (improper neutralization of delimiters). Tato chyba může být zneužita k vykonání libovolných příkazů s oprávněními serveru nebo operátora IRC (IRCOp).
+Vládní kybernetické bezpečnostní agentury v Belgii, Irsku a Německu tento týden vyzvaly provozovatele, aby správy rozhraní těchto řídicích jednotek okamžitě odpojili od internetu. Pro řídicí jednotku ponechanou na internetu nestačí podle belgických a irských agentur pouhá aktualizace firmwaru, změna výchozích hesel ani zapnutí režimu Strict mode. Režim Strict mode je ochrana přihlášení, která vyžaduje šifrované připojení a relační tokeny, avšak jedna ze šesti zranitelností se nachází přímo v bráně, která tento režim vynucuje.
 
-Podle popisu v databázi NVD modul labeled-response ve verzích UnrealIRCd od 6.0.0 do 6.2.7.1 neodescapuje tag zprávy &#x27;label&#x27; protokolu IRCv3 při jeho vracení v odpovědích. To umožňuje jakémukoli uživateli v síti se dvěma nebo více propojenými servery vkládat příkazy typu server-to-server, které se spustí s oprávněním samotného serveru.
+Jednotka AK-SM800A řídí chladničky a mrazničky v obchodech a servisní firmy ji mohou spravovat na dálku. Tyto řídicí jednotky se staly terčem útoků ve Francii od 11. října a v druhé vlně napříč Evropou, která začala minulý týden. Útoky způsobily nežádoucí odmrazovací cykly a zničily zásoby zboží. Německá spolková agentura pro bezpečnost IT (BSI) v bezpečnostním upozornění uvádí, že AK-SM800A byla zapojena již v dřívějších incidentech, při nichž byla manipulována chladicí zařízení v několika zemích.
 
-K zařazení na seznam dochází necelý týden poté, co vedoucí vývojář projektu UnrealIRCd Bram Matthys (známý jako Syzop) vydal verzi 6.2.7.1 opravující několik bezpečnostních chyb nalezených za pomoci umělé inteligence. Matthys potvrdil, že útočníci chybu na internetu aktivně zneužívají, a označil ji za nejkritičtější problém nalezený v UnrealIRCd za posledních 15 let. Pokusy o zneužití začaly pouhý den po vydání opravy z 7. listopadu 2026.
+Výzkumníci zkoumali firmware verze 5.3.2 a uvádějí, že dotčena je každá verze až do té doby nejnovější. Žádné identifikátory CVE nebyly přiděleny. Výzkumníci si ponechávají technické detaily v tajnosti, zatímco pracují na koordinovaném zveřejnění s dánskou společností Danfoss. Výrobce uvádí softwarový balíček 5.4.0 z listopadu jako své nejnovější vydání, ale v jeho dokumentaci není zmíněna žádná oprava zranitelností. Bezpečnostní analytici potvrdili, že sestavení 5.4.0 pochází z 29. října, tedy z doby před nahlášením chyb.
 
-Civilní federální orgány v USA (FCEB) mají podle závazné operativní směrnice BOD 26-04 čas na aplikaci oprav do 16. listopadu 2026.</p>
+Pět ze zranitelností se nachází v obsluhách webových požadavků, které nevyžadují přihlášení a běží v programu pod oprávněním root. Prostřednictvím jedné z nich spustili výzkumníci kód s oprávněním root. Šestá chyba se nachází v bráně vynucující Strict mode, přičemž spuštění v emulátoru vedlo ke pádu brány bez přítomnosti základních ochran jako stack canaries. S kódem běžícím pod rootem může útočník měnit nastavení, spouštět odmrazování a mazat stopy v logu. Zařízení navíc nepoužívají Secure Boot, takže útočník může implantovat kód, který přežije i tovární restart a aktualizaci firmwaru.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost se nachází v modulu labeled-response protokolu IRCv3. Při zpracování zprávy s tagem label server neověřuje a neodescapovává řídicí znaky (delimitery). Pokud je síť tvořena dvěma nebo více propojenými IRC servery, útočník může poslat speciálně upravený tag label. Při přeposílání zprávy mezi servery dochází k interpretaci vložených řídicích znaků jako samostatných serverových příkazů. Tyto příkazy se následně vykonají s nejvyššími právy serveru nebo IRCOp (IRC Operator), což útočníkovi umožňuje spouštět libovolné příkazy (Command Injection) a lateralizovat v síti.</p>
+                        <p>Pět zranitelností spočívá v nepodmíněném zpracování HTTP/HTTPS požadavků v obslužných procesech webového rozhraní (request handlers), které běží s nejvyššími privilegii root. Útočník může odeslat speciálně zkonstruovaný požadavek bez jakékoliv autentizace a dosáhnout spuštění libovolného kódu (RCE). Šestá chyba zneužívá zranitelnost v samotné autentizační bráně rozhraní &#x27;Strict mode&#x27; – chybějící ochranné mechanické prvky paměti (jako stack canaries) umožňují vyvolat Buffer Overflow nebo crash procesu a následně převzít kontrolu nad tokem vykonávání kódu. Jelikož hardware nevyužívá Secure Boot, útočník dokáže zapsat persistenční kód přímo do paměti flash, který přetrvá i factory reset.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat UnrealIRCd na verzi 6.2.7.1 nebo novější.</li><li>Aplikovat dočasný spamfilter jako workaround, pokud nelze server ihned aktualizovat.</li><li>Dodržet termín aktualizace pro FCEB orgány do 16. 11. 2026 podle směrnice BOD 26-04.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1059</code></li><li><code>T1068</code></li><li><code>T1210</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (potvrzeno CISA i vývojářem), +2 Remote exploit bez autentizace (jakýkoliv uživatel v síti propojených serverů), +2 Dopad na enterprise/infrastrukturní software (IRC servery ve vládním a firemním sektoru), +1 Umožňuje Privilege Escalation a Lateral Movement (vkládání příkazů vykonávaných se serverovými a IRCOp oprávněními).</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě odeberte management rozhraní řídicích jednotek Danfoss AK-SM800A z veřejného internetu.</li><li>Umístěte řídicí rozhraní za zabezpečenou VPN s vícefaktorovou autentizací (MFA).</li><li>Segmentujte síť OT/ICS od běžné podnikové IT sítě a zablokujte příchozí HTTP/HTTPS provoz na porty zařízení ze neprověřených IP adres.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1542</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužívání v reálném světě (probíhající útoky v Evropě způsobující odmrazování a škody na zboží), +2 Vzdálené zneužití bez nutnosti autentizace, +2 Dopad na průmyslové řídicí systémy a kritickou infrastrukturu, +1 Umožňuje získání oprávnění root a trvalou kompromitaci zařízení, +1 Absolutní absence opravného balíčku (neopravený zero-day).</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>IRC:</strong> Internet Relay Chat – síťový protokol pro textovou komunikaci v reálném čase.</div><div class='glossary-item'><strong>IRCv3:</strong> Moderní rozšíření protokolu IRC podporující dodatečné funkce jako tagování zpráv nebo metadata.</div><div class='glossary-item'><strong>Command Injection:</strong> Zranitelnost umožňující útočníkovi vložit a spustit vlastní systémové příkazy v operačním systému serveru.</div><div class='glossary-item'><strong>IRCOp:</strong> IRC Operator – uživatel s nejvyššími správcovskými právy nad IRC serverem nebo sítí.</div><div class='glossary-item'><strong>CVSS:</strong> Common Vulnerability Scoring System – standardizovaný systém pro hodnocení závažnosti bezpečnostních zranitelností.</div><div class='glossary-item'><strong>CISA KEV:</strong> Katalog známých zneužívaných zranitelností udržovaný americkou agenturou CISA.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Vzdálené spuštění kódu (Remote Code Execution), které útočníkovi umožňuje spustit libovolný příkaz na cílovém zařízení přes síť.</div><div class='glossary-item'><strong>Buffer Overflow:</strong> Přetečení zásobníku – zranitelnost paměti, kdy program zapíše více dat, než kolik je vyhrazeno pro danou proměnnou, což vede k přepsání sousední paměti.</div><div class='glossary-item'><strong>Secure Boot:</strong> Bezpečnostní standard zajišťující, že se v zařízení spustí pouze firmware důvěryhodně podepsaný výrobcem.</div><div class='glossary-item'><strong>stack canaries:</strong> Bezpečnostní prvek v paměti procesoru, který detekuje přetečení zásobníku předtím, než může být spuštěn škodlivý kód.</div><div class='glossary-item'><strong>OT/ICS:</strong> Operační technologie a průmyslové řídicí systémy (Operational Technology / Industrial Control Systems) používané k monitorování a řízení fyzických procesů.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/attackers-exploit-unrealircd-flaw-that.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/six-unpatched-danfoss-refrigeration.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">MALWARE</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-3248" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2025-3248</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-28797" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-28797</a></div>
+                    <h2>#2 FBI a Amazon varují před AI nástrojem ARTEX zneužívaným k autonomním kybernetickým útokům</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Enterprise cloudová prostředí, systémy správy Microsoft 365, dodavatelské řetězce (ConnectWise) a rozhraní AI aplikací (LiteLLM, Dify, Langflow, Ollama).</p>
+                <p><strong>⚡ Podstata:</strong> FBI a bezpečnostní tým Amazonu varují před masivním využitím autonomního penetračního nástroje ARTEX řízeného umělou inteligencí. Útočníci tento kód zneužívají k automatizovanému pronikání do podnikových sítí, únikům dat a krádežím API klíčů pro LLM modely.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Hackeři používají AI k automatickému hledání slabin ve firemních systémech během několika minut. Firmám hrozí únik přihlašovacích údajů a kompromitace cloudových účtů bez nutnosti lidského zásahu útočníka.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">FBI varuje, že hackeři používají framework pro penetrační testování s podporou AI nazvaný ARTEX k automatizaci kybernetických útoků na organizace po celém světě, včetně nedávného narušení dodavatelského řetězce ConnectWise, které kompromitovalo prostředí zákazníků Microsoft 365. Útočníci tento open-source kód využívají nejméně od srpna 2026 k cílení na finanční, vládní, technologický, obranný a zdravotnický sektor. ARTEX výrazně zkracuje dobu potřebnou k řetězení útočných technik, přičemž některé průniky postupují od počátečního ztargetování k získání priviligovaného přístupu za méně než tři hodiny.
+
+ARTEX je autonomní penetrační framework napsaný v jazyce Go, který využívá agenty umělé inteligence k provádění průzkumu, odhalování zranitelností, zneužívání systémů, Privilege Escalation a exfiltraci dat s minimálním zásahem člověka. Místo použití vlastního AI modelu se integruje s externími velkými jazykovými modely (LLM), jako jsou Anthropic Claude, OpenAI GPT, DeepSeek, GLM, Grok a Kimi. Útočníci zadají cíle a úkoly, které ARTEX přetvoří na příkazy spouštěné specializovanými agenty.
+
+Bezpečnostní tým Amazonu odhalil paralelní kampaň, ve které autonomní AI agenti běžící na bázi ARTEXu vyhledávali zranitelná rozhraní AI aplikací (LiteLLM, One API, Dify, FastGPT, Langflow, RAGFlow či Ollama) za účelem odcizení uložených API klíčů k platforem AI. Ulovené klíče pak agenti ihned používali k napájení vlastního vyhledávání dalších zranitelných cílů. Agenti využívali seznamy známých slabin včetně výchozích hesel, nedokončených instalací a obcházení autentizace přes hlavičku isCliRequest u One API či SSRF zranitelnosti pro přístup k metadatským službám cloudu.
+
+Nástroj ARTEX původně zveřejnil na GitHubu vývojář vystupující pod přezdívkou Autumn-27 v červenci 2026 a repozitář odstranil 8. října po zprávách o jeho zneužívání. Nástroj je však nadále šířen prostřednictvím komunitních forků, archivních kopií a komerční verze ARTEX PRO. Výzkumníci identifikovali více než 1 600 veřejně přístupných konzolí ARTEX. FBI doporučuje organizacím zabezpečit rozhraní obrácená do internetu, omezit přístupy k administraci cloudu a zavést rate limiting na citlivá API.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>ARTEX funguje jako orchestrátor autonomních AI agentů napsaný v Go. Operátor definuje pouze vysokoúrovňový cíl (např. &#x27;získej přístup k M365 tenantu&#x27;). Plánovací agent rozloží cíl na podúlohy (skenování rozhraní, vyhledávání API klíčů, zneužití SSRF nebo bypassu autentizace) a posílá dotazy do LLM pro generování konkrétních CLI příkazů a exploitů. Nástroj automaticky řetězí nalezené zranitelnosti (např. přes veřejné API vyvolá SSRF na cloud metadata endpoint `169.254.169.254`, získá IAM tokeny a provede Privilege Escalation a Lateral Movement v cloudovém prostředí).</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Zamezte přímému přístupu z internetu k administrátorským rozhraním AI brán (LiteLLM, Dify, Langflow apod.) a vyžadujte VPN / Zero Trust přístup.</li><li>Implementujte striktní rate limiting a monitorování neobvykle vysokého počtu automatizovaných požadavků na API rozhraní.</li><li>Pravidelně rotujte API klíče pro LLM služby a nastavte pro ně striktní oporávnění bez přístupu k produkčním databázím.</li><li>Sledujte indikátory kompromitace (IOCs) zveřejněné FBI a aplikujte detekční YARA/SIEM pravidla pro nástroj ARTEX.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1595</code></li><li><code>T1190</code></li><li><code>T1552</code></li><li><code>T1078</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužívání v reálném světě (hlášeno FBI i společností Amazon u dodavatelského řetězce ConnectWise a AI aplikací), +2 Vzdálená kompromitace bez autentizace s plnou automatizací, +2 Dopad na enterprise software, cloudová prostředí M365 a AI infrastrukturu, +1 Zveřejněný open-source kód a volně dostupné nástroje, +1 Umožňuje Privilege Escalation a Lateral Movement v napadených sítích.</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Privilege Escalation:</strong> Zvýšení oprávnění – proces, při kterém útočník získá vyšší úroveň přístupu k systému (např. admin/root), než mu byla původně přidělena.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Postranní pohyb – technika, kdy se útočník po proniknutí do jednoho počítače v síti přesouvá na další zasažené systémy.</div><div class='glossary-item'><strong>SSRF:</strong> Server-Side Request Forgery – zranitelnost webové aplikace, která útočníkovi umožňuje prinutit server odesílat neoprávněné požadavky do interní sítě nebo cloudu.</div><div class='glossary-item'><strong>LLM:</strong> Velký jazykový model (Large Language Model) – systém umělé inteligence trénovaný na zpracování a generování textu či kódu.</div><div class='glossary-item'><strong>IOC:</strong> Indikátor kompromitace (Indicator of Compromise) – technická ststopa v síti či systému (např. IP adresa, hash souboru), která naznačuje přítomnost útočníka.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/amazon-uncovers-ai-agent-campaign.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">9<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">APT</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2021-44228</a></div>
+                    <h2>#3 Skupina BO Team zneužila zranitelnost Log4Shell v VMware vCenter k průniku do vývojářské infrastruktury</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> VMware vCenter 7.0.3, vývojová CI/CD infrastruktura, Linux/Windows servery a podepisovací kódový server softwarové vývojové firmy.</p>
+                <p><strong>⚡ Podstata:</strong> Kybernetická skupina BO Team kompromitovala kompletní vývojářskou infrastrukturu a server pro podepisování kódu ruské softwarové firmy. Útočníci pronikli do sítě zneužitím známé zranitelnosti Log4Shell na neaktualizovaném serveru VMware vCenter.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Hackeři ovládli systémy vývojářské firmy a získali přístup k podepisování softwaru. Mohou tak vložit škodlivý kód do běžných aktualizací softwaru, které si uživatelé nainstalují jako důvěryhodné.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Vyšetřování podezřelé aktivity v síti ruského softwarového vývojáře odhalilo dlouhotrvající kompromitaci jeho vývojové infrastruktury a serveru určeného k elektronickému podepisování softwarového kódu. Aktivita, kterou zdokumentoval tým Kaspersky ICS CERT v červnu 2025, je připisována útočné skupině BO Team (známé také jako Black Owl, Hoody Hyena nebo Lifting Zmiy). Cílová společnost vyvíjí software pro zákazníky v Ruské federaci.
+
+V průběhu několika měsíců vedl průnik ke krádeži důvěrných informací a kompromitaci všech komponent IT infrastruktury organizace, včetně Windows a Linux serverů, pracovních stanic, hypervizorů, zálohovacích serverů, serverů pro správu bezpečnostních řešení a síťových prvků. Skupina BO Team, aktivní minimálně od roku 2023, se zaměřuje na kybernetickou špionáž a hacktivismus s cílem oslabit vojensko-průmyslový komplex. Při útocích používá klastry nástrojů Mythic, Cobalt Strike i vlastní malware (BrockenDoor, ZeronetKit).
+
+Útok začal kompromitací Linuxového terminálového serveru přes exponovanou službu SSH, ze kterého útočníci prováděli průzkum vnitřní sítě. Po neúspěšných pokusech o přihlášení do webového rozhraní VMware vCenter nakonec úspěšně zneužili neopravenou zranitelnost CVE-2021-44228 (Log4Shell) na serveru VMware vCenter verze 7.0.3, čímž získali vzdálený příkazový řádek s oprávněním root.
+
+Následně se útočníci připojili k hypervizoru přes SSH a nasadili persistenční backdoor v adresáři `/etc/cron.hourly/` pod maskovacím názvem `pgcache`. Tento skript každou hodinu stahoval a spouštěl sekundární shell skript z domény `nofrillsdns.com`, který následně spouštěl nástroj Global Socket (GSocket) k udržení vzdálené kontroly nad hostitelským systémem. Kompromitace CI/CD a podepisovacího serveru naznačuje přípravu útoků na dodavatelský řetězec (Supply Chain Attack).</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Útočníci poslali na rozhraní VMware vCenter 7.0.3 speciálně upravený řetězec využívající JNDI lookup v knihovně Log4j (CVE-2021-44228). Server zranitelnou knihovnou vyhodnotil vstup a navázal spojení s nebezpečným LDAP serverem útočníka, což vedlo k načtení a spuštění škodlivé třídy Java pod právním kontextem root. Po získání shellu útočníci nakonfigurovali persistenční úlohu cron (`/etc/cron.hourly/pgcache`), která pravidelně dotazovala DNS záznamy dynamické služby `nofrillsdns.com` a přes utilitu GSocket vytvářela šifrovaný reverzní tunel obcházející firewall.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizujte všechny instance VMware vCenter na nejnovější podporovanou verzi s patchovanou knihovnou Log4j.</li><li>Izolujte server pro podepisování kódu a CI/CD kanály do samostatné bezpečné sítě bez přímého přístupu z obecné IT infrastruktury.</li><li>Zaveďte detekci odchozích reverzních tunelů (např. nástrojů GSocket, Cobalt Strike, C2 komunikace) na hraničních firewallech.</li><li>Prověřte plánované úlohy (cron) na hypervizorech VMware ESXi a Linux servery na výskyt neautorizovaných skriptů.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1059.004</code></li><li><code>T1053.003</code></li><li><code>T1105</code></li><li><code>T1572</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužívání v reálném světě (měsíce trvající kompromitace vývojářské infrastruktury a kódu), +2 Remote exploit bez autentizace (Log4Shell), +2 Dopad na enterprise virtualization software (VMware vCenter) a CI/CD infrastrukturu, +1 Veřejně dostupný PoC exploit pro CVE-2021-44228, +1 Umožňuje Privilege Escalation na úroveň root a Lateral Movement napříč hypervisory.</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Log4Shell:</strong> Kritická zranitelnost v populární Java knihovně Apache Log4j umožňující vzdálené spuštění kódu odesláním speciálního textového řetězce.</div><div class='glossary-item'><strong>CI/CD:</strong> Průběžná integrace a doručování (Continuous Integration / Continuous Delivery) – automatizovaný systém pro vývoj, testování a nasazování softwaru.</div><div class='glossary-item'><strong>Hypervizor:</strong> Základní softwarový či hardwarový systém, který vytváří a provozuje virtuální počítače (např. VMware ESXi).</div><div class='glossary-item'><strong>Backdoor:</strong> Zadní vrátka – skrytý způsob přístupu do systému, který útočníkovi umožňuje se do napadené sítě kdykoliv vrátit.</div><div class='glossary-item'><strong>GSocket:</strong> Nástroj umožňující navázat šifrované síťové spojení mezi dvěma počítači i přes firewally a NAT.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/bo-team-exploits-log4shell-in-vmware.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-high" style="--sev-color: #ff9500;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-42271" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-42271</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-48710" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-48710</a></div>
+                    <h2>#4 Útočníci aktivně skenují a zneužívají řetězec zranitelností v LiteLLM a Starlette</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> AI proxy servery LiteLLM a webové aplikace běžící na Python frameworku Starlette verze nižší než 1.0.1.</p>
+                <p><strong>⚡ Podstata:</strong> Bezpečnostní pasti (honeypoty) zachytily aktivní vlnu útoků zneužívajících spojené zranitelnosti v Python frameworku Starlette a AI proxy nástroji LiteLLM. Zneužitím chybějící validace HTTP hlavičky Host lze obejít autentizaci a vykonat příkazy na serveru.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou neoprávněně ovládnout webové servery pohánějící AI systémy a získat prístup k datům nebo nad nimi převzít kontrolu.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Během víkendu začaly bezpečnostní honeypoty SANS ISC zachytávat požadavky na endpoint `/mcp-rest/test/tools/list`. Tyto požadavky se pokoušejí zneužít řetězec zranitelností CVE-2026-42271 a CVE-2026-48710. Společnost Horizon3.ai publikovala krátký rozbor toho, jak lze tyto chyby zřetězit k dosažení vzdáleného spuštění kódu (RCE) bez autentizace.
+
+Problém začíná u Python webového frameworku Starlette. Verze před 1.0.1 neprovádějí validaci HTTP hlavičky &quot;Host&quot; (zranitelnost známá jako BadHost). Starlette vezme nevalidovanou hlavičku Host a použije ji k sestavení kompletní URL adresy, podle které se následně provádějí rozhodnutí o řízení přístupu. Klasické PoC exploity využívají v hlavičce Host znaky jako &#x27;/&#x27;, &#x27;?&#x27; nebo &#x27;#&#x27;, aby zmiatly logiku řízení přístupu. Útočníci v zachycených skenech zkoušejí modifikace se znaky jako &#x27;localhost]&#x27; nebo &#x27;[localhost&#x27;, aby obcházeli WAF filtry.
+
+Jelikož nástroje jako LiteLLM spoléhají na Starlette při řízení přístupu, selhání validace v hlavičce umožňuje neoprávněným uživatelům přistupovat k endpointům, které normálně vyžadují přihlášení (například `/mcp-rest/test/tools/list`), a předávat jim parametry pro spuštění systémových příkazů (`stdio` transport s příkazem `id`). Útoky probíhají v reálném čase s modifikovanými hlavičkami pro obcházení WAF pravidel.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Při odeslání HTTP POST požadavku útočník vloží do hlavičky `Host` neobvyklé znaky (např. `Host: localhost]`). Nezabezpečená verze Starlette nevytvoří výjimku a předá zmanipulovanou URL internímu routeru. Řízení přístupu (Access Control) vyhodnotí požadavek jako legitimní lokální volání a propustí ho k endpointu LiteLLM bez ověření Bearer tokenu. Útočník následně v JSON těle požadavku definuje objekt `</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizujte framework Starlette na verzi 1.0.1 nebo novější.</li><li>Aktualizujte balíček LiteLLM na nejnovější verzi opravující zneužívání mcp-rest endpointů.</li><li>Na Web Application Firewallu (WAF) nastavte striktní pravidla validující hlavičku Host (povolit pouze alfanumerické znaky, tečku a pomlčku).</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1552</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužívání v reálném světě (detekované skeny a pokusy o exploit na honeypotech SANS ISC), +2 Remote exploit bez autentizace (obcházení autentizace přes hlavičku Host spojené s RCE), +2 Dopad na enterprise AI infrastrukturu a framework Starlette, +1 Veřejně publikovaný PoC exploit od Horizon3.ai.</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Honeypot:</strong> Zabezpečená past – systém záměrně vystavený na internetu, který slouží k přilákání a sledování aktivit útočníků.</div><div class='glossary-item'><strong>WAF:</strong> Web Application Firewall – bezpečnostní filtr, který chrání webové aplikace před útoky inspekcí HTTP provozu.</div><div class='glossary-item'><strong>Endpoint:</strong> Koncový bod webového rozhraní (URL adresa), na kterém aplikace přijímá požadavky.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://isc.sans.edu/diary/rss/33522" target="_blank" rel="noopener noreferrer">SANS ISC ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-medium" style="--sev-color: #ffcc00;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">6<small>/10</small></span>
+                    <span class="score-word">STŘEDNÍ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
+                    <h2>#5 Únik klíče Fireworks AI vedl k nasazení trojanizovaného rozšíření Claude Code na Cursor Marketplace</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Uživatelé a vývojáři používající editor Cursor a rozhraní Claude Code; dotčeny byly i společnosti Uber a Notion.</p>
+                <p><strong>⚡ Podstata:</strong> Kompromitace poskytovatele Fireworks AI vedla ke krádeži přístupových klíčů vývojářské platformy Cursor. Útočníci následně umístili škodlivé (trojanizované) rozšíření Claude Code do katalogu Cursor Marketplace, které se pokoušelo instalovat SSH backdoor.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Pokud si vývojáři v daný den nainstalovali doplňující modul pro umělou inteligenci, mohlo dojít k tajnému otevření vzdáleného přístupu do jejich počítače. Dotčené osoby byly varovány.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Kompromitace oficiálního rozšíření Claude Code od společnosti Anthropic na tržišti rozšíření Cursor byla důsledkem krádeže přístupového klíče, který byl vyzrazen po útoku na společnost Fireworks AI. Útočník získal přístupový klíč vydaný pro Fireworks, který byl touto firmou vyzrazen, a použil jej k kopírování dat z úložiště určeného pouze pro čtení.
+
+Úložiště obsahovalo omezené stopy konverzací kódovacích agentů ze relací, které nebyly v režimu Privacy Mode. Mezi těmito daty byly i needitované přístupové údaje necelých 0,01 % zákazníků. Útočník tyto údaje použil jako odrazový můstek k přístupu k vybraným SaaS nástrojům společnosti Cursor a získal zdrojové kódy, zákaznickou podporu i metriků vyvyžívání.
+
+Následně 29. října 2026 útočník zneužil odcizené přihlašovací údaje z interních systémů a umístil trojanizovanou verzi rozšíření Claude Code přímo do vyrovnávací paměti (cache) tržiště Cursor Marketplace. Až 5 000 uživatelů, kteří požádali o konkrétní verze rozšíření (2.1.312 nebo 2.1.313) během 11 hodin, obdrželo škodlivé sestavení obsahující SSH backdoor. Incident zároveň zasáhl i firmy Uber a Notion.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Útočník zneužil kompromitovaný API klíč k úložišti S3, kde nalezl zapomenuté přístupové údaje. S nimi pronikl do správy vyrovnávací paměti (cache CDN) obchodního místa Cursor Marketplace. Zde nahradil legitimní archiv rozšíření `Claude Code` škodlivým balíčkem. Při instalaci balíčku se spustil instalátor, který do systému oběti přidal neautorizovaný veřejný SSH klíč do `~/.ssh/authorized_keys` a navázal odchozí spojení na C2 server útočníka.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Pokud jste 29. října 2026 stahovali rozšíření Claude Code v editoru Cursor (verze 2.1.312/313), okamžitě ho odinstalujte.</li><li>Zkontrolujte a vymažte neautorizované klíče v souboru `~/.ssh/authorized_keys`.</li><li>Proveďte rotaci všech přístupových tokenů a API klíčů použitých ve vývojovém prostředí.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1195.002</code></li><li><code>T1098.004</code></li><li><code>T1552.001</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužívání v reálném světě (stažení škodlivého rozšíření až 5 000 uživateli), +2 Dopad na enterprise vývojářské platformy a služby (Cursor, Uber, Notion), +1 Umožňuje vytvoření trvalého SSH backdooru pro Lateral Movement.</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SSH backdoor:</strong> Neautorizovaný přístup přes protokol SSH, který útočníkovi umožňuje vzdálené přihlášení do příkazové řádky počítače.</div><div class='glossary-item'><strong>SaaS:</strong> Software jako služba (Software as a Service) – model poskytování aplikací přes internet.</div><div class='glossary-item'><strong>CDN:</strong> Content Delivery Network – síť serverů pro rychlé doručování obsahu (souborů, rozšíření) uživatelům.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-medium" style="--sev-color: #ffcc00;">
@@ -116,14 +292,14 @@ Civilní federální orgány v USA (FCEB) mají podle závazné operativní smě
                 </div>
                 <div class="title-box">
                     <div class="meta-tags"><span class="badge badge-cat">MALWARE</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
-                    <h2>#2 Únik klíče Fireworks AI vedl k kompromitaci platformy Cursor a šíření škodlivého rozšíření Claude Code</h2>
+                    <h2>#6 Malware SANSAR využívá modifikovanou knihovnu NVIDIA k maskování vytížení GPU při těžbě kryptoměn</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Vývojáři používající AI kódovací editor Cursor a zákazníci služeb Fireworks AI (včetně společností Uber a Notion).</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci získali zneužitelný přístupový klíč z infrastruktury Fireworks AI, odcizili nešifrované API přihlašovací údaje z datových záznamů vývojářského editoru Cursor a 29. října publikovali trojanizované rozšíření Claude Code s SSH backdoorem.</p>
+                <p><strong>🎯 Cíl:</strong> Linuxové servery s akcelerací GPU NVIDIA a exponovanými rozhraními (např. Ray job agent).</p>
+                <p><strong>⚡ Podstata:</strong> Bezpečnostní analytici odhalili novou kampaň zaměřenou na Linuxové servery s grafikami NVIDIA. Útočníci nasazují škodlivý toolkit SANSAR, který obsahuje jaderný rootkit a upravenou knihovnu NVML mementálně podvrhující údaje o vytížení grafických karet.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útok cílil na softwarové vývojáře. Pokud používáte vývojářský nástroj Cursor a stáhli jste si 29. října rozšíření Claude Code, vaše zařízení mohlo být napadeno škodlivým kódem pro vzdálenou kontrolu.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Hackeři tajně využívají výkonné firemní servery k těžbě kryptoměn a maskují své stopy tak, že správci systému na grafech vytížení nic nepoznají.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -131,71 +307,24 @@ Civilní federální orgány v USA (FCEB) mají podle závazné operativní smě
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost Cursor potvrdila bezpečnostní incident, při kterém útočníci dokázali distribuovat škodlivé rozšíření Claude Code prostřednictvím jejího tržiště rozšíření. K útoku došlo poté, co útočníci odcizili přihlašovací údaje z infrastruktury poskytovatele AI infrastruktury Fireworks AI.
+                        <p class="long-text">Finančně motivovaná útočná skupina sledovaná jako REF3364 stojí za operací zaměřenou na Linuxové servery, která manipuluje s naměřenými hodnotami vytížení GPU. Ústředním prvkem je toolkit SANSAR napsaný v jazyce Rust, který přijímá příkazy přes síť TOR a spravuje CPU i GPU minery. Útočníci rovněž nasadili kernel rootkit pro skrytí procesů a souborů a modifikovaný wrapper knihovny NVML (NVIDIA Management Library).
 
-Podle incidentní zprávy zveřejněné v pátek útok začal získáním přístupového klíče uloženého u Fireworks AI, třetí strany využívané pro trénování a inferenci AI modelů. Útočníci tento klíč použili ke zkopírování dat z úložiště určeného pro čtení, které Cursor sdílel s Fireworks AI. Úložiště obsahovalo historii relací AI kódovacích agentů (především z roku 2025) od uživatelů, kteří neměli zapnutý Privacy Mode. Některé z těchto záznamů obsahovaly neanonymizované API přihlašovací údaje, což útočníkům umožnilo zasáhnout méně než 0,01 % zákazníků a proniknout do dalších interních SaaS nástrojů Cursoru.
+Počáteční přístup byl získán přes exponovaného agenta Ray, což útočníkům umožnilo spustit příkazy `nvidia-smi` pro exfiltraci inventáře GPU. Následně získali root oprávnění a sestavili jaderný modul `acpi_thermal_mgr` pomocí DKMS. Upravený NVML wrapper zachytává volání monitorovacích nástrojů a hlásí vytížení GPU jako 0 %, přičemž teploty a spotřebu nahrazuje náhodnými hodnotami (36-46 °C).
 
-Pomocí získaných přístupových údajů útočníci odcizili zneužité zdrojové kódy z archivovaných neprodukčních repozitářů, data zákaznické podpory, e-mailové konverzace, metriky používání produktů a přihlašovací údaje dříve sdílené se zákaznickou podporou. Dne 29. října 2026 pak útočníci zneužili získané přihlašovací údaje k nahrání škodlivých verzí (2.1.312 a 2.1.313) rozšíření Anthropic Claude Code přímo do mezipaměti tržiště rozšíření Cursor VS Code.
-
-Škodlivá rozšíření byla dostupná přibližně 11 hodin a stáhlo si je až 5 000 vývojářů. Obsahovala JavaScriptový kód, který se pokoušel nainstalovat trvalý SSH backdoor, sbíral systémové informace a nastavoval mechanismy pro trvalé udržení přístupu. Vzhledem k chybám v kódu malware selhal na mnoha systémech Windows a macOS, kde nebyl SSH démon předem povolen. Incident se dotkl i dalších zákazníků Fireworks AI – společnost Uber potvrdila únik dat řidičských průkazů a startup Notion rovněž potvrdil odcizení dat.</p>
+Součástí výbavy je také zadní vrátko `netns`, které získává IP adresu C2 serveru z kontraktu v síti Ethereum a následně navazuje TCP spojení pro zpětný shell.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Útok proběhl ve dvou fázích (Supply Chain Attack). Nejprve útočníci využili kompromitovaný přístupový klíč Fireworks AI k přečtení S3 storage bucketu. V něm našli neredagované API credentials obsažené v historických konverzních záznamech (traces) kódovacího asistenta. Pomocí těchto credentials získali přístup k interní správě marketplace rozšíření Cursor. Dne 29. října nahradili legitimní balíčky Anthropic Claude Code (verze 2.1.312 a 2.1.313) v mezipaměti trójským koněm. Po instalaci rozšíření spustil škodlivý JavaScriptový loader, který shromáždil systémové údaje, zapsal veřejný SSH klíč útočníka do souboru authorized_keys a pokusil se povolit SSH službu pro zajištění trvalého vzdáleného přístupu (Persistence a Lateral Movement).</p>
+                        <p>Po získání přístupu root malware nainstaluje knihovní wrapper (hooking), který přepisuje volání funkce z `libnvidia-ml.so`. Když správce spustí příkaz `nvidia-smi`, wrapper podvrhne data vrátí nulu u GPU Utilization. Zároveň je nahrán kernel rootkit `acpi_thermal_mgr.ko` využívající rozhraní `ftrace` v Linuxovém jádře k odchytávání systémových volání pro výpis adresářů a procesů, čímž skrývá přítomnost těžebních procesů `kurt` (XMRig) a `tilki` (SRBMiner).</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Pokud jste 29. října nainstalovali nebo aktualizovali rozšíření Claude Code na Cursoru, prověřte přítomnost verzí 2.1.312 a 2.1.313 a okamžitě je odstraňte.</li><li>Zkontrolujte soubor ~/.ssh/authorized_keys na přítomnost cizích veřejných klíčů.</li><li>Proveďte rotaci všech API klíčů a přihlašovacích údajů, které mohly být zadané v prostředí Cursoru.</li><li>Zapněte funkce typu Privacy Mode pro zamezení ukládání neanonymizovaných dat do trénovacích databází.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1195.002</code></li><li><code>T1078</code></li><li><code>T1098.004</code></li><li><code>T1547</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (podvržené rozšíření s SSH backdoor doručeno až 5 000 vývojářům), +2 Dopad na enterprise software (vývojářská platforma Cursor, SaaS nástroje, zasažení zákazníci jako Uber a Notion), +1 Privilege Escalation a Lateral Movement (instalace SSH backdooru pro trvalý vzdálený přístup a využití odcizených API klíčů k přístupu do dalších systémů).</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Zabezpečte rozhraní agentů Ray a zamezte jejich vystavení do veřejného internetu.</li><li>Kontrolujte integritu systémových knihoven NVIDIA (`libnvidia-ml.so`) a souborů v adresáři `/opt`.</li><li>Monitorujte odchozí síťový provoz na přítomnost TOR uzlů a neobvyklé komunikace s Ethereum RPC uzly.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1014</code></li><li><code>T1564.001</code></li><li><code>T1496</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Aktivní zneužívání v reálném světě (operace REF3364 odhalená na Linux serverech), +2 Dopad na enterprise Linux a GPU infrastrukturu (NVIDIA, Ray), +1 Umožňuje Privilege Escalation a skrytí procesů pomocí kernel rootkitu.</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Supply Chain Attack:</strong> Útok na dodavatelský řetězec – kompromitace důvěryhodného dodavatele nebo komponenty za účelem zasažení koncových odběratelů.</div><div class='glossary-item'><strong>SSH:</strong> Secure Shell – síťový protokol pro bezpečné vzdálené připojení k příkazovému řádku počítače.</div><div class='glossary-item'><strong>Backdoor:</strong> Zadní vrátka – skrytý způsob přístupu do systému vytvořený útočníkem pro obcházení běžného ověření.</div><div class='glossary-item'><strong>API:</strong> Application Programming Interface – rozhraní umožňující propojení a komunikaci mezi různými softwarovými aplikacemi.</div><div class='glossary-item'><strong>Persistence:</strong> Technika udržení trvalého přístupu v kompromitovaném systému i po jeho restartu.</div><div class='glossary-item'><strong>SaaS:</strong> Software as a Service – cloudový model poskytování softwaru jako služby přístupné přes internet.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Rootkit:</strong> Škodlivý kód běžící na úrovni jádra operačního systému, který maskuje přítomnost procesů, souborů a síťových spojení.</div><div class='glossary-item'><strong>NVML:</strong> NVIDIA Management Library – C-based API rozhraní pro monitorování a správu stavu grafických karet NVIDIA.</div><div class='glossary-item'><strong>TOR:</strong> Anonymizační síť (The Onion Router) umožňující skrytí skutečné IP adresy komunikujících stran.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-medium" style="--sev-color: #ffcc00;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">6<small>/10</small></span>
-                    <span class="score-word">STŘEDNÍ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">APT</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
-                    <h2>#3 USA narušily 18měsíční kampaň FaceStealer severokorejské skupiny BlueNoroff cílící na kryptoměny a open-source vývojáře</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Zakladatelé a manažeři kryptoměnových a Web3 firem a vývojáři spravující open-source balíčky (npm, Rust crate).</p>
-                <p><strong>⚡ Podstata:</strong> Americké úřady odstavily cloudovou infrastrukturu severokorejské APT skupiny BlueNoroff, která pomocí deepfake videí a techniky ClickFix ukradla přes 400 milionů dolarů a cílovala i na vývojáře populárních open-source knihoven.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci se vydávali za známé osoby na videohovorech, aby přiměli lidi ke spuštění škodlivých oprav. Pokud na videohovoru nastanou technické potíže, nikdy nespusťte doporučené skripty ani stáhnuté opravné soubory.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Vláda USA narušila sociálně inženýrskou kampaň severokorejských útočníků s názvem &#x27;FaceStealer&#x27;, která byla zodpovědná za krádež více než 400 milionů dolarů v kryptoměnách. Kampaň probíhala 18 měsíců, než americké orgány zabavily její cloudovou infrastrukturu.
-
-Útočníci využívali kombinaci sociálního inženýrství, deepfake videí a techniky ClickFix. Cílili na jednotlivce v sektoru kryptoměn, Web3 a na vývojáře open-source softwaru. Vyšetřovatelé identifikovali přes 900 videí z webkamer, které hackerská skupina tajně nahostovala a natočila u obětí. Podle výstrahy FBI severokorejská skupina zneužívala kompromitované účty na platformách Telegram, LinkedIn, Slack a Discord k zvání obětí na videokonference pod různými záminkami.
-
-Během videohovoru útočníci přehrávali dříve nahraná videa známých osobností z oboru nebo kolegů. Zatímco cíl čekal na zahájení schůzky, útočník ho tajně nahrával přes webkameru a video použil při dalších útocích. Následně útočník simuloval technický problém a zobrazil falešné chybové hlášení s odkazem na &#x27;opravu&#x27;. Uživatel byl vyzván ke spuštění skriptu nebo instalátoru, čímž do počítače nainstaloval malware pro kradení kryptoměnových peněženek a přístupových údajů k Zoomu, Google Meet či Microsoft Teams.
-
-Analytici ze společnosti Arctic Wolf připsali kampaň skupině BlueNoroff a zjištěno bylo 677 cílů v 58 zemích. FBI také potvrdila incident, kdy byl napaden správce populární JavaScriptové knihovny v ekosystému npm s desítkami milionů týdenních stažení. Útoky cílily rovněž na správce balíčků v ekosystému Rust crate. Paralelně Ministerstvo spravedlnosti USA oznámilo zmrazení více než 2,7 miliardy dolarů z dřívější 6,4miliardové krádeže na burze Binance.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Útočníci ze skupiny BlueNoroff kombinovali účetní impersonaci s technikou ClickFix. Přes kompromitované účty na zprávových platformách pozvali cíl do videohovoru. V prostředí videohovoru pustili předtočené deepfake video známého kolegy. Následně vyvolali v aplikaci (nebo v prohlížeči) vizuální chybové okno a instruovali oběť, aby problém vyřešila vkládáním příkazů do terminálu nebo spuštěním škodlivého skriptu (ClickFix). Tento skript nainstaloval Infostealer malware nastavený na exfiltraci kryptoměnových privátních klíčů, tokenů relací (session tokens) a přihlašovacích údajů k vývojářským účtům npm / Rust crate.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Nikdy nespouštějte příkazy ani skripty nabízené během videohovorů jako &#x27;opravu&#x27; technických problémů.</li><li>Připojujte se k videokonferencím výhradně přes oficiální klientské aplikace za použití ověřených pozvánek.</li><li>Při podezřelých výzvách ověřte identitu volajícího jiným komunikačním kanálem.</li><li>Udržujte webkameru vypnutou, pokud není explicitně vyžadována.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1566.003</code></li><li><code>T1204.002</code></li><li><code>T1539</code></li><li><code>T1056.001</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (18 měsíců trvající kampaň se škodami přes 400 mil. USD a 677 cíli v 58 zemích), +2 Dopad na enterprise software / dodavatelský řetězec (umožnila kompromitaci správců balíčků v ekosystémech npm a Rust), +1 Lateral Movement a Privilege Escalation (krádeže přihlašovacích údajů, videí a kontaktů k dalšímu šíření v organizacích).</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>APT:</strong> Advanced Persistent Threat – pokročilá trvalá hrozba, obvykle státem sponzorovaná hackerská skupina provádějící dlouhodobé cílené útoky.</div><div class='glossary-item'><strong>Deepfake:</strong> Syntetická média (video či zvuk) vytvořená pomocí umělé inteligence k přesvědčivému napodobení vzhledu a hlasu reálné osoby.</div><div class='glossary-item'><strong>ClickFix:</strong> Technika sociálního inženýrství, při níž je oběť přiměněna k ručnímu zkopírování a spuštění škodlivého kódu pod záminkou opravy chybového hlášení.</div><div class='glossary-item'><strong>Infostealer:</strong> Typ škodlivého softwaru specializovaný na sběr a odcizení citlivých dat, jako jsou hesla, tokeny relací a kryptoměnové peněženky.</div><div class='glossary-item'><strong>npm:</strong> Správce balíčků pro JavaScriptové běhové prostředí Node.js.</div><div class='glossary-item'><strong>Crate:</strong> Softwarový balíček v ekosystému programovacího jazyka Rust.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/us-disrupts-north-korean-campaign-behind-400-million-crypto-theft/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/sansar-linux-cryptomining-malware-uses.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>
