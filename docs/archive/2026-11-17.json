@@ -1,0 +1,120 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v ScreenConnect zneužívána k šíření SCKit malwaru",
+      "kategorie": "malware",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (pro neaktualizované systémy)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-84869"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/connectwise-warns-screenconnect-attacks.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci zneužívají kritickou zranitelnost v nástroji ScreenConnect k instalaci malwaru SCKit, který umožňuje vzdálené ovládání a šíření v síti.",
+        "cil": "Enterprise systémy pro vzdálenou správu (RMM) ScreenConnect.",
+        "dopad_laici": "Útočníci mohou převzít kontrolu nad počítači, které používají technici pro vzdálenou podporu. Pokud používáte tento software, okamžitě jej aktualizujte na verzi 26.6.5 nebo novější."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost ConnectWise dokončila vyšetřování neoprávněných přístupů do prostředí ScreenConnect a doporučuje uživatelům aktualizaci na verzi 26.6.5. Útočníci zneužívají zranitelnost CVE-2026-84869 (CVSS 9.9), která umožňuje přenos a spuštění souborů bez autorizace. Útoky využívají toolkit SCKit, který se šíří jako červ z infikovaných zařízení na pracovní stanice techniků. Malware využívá modul RelayTrap.cs pro laterální pohyb v síti. ConnectWise preventivně zakázala pět rizikových rozšíření třetích stran.",
+        "jak_to_funguje": "Zranitelnost umožňuje obejití autentizačních kontrol v RMM+ verzích 1.0.31 a 1.0.32. Útočník využije chybu v přenosu souborů k injektáži kódu do paměti procesu technika, čímž získá oprávnění SYSTEM a možnost instalovat perzistentní backdoor (např. maskovaný jako Windows Update Agent).",
+        "mitre": [
+          "T1068",
+          "T1210",
+          "T1547"
+        ],
+        "mitigace": [
+          "Aktualizace ScreenConnect na verzi 26.6.5+",
+          "Zakázání rizikových rozšíření (Labtech Plus, RMM Plus atd.)",
+          "Revize logů na přítomnost procesu UpdateConnect.ClientService.exe"
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RMM",
+          "vysvetleni": "Remote Monitoring and Management – nástroje pro vzdálenou správu a monitoring IT infrastruktury."
+        },
+        {
+          "pojem": "SCKit",
+          "vysvetleni": "Toolkit používaný útočníky pro automatizované šíření malwaru v rámci kompromitovaných RMM sítí."
+        },
+        {
+          "pojem": "CVSS",
+          "vysvetleni": "Common Vulnerability Scoring System – standard pro hodnocení závažnosti zranitelností."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Masivní zneužití zranitelností v N-central k těžbě kryptoměn",
+      "kategorie": "malware",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Privilege Escalation, +1 Chybí patch (pro neaktualizované systémy)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-129271",
+        "CVE-2026-129272",
+        "CVE-2026-129273",
+        "CVE-2026-129274",
+        "CVE-2026-129275",
+        "CVE-2026-129276",
+        "CVE-2026-129277",
+        "CVE-2026-129278",
+        "CVE-2026-129279",
+        "CVE-2026-129280",
+        "CVE-2026-129281",
+        "CVE-2026-129282",
+        "CVE-2026-129283",
+        "CVE-2026-129284",
+        "CVE-2026-129285",
+        "CVE-2026-129286",
+        "CVE-2026-129287"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/n-able-patches-17-n-central-flaws-as.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci zneužívají řadu zranitelností v platformě N-central k získání SYSTEM oprávnění a instalaci těžařů kryptoměn.",
+        "cil": "N-able N-central (RMM/UEM platforma).",
+        "dopad_laici": "Pokud vaše firma používá N-central, servery mohou být zneužity k nelegální těžbě kryptoměn, což zpomaluje systémy a ohrožuje bezpečnost dat. Je nutná okamžitá aktualizace."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost N-able vydala kritickou aktualizaci N-central 2026.4 Hotfix 3, která opravuje 17 zranitelností. Tyto chyby umožňují útočníkům obejít autentizaci, provádět path traversal, injektovat XML entity a získat SYSTEM oprávnění. Útočníci aktivně zneužívají tyto vektory (označované jako 4EverAble2Shell a Agent2Shell) k nasazení těžařů kryptoměn. Aktualizace zcela odstraňuje podporu pro legacy API, která byla hlavním vektorem útoku.",
+        "jak_to_funguje": "Zranitelnosti umožňují řetězení útoků od neautentizovaného přístupu přes API až po RCE (Remote Code Execution) pod účtem SYSTEM. Útočníci využívají chyby v parsování XML a nedostatečnou validaci vstupů v serverových komponentách k eskalaci privilegií.",
+        "mitre": [
+          "T1068",
+          "T1496",
+          "T1190"
+        ],
+        "mitigace": [
+          "Upgrade na N-central 2026.4 Hotfix 3",
+          "Aktualizace všech Agentů a Prob",
+          "Odstranění legacy API konfigurací"
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému."
+        },
+        {
+          "pojem": "Path Traversal",
+          "vysvetleni": "Zranitelnost umožňující přístup k souborům mimo zamýšlený adresářový strom."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
