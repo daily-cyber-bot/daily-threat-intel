@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 17.11.2026</title>
+    <title>Threat Intel Svodka | 18.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +58,7 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">17.11.2026 • 2 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">18.11.2026 • 2 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -68,15 +68,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">MALWARE</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-84869" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-84869</a></div>
-                    <h2>#1 Kritická zranitelnost v ScreenConnect zneužívána k šíření SCKit malwaru</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129448" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129448</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-34197" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-34197</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-82384" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-82384</a></div>
+                    <h2>#1 Kritická zranitelnost v Apache Roller zneužívaná k RCE</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Enterprise systémy pro vzdálenou správu (RMM) ScreenConnect.</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci zneužívají kritickou zranitelnost v nástroji ScreenConnect k instalaci malwaru SCKit, který umožňuje vzdálené ovládání a šíření v síti.</p>
+                <p><strong>🎯 Cíl:</strong> Apache Roller (Java-based group-blogging server).</p>
+                <p><strong>⚡ Podstata:</strong> Zranitelnost v Apache Roller umožňuje neautentizovaným útočníkům vzdálené spuštění kódu (RCE) prostřednictvím deserializace nedůvěryhodných dat v XML-RPC endpointu.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou převzít kontrolu nad počítači, které používají technici pro vzdálenou podporu. Pokud používáte tento software, okamžitě jej aktualizujte na verzi 26.6.5 nebo novější.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou převzít kontrolu nad serverem, pokud používáte starší verzi tohoto softwaru. Je nutné okamžitě aktualizovat na verzi 6.1.6 nebo vyšší.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,20 +84,24 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost ConnectWise dokončila vyšetřování neoprávněných přístupů do prostředí ScreenConnect a doporučuje uživatelům aktualizaci na verzi 26.6.5. Útočníci zneužívají zranitelnost CVE-2026-84869 (CVSS 9.9), která umožňuje přenos a spuštění souborů bez autorizace. Útoky využívají toolkit SCKit, který se šíří jako červ z infikovaných zařízení na pracovní stanice techniků. Malware využívá modul RelayTrap.cs pro laterální pohyb v síti. ConnectWise preventivně zakázala pět rizikových rozšíření třetích stran.</p>
+                        <p class="long-text">Apache vydal bezpečnostní aktualizace pro kritickou chybu v Rolleru, kterou útočníci zneužívají k získání kontroly nad servery. Apache Roller je open-source blogovací server založený na Javě. Chyba (CVE-2026-129448) je aktivně zneužívána v reálném světě.
+
+Deserializace nedůvěryhodných dat ve verzích 4.0.0 až 6.1.4 umožňuje neautentizovanému útočníkovi spustit libovolný kód. XML-RPC endpoint přijímá typy rozšíření dodavatele a deserializuje je před autentizací požadavku. Jedná se o stejnou zranitelnost jako CVE-2026-82384, která se dříve týkala pouze verze 6.1.5.
+
+Uživatelé by měli okamžitě upgradovat na Apache Roller 6.1.6 nebo novější, který zakazuje typy rozšíření a odmítá škodlivé XML-RPC požadavky po vypnutí této funkce. Administrátoři, kteří nemohou okamžitě upgradovat, mohou dočasně zmírnit riziko nastavením &#x27;enabledForExtensions&#x27; na &#x27;false&#x27; v souboru WEB-INF/web.xml a odstraněním mapování servletu &#x27;/roller-services/xmlrpc&#x27;.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost umožňuje obejití autentizačních kontrol v RMM+ verzích 1.0.31 a 1.0.32. Útočník využije chybu v přenosu souborů k injektáži kódu do paměti procesu technika, čímž získá oprávnění SYSTEM a možnost instalovat perzistentní backdoor (např. maskovaný jako Windows Update Agent).</p>
+                        <p>Zranitelnost spočívá v nebezpečné deserializaci objektů z XML-RPC požadavků. Útočník pošle speciálně vytvořený XML-RPC požadavek, který obsahuje serializovaný Java objekt. Aplikace tento objekt deserializuje předtím, než ověří identitu odesílatele, což vede k RCE v kontextu běžícího procesu.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizace ScreenConnect na verzi 26.6.5+</li><li>Zakázání rizikových rozšíření (Labtech Plus, RMM Plus atd.)</li><li>Revize logů na přítomnost procesu UpdateConnect.ClientService.exe</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1068</code></li><li><code>T1210</code></li><li><code>T1547</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (pro neaktualizované systémy)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Upgrade na Apache Roller 6.1.6+</li><li>Nastavení enabledForExtensions na false v WEB-INF/web.xml</li><li>Odstranění mapování servletu /roller-services/xmlrpc</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1203</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation/Lateral Movement, +1 Chybí patch (pro starší verze)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RMM:</strong> Remote Monitoring and Management – nástroje pro vzdálenou správu a monitoring IT infrastruktury.</div><div class='glossary-item'><strong>SCKit:</strong> Toolkit používaný útočníky pro automatizované šíření malwaru v rámci kompromitovaných RMM sítí.</div><div class='glossary-item'><strong>CVSS:</strong> Common Vulnerability Scoring System – standard pro hodnocení závažnosti zranitelností.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Deserializace:</strong> Proces převodu datového formátu (např. XML nebo binární stream) zpět na objekt v paměti aplikace. Pokud není vstup validován, může vést k RCE.</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka spustit libovolný kód na cílovém systému na dálku.</div><div class='glossary-item'><strong>XML-RPC:</strong> Protokol pro vzdálené volání procedur, který používá XML k přenosu dat a HTTP jako transportní vrstvu.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/connectwise-warns-screenconnect-attacks.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
         </article>
         
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -107,15 +111,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">MALWARE</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129271" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129271</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129272" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129272</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129273" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129273</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129274" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129274</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129275" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129275</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129276" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129276</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129277" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129277</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129278" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129278</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129279" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129279</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129280" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129280</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129281" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129281</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129282" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129282</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129283" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129283</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129284" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129284</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129285" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129285</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129286" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129286</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129287" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129287</a></div>
-                    <h2>#2 Masivní zneužití zranitelností v N-central k těžbě kryptoměn</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114938" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114938</a></div>
+                    <h2>#2 Kritická zranitelnost Java4Shell v OpenJDK umožňuje RCE</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> N-able N-central (RMM/UEM platforma).</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci zneužívají řadu zranitelností v platformě N-central k získání SYSTEM oprávnění a instalaci těžařů kryptoměn.</p>
+                <p><strong>🎯 Cíl:</strong> OpenJDK 17.0.6+ a aplikace jako Jenkins, Jira, Confluence, Keycloak.</p>
+                <p><strong>⚡ Podstata:</strong> Zranitelnost v Base64 dekodéru OpenJDK umožňuje útočníkům poškození paměti a potenciální vzdálené spuštění kódu (RCE) v mnoha enterprise aplikacích.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Pokud vaše firma používá N-central, servery mohou být zneužity k nelegální těžbě kryptoměn, což zpomaluje systémy a ohrožuje bezpečnost dat. Je nutná okamžitá aktualizace.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Chyba v základní součásti mnoha firemních systémů. Pokud provozujete servery s Javou, je nutné prověřit verzi a aplikovat záplaty od dodavatele.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -123,20 +127,24 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost N-able vydala kritickou aktualizaci N-central 2026.4 Hotfix 3, která opravuje 17 zranitelností. Tyto chyby umožňují útočníkům obejít autentizaci, provádět path traversal, injektovat XML entity a získat SYSTEM oprávnění. Útočníci aktivně zneužívají tyto vektory (označované jako 4EverAble2Shell a Agent2Shell) k nasazení těžařů kryptoměn. Aktualizace zcela odstraňuje podporu pro legacy API, která byla hlavním vektorem útoku.</p>
+                        <p class="long-text">Kritická zranitelnost Java4Shell v OpenJDK umožňuje neautentizovaným útočníkům vzdáleně spustit kód v enterprise aplikacích jako Jenkins, Jira, Confluence a Keycloak. Chyba (CVE-2026-114938) je způsobena poškozením paměti v hardwarově akcelerované funkci pro dekódování Base64.
+
+Zranitelnost se týká OpenJDK 17.0.6 a novějších verzí na procesorech x86-64 s podporou instrukcí AVX-512. Speciálně vytvořená data Base64 mohou způsobit přepsání částí paměti Javy, což vede k úniku informací nebo RCE. Výzkumníci z Calif zjistili, že k vyvolání chyby stačí 64 znaků &#x27;A&#x27; následovaných rovnítkem.
+
+Oracle vydal záplaty 17. listopadu. Dočasnou mitigací je spuštění OpenJDK s parametrem -XX:-UseBASE64Intrinsics nebo -XX:UseAVX=2 pro zakázání AVX-512 instrukcí.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnosti umožňují řetězení útoků od neautentizovaného přístupu přes API až po RCE (Remote Code Execution) pod účtem SYSTEM. Útočníci využívají chyby v parsování XML a nedostatečnou validaci vstupů v serverových komponentách k eskalaci privilegií.</p>
+                        <p>Chyba je v implementaci Base64 dekodéru, který využívá AVX-512 instrukce pro zrychlení. Při zpracování malformovaného Base64 řetězce dochází k zápisu mimo vyhrazenou paměť (out-of-bounds write), což umožňuje útočníkovi ovlivnit sousední objekty v paměti JVM.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Upgrade na N-central 2026.4 Hotfix 3</li><li>Aktualizace všech Agentů a Prob</li><li>Odstranění legacy API konfigurací</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1068</code></li><li><code>T1496</code></li><li><code>T1190</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Privilege Escalation, +1 Chybí patch (pro neaktualizované systémy)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizace OpenJDK na opravenou verzi</li><li>Použití parametru -XX:-UseBASE64Intrinsics</li><li>Použití parametru -XX:UseAVX=2</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1210</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (pro některé distribuce), +2 Dopad na kritickou infrastrukturu</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém systému.</div><div class='glossary-item'><strong>Path Traversal:</strong> Zranitelnost umožňující přístup k souborům mimo zamýšlený adresářový strom.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Base64:</strong> Metoda kódování binárních dat do textového formátu pomocí 64 znaků.</div><div class='glossary-item'><strong>JVM:</strong> Java Virtual Machine – prostředí, ve kterém běží programy napsané v jazyce Java.</div><div class='glossary-item'><strong>AVX-512:</strong> Sada instrukcí pro procesory Intel/AMD umožňující paralelní zpracování dat (SIMD).</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/n-able-patches-17-n-central-flaws-as.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>

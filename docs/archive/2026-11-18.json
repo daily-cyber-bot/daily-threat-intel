@@ -1,0 +1,112 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v Apache Roller zneužívaná k RCE",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation/Lateral Movement, +1 Chybí patch (pro starší verze)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-129448",
+        "CVE-2026-34197",
+        "CVE-2026-82384"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost v Apache Roller umožňuje neautentizovaným útočníkům vzdálené spuštění kódu (RCE) prostřednictvím deserializace nedůvěryhodných dat v XML-RPC endpointu.",
+        "cil": "Apache Roller (Java-based group-blogging server).",
+        "dopad_laici": "Útočníci mohou převzít kontrolu nad serverem, pokud používáte starší verzi tohoto softwaru. Je nutné okamžitě aktualizovat na verzi 6.1.6 nebo vyšší."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Apache vydal bezpečnostní aktualizace pro kritickou chybu v Rolleru, kterou útočníci zneužívají k získání kontroly nad servery. Apache Roller je open-source blogovací server založený na Javě. Chyba (CVE-2026-129448) je aktivně zneužívána v reálném světě.\n\nDeserializace nedůvěryhodných dat ve verzích 4.0.0 až 6.1.4 umožňuje neautentizovanému útočníkovi spustit libovolný kód. XML-RPC endpoint přijímá typy rozšíření dodavatele a deserializuje je před autentizací požadavku. Jedná se o stejnou zranitelnost jako CVE-2026-82384, která se dříve týkala pouze verze 6.1.5.\n\nUživatelé by měli okamžitě upgradovat na Apache Roller 6.1.6 nebo novější, který zakazuje typy rozšíření a odmítá škodlivé XML-RPC požadavky po vypnutí této funkce. Administrátoři, kteří nemohou okamžitě upgradovat, mohou dočasně zmírnit riziko nastavením 'enabledForExtensions' na 'false' v souboru WEB-INF/web.xml a odstraněním mapování servletu '/roller-services/xmlrpc'.",
+        "jak_to_funguje": "Zranitelnost spočívá v nebezpečné deserializaci objektů z XML-RPC požadavků. Útočník pošle speciálně vytvořený XML-RPC požadavek, který obsahuje serializovaný Java objekt. Aplikace tento objekt deserializuje předtím, než ověří identitu odesílatele, což vede k RCE v kontextu běžícího procesu.",
+        "mitre": [
+          "T1190",
+          "T1203"
+        ],
+        "mitigace": [
+          "Upgrade na Apache Roller 6.1.6+",
+          "Nastavení enabledForExtensions na false v WEB-INF/web.xml",
+          "Odstranění mapování servletu /roller-services/xmlrpc"
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Deserializace",
+          "vysvetleni": "Proces převodu datového formátu (např. XML nebo binární stream) zpět na objekt v paměti aplikace. Pokud není vstup validován, může vést k RCE."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka spustit libovolný kód na cílovém systému na dálku."
+        },
+        {
+          "pojem": "XML-RPC",
+          "vysvetleni": "Protokol pro vzdálené volání procedur, který používá XML k přenosu dat a HTTP jako transportní vrstvu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Kritická zranitelnost Java4Shell v OpenJDK umožňuje RCE",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (pro některé distribuce), +2 Dopad na kritickou infrastrukturu",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-114938"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zranitelnost v Base64 dekodéru OpenJDK umožňuje útočníkům poškození paměti a potenciální vzdálené spuštění kódu (RCE) v mnoha enterprise aplikacích.",
+        "cil": "OpenJDK 17.0.6+ a aplikace jako Jenkins, Jira, Confluence, Keycloak.",
+        "dopad_laici": "Chyba v základní součásti mnoha firemních systémů. Pokud provozujete servery s Javou, je nutné prověřit verzi a aplikovat záplaty od dodavatele."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Kritická zranitelnost Java4Shell v OpenJDK umožňuje neautentizovaným útočníkům vzdáleně spustit kód v enterprise aplikacích jako Jenkins, Jira, Confluence a Keycloak. Chyba (CVE-2026-114938) je způsobena poškozením paměti v hardwarově akcelerované funkci pro dekódování Base64.\n\nZranitelnost se týká OpenJDK 17.0.6 a novějších verzí na procesorech x86-64 s podporou instrukcí AVX-512. Speciálně vytvořená data Base64 mohou způsobit přepsání částí paměti Javy, což vede k úniku informací nebo RCE. Výzkumníci z Calif zjistili, že k vyvolání chyby stačí 64 znaků 'A' následovaných rovnítkem.\n\nOracle vydal záplaty 17. listopadu. Dočasnou mitigací je spuštění OpenJDK s parametrem -XX:-UseBASE64Intrinsics nebo -XX:UseAVX=2 pro zakázání AVX-512 instrukcí.",
+        "jak_to_funguje": "Chyba je v implementaci Base64 dekodéru, který využívá AVX-512 instrukce pro zrychlení. Při zpracování malformovaného Base64 řetězce dochází k zápisu mimo vyhrazenou paměť (out-of-bounds write), což umožňuje útočníkovi ovlivnit sousední objekty v paměti JVM.",
+        "mitre": [
+          "T1190",
+          "T1210"
+        ],
+        "mitigace": [
+          "Aktualizace OpenJDK na opravenou verzi",
+          "Použití parametru -XX:-UseBASE64Intrinsics",
+          "Použití parametru -XX:UseAVX=2"
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Base64",
+          "vysvetleni": "Metoda kódování binárních dat do textového formátu pomocí 64 znaků."
+        },
+        {
+          "pojem": "JVM",
+          "vysvetleni": "Java Virtual Machine – prostředí, ve kterém běží programy napsané v jazyce Java."
+        },
+        {
+          "pojem": "AVX-512",
+          "vysvetleni": "Sada instrukcí pro procesory Intel/AMD umožňující paralelní zpracování dat (SIMD)."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
