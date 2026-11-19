@@ -1,0 +1,57 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická deserializační zranitelnost v Apache Roller umožňuje RCE bez autentizace",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 10,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-129448",
+        "CVE-2026-34197",
+        "CVE-2026-82384"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Neznámí útočníci aktivně zneužívají kritickou zranitelnost v open-source blogovacím serveru Apache Roller, která umožňuje vzdálené spuštění kódu bez nutnosti přihlášení.",
+        "cil": "Podnikové servery využívající platformu Apache Roller ve verzích 4.0.0 až 6.1.4.",
+        "dopad_laici": "Útočníci mohou zcela převzít kontrolu nad firemními webovými servery a krasst či odcizit citlivá data. Administrátoři musí okamžitě aktualizovat software."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "A critical security flaw in Apache Roller, an open-source, Java-based blogging platform, has come under active exploitation in the wild, according to the Apache Software Foundation (ASF). The vulnerability, tracked as CVE-2026-129448 (CVSS score: 9.8), is a case of unauthenticated deserialization in the XML-RPC endpoint that could lead to remote code execution. Deserialization of Untrusted Data in Apache Roller versions 4.0.0 through 6.1.4 allows an unauthenticated remote attacker to execute arbitrary code, project maintainers said. The XML-RPC endpoint accepts vendor extension types and deserializes them before authenticating the requester.\n\nASF also noted that the vulnerability is the same as CVE-2026-82384 (CVSS score: 9.8), which was patched in September 2026 and listed only Apache Roller 6.1.5 as affected. This issue is being actively exploited, it added. ASF did not share any details on how the vulnerability is being exploited, or who is being targeted as part of these efforts. A security researcher named n0mi1k has been credited with finding the flaw, and Matt Raible has been acknowledged for reporting it.\n\nUsers are advised to upgrade to Apache Roller 6.1.6 or later, which disables the extension types and rejects XML-RPC requests when the XML-RPC feature is disabled. If immediate patching is not an option, it's recommended to set 'enabledForExtensions' to 'false' in WEB-INF/web.xml, or remove the '/roller-services/xmlrpc' servlet mapping, and then restart Roller. Disabling XML-RPC in the administration UI is not enough, because older versions deserialize the request before checking that setting, ASF noted.",
+        "jak_to_funguje": "Zranitelnost spočívá v nesprávném ošetření deserializace nedůvěryhodných dat v XML-RPC koncovém bodě. Endpoint přijímá typy rozšíření dodavatele a deserializuje je ještě před ověřením totožnosti odesílatele (autentizací). To umožňuje útočníkovi odeslat speciálně crafted XML-RPC požadavek obsahující škodlivý objekt, jehož zpracováním v paměti Javy dojít k RCE s oprávněními aplikačního serveru.",
+        "mitre": [
+          "T1190",
+          "T1210"
+        ],
+        "mitigace": [
+          "Upgrade na Apache Roller 6.1.6 nebo novější",
+          "Nastavení parametrů 'enabledForExtensions' na 'false' v souboru WEB-INF/web.xml",
+          "Odstranění servlet mappingu '/roller-services/xmlrpc'"
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Deserialization",
+          "vysvetleni": "Proces převodu serializovaných dat (např. bajtového streamu) zpět do strukturovaných objektů v paměti aplikace."
+        },
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution - schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému."
+        },
+        {
+          "pojem": "XML-RPC",
+          "vysvetleni": "Protokol pro vzdálené volání procedur využívající XML pro přenos dat a HTTP jako transportní protokol."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}

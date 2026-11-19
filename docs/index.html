@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 18.11.2026</title>
+    <title>Threat Intel Svodka | 19.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +58,7 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">18.11.2026 • 2 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">19.11.2026 • 1 hrozeb</span>
         </header>
         <main>
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
@@ -69,14 +69,14 @@
                 </div>
                 <div class="title-box">
                     <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129448" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129448</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-34197" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-34197</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-82384" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-82384</a></div>
-                    <h2>#1 Kritická zranitelnost v Apache Roller zneužívaná k RCE</h2>
+                    <h2>#1 Kritická deserializační zranitelnost v Apache Roller umožňuje RCE bez autentizace</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Apache Roller (Java-based group-blogging server).</p>
-                <p><strong>⚡ Podstata:</strong> Zranitelnost v Apache Roller umožňuje neautentizovaným útočníkům vzdálené spuštění kódu (RCE) prostřednictvím deserializace nedůvěryhodných dat v XML-RPC endpointu.</p>
+                <p><strong>🎯 Cíl:</strong> Podnikové servery využívající platformu Apache Roller ve verzích 4.0.0 až 6.1.4.</p>
+                <p><strong>⚡ Podstata:</strong> Neznámí útočníci aktivně zneužívají kritickou zranitelnost v open-source blogovacím serveru Apache Roller, která umožňuje vzdálené spuštění kódu bez nutnosti přihlášení.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou převzít kontrolu nad serverem, pokud používáte starší verzi tohoto softwaru. Je nutné okamžitě aktualizovat na verzi 6.1.6 nebo vyšší.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou zcela převzít kontrolu nad firemními webovými servery a krasst či odcizit citlivá data. Administrátoři musí okamžitě aktualizovat software.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,67 +84,24 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Apache vydal bezpečnostní aktualizace pro kritickou chybu v Rolleru, kterou útočníci zneužívají k získání kontroly nad servery. Apache Roller je open-source blogovací server založený na Javě. Chyba (CVE-2026-129448) je aktivně zneužívána v reálném světě.
+                        <p class="long-text">A critical security flaw in Apache Roller, an open-source, Java-based blogging platform, has come under active exploitation in the wild, according to the Apache Software Foundation (ASF). The vulnerability, tracked as CVE-2026-129448 (CVSS score: 9.8), is a case of unauthenticated deserialization in the XML-RPC endpoint that could lead to remote code execution. Deserialization of Untrusted Data in Apache Roller versions 4.0.0 through 6.1.4 allows an unauthenticated remote attacker to execute arbitrary code, project maintainers said. The XML-RPC endpoint accepts vendor extension types and deserializes them before authenticating the requester.
 
-Deserializace nedůvěryhodných dat ve verzích 4.0.0 až 6.1.4 umožňuje neautentizovanému útočníkovi spustit libovolný kód. XML-RPC endpoint přijímá typy rozšíření dodavatele a deserializuje je před autentizací požadavku. Jedná se o stejnou zranitelnost jako CVE-2026-82384, která se dříve týkala pouze verze 6.1.5.
+ASF also noted that the vulnerability is the same as CVE-2026-82384 (CVSS score: 9.8), which was patched in September 2026 and listed only Apache Roller 6.1.5 as affected. This issue is being actively exploited, it added. ASF did not share any details on how the vulnerability is being exploited, or who is being targeted as part of these efforts. A security researcher named n0mi1k has been credited with finding the flaw, and Matt Raible has been acknowledged for reporting it.
 
-Uživatelé by měli okamžitě upgradovat na Apache Roller 6.1.6 nebo novější, který zakazuje typy rozšíření a odmítá škodlivé XML-RPC požadavky po vypnutí této funkce. Administrátoři, kteří nemohou okamžitě upgradovat, mohou dočasně zmírnit riziko nastavením &#x27;enabledForExtensions&#x27; na &#x27;false&#x27; v souboru WEB-INF/web.xml a odstraněním mapování servletu &#x27;/roller-services/xmlrpc&#x27;.</p>
+Users are advised to upgrade to Apache Roller 6.1.6 or later, which disables the extension types and rejects XML-RPC requests when the XML-RPC feature is disabled. If immediate patching is not an option, it&#x27;s recommended to set &#x27;enabledForExtensions&#x27; to &#x27;false&#x27; in WEB-INF/web.xml, or remove the &#x27;/roller-services/xmlrpc&#x27; servlet mapping, and then restart Roller. Disabling XML-RPC in the administration UI is not enough, because older versions deserialize the request before checking that setting, ASF noted.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost spočívá v nebezpečné deserializaci objektů z XML-RPC požadavků. Útočník pošle speciálně vytvořený XML-RPC požadavek, který obsahuje serializovaný Java objekt. Aplikace tento objekt deserializuje předtím, než ověří identitu odesílatele, což vede k RCE v kontextu běžícího procesu.</p>
+                        <p>Zranitelnost spočívá v nesprávném ošetření deserializace nedůvěryhodných dat v XML-RPC koncovém bodě. Endpoint přijímá typy rozšíření dodavatele a deserializuje je ještě před ověřením totožnosti odesílatele (autentizací). To umožňuje útočníkovi odeslat speciálně crafted XML-RPC požadavek obsahující škodlivý objekt, jehož zpracováním v paměti Javy dojít k RCE s oprávněními aplikačního serveru.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Upgrade na Apache Roller 6.1.6+</li><li>Nastavení enabledForExtensions na false v WEB-INF/web.xml</li><li>Odstranění mapování servletu /roller-services/xmlrpc</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1203</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation/Lateral Movement, +1 Chybí patch (pro starší verze)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Upgrade na Apache Roller 6.1.6 nebo novější</li><li>Nastavení parametrů &#x27;enabledForExtensions&#x27; na &#x27;false&#x27; v souboru WEB-INF/web.xml</li><li>Odstranění servlet mappingu &#x27;/roller-services/xmlrpc&#x27;</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1210</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Deserializace:</strong> Proces převodu datového formátu (např. XML nebo binární stream) zpět na objekt v paměti aplikace. Pokud není vstup validován, může vést k RCE.</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka spustit libovolný kód na cílovém systému na dálku.</div><div class='glossary-item'><strong>XML-RPC:</strong> Protokol pro vzdálené volání procedur, který používá XML k přenosu dat a HTTP jako transportní vrstvu.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Deserialization:</strong> Proces převodu serializovaných dat (např. bajtového streamu) zpět do strukturovaných objektů v paměti aplikace.</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution - schopnost útočníka vzdáleně spouštět libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>XML-RPC:</strong> Protokol pro vzdálené volání procedur využívající XML pro přenos dat a HTTP jako transportní protokol.</div></div>
                 </div>
             </details>
             <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-critical" style="--sev-color: #ff3b30;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">9<small>/10</small></span>
-                    <span class="score-word">KRITICKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114938" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114938</a></div>
-                    <h2>#2 Kritická zranitelnost Java4Shell v OpenJDK umožňuje RCE</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> OpenJDK 17.0.6+ a aplikace jako Jenkins, Jira, Confluence, Keycloak.</p>
-                <p><strong>⚡ Podstata:</strong> Zranitelnost v Base64 dekodéru OpenJDK umožňuje útočníkům poškození paměti a potenciální vzdálené spuštění kódu (RCE) v mnoha enterprise aplikacích.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Chyba v základní součásti mnoha firemních systémů. Pokud provozujete servery s Javou, je nutné prověřit verzi a aplikovat záplaty od dodavatele.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Kritická zranitelnost Java4Shell v OpenJDK umožňuje neautentizovaným útočníkům vzdáleně spustit kód v enterprise aplikacích jako Jenkins, Jira, Confluence a Keycloak. Chyba (CVE-2026-114938) je způsobena poškozením paměti v hardwarově akcelerované funkci pro dekódování Base64.
-
-Zranitelnost se týká OpenJDK 17.0.6 a novějších verzí na procesorech x86-64 s podporou instrukcí AVX-512. Speciálně vytvořená data Base64 mohou způsobit přepsání částí paměti Javy, což vede k úniku informací nebo RCE. Výzkumníci z Calif zjistili, že k vyvolání chyby stačí 64 znaků &#x27;A&#x27; následovaných rovnítkem.
-
-Oracle vydal záplaty 17. listopadu. Dočasnou mitigací je spuštění OpenJDK s parametrem -XX:-UseBASE64Intrinsics nebo -XX:UseAVX=2 pro zakázání AVX-512 instrukcí.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba je v implementaci Base64 dekodéru, který využívá AVX-512 instrukce pro zrychlení. Při zpracování malformovaného Base64 řetězce dochází k zápisu mimo vyhrazenou paměť (out-of-bounds write), což umožňuje útočníkovi ovlivnit sousední objekty v paměti JVM.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizace OpenJDK na opravenou verzi</li><li>Použití parametru -XX:-UseBASE64Intrinsics</li><li>Použití parametru -XX:UseAVX=2</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1210</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch (pro některé distribuce), +2 Dopad na kritickou infrastrukturu</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Base64:</strong> Metoda kódování binárních dat do textového formátu pomocí 64 znaků.</div><div class='glossary-item'><strong>JVM:</strong> Java Virtual Machine – prostředí, ve kterém běží programy napsané v jazyce Java.</div><div class='glossary-item'><strong>AVX-512:</strong> Sada instrukcí pro procesory Intel/AMD umožňující paralelní zpracování dat (SIMD).</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>
