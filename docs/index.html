@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 20.11.2026</title>
+    <title>Threat Intel Svodka | 21.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,48 +58,9 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">20.11.2026 • 9 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">21.11.2026 • 2 hrozeb</span>
         </header>
         <main>
-        <article class="card sev-critical" style="--sev-color: #ff3b30;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">10<small>/10</small></span>
-                    <span class="score-word">KRITICKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123890" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123890</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123891" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123891</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123892" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123892</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123893" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123893</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123894" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123894</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-59309" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-59309</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-59310" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-59310</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-22457" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2025-22457</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-102764" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-102764</a></div>
-                    <h2>#1 Kritické zranitelnosti ve VMware vCenter Serveru zneužívané APT skupinou</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> VMware vCenter Server, VMware Cloud Foundation a související virtualizační infrastruktura podniků</p>
-                <p><strong>⚡ Podstata:</strong> Čínská kyberšpionážní skupina Armory Castle aktivně zneužívá zero-day chybu CVE-2026-123890 v platformě VMware vCenter Server pro obcházení autentizace a převzetí kontroly.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad podnikovými servery a virtuálními počítači, aniž by k tomu potřebovali heslo. Firmy musí okamžitě aktualizovat software podle pokynů výrobce.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Broadcom vydal bezpečnostní aktualizace k opravě kritické zranitelnosti spočívající v obcházení autentizace ve VMware vCenter Serveru, kterou hackeři spojovaní s Čínou zneužívají v zero-day útokech již od září 2026. Zranitelnost, označená jako CVE-2026-123890, postihuje službu VMware Directory Service (vmdird) v prostředí vCenter Serveru, který organizace využívají ke správě virtualizovaných prostředí. Podle společnosti Broadcom tato chyba umožňuje neautentizovanému útočníkovi s přístupem k síti obejít ověření a získat neoprávněný přístup. Úspěšné zneužití může vést k získání administrátorských oprávnění nad vCenterem a tím i plné kontrole nad všemi spravovanými virtuálními stroji. Broadcom vydal opravu 19. listopadu v rámci bulletinu VMSA-2026-0009, který řeší i další související nedostatky v SDDC Manageru a nástrojích VMware Tools pro Windows. Zranitelnost se týká verzí vCenteru, SDDC Manageru a VMware Tools před opravenými verzemi, a to jak při samostatném nasazení, tak v rámci řešení VMware Cloud Foundation, vSphere Foundation či Telco Cloud Platform. Výrobce klasifikuje tuto aktualizaci jako nouzovou a naléhavě doporučuje okamžitou instalaci. Podle zjištění bezpečnostních firem Mandiant a Google Threat Intelligence Group využívala zranitelnost skupina Armory Castle (dříve UNC5221) již začátkem září 2026. Útočníci k exploitu používali vlastní nástroj nazvaný BONESAW napsaný v jazyce Golang, který dokáže exfiltrovat databázi LMDB (data.mdb), zneužít službu SAML STS pro generování falešných tokenů a vytvořit nového administrátorského uživatele. Následně útočníci nasazovali nástroj SAWSNAKE pro provádění útoků typu Golden SAML, čímž obcházeli multifaktorové ověřování (MFA), a instalovali web shelly jako SLIMSAVAGE, CAGEMATCH, BEARBONES a LAZYBONES pro udržení trvalého přístupu a pohyb v síti.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba CVE-2026-123890 je zranitelnost odhalení klíče relace Secure Remote Password (SRP-6a) bez autentizace přes rozhraní DCE/RPC služby VMware Directory Service (vmdird). Útočník odešle crafted RPC požadavek, čímž obejde autentizaci a vytvoří platnou relaci s právy administrátora účtu administrator@vsphere.local. Následně zneužitím interních rozhraní a databáze LMDB dokáže manipulovat se SAML tokeny (Golden SAML) a kompletně ovládnout identitní a správcovskou vrstvu vCenteru.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Nainstalovat nejnovější kumulativní bezpečnostní aktualizace vydané společností Broadcom (např. vCenter 8.0 U3m, 9.0.2.0200, 9.1.1.0200).</li><li>Omezit síťový přístup k rozhraním vCenteru (porty 9080, 5480, 2012) pouze na nezbytné administrátorské stanice.</li><li>Zkontrolovat systémové logy a záznamy služby vmdird na přítomnost neobvyklých relací a nově vytvořených SSO administrátorských účtů.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1078</code></li><li><code>T1550.002</code></li><li><code>T1190</code></li><li><code>T1505.003</code></li><li><code>T1021.004</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Zero-day:</strong> Dosud nezveřejněná zranitelnost, na kterou v době útoku neexistuje oficiální záplata.</div><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution - vzdálené spuštění libovolného kódu útočníkem na napadeném systému.</div><div class='glossary-item'><strong>Webshell:</strong> Skript nahraný na webový server, který útočníkovi umožňuje vzdálenou administraci a ovládání systému přes webové rozhraní.</div><div class='glossary-item'><strong>Golden SAML:</strong> Pokročilá technika útoku, při které útočník padělá ověřovací tokeny SAML pomocí ukradených kryptografických klíčů, čímž získá trvalý přístup k aplikacím bez nutnosti znát heslo uživatele.</div><div class='glossary-item'><strong>Exfiltrace:</strong> Neoprávněné stažení a kopírování citlivých dat z napadeného systému ven do infrastruktury útočníka.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a> • <a href="https://thehackernews.com/2026/11/critical-vmware-vcenter-flaw-cvss-98.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
         <article class="card sev-critical" style="--sev-color: #ff3b30;">
             <header class="card-header">
                 <div class="score-box">
@@ -107,15 +68,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-121805" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-121805</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120292" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120292</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120285" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120285</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-116953" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-116953</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123637" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123637</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-126822" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-126822</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-94127" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-94127</a></div>
-                    <h2>#2 Kritické RCE zranitelnosti v konfiguračním rozhraní F5 BIG-IP</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-121805" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-121805</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120292" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120292</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120285" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120285</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-116953" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-116953</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123637" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123637</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-126822" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-126822</a></div>
+                    <h2>#1 Kritické zranitelnosti v F5 BIG-IP umožňují RCE a DoS</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> F5 BIG-IP Access Policy Manager a síťová zařízení v podnikovém sektoru</p>
-                <p><strong>⚡ Podstata:</strong> Společnost F5 vydala nouzové záplaty pro pět kritických zranitelností typu stack-based buffer overflow v produktech BIG-IP APM a iRules, které umožňují vzdálené spuštění kódu.</p>
+                <p><strong>🎯 Cíl:</strong> BIG-IP Access Policy Manager (APM) a iRules.</p>
+                <p><strong>⚡ Podstata:</strong> Společnost F5 vydala nouzové záplaty pro pět kritických zranitelností typu Buffer Overflow v produktech BIG-IP, které umožňují vzdálené spuštění kódu (RCE) nebo DoS útoky.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Neautentizovaní útočníci mohou přes internet způsobit pád síťových bran nebo na nich spustit škodlivý kód. Firmy využívající technologie F5 musí okamžitě aplikovat bezpečnostní hotfixy.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou převzít kontrolu nad síťovým zařízením vaší firmy nebo jej vyřadit z provozu. Správci IT musí okamžitě nainstalovat dostupné záplaty.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -123,17 +84,21 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Americká kyberbezpečnostní společnost F5 vydala varování a urgentní záplaty k pěti zranitelnostem v produktové řadě BIG-IP, které mohou útočníci zneužít k vyvolání odepření služby (DoS) nebo k vzdálenému spuštění kódu (RCE). Tyto nedostatky, evidované pod identifikačními kódy CVE-2026-121805, CVE-2026-120292, CVE-2026-120285, CVE-2026-116953 a CVE-2026-123637, spadají do kategorie přetečení paměťového zásobníku (stack-based buffer overflow) a postihují komponentu BIG-IP Access Policy Manager (APM) a programovací skriptovací modul BIG-IP iRules. Všechny zmíněné problémy mají kritickou závažnost a neautentizovaní útočníci je mohou zneužít k ukončení procesu Traffic Management Microkernel (TMM) a spuštění libovolného kódu. Společnost F5 rovněž uvolnila inženýrské hotfixy pro vysoce závažnou zranitelnost v APM SAML (CVE-2026-126822), která vzniká na základě podtečení celého čísla (integer underflow) a umožňuje DoS útoky. Podle vyjádření F5 se jedná výhradně o problém v datové rovině bez přímé expozice řídicí roviny (control plane). Vzhledem k tomu, že k těmto chybám neexistují nouzové mitigace v podobě náhradních konfigurací, je nutné neprodleně instalovat vydané out-of-band hotfixy. Bezpečnostní experti a sledovací systémy jako Shadowserver hlásí desítky tisíc exponovaných instancí BIG-IP APM v globálním měřítku. Útočníci a státní kybernetické skupiny v minulosti opakovaně zneužívali zranitelnosti v zařízeních F5 k pronikání do podnikových sítí, mapování infrastruktury a nasazování malwaru.</p>
+                        <p class="long-text">Společnost F5 varovala zákazníky, aby neprodleně opravili pět zranitelností v systému BIG-IP, které mohou útočníci zneužít k vyvolání DoS nebo k RCE. Zranitelnosti CVE-2026-121805, CVE-2026-120292, CVE-2026-120285, CVE-2026-116953 a CVE-2026-123637 jsou typu stack-based Buffer Overflow a postihují řešení BIG-IP Access Policy Manager (APM) a skriptovací funkci iRules.
+
+Tyto problémy jsou hodnoceny jako kritické a neautentizovaní útočníci je mohou zneužít k ukončení procesu Traffic Management Microkernel (TMM) a ke spuštění libovolného kódu. F5 rovněž vydala opravy pro zranitelnost CVE-2026-126822 v APM SAML, která vzniká v důsledku integer underflow a umožňuje DoS útoky.
+
+F5 uvedla, že se jedná o problém na datové rovině (data plane) a neexistují žádná jiná zmírňující opatření než instalace hotfixů. Podle monitoringu Shadowserver je online vystaveno přes 177 000 instancí BIG-IP. Ačkoliv F5 zatím neoznačila tyto konkrétní chyby jako aktivně zneužívané, historie útoků na F5 zařízení vyžaduje okamžitou reakci.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnosti typu stack-based buffer overflow v komponentě TMM (Traffic Management Microkernel) umožňují při zpracování speciálně upravených síťových paketů přepsat paměťový prostor zásobníku (stack). Útočník tímto způsobem může narušit tok programu, způsobit pád procesu TMM nebo v optimálním případě přesměrovat prováděný kód na vlastní instrukce a získat tak plnou kontrolu nad procesem s oprávněními jádra či příslušného daemona.</p>
+                        <p>Zranitelnosti typu stack-based Buffer Overflow umožňují přepsání paměti zásobníku (stack) nad rámec vyhrazeného bufferu, což vede k možnosti podvržení návratové adresy a následnému spuštění útočníkem dodaného kódu (RCE).</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě nainstalovat oficiální out-of-band hotfixy a aktualizace firmwaru BIG-IP vydané společností F5.</li><li>Prověřit síťové logy na podezřelou aktivitu a restarty procesu TMM.</li><li>Zkontrolovat přístupnost managementu a datových rozhraní zařízení z nedůvěryhodných sítí.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1499</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software a síťovou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation, +3 In the wild (historická a opakovaná zneužití F5 v enterprise segmentu)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitá instalace out-of-band hotfixů od výrobce.</li><li>Omezení přístupu k management rozhraní z nedůvěryhodných sítí.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1210</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Umožňuje RCE, +1 Chybí patch (v době zjištění), +3 Aktivní zneužívání v minulosti u podobných F5 zranitelností (v kontextu CISA KEV)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Stack-based buffer overflow:</strong> Přetečení vyrovnávací paměti v zásobníku, ke kterému dochází, když program zapisuje do paměti více dat, než kolik se jí pro tento účel alokovalo.</div><div class='glossary-item'><strong>Denial-of-Service (DoS):</strong> Útok, jehož cílem je vyřadit cílový systém, službu nebo síť z provozu.</div><div class='glossary-item'><strong>Hotfix:</strong> Rychlá softwarová oprava vydaná mimo běžný cyklus aktualizací za účelem řešení konkrétního kritického problému.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution - schopnost útočníka spustit libovolný kód na cílovém systému na dálku.</div><div class='glossary-item'><strong>Buffer Overflow:</strong> Chyba v paměti, kdy program zapíše více dat do bufferu, než je jeho kapacita, což může vést k narušení stability nebo spuštění kódu.</div><div class='glossary-item'><strong>DoS:</strong> Denial of Service - útok, jehož cílem je vyřadit službu nebo systém z provozu.</div></div>
                 </div>
             </details>
             <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/f5-releases-emergency-patches-for-critical-big-ip-rce-flaws/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
@@ -146,15 +111,15 @@
                     <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-132165" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-132165</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-132166" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-132166</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-9082" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-9082</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-118539" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-118539</a></div>
-                    <h2>#3 Kritická RCE zranitelnost CVE-2026-132165 v instalátoru redakčního systému Drupal</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123890" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123890</a></div>
+                    <h2>#2 Útočníci zneužívají kritickou zranitelnost VMware vCenter</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Webové aplikace a portály běžící na redakčním systému Drupal</p>
-                <p><strong>⚡ Podstata:</strong> V redakčním systému Drupal byla opravena kritická zranitelnost CVE-2026-132165 v souboru install.php, která neautentizovaným útočníkům umožňuje spustit reinstalaci webu a získat plnou kontrolu nad serverem.</p>
+                <p><strong>🎯 Cíl:</strong> VMware vCenter Server.</p>
+                <p><strong>⚡ Podstata:</strong> Čínská APT skupina Armory Castle zneužila zero-day zranitelnost v VMware vCenter k obcházení autentizace a získání plných administrátorských práv.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Neznámí útočníci mohou převzít kontrolu nad firemními weby a portály bez nutnosti přihlášení. Administrátoři musí okamžitě provést aktualizaci systému nebo zablokovat přístup k instalačnímu skriptu.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci získali plnou kontrolu nad virtualizační infrastrukturou, což jim umožnilo krást data a ovládat virtuální servery. Je nutná okamžitá aktualizace.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -162,254 +127,24 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Tým pro bezpečnost redakčního systému Drupal vydal opravy pro kritickou zranitelnost vzdáleného spuštění kódu (RCE), která může útočníkům umožnit kompletní převzetí raných webových stránek. CMS Drupal je široce využíván v korporátní sféře, státní správě, vzdělávacích institucích a velkých mediálních domech. Bezpečnostní chyba, evidovaná jako CVE-2026-132165, byla objevena nástrojem Anthropic OSS Scanner a umožňuje anonymním uživatelům provést vynucenou reinstalaci jádra Drupalu. Jádro Drupalu standardně obsahuje skript /core/install.php, který po dokončení instalace zůstává na serveru. Výchozí pravidla v souboru .htaccess tento skript neblokují, a zabezpečení tak závisí na správci serveru. Za určitých podmínek může útočník tento instalační nástroj zneužít k přepisu konfigurace nebo spuštění libovolného kódu, přičemž některé cesty útoku jsou zmírněny, pokud webový server nemá oprávnění k zápisu do souboru settings.php. Bezpečnostní tým naléhavě vyzval správce k okamžité aktualizaci na verze Drupal 10.6.22, 11.3.22 nebo 11.4.13, protože exploity se mohou objevit během několika hodin či dnů. Administrátoři, kteří nemohou provést okamžitý upgrade, by měli v konfiguraci webového serveru nebo pomocí .htaccess souboru zcela zablokovat přístup k /core/install.php. Současně byla opravena středně kritická řetězcová zranitelnost CVE-2026-132166 vyžadující administrátorská oprávnění.</p>
+                        <p class="long-text">Skupina Armory Castle (dříve UNC5221) zneužila zero-day zranitelnost CVE-2026-123890 v VMware vCenter Server. Jedná se o chybu obcházení autentizace v Directory Service (vmdird), která umožňuje útočníkovi vytvořit autentizovanou relaci s právy administrator@vsphere.local.
+
+Útočníci k útoku využili nástroj BONESAW napsaný v jazyce Golang. Po získání přístupu útočníci nasadili řadu malwaru, včetně web shellů SLIMSAVAGE a CAGEMATCH, a nástroj SAWSNAKE pro provádění Golden SAML útoků, které umožňují obejít vícefaktorové ověřování (MFA).
+
+Kampaň zahrnovala také zneužití zranitelnosti v BeyondTrust Remote Support (CVE-2026-102764) pro prvotní průnik a laterální pohyb v síti. CISA zařadila tuto zranitelnost do katalogu KEV a nařídila federálním agenturám její opravu.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba spočívá v tom, že výchozí instalační skript /core/install.php není po dokončení instalace automaticky odstraněn ani dostatečně zabezpečen proti opětovnému spuštění za specifických podmínek prostředí. Anonymní uživatel tak může skript vyvolat a odeslat parametry vedoucí k reinicializaci aplikace, což v důsledku vede k přepsání konfiguračních souborů a provedení RCE v kontextu webového serveru.</p>
+                        <p>Zranitelnost spočívá v obcházení autentizace v protokolu SRP-6a přes DCE/RPC, což útočníkovi umožní vytvořit legitimní administrátorskou relaci bez znalosti hesla.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat Drupal na verze 10.6.22, 11.3.22, 11.4.13 nebo novější.</li><li>Zablokovat přístup k souboru /core/install.php na úrovni webového serveru (Nginx/Apache) či v souboru .htaccess.</li><li>Zkontrolovat oprávnění souboru settings.php, aby jej webový server nemohl zapisovat.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1505</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (aktivní varování před rychlým vývojem exploitů), +2 Remote exploit bez autentizace, +2 Dopad na enterprise webové systémy, +1 Veřejný PoC exploit, +1 Chybí patch v dřívějších verzích</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizace VMware vCenter na verze obsahující opravu.</li><li>Audit logů na přítomnost neobvyklých administrátorských relací.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1078</code></li><li><code>T1550</code></li><li><code>T1021</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (potvrzeno CISA/Mandiant), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Umožňuje RCE/admin přístup, +1 Chybí patch (v době útoku)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>CMS:</strong> Content Management System - systém pro správu obsahu webových stránek.</div><div class='glossary-item'><strong>WAF:</strong> Web Application Firewall - bezpečnostní prvek filtrující a monitorující HTTP provoz směřující na webovou aplikaci.</div><div class='glossary-item'><strong>Deserializace:</strong> Proces převodu serializovaných dat zpět do podoby objektů v paměti aplikace; pokud je vstup nedůvěryhodný, může vést k RCE.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>APT:</strong> Advanced Persistent Threat - sofistikovaná skupina útočníků, často státně sponzorovaná, s dlouhodobým cílem.</div><div class='glossary-item'><strong>Golden SAML:</strong> Technika útoku, při které útočník získá privátní klíč pro podepisování SAML tokenů a může se vydávat za libovolného uživatele.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/drupal-patches-critical-installer-flaw.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129289" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129289</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-126714" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-126714</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-115560" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-115560</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129182" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129182</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129474" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129474</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129481" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129481</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129496" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129496</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129291" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129291</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109618" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109618</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-109619" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-109619</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-46300" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-46300</a></div>
-                    <h2>#4 Kritické zranitelnosti PHP a FPM umožňující vzdálené spuštění kódu</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Webové servery a aplikace postavené na programovacím jazyku PHP</p>
-                <p><strong>⚡ Podstata:</strong> Vývojáři jazyka PHP vydali bezpečnostní aktualizace pro 18 zranitelností včetně kritických chyb v PHP-FPM a správě relací, které mohou vést ke vzdálenému spuštění kódu.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Zranitelnosti v PHP mohou útočníkům umožnit ovládnutí webových stránek a serverů. Provozovatelé webů by měli co nejdříve aktualizovat PHP na nejnovější verze.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Tým vyvíjející PHP vydal nouzové bezpečnostní aktualizace pro celkem 18 zranitelností postihujících jádro PHP, správu relací (sessions), modul PHP-FPM a další komponenty. Aktualizace jsou dostupné pro verze PHP 8.5.13, 8.4.28, 8.3.37 a 8.2.36. Mezi nejzávažnější patří CVE-2026-129289, což je kritická zranitelnost typu HTTP request smuggling v PHP-FPM s CVSS skóre 9.2, která za určitých podmínek při opětovném využití připojení (connection reuse) umožňuje neautentizovaným útočníkům vzdáleně spouštět kód. Tento problém ovlivňuje specifické konfigurace webových serverů nginx, Apache, HAProxy a LSAPI, pokud využívají trvalá backendová připojení k PHP-FPM. Další významná zranitelnost, označená jako CVE-2026-126714 (známá též jako &#x27;phpAfterShell&#x27; s CVSS 9.2), představuje problém typu Time-of-check Time-of-use (TOCTOU) v souborovém handleru relací. Pokud dojde k přerušení zápisu do souboru relace (například během nahrávání souboru přes funkci upload progress), PHP může zanechat poškozený soubor relace, který je při dalším volání funkce session_start() načten jako deserializační primitivum, což v kombinaci s vhodným gadget chainem vede k RCE. Mezi další opravené chyby patří několik případů použití již uvolněné paměti (use-after-free) jako CVE-2026-129474, CVE-2026-129496 či CVE-2026-115560. Jako dočasnou mitigaci lze u upload progress nastavit session.upload_progress.enabled=0 nebo v PHP-FPM zakázat trvalá připojení.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost phpAfterShell (CVE-2026-126714) využívá anomálii při přerušeném zápisu dat relace na disk. Při souběžném zpracování požadavku s aktivním nahráváním souboru (upload progress) dojde k předčasnému ukončení zápisu a zanechání neúplných serializovaných dat v souboru relace. Následné čtení těchto dat funkcí session_start() interpretuje částečně přepsaný obsah jako objekty, což umožňuje spuštění kódu v kontextu PHP workeru.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat PHP na verze 8.5.13, 8.4.28, 8.3.37, 8.2.36 nebo novější.</li><li>Dočasně zakázat funkci upload progress nastavením session.upload_progress.enabled = 0 v souboru php.ini a restartovat PHP workery.</li><li>Vypnout trvalá backendová připojení mezi webovým serverem a PHP-FPM (např. vypnout fastcgi_keep_conn v Nginxu), pokud nelze okamžitě aplikovat patch.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1203</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise webové aplikace, +1 Veřejný PoC exploit, +1 Privilege Escalation, +1 Chybí patch u starších verzí</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>PHP-FPM:</strong> FastCGI Process Manager - alternativní implementace PHP FastCGI s užitečnými funkcemi pro zatížené weby.</div><div class='glossary-item'><strong>HTTP request smuggling:</strong> Technika útoku spočívající v odlišné interpretaci posloupnosti HTTP požadavků mezi předním proxy serverem a backendovým serverem.</div><div class='glossary-item'><strong>Use-after-free:</strong> Chyba správy paměti, kdy program nadále používá ukazatel na paměťové místo poté, co byla tato paměť uvolněna, což umožňuje její přepsání a spuštění kódu.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/php-security-updates-fix-18-flaws-including-critical-rce-bugs/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/phpaftershell-explained-how-hackers.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a> • <a href="https://thehackernews.com/2026/11/php-fixes-7-critical-flaws-including.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a> • <a href="https://thehackernews.com/2026/11/everything-is-web-application-including.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-132825" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-132825</a></div>
-                    <h2>#5 Kritické zranitelnosti v programovacím jazyku Ruby umožňující RCE v aplikacích Rails</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Aplikace postavené na jazyku Ruby a frameworku Ruby on Rails</p>
-                <p><strong>⚡ Podstata:</strong> V programovacím jazyku Ruby bylo opraveno sedm chyb v práci s pamětí a regulárními výrazy, přičemž kritická chyba CVE-2026-132825 (Ruby2Shell) umožňuje vzdálené spuštění kódu v aplikacích Ruby on Rails.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Chyba v základním běhovém prostředí jazyka Ruby může umožnit útočníkům převzít kontrolu nad webovými aplikacemi. Vývojáři musí okamžitě aktualizovat Ruby na opravené verze.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Projekt Ruby vydal opravy pro sedm zranitelností týkajících se bezpečnosti paměti v regulárních výrazech a kódu pro převod velikosti písmen řetězců (case-conversion). Pro pět z těchto chyb existují ověřené proof-of-concept exploity pro vzdálené spuštění kódu (RCE). Uvolněné opravené verze zahrnují Ruby 4.0.10, 3.4.13 a 3.3.14. Nejzávažnějším problémem je kritická chyba GHSA-34m4-m9fh-gqp5, nyní evidovaná jako CVE-2026-132825 (označovaná také jako Ruby2Shell). Jedná se o jednobajtové přetečení haldy (heap overflow) při změně velikosti písmen řetězce v jednobajtových kódováních, jako je ISO-8859-1 nebo Windows-1252. Nový výzkum ukazuje, že tuto zranitelnost lze dosáhnout přes síť bez autentizace ve výchozí konfiguraci frameworku Ruby on Rails a klasických aplikací Sinatra. Při zpracování standardního formulářového požadavku vrstva Rack provede převod velikosti písmen u vstupního pole, což vede k aktivaci chyby ještě před spuštěním vlastního kódu aplikace. Mezi další opravené nedostatky patří chyby typu double free a heap overflow při kompilaci speciálně upravených regulárních výrazů s průnikem tříd znaků (&amp;&amp;).</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba CVE-2026-132825 spočívá v chybčím výpočtu alokace paměti při konverzi velikosti znaků v určitých kódováních stránek, což vede k přetečení haldy (heap overflow) o jeden bajt. Zpracováním speciálně crafted HTTP požadavku přes aplikační vrstvu Rack v Rails dojde k přepsání sousedních paměťových struktur, což útočníkovi umožňuje zmanipulovat běhové prostředí a dosáhnout RCE.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizovat interpret jazyka Ruby na verzi 4.0.10, 3.4.13, 3.3.14 nebo novější.</li><li>Zkontrolovat a aktualizovat závislosti a framework Ruby on Rails v aplikacích.</li><li>Monitorovat síťový provoz na přítomnost anomálních HTTP požadavků cílících na konverze řetězců v Rails.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1203</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise webové frameworky, +1 Veřejný PoC exploit, +1 Chybí patch v dřívějších verzích, +2 Kritická chyba v konverzi řetězců (Ruby2Shell)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Heap overflow:</strong> Přetečení dynamicky alokované paměti (haldy), které může umožnit přepsání důležitých dat v paměti a spuštění kódu.</div><div class='glossary-item'><strong>Ruby on Rails:</strong> Populární webový aplikační framework napsaný v programovacím jazyku Ruby.</div><div class='glossary-item'><strong>Rack:</strong> Standardní rozhraní pro vývoj webových aplikací v Ruby, které slouží jako propojení mezi webovým serverem a samotnou aplikací.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/ruby-releases-fixes-for-7-regex-and.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114202" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114202</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114204" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114204</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114205" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114205</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-126574" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-126574</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-112115" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-112115</a></div>
-                    <h2>#6 Kritické zranitelnosti pevně zakódovaných klíčů v ASUS Control Center Express</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Centrální manažerské konzole ASUS Control Center Express a spravovaná podniková zařízení</p>
-                <p><strong>⚡ Podstata:</strong> Společnost ASUS vydala verzi v1.7.29 softwaru Control Center Express, která opravuje kritické zranitelnosti včetně chyby s pevně zakódovaným kryptografickým klíčem ohodnocené maximálním skóre CVSS 10.0.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Vzdálení útočníci mohou převzít plnou administrátorskou kontrolu nad podnikovým softwarem pro správu počítačů bez nutnosti přihlášení. Firmy musí ihned aktualizovat software.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost ASUS vydala aktualizaci Control Center Express v1.7.29 za účelem nápravy tří kritických zranitelností, které mohou vzdáleným útočníkům umožnit získání administrátorské kontroly nad manažerskou konzolí a všemi spravovanými zařízeními. Nejzávažnějším problémem je zranitelnost označená jako CVE-2026-114202 s maximálním skóre CVSS 10.0, která vyplývá z použití pevně zakódovaného (hard-coded) kryptografického klíče v produktu. Tato chyba umožňuje neautentizovanému vzdálenému útočníkovi zfalšovat autentizační token a získat oprávnění administrátora bez jakýchkoliv oprávnění či nutnosti interakce s uživatelem. Druhou chybou je CVE-2026-114204, rovněž postavená na pevně zakódovaném klíči, která umožňuje útočníkovi s nízkými oprávněními zfalšovat token relace pro nedávno přihlášený účet. Třetí nedostatek, CVE-2026-114205, představuje autorizační chybu umožňující vytvoření účtu administrátora nízko-privilegovaným uživatelem. ASUS Control Center Express je centrální dashboard určený pro správu fleetu pracovních stanic a serverových desek ve firmách. ASUS současně vydal aktualizace pro Control Center Enterprise, Datacenter a utilitu Armoury Crate (včetně CVE-2026-126574 a CVE-2026-112115). Po aktualizaci konzole je nutné provést i aktualizaci klientských agentů na spravovaných zařízeních.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost CVE-2026-114202 využívá faktu, že kryptografický klíč pro podepisování nebo ověřování tokenů je natvrdo zapsán přímo ve zdrojovém kódu aplikace. Útočník, který tento klíč zná nebo jej z binárního souboru extrahoval, dokáže sám vygenerovat platný administrativní token, obejít autentizační vrstvu a odeslat příkazy s nejvyššími právy do API konzole.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat ASUS Control Center Express na verzi 1.7.29 nebo novější.</li><li>Aktualizovat klientské agenty na spravovaných zařízeních pomocí funkce Select Function → Client Agent Updater.</li><li>Omezit síťový přístup k manažerským konzolím ASUS pouze na izolovanou správcovskou síť (VLAN).</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1078</code></li><li><code>T1550</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software a správu zařízení, +1 Veřejný PoC exploit, +1 Privilege Escalation, +2 Kritická chyba s pevně zakódovaným klíčem (CVSS 10.0)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Hard-coded key:</strong> Pevně zakódovaný kryptografický klíč nebo heslo přímo ve zdrojovém kódu aplikace, což usnadňuje jeho kompromitaci.</div><div class='glossary-item'><strong>CVSS:</strong> Common Vulnerability Scoring System - standardizovaný systém pro hodnocení závažnosti počítačových zranitelností na škále 0 až 10.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/asus-warns-of-critical-hard-coded-key-flaw-in-control-center-express/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123007" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123007</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123633" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123633</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-121810" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-121810</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123634" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123634</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-113425" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-113425</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-118899" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-118899</a></div>
-                    <h2>#7 Kritické zranitelnosti v HTTP/2 protokolu serveru NGINX umožňující RCE a únik z kontejneru</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Webové servery a proxy servery NGINX s povoleným protokolem HTTP/2</p>
-                <p><strong>⚡ Podstata:</strong> Bezpečnostní experti objevili dvě kritické zranitelnosti v HTTP/2 protokolu webového serveru NGINX označené jako &#x27;nginx2root&#x27;, které v řetězci s chybou v Linuxovém jádře umožňují únik z kontejneru a převzetí serveru.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Neznámí útočníci mohou vzdáleně ovládnout webové servery zpracovávající provoz přes HTTP/2. Administrátoři by měli okamžitě aktualizovat NGINX na opravené verze.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Dvě kritické zranitelnosti v NGINX, nazývané &#x27;nginx2root&#x27;, umožňují neautentizovaným útočníkům vzdáleně spouštět kód na zranitelných webových serverech, přičemž výzkumníci demonstrovali jejich zřetězení s chybou v Linuxovém jádře k získání root oprávnění na hostiteli. Tyto chyby v protokolu HTTP/2 objevili nezávisle výzkumníci z firem Xint, Wiz, Ikotas Labs, Metnir a Rapid7. První chybou je CVE-2026-123007, což je problém řízení toku (flow-control), který dokáže poškodit paměť v NGINX workeru a postihuje verze od 1.31.8 až do 1.9.5 z roku 2015. Společnost Wiz demonstrovala vzdálené spuštění kódu na serveru obsluhujícím statické soubory přes HTTP/2 s TLS, zatímco Xint předvedl získání root přístupu pomocí zřetězení s chybou v podsystému SCTP Linuxového jádra, což umožnilo únik z Docker kontejneru. Druhou chybou je CVE-2026-123633, což je problém typu use-after-free při přijímání HTTP/2 spojení a proxyování požadavků na backend. Další tři související chyby (CVE-2026-121810, CVE-2026-123634 a CVE-2026-113425) byly opraveny v NGINX Open Source 1.30.7 stable a 1.31.9 mainline (resp. NGINX Plus 37.0.8.1). Jako dočasnou mitigaci lze doporučit vypnutí protokolu HTTP/2, pokud nelze provést okamžitý upgrade.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnosti využívají nesprávného ošetření toků dat a stavů připojení v implementaci protokolu HTTP/2 v NGINX (CVE-2026-123007 a CVE-2026-123633). Zasláním specificky zmanipulovaných HTTP/2 rámců dojde k poškození paměti (memory corruption / use-after-free) v paměťovém prostoru worker procesu. Útočník může toto poškození zneužít k řízení prováděného kódu a následně v kombinaci s dalšími chybami provést eskalaci oprávnění.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizovat NGINX na verzi 1.30.7 stable, 1.31.9 mainline nebo novější (případně NGINX Plus 37.0.8.1).</li><li>Dočasně zakázat protokol HTTP/2 v konfiguraci serveru, pokud aktualizace není možná.</li><li>Zasílat webový provoz přes zabezpečené a aktualizované kontejnerové běhové prostředí s minimalizovanými oprávněními.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1203</code></li><li><code>T1068</code></li><li><code>T1611</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise webové servery, +1 Veřejný PoC exploit, +1 Privilege Escalation (útok z kontejneru na hostitele), +2 Kritická paměťová chyba v HTTP/2 (nginx2root)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>HTTP/2:</strong> Druhý hlavní, modernější protokol pro přenos webových stránek, který přináší multiplexování a vyšší efektivitu.</div><div class='glossary-item'><strong>Únik z kontejneru:</strong> Container escape - technika, kdy útočník pronikne z izolovaného běhového prostředí kontejneru do samotného operačního systému hostitele.</div><div class='glossary-item'><strong>SCTP:</strong> Stream Control Transmission Protocol - síťový protokol zajišťující spolehlivý přenos zpráv podobně jako TCP, ale s pokročilými funkcemi.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/critical-nginx-nginx2root-bugs-let-attackers-hijack-servers/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">7<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-99312" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-99312</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-3344" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2022-3344</a></div>
-                    <h2>#8 Zranitelnost v Linuxovém KVM hypervisoru CVE-2026-99312 umožňující čtení paměti hostitele z VM</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Cloudové servery a virtualizační platformy využívající Linux KVM s procesory AMD</p>
-                <p><strong>⚡ Podstata:</strong> Zranitelnost CVE-2026-99312 v KVM hypervisoru na procesorech AMD umožňuje z vnitřku virtuálního stroje číst desítky gigabajtů operační paměti hostitelského serveru.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Uživatelé virtuálních serverů v cloudu mohli za určitých podmínek číst citlivá data z paměti hostitelského serveru, kde běží i stroje jiných zákazníků. Poskytovatelé cloudu již situaci řeší.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Bezpečnostní výzkumníci objevili závažnou zranitelnost v KVM (Kernel-based Virtual Machine), což je vestavěný hypervisor v Linuxovém jádře, která umožnila číst přibližně 127 GB paměti cloudového serveru přímo z vnitřku virtuálního stroje (Droplet) u poskytovatele DigitalOcean. Chyba, evidovaná jako CVE-2026-99312, postihuje výhradně hostitelské systémy s procesory AMD a povolenou vnořenou virtualizací (nested virtualization). Bezpečnostní záplaty byly vydány upstreamem a poskytovatelé cloudu aplikovali živé záplaty (live patch) pro ochranu infrastruktury. Zranitelnost objevil Oren Yomtov z firmy Terra Security. Při testování na sdíleném serveru dokázali výzkumníci číst 127 GB RAM hostitele, včetně dat náležejících jiným zákazníkům, v režimu pouze pro čtení, a na vlastním testovacím serveru úspěšně zapsat 34 bajtů do paměti hostitelského jádra. Útok vyžaduje, aby útočník již disponoval root oprávněním uvnitř vlastního kompromitovaného virtuálního stroje. Procesory Intel tímto nejsou zasaženy. K problému dochází v důsledku nesprávné správy ukazatelů v nested page tables při resetovacím signálu INIT, kdy KVM opomene obnovit ukazatel vnějšího VM a zanechá jej odkazující na uvolněnou paměť. Chyba se do jádra dostala v roce 2022 při opravě jiné zranitelnosti (CVE-2022-3344) a zůstala neodhalena téměř čtyři roky.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>KVM spravuje paměť virtuálních strojů pomocí tabulek stránek (nested page tables). Když signál INIT zastaví vnořený virtuální stroj, KVM selže při obnově ukazatele na tabulku stránek nadřazeného VM, což vede k ponechání ukazatele na paměťovou stránku, kterou již jádro uvolnilo (use-after-free). Jakmile jádro tuto stránku znovu použije pro jiný účel, virtuální stroj může skrze zfalšované záznamy v tabulce přistupovat k libovolným fyzickým adresám v RAM hostitele.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat hostitelské jádro Linuxu na verze obsahující záplatu (např. stabilní jádro 7.3.5, 6.18.64, 6.12.118 a novější).</li><li>V případě nemožnosti okamžitého restartu hostitele dočasně vypnout vnořenou virtualizovanou podporu (nested virtualization) na AMD procesorech.</li><li>Spoléhat na hotfixy a live-patching od poskytovatelů cloudových služeb.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1592</code></li><li><code>T1068</code></li><li><code>T1598</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na enterprise virtualizační infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation (únik z virtuálního stroje), +3 In the wild (reálná demonstrace čtení 127 GB RAM cloudu)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Hypervisor:</strong> Virtualizační vrstva, která umožňuje spouštět a spravovat více virtuálních strojů na jednom fyzickém hardwaru.</div><div class='glossary-item'><strong>Vnořená virtualizace:</strong> Nested virtualization - schopnost spouštět virtuální stroj uvnitř jiného virtuálního stroje.</div><div class='glossary-item'><strong>RAM:</strong> Operační paměť počítače určená pro dočasné uložení dat a spuštěných programů.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/new-linux-kvm-flaw-cve-2026-99312-lets.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">7<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76466" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76466</a></div>
-                    <h2>#9 Aktivní zneužívání kritické zranitelnosti v Cisco Expressway pro eskalaci na root</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Komunikační brány Cisco Expressway Series v perimetru sítí</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci začali aktivně zneužívat kritickou zranitelnost CVE-2026-76466 v zařízeních Cisco Expressway k získání administrátorských oprávnění root a průniku do vnitřní sítě organizací.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Neznámí útočníci úspěšně napadli internetem vystavená komunikační zařízení a pronikli do vnitřní sítě firem. Organizace musí okamžitě aktualizovat firmware.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Bezpečnostní analytici zaznamenali první reálné případy zneužití kritické zranitelnosti v zařízeních Cisco Expressway krátce po zveřejnění veřejného proof-of-concept (PoC) exploitu. Incident se odehrál v ruské organizaci, kde útočníci kompromitovali dvě internetem vystavená zařízení a následně skrze ně pronikli ke dvěma uzlům vnitřního clusteru. Zranitelnost, označená jako CVE-2026-76466 s maximálním CVSS skóre 9.8, umožňuje neautentizovanému vzdálenému útočníkovi s přístupem k síti spouštět libovolné příkazy operačního systému s oprávněním root. Podle vyjádření společnosti Cisco je problém způsoben použitím perzistentních cookies a nedostatečným ověřováním klientských certifikátů při zapnutém režimu TLS Verify Mode pro clustering. Útočník mající k dispozici platné cookies se může připojit k databázové službě a vyvolat specifické příkazy RPC. Po získání root oprávnění útočníci v napadeném prostředí nasadili vlastní skripty v jazyku Python (pravděpodobně generované za pomoci AI nástrojů) k mapování vnitřní sítě, prohledávání SMB zdrojů, interakci s databázemi MS SQL, WinRM a repozitáři GitLab za účelem krádeže přihlašovacích údajů.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Chyba spočívá v nedostatečné validaci certifikátů a nebezpečné práci s perzistentními cookies v komunikačním protokolu pro clustering Cisco Expressway. Útočník odesláním zfalšovaných RPC příkazů přes databázovou službu obejde autentizaci a provede injektáž příkazů s nejvyššími právy root.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat Cisco Expressway na opravené verze (např. migrovat z řady X14 na opravenou větev, případně verze X15.5.20 a vyšší).</li><li>Prověřit indikátory kompromitace včetně přítomnosti řetězce &#x27;wombat@127.0.0.1&#x27; v erlang.log a skriptů v adresáři /mnt/harddisk/i*.</li><li>Zajistit síťovou segmentaci a oddělit perimetrové komunikační brány od vnitřní podnikové sítě.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1021</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (aktivně zneužito v Rusku po vydání PoC), +2 Remote exploit bez autentizace, +2 Dopad na enterprise síťová zařízení, +1 Veřejný PoC exploit, +1 Privilege Escalation (root oprávnění)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RPC:</strong> Remote Procedure Call - protokol umožňující programovat vzdálené volání procedur v jiné síťové adrese.</div><div class='glossary-item'><strong>Clustering:</strong> Propojení více serverů do jednoho spolupracujícího celku za účelem vyšší dostupnosti a výkonu.</div><div class='glossary-item'><strong>IoC:</strong> Indicators of Compromise - forenzní stopy (IP adresy, hashe souborů, záznamy v logu) indikující proběhlý útok.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-cisco.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>

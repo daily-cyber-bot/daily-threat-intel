@@ -1,0 +1,106 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritické zranitelnosti v F5 BIG-IP umožňují RCE a DoS",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Umožňuje RCE, +1 Chybí patch (v době zjištění), +3 Aktivní zneužívání v minulosti u podobných F5 zranitelností (v kontextu CISA KEV)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-121805",
+        "CVE-2026-120292",
+        "CVE-2026-120285",
+        "CVE-2026-116953",
+        "CVE-2026-123637",
+        "CVE-2026-126822"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/f5-releases-emergency-patches-for-critical-big-ip-rce-flaws/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Společnost F5 vydala nouzové záplaty pro pět kritických zranitelností typu Buffer Overflow v produktech BIG-IP, které umožňují vzdálené spuštění kódu (RCE) nebo DoS útoky.",
+        "cil": "BIG-IP Access Policy Manager (APM) a iRules.",
+        "dopad_laici": "Útočníci mohou převzít kontrolu nad síťovým zařízením vaší firmy nebo jej vyřadit z provozu. Správci IT musí okamžitě nainstalovat dostupné záplaty."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost F5 varovala zákazníky, aby neprodleně opravili pět zranitelností v systému BIG-IP, které mohou útočníci zneužít k vyvolání DoS nebo k RCE. Zranitelnosti CVE-2026-121805, CVE-2026-120292, CVE-2026-120285, CVE-2026-116953 a CVE-2026-123637 jsou typu stack-based Buffer Overflow a postihují řešení BIG-IP Access Policy Manager (APM) a skriptovací funkci iRules.\n\nTyto problémy jsou hodnoceny jako kritické a neautentizovaní útočníci je mohou zneužít k ukončení procesu Traffic Management Microkernel (TMM) a ke spuštění libovolného kódu. F5 rovněž vydala opravy pro zranitelnost CVE-2026-126822 v APM SAML, která vzniká v důsledku integer underflow a umožňuje DoS útoky.\n\nF5 uvedla, že se jedná o problém na datové rovině (data plane) a neexistují žádná jiná zmírňující opatření než instalace hotfixů. Podle monitoringu Shadowserver je online vystaveno přes 177 000 instancí BIG-IP. Ačkoliv F5 zatím neoznačila tyto konkrétní chyby jako aktivně zneužívané, historie útoků na F5 zařízení vyžaduje okamžitou reakci.",
+        "jak_to_funguje": "Zranitelnosti typu stack-based Buffer Overflow umožňují přepsání paměti zásobníku (stack) nad rámec vyhrazeného bufferu, což vede k možnosti podvržení návratové adresy a následnému spuštění útočníkem dodaného kódu (RCE).",
+        "mitre": [
+          "T1190",
+          "T1210"
+        ],
+        "mitigace": [
+          "Okamžitá instalace out-of-band hotfixů od výrobce.",
+          "Omezení přístupu k management rozhraní z nedůvěryhodných sítí."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution - schopnost útočníka spustit libovolný kód na cílovém systému na dálku."
+        },
+        {
+          "pojem": "Buffer Overflow",
+          "vysvetleni": "Chyba v paměti, kdy program zapíše více dat do bufferu, než je jeho kapacita, což může vést k narušení stability nebo spuštění kódu."
+        },
+        {
+          "pojem": "DoS",
+          "vysvetleni": "Denial of Service - útok, jehož cílem je vyřadit službu nebo systém z provozu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Útočníci zneužívají kritickou zranitelnost VMware vCenter",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild (potvrzeno CISA/Mandiant), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Umožňuje RCE/admin přístup, +1 Chybí patch (v době útoku)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-123890"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Čínská APT skupina Armory Castle zneužila zero-day zranitelnost v VMware vCenter k obcházení autentizace a získání plných administrátorských práv.",
+        "cil": "VMware vCenter Server.",
+        "dopad_laici": "Útočníci získali plnou kontrolu nad virtualizační infrastrukturou, což jim umožnilo krást data a ovládat virtuální servery. Je nutná okamžitá aktualizace."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Skupina Armory Castle (dříve UNC5221) zneužila zero-day zranitelnost CVE-2026-123890 v VMware vCenter Server. Jedná se o chybu obcházení autentizace v Directory Service (vmdird), která umožňuje útočníkovi vytvořit autentizovanou relaci s právy administrator@vsphere.local.\n\nÚtočníci k útoku využili nástroj BONESAW napsaný v jazyce Golang. Po získání přístupu útočníci nasadili řadu malwaru, včetně web shellů SLIMSAVAGE a CAGEMATCH, a nástroj SAWSNAKE pro provádění Golden SAML útoků, které umožňují obejít vícefaktorové ověřování (MFA).\n\nKampaň zahrnovala také zneužití zranitelnosti v BeyondTrust Remote Support (CVE-2026-102764) pro prvotní průnik a laterální pohyb v síti. CISA zařadila tuto zranitelnost do katalogu KEV a nařídila federálním agenturám její opravu.",
+        "jak_to_funguje": "Zranitelnost spočívá v obcházení autentizace v protokolu SRP-6a přes DCE/RPC, což útočníkovi umožní vytvořit legitimní administrátorskou relaci bez znalosti hesla.",
+        "mitre": [
+          "T1078",
+          "T1550",
+          "T1021"
+        ],
+        "mitigace": [
+          "Aktualizace VMware vCenter na verze obsahující opravu.",
+          "Audit logů na přítomnost neobvyklých administrátorských relací."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "APT",
+          "vysvetleni": "Advanced Persistent Threat - sofistikovaná skupina útočníků, často státně sponzorovaná, s dlouhodobým cílem."
+        },
+        {
+          "pojem": "Golden SAML",
+          "vysvetleni": "Technika útoku, při které útočník získá privátní klíč pro podepisování SAML tokenů a může se vydávat za libovolného uživatele."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
