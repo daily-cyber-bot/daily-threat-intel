@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 22.11.2026</title>
+    <title>Threat Intel Svodka | 23.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,25 +58,25 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">22.11.2026 • 6 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">23.11.2026 • 4 hrozeb</span>
         </header>
         <main>
-        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+        <article class="card sev-high" style="--sev-color: #ff9500;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">9<small>/10</small></span>
-                    <span class="score-word">KRITICKÁ</span>
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133968" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133968</a></div>
-                    <h2>#1 Autonomní AI agenti čínských útočníků objvili zero-day v medicínském softwaru MONAI Label a získali root přístup</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76466" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76466</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-7646" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-7646</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-20320" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-20320</a></div>
+                    <h2>#1 Kritická RCE zranitelnost v Cisco Expressway zneužívaná v reálných útocích</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Serverové prostředí MONAI Label verze 0.8.5 a starší, používané pro zpracování medicínských snímků a trénování AI modelů.</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci zneužili autonomní AI agenty v rámci frameworku Cairn k automatizovanému objevení zero-day zranitelnosti v open-source serveru MONAI Label a k získání neomezeného root přístupu na univerzitním serveru.</p>
+                <p><strong>🎯 Cíl:</strong> Enterprise brány Cisco Expressway-C a Cisco Expressway-E spojené do clusteru.</p>
+                <p><strong>⚡ Podstata:</strong> Útočníci aktivně zneužívají kritickou zranitelnost v bránách Cisco Expressway, která umožňuje neautentizovaným útočníkům vzdálené spuštění příkazů s oprávněním root.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou nadálku ovládnout výzkumné a nemocniční servery uchovávající citlivé lékařské snímky. Pacienti ani běžní uživatelé nemusí dělat nic, správci systémů musejí servery izolovat z internetu.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Firmy a organizace používající tyto systémy pro zabezpečenou komunikaci mohou čelit kompletnímu převzetí zařízení útočníky, což ohrožuje celou vnitřní síť. Je nutné okamžitě aplikovat bezpečnostní aktualizace.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,50 +84,42 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Čínští útočníci použili podle zjištění týmu Amazon Threat Intelligence autonomní AI agenty k objevení dříve neznámé zranitelnosti v open-source serveru MONAI Label pro medicínské zobrazování a získali root přístup k univerzitnímu serveru.
+                        <p class="long-text">Americká agentura CISA varovala federální úřady, že útočníci nyní v reálném světě aktivně zneužívají nedávno opravenou kritickou zranitelnost v produktech Cisco Expressway. Zařízení Cisco Expressway Series jsou podnikové kolaborativní brány (nasazené jako virtuální stroje nebo fyzický hardware), které propojují interní hlasové a video systémy s vnějšími sítěmi a vzdálenými uživateli pomocí zabezpečeného připojení.
 
-Zranitelnost umožňuje útočníkovi bez přihlašovacích údajů zapisovat soubory mimo určenou úložištní složku serveru. Postihuje MONAI Label verze 0.8.5 a starší ve výchozí konfiguraci, která běží bez zapnuté autentizace. Správci projektu již sloučili opravu ve zdrojovém kódu, avšak dosud nevydali žádnou opravenou verzi k instalaci.
+Tato bezpečnostní trhlina, označená jako CVE-2026-76466, pramení z použití napevno zapsaných přihlašovacích údajů (hard-coded credentials) a selhání při úplné validaci klientských certifikátů. To umožňuje neautentizovaným útočníkům vzdáleně spouštět libovolné příkazy operačního systému jako root na dotčených zařízeních Cisco Expressway-C a Cisco Expressway-E nakonfigurovaných v clusteru.
 
-Jedná se o chybu typu Path Traversal v částech serveru, které ukládají nahrávané snímky a popisky. Identifikátor souboru poskytnutý klientem se připojí k cestě k úložišti a zapíše na disk bez kontroly, zda výsledná cesta zůstává uvnitř povolené složky. Jelikož server zapisuje s oprávněními účtu, pod kterým běží, zapisovatelná složka pro nastavení či kód otevírá cestu ke spuštění libovolného kódu.
-
-Amazon rekonstruoval průnik poté, co objevil volně přístupný ovládací panel Cairn spravovaný útočníky. Cairn je open-source framework provozující AI agenty jako automatizované nástroje pro penetrační testování. Během přibližně 48 hodin v září agenti mapovali rozhraní aplikace a k zápisu souborů na server se dopracovali za pouhých 11 minut. Agenti pracovali s minimálním vedením – operátor pouze stanovil cíl získat shell rozhraní a vybral terče.
-
-Získání root shellu proběhlo v navazující relaci: agenti využili chybu k nahrání souboru, který Python automaticky spouští při startu. Následně vyvolali trénovací funkci, jež spustila nový proces Pythonu, načetla škodlivý soubor a připojila se zpět k útočníkům s právy roota. Správci potvrdili chybu a sloučili opravu 19. října, ale oficiální balíček dosud nebyl vydán.</p>
+Ačkoliv společnost Cisco uvedla, že její tým PSIRT nezaznamenal aktivní zneužívání v přírodě ani veřejně dostupné exploity v době vydání záplat koncem října, CISA označila zranitelnost za aktivně zneužívanou a zařadila ji do katalogu známých zneužívaných zranitelností (KEV). Využití této chyby umožňuje získat plná oprávnění root a provádět další laterální pohyb v síti pomocí skriptů pro skenování SMB, SQL Serveru, WinRM nebo GitLab repozitářů.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Jedná se o zranitelnost Path Traversal v rozhraní pro nahrávání souborů a značek v MONAI Label. Aplikace přijímá klientský identifikátor souboru a bez sanitizace jej zřetězí s cílovým adresářem úložiště. Útočník předá v názvu sekvence typu &#x27;../&#x27;, čímž vystoupí z vyhrazeného adresáře. Protože služba standardně nevyžaduje autentizaci a běží pod privilegovaným účtem, útočník zapsal škodlivý skript do adresáře načítaného při startu runtime prostředí Pythonu. Následné vyvolání trénovací úlohy vytvořilo nový proces Pythonu, který tento skript vyhodnotil a vytvořil zpětné spojení (Reverse Shell) s právy uživatele root.</p>
+                        <p>Zranitelnost kombinuje absenci řádné validace klientských certifikátů a přítomnost hard-coded credentials. Útočník mající platné session cookies může navázat spojení databázovou službu a volat specifické Remote Procedure Call (RPC) příkazy. Tím obejde autentizaci a provede arbitrážní příkazy s oprávněním root na základním operačním systému zařízení.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Zablokujte neautorizovaný síťový přístup k serverům MONAI Label pomocí firewallů a směrovacích pravidel.</li><li>Vytvořte a zapněte autentizaci k API rozhraní služby, která je ve výchozím stavu vypnutá.</li><li>Spouštějte službu pod dedikovaným účtem s minimálními oprávněními (Principle of Least Privilege) a nikoli pod uživatelem root.</li><li>Prověřte systém na přítomnost neznámých startup souborů Pythonu (.pth nebo __init__.py) a podezřelých trénovacích úloh.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1059.006</code></li><li><code>T1574.006</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (potvrzené útoky čínských aktérů v reálném světě)
-+2 Remote exploit bez autentizace (ve výchozím nastavení zcela chybí autentizace)
-+2 Dopad na enterprise software / kritickou infrastrukturu (medicínský server MONAI Label pro zdravotnický výzkum a AI modely)
-+1 Umožňuje Privilege Escalation nebo Lateral Movement (získání root přístupu pomocí Python startup skriptu)
-+1 Chybí patch (výrobce opravu sloučil v zdrojovém kódu, ale dosud nevydal zkompilovaný instalovatelný balíček)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aplikovat oficiální bezpečnostní záplaty vydané společností Cisco.</li><li>Izolovat internetově vystavená zařízení Cisco Expressway a omezit přístup k administraci.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1078</code></li><li><code>T1059</code></li><li><code>T1021</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Chybí patch</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>zero-day:</strong> Zranitelnost v softwaru, pro kterou v době zneužití nebo odhalení neexistuje oficiální oprava od výrobce.</div><div class='glossary-item'><strong>root:</strong> Nejvyšší účet správce v operačních systémech typu Linux/Unix s neomezenými právy nad celým systémem.</div><div class='glossary-item'><strong>Path Traversal:</strong> Typ zranitelnosti, při které aplikace nedostatečně kontroluje zadané cesty k souborům (např. znáky &#x27;../&#x27;) a umožňuje útočníkovi číst nebo zapisovat soubory mimo povolenou složku.</div><div class='glossary-item'><strong>Reverse Shell:</strong> Technika, při níž napadený server sám naváže odchozí síťové spojení k příkazovému serveru útočníka a předá mu řízení příkazového řádku.</div><div class='glossary-item'><strong>Principle of Least Privilege:</strong> Bezpečnostní zásada udělovat uživatelům a procesům pouze minimální oprávnění nezbytná pro jejich činnost.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>root:</strong> Hlavní administrátorský účet v unixových operačních systémech s neomezenými oprávněními.</div><div class='glossary-item'><strong>RPC:</strong> Remote Procedure Call – protokol umožňující programu vyvolat provedení procedury na jiném počítači.</div><div class='glossary-item'><strong>hard-coded credentials:</strong> Přihlašovací údaje natvrdo zapsané ve zdrojovém kódu aplikace.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/attackers-ai-agents-found-zero-day-in.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-flags-critical-cisco-expressway-rce-flaw-as-actively-exploited/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
         </article>
         
-        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+        <article class="card sev-high" style="--sev-color: #ff9500;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">9<small>/10</small></span>
-                    <span class="score-word">KRITICKÁ</span>
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">APT</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129448" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129448</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76466" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76466</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-42884" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2025-42884</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-123890" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-123890</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-102764" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-102764</a></div>
-                    <h2>#2 Útočníci a APT skupiny masivně zneužívají kritické zranitelnosti ve VMware, Cisco, Apache a SAP</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-84869" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-84869</a></div>
+                    <h2>#2 Kritická zranitelnost v ConnectWise ScreenConnect zneužívaná k útokům na MSP techniky</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Enterprise infrastruktura využívající VMware vCenter, Cisco Expressway Series, Apache Roller a SAP NetWeaver Enterprise Portal.</p>
-                <p><strong>⚡ Podstata:</strong> Americká agentura CISA zařadila na seznam aktivně zneužívaných zranitelností čtyři kritické chyby v produktech VMware, Cisco, Apache a SAP. Čínská kyberšpionážní skupina Armory Castle zneužívá zranitelnost ve vCenter k instalaci zadních vrátků.</p>
+                <p><strong>🎯 Cíl:</strong> Pracovní stanice a servery poskytovatelů spravovaných IT služeb (MSP).</p>
+                <p><strong>⚡ Podstata:</strong> Útočníci aktivně zneužívají zranitelnost v ConnectWise ScreenConnect, která umožňuje vzdálenému hostu nahrát a spustit škodlivý soubor na klientské stanici technika.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Chyby umožňují útočníkům převzít kontrolu nad firemními servery a virtuálními počítači. Organizační i firemní správci IT musejí zasažené systémy okamžitě aktualizovat.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou skrze vzdálenou relaci ovládnout počítače IT správců, což jim otevírá cestu k přístupu do sítí všech klientů dané firmy. Doporučuje se okamžitá aktualizace softwaru.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -135,30 +127,24 @@ Získání root shellu proběhlo v navazující relaci: agenti využili chybu k 
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Americká agentura CISA přidala v pátek na svůj katalog znepokojivých zranitelností (KEV) čtyři chyby s dopadem na Apache Roller, Cisco Expressway, SAP NetWeaver a Broadcom VMware vCenter z důvodu důkazů o jejich aktivním zneužívání v praxi.
+                        <p class="long-text">Bezpečnostní výzkumníci zaznamenali aktivní zneužívání bezpečnostní trhliny v nástroji ConnectWise ScreenConnect, která je evidována pod označením CVE-2026-84869 s CVSS skóre 9.9. Jedná se o klientskou zranitelnost umožňující hostu přenést a spustit škodlivou payload na klientské stanici připojujícího se technika bez jeho vědomí.
 
-Mezi zasažené zranitelnosti patří CVE-2026-129448 (CVSS 9.8) způsobující deserializaci neověřených dat v Apache Roller s možností RCE přes XML-RPC koncový bod, CVE-2026-76466 (CVSS 9.8) využívající natvrdo zakódované přihlašovací údaje v Cisco Expressway Series k vykonávání příkazů s právy roota, CVE-2025-42884 (CVSS 6.5) v SAP NetWeaver umožňující únik dat přes JNDI injektáž a CVE-2026-123890 (CVSS 9.8) představující Authentication Bypass ve VMware vCenter.
+Během října a listopadu 2026 sledovali bezpečnostní experti z firmy Huntress masivní vlnu pokusů, kdy útočníci hromadně zasílali požadavky na spuštění dávkových souborů (batch skriptů) typu update.bat. Tyto skripty po spuštění dekódovaly Telegram bot tokeny, stahovaly instalační soubory vydávající se za aktualizace systému Windows a registrovaly rogue klienty ScreenConnect na útočníkův vlastní relay server.
 
-Vývojáři Apache Roller potvrdili aktivní zneužívání chyby. Zneužití zranitelnosti v Cisco Expressway vedlo k narušení ruské organizace po zveřejnění PoC kódu, což útočníkům umožnilo Lateral Movement po síti. Zneužití VMware vCenter bylo spojeno s čínskou špionážní skupinou Armory Castle (dříve UNC5221), která chybu řetězí se zranitelností v BeyondTrust Remote Support (CVE-2026-102764) pro nasazování vlastních backdoorů a krádeže dat.
-
-Federální orgány USA dostaly příkaz nainstalovat opravné balíčky do 23. listopadu 2026 v souladu se směrnicí BOD 26-04.</p>
+Tento typ útoku představuje obrovské riziko, jelikož stanice techniků spravovaných služeb (MSP) disponují přístupy k RMM nástrojům, uloženým přihlašovacím údajům a celé infrastruktuře koncových zákazníků. Jako mitigaci výrobce doporučuje aktualizaci na verzi 26.6.5 nebo novější, případně dočasné odebrání oprávnění TransferFiles pro role hostů.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>V případě VMware vCenter chyba v autentizačním rozhraní (Authentication Bypass) umožňuje vzdálenému útočníkovi bez přihlášení obejít ověřovací mechanismy a získat přístup k řízení hypervizorů. Skupina Armory Castle tuto chybu kombinuje s Remote Code Execution v BeyondTrust Remote Support (CVE-2026-102764) pro usazení v síti (Persistence). V případě Cisco Expressway útočník využitím natvrdo zadaných pověřovacích údajů v databázové službě dosáhne vykonání systémových příkazů s právy roota (Privilege Escalation). U Apache Roller způsobuje nezabezpečená deserializace objektů v rozhraní XML-RPC vyhodnocení škodlivého kódu v běhovém prostředí.</p>
+                        <p>Zranitelnost spočívá v chybějící validaci souborů přenášených během relace ze strany hosta. Maligní host dokáže skrze protokol ScreenConnect přinutit klientskou aplikaci hostitelského technika k automatickému provedení staženého binárního souboru, čímž dochází k eskalaci oprávnění a spuštění kódu v kontextu uživatele.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aplikujte oficiální bezpečnostní záplaty vydané výrobcem Broadcom pro VMware vCenter (opraveno v listopadu 2026).</li><li>Aktualizujte systémy Cisco Expressway na verzi odstraňující pevně zakódované přihlašovací údaje.</li><li>Nainstalujte opravy pro Apache Roller (opraveno v listopadu 2026) a SAP NetWeaver Enterprise Portal.</li><li>Monitorujte přístupové protokoly vCenter a síťový provoz na rozhraních XML-RPC a JNDI.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1210</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (všechny čtyři zranitelnosti byly zařazeny na katalog CISA KEV z důvodu aktivních útoků v praxi)
-+2 Remote exploit bez autentizace (unauthenticated RCE a auth bypass u vCenter, Apache Roller a Cisco Expressway)
-+2 Dopad na enterprise software / kritickou infrastrukturu (klíčové enterprise systémy VMware vCenter, Cisco Expressway a SAP NetWeaver)
-+1 Veřejný PoC exploit (pro Cisco Expressway byl publikován veřejný PoC)
-+1 Umožňuje Privilege Escalation nebo Lateral Movement (získání root přístupu a Lateral Movement v sítích)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat ScreenConnect host klienty na verzi 26.6.5 nebo novější.</li><li>Odebrat oprávnění TransferFiles pro skupinu relací a role hostů, pokud patch není dostupný.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1204</code></li><li><code>T1059</code></li><li><code>T1563</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na cílovém počítači bez fyzického přístupu.</div><div class='glossary-item'><strong>Authentication Bypass:</strong> Chyba v návrhu nebo kódu softwaru, která útočníkovi umožňuje obejít proces ověření identity a získat přístup bez hesla.</div><div class='glossary-item'><strong>Lateral Movement:</strong> Postup útočníka spočívající v přecházení mezi jednotlivými servery a počítači uvnitř kompromitované sítě.</div><div class='glossary-item'><strong>Deserialization:</strong> Proces převodu datového formátu zpět na paměťové objekty. Pokud nejsou vstupní data ověřena, může vést ke spuštění škodlivého kódu.</div><div class='glossary-item'><strong>Persistence:</strong> Technika, kterou si útočník zajišťuje trvalý přístup do systému i po jeho restartu nebo změně hesla.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>MSP:</strong> Managed Service Provider – firma poskytující externí správu IT infrastruktury pro jiné podniky.</div><div class='glossary-item'><strong>payload:</strong> Škodlivá část kódu, která je doručena na oběť a provádí zamýšlenou nekalou činnost.</div><div class='glossary-item'><strong>relay:</strong> Zprostředkovatelský server zajišťující síťové propojení mezi dvěma body v situaci, kdy nelze navázat přímé spojení.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-vmware-cisco.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-screenconnect.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-high" style="--sev-color: #ff9500;">
@@ -168,15 +154,15 @@ Federální orgány USA dostaly příkaz nainstalovat opravné balíčky do 23. 
                     <span class="score-word">VYSOKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
-                    <h2>#3 Zranitelné API v Microsoft Entra Connect Health umožnilo únik správy identit enterprise zákazníků</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-134624" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-134624</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133968" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133968</a></div>
+                    <h2>#3 Zranitelnost v N-able Mail Assure umožňující SSRF útoky na vnitřní sítě</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Správci identit a tenanty v prostředí Microsoft Entra Connect Health.</p>
-                <p><strong>⚡ Podstata:</strong> Společnost Microsoft potvrdila únik dat způsobený zranitelností v API rozhraní služby Entra Connect Health, přes kterou neautorizovaní útočníci získali přístup k e-mailům správců a konfiguraci identitních systémů.</p>
+                <p><strong>🎯 Cíl:</strong> Služba N-able Mail Assure a SpamExperts Hosted Cloud.</p>
+                <p><strong>⚡ Podstata:</strong> Společnost N-able opravila kritickou SSRF zranitelnost v e-mailovém filtrovacím řešení Mail Assure, která umožňovala skenovat a napadat vnitřní síťové služby.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci získali kontakty na IT administrátory a detaily o nastavení firemních účtů. Pro běžné uživatele nehrozí přímé riziko, ale firmy by měly dát pozor na cílené podvodné e-maily (phishing).</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Poskytovatelé IT služeb a jejich zákazníci byli vystaveni riziku, že útočníci skrze e-mailovou bránu proniknou do interních podnikových systémů. Výrobce aplikoval záplatu na hostované verzi.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -184,125 +170,24 @@ Federální orgány USA dostaly příkaz nainstalovat opravné balíčky do 23. 
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Microsoft varuje organizace před bezpečnostním incidentem poté, co útočníci zneužili zranitelnost v cloudové službě Entra Connect Health k získání neoprávněného přístupu k e-mailovým adresám administrátorů a konfiguračním informacím tenantů.
+                        <p class="long-text">Společnost N-able zveřejnila podrobnosti o kritické chybě zabezpečení, kterou objevila během vyšetřování narušení své služby Mail Assure a SpamExperts Hosted Cloud, což je e-mailové filtrovací řešení provozované pro poskytovatele spravovaných služeb (MSP).
 
-Microsoft Entra Connect Health je cloudová služba pro monitorování stavu, výkonu a výstrah místní identitní infrastruktury prostřednictvím správcovského centra Microsoft Entra. Chyba byla v API zavedena 23. července a odhalena 9. listopadu 2026.
+Zranitelnost, označená jako CVE-2026-134624, je typu Server-Side Request Forgery (SSRF) s hodnocením CVSS 9.3. Umožňovala uživateli s vysokou úrovní API přístup otevírat spojení na interní systémy podle vlastního výběru na serverech platformy. Chyba se nacházela v kontrolním mechanismu připojení pro LDAP synchronizaci. Před vydáním opravy neexistovalo žádné omezení cílové destinace tohoto ověření.
 
-Vyšetřování potvrdilo, že chyba byla aktivně zneužívána. Útočníci získali neoprávněný přístup pro čtení k metadatům tenantů a služeb. Exponované informace zahrnovaly e-mailové adresy technických kontaktů a administrátorů, ID tenantů, názvy domén, stav synchronizace adresářů a úrovně licencí. Vypršený certifikát z roku 2024 byl rovněž vrácen rozhraním API.
-
-Microsoft zdůraznil, že zranitelnost neodhalila uživatelská hesla, jejich hashe, autentizační tokeny ani kryptografické klíče. Společnost nasadila opravu na straně serveru 19. listopadu a následující den dokončila vyšetřování a začala upozorňovat dotčené zákazníky.</p>
+Firma reagovala odstavením systémů, rotací interních pověření, zneplatněním API a OAuth tokenů a resetováním hesel. Pro uživatele Hosted Cloud verze byla nasazena záplata (build 20261121.1943), zatímco provozovatelé Local Cloud verzí musí aplikovat týdenní aktualizace sami.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost spočívala v nedostatečné kontrole oprávnění v API rozhraní služby Microsoft Entra Connect Health. Vzdálený požadavek na koncový bod API vracel konfigurační struktury a metadata organizace bez ověření přístupových práv volajícího. Útočník tak mohl zasíláním dotazů stahovat citlivé provozní informace o identitní architektuře tenantů.</p>
+                        <p>Aplikace prováděla interní ověření síťového spojení pro LDAP bez validace cílové IP adresy či portu. Autentizovaný uživatel API mohl donutit server k navázání spojení s libovolnými vnitřními uzly v síti, mapovat otevřené porty a zasílat data na interní služby.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Upozorněte bezpečnostní týmy a administrátory na zvýšené riziko cíleného phishingu a sociálního inženýrství.</li><li>Vynutíte použití vůči phishingu odolného vícefaktorového ověření (FIDO2 / Passkeys) pro všechny privilegované účty.</li><li>Zkontrolujte audity a protokoly přihlášení v Microsoft Entra na přítomnost neobvyklé aktivity.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1592</code></li><li><code>T1087</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (Microsoft výslovně potvrdil neoprávněný přístup útočníků v praxi)
-+2 Remote exploit bez autentizace (zranitelné rozhraní API v cloudové službě nevyžadovalo autentizaci pro čtení)
-+2 Dopad na enterprise software / kritickou infrastrukturu (Microsoft Entra Connect Health spravuje identitní infrastrukturu velkých organizací)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat software na verzi build 20261121.1943 nebo novější.</li><li>Pravidelně kontrolovat platnost a rotovat API klíče a OAuth tokeny.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1046</code></li><li><code>T1595</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>tenant:</strong> Vyhrazená instance cloudové služby Microsoftu představující jednu organizaci a její data.</div><div class='glossary-item'><strong>API:</strong> Application Programming Interface – rozhraní pro programování aplikací umožňující komunikaci mezi různými softwarovými systémy.</div><div class='glossary-item'><strong>phishing:</strong> Podvodná technika sociálního inženýrství sloužící k vylákání citlivých údajů (hesla, klíče) pod přetvářkou důvěryhodné autority.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SSRF:</strong> Server-Side Request Forgery – zranitelnost umožňující přimět server, aby odeslal HTTP požadavek na libovolné destinace včetně vnitřní sítě.</div><div class='glossary-item'><strong>LDAP:</strong> Lightweight Directory Access Protocol – síťový protokol pro vyhledávání a správu informací v adresářových službách.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">7<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
-                    <h2>#4 Únik dat a promptů u poskytovatelů AI infrastruktury OpenRouter z důvodu kompromitace klíčů</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Uživatelé a firmy posílající dotazy a API klíče přes agregátor OpenRouter k AI modelům s nastavením Zero Data Retention.</p>
-                <p><strong>⚡ Podstata:</strong> Bezpečnostní výzkumníci ze společnosti Dragos pomocí návnadových údajů (canary tokens) odhalili, že útočníci po celé měsíce tajně odchytávali uživatelské dotazy (prompty) a klíče u tří poskytovatelů AI rozhraní napojených na OpenRouter.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Pokud jste používali AI služby přes zasažené poskytovatele, vaše konverzace a hesla vložená do AI mohly být vyzrazeny útočníkům. Neukládejte do AI modelů citlivé osobní ani firemní údaje.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Útočníci měsíce odcizovali data z nitra tří poskytovatelů AI inferenčních služeb, aniž by o tom poskytovatelé věděli, dokud je neupozornili bezpečnostní výzkumníci z firmy Dragos. Některé z ukradených požadavků měly příznak Zero Data Retention, který má zaručit, že prompty nebudou nikde ukládány.
-
-Agregátor OpenRouter oznámil, že odebral tři poskytovatele ze své platformy, vyřadil 125 koncových bodů z nároku na příznak Zero Data Retention a informoval dotčené zákazníky. K prolomení samotného rozhraní OpenRouter nedošlo.
-
-Nejstarší z úniků začal v polovině července. Výzkum využíval seeding zhruba dvou milionů promptů s unikátními webovými odkazy a přístupovými údaji (canary tokens). Největší únik zahrnoval stovky klíčů AWS vložených do požadavků koncem října. Útočníci kopírovali veškerý provoz na prvním vstupním bodě a během několika hodin testovali ukradené klíče AWS, prohledávali S3 buckety, Secrets Manager a zkoušeli vytvářet nové uživatele IAM.
-
-Výzkumníci rovněž odhalili, že čínská AI laboratoř stahovala tajné odkazy z více než poloviny testovacích promptů odeslaných jejím modelům, včetně požadavků označených jako bez sběru dat.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Útočníci kompromitovali příchozí reverzní proxy a vstupní uzly infrastruktury poskytovatelů AI ještě před samotným předáním požadavku jazykovému modelu. Odchytáváním síťového provozu na úrovni rozhraní získávali kompletní texty zpráv (prompty) i přístupové tokeny obsažené v hlavičkách. Pomocí získaných AWS přístupových klíčů následně spouštěli automatizované skripty a nástroje (např. ARTEX) pro průzkum cloudového prostředí AWS (S3, Secrets Manager, IAM).</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě rotujte veškeré API klíče, hesla a přístupové tokeny k AWS, které byly součástí promptů odesílaných do AI modelů.</li><li>Nestačí spoléhat na deklarativní příznaky ochrany soukromí (Zero Data Retention) bez šifrování na straně klienta.</li><li>Zaveďte monitorování volání AWS API (CloudTrail) na detekci neobvyklých aktivit skriptů jako artex-agent.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1040</code></li><li><code>T1552.001</code></li><li><code>T1087.004</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (měsíce trvající odchytávání uživatelských promptů a přístupových údajů v reálném provozu)
-+2 Dopad na enterprise software / kritickou infrastrukturu (rozsáhlá cloudová infrastruktura AI modelů a API brán OpenRouter)
-+1 Umožňuje Privilege Escalation nebo Lateral Movement (zneužití ukradených AWS klíčů k prohledávání S3 a Secrets Manageru)
-+1 Chybí patch (služba Zero Data Retention neposkytovala technické garance proti kompromitovaným backend poskytovatelům)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>prompt:</strong> Vstupní textový dotaz nebo instrukce zadávaná uživatelem do rozhraní umělé inteligence.</div><div class='glossary-item'><strong>Zero Data Retention:</strong> Smluvní a technický režim poskytovatele cloudové služby garantující, že data uživatele nebudou ukládána na disk ani uchovávána.</div><div class='glossary-item'><strong>canary token:</strong> Unikátní sledovací prvek (odkaz nebo podvržený klíč) vložený do dat za účelem detekce neoprávněného čtení nebo úniku.</div><div class='glossary-item'><strong>IAM:</strong> Identity and Access Management – systém pro správu identit, uživatelů a jejich přístupových práv v cloudovém prostředí AWS.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
-        </article>
-        
-        <article class="card sev-high" style="--sev-color: #ff9500;">
-            <header class="card-header">
-                <div class="score-box">
-                    <span class="score-num">7<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
-                </div>
-                <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-125396" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-125396</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-65640" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-65640</a></div>
-                    <h2>#5 Zranitelnost Ghostscript umožňuje spuštění příkazů při zpracování dokumentů a obrázků</h2>
-                </div>
-            </header>
-            <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Linuxové servery a webové aplikace (WordPress, Roundcube, ImageMagick) zpracovávající nahrávané obrázky a dokumenty.</p>
-                <p><strong>⚡ Podstata:</strong> Chyba typu Use-After-Free v knihovně Ghostscript umožňuje útočníkům obejít bezpečnostní sandbox -dSAFER a spustit kód na serveru zasláním speciálně upraveného obrázku nebo PDF souboru.</p>
-                <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočník může nahráním upraveného obrázku na webové stránky ovládnut server. Běžní uživatelé se nemusejí obávat přímo, správci webů by měli aktualizovat své servery.</p>
-                </div>
-            </section>
-            <details class="tech-accordion">
-                <summary>Rozbalit přeložený článek a technický rozbor</summary>
-                <div class="accordion-content">
-                    <div class="section-block">
-                        <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Opravená chyba v interpretu Ghostscript umožňuje upravenému souboru uniknout z bezpečnostního sandboxu programu a spustit příkazy na serveru, který jej zpracovává.
-
-Ghostscript je interpret, který mnohé linuxové servery používají k převodu nahraných PDF, PostScript souborů a obrázků do jiných formátů, často bez přímého volání aplikací. Knihovny jako ImageMagick, Pillow či libvips předávají obsah PostScriptu Ghostscriptu ke zpracování, i když má soubor příponu .png nebo .jpg.
-
-Podstatou chyby je Use-After-Free v části Ghostscriptu načítající písma. Upravený dokument tuto chybu zneužije k vypnutí kontrol v sandboxu -dSAFER. Bezpečnostní firma pwn.ai předvedla spuštění příkazu přes 10 aplikací včetně e-mailových příloh v Roundcube či zásuvných modulů WordPress (Forminator, Essential Addons for Elementor).
-
-Vývojáři ze společnosti Artifex opravili chybu ve verzi 10.08.0 dne 8. září. Zokrytí v Linuxových distribucích je však nejednotné; Debian 12 či Amazon Linux stále evidují balíček jako zranitelný nebo čekající na opravu.</p>
-                    </div>
-                    <div class="section-block">
-                        <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost spočívá v chybě správy paměti typu Use-After-Free při načítání fontů v Ghostscriptu. Speciálně vytvořený strukturovaný PostScript kód v souboru vyhnutí se paměťovým ukazatelům způsobí opětovné použití uvolněného paměťového bloku. Útočník tím přepíše interní paměťové struktury běhového prostředí a deaktivuje příznak -dSAFER. Tím dojde k rozbití sandboxu a získání možnosti volat systémové funkce operačního systému (např. execve) v kontextu procesu, pod kterým kód běží.</p>
-                    </div>
-                    <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizujte balíček Ghostscript na verzi 10.08.0 nebo novější v systému i uvnitř Docker kontejnerů.</li><li>Omezte povolené typy souborů v knihovnách pro zpracování obrázků (zakažte obsluhu EPS a PostScript souborů v ImageMagick policy.xml).</li><li>Využijte profilovací nástroje jako AppArmor nebo SELinux k zamezení spouštění příkazového shellu z procesu rendereru.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1059.004</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace (zneužitelné přes e-maily, anonymní tiskové úlohy či veřejné upload formuláře)
-+2 Dopad na enterprise software / kritickou infrastrukturu (Ghostscript je systémová komponenta pro převod grafiky a PDF na Linuxu)
-+1 Veřejný PoC exploit (bezpečnostní firma pwn.ai publikovala analýzu a PoC soubor)
-+1 Umožňuje Privilege Escalation nebo Lateral Movement (únik ze sandboxu -dSAFER k vykonání systémových příkazů)
-+1 Chybí patch (řada distribucí jako Debian 12 či Amazon Linux nemá k dispozici aktualizovaný balíček)</p></div>
-                    </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Use-After-Free:</strong> Typ zranitelnosti správy paměti, kdy program pokračuje v používání ukazatele na paměťový blok i po jeho uvolnění, což umožňuje přepsání dat a spuštění kódu.</div><div class='glossary-item'><strong>sandbox:</strong> Izolované bezpečnostní prostředí určené k bezpečnému spouštění neprověřeného kódu bez rizika poškození okolního systému.</div><div class='glossary-item'><strong>PostScript:</strong> Programovací jazyk a formát popisující vzhled tištěných stran a grafických dokumentů.</div></div>
-                </div>
-            </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/researchers-demonstrate-ghostscript.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-medium" style="--sev-color: #ffcc00;">
@@ -312,15 +197,15 @@ Vývojáři ze společnosti Artifex opravili chybu ve verzi 10.08.0 dne 8. zář
                     <span class="score-word">STŘEDNÍ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
-                    <h2>#6 Únik dat z platformy Rackspace Spot způsobil kompromitaci klíčů Kubernetes zákazníků</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-134814" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-134814</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-1245" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-1245</a></div>
+                    <h2>#4 Kritická zranitelnost code injection v knihovně binary-parser pro Node.js</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Zákazníci cloudové platformy Rackspace Spot provozující aplikace v Kubernetes clusteru.</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci zneužili uníklá přihlašovací credentials k průniku do cloudové platformy Rackspace Spot. Získali přístup k zákaznickým Kubernetes clusterům, kde četli uložená tajemství (Secrets) a nasazovali neautorizované zátěže.</p>
+                <p><strong>🎯 Cíl:</strong> Vývojářské projekty a aplikace využívající knihovnu binary-parser ve verzích nižších než 2.3.1.</p>
+                <p><strong>⚡ Podstata:</strong> V populární knihovně binary-parser pro JavaScript byla objevena zranitelnost umožňující injektáž kódu a spuštění libovolného JavaScriptu v prostředí Node.js.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Běžných uživatelů se incident přímo netýká. Zasažené firmy musejí neprodleně vyměnit všechna hesla, tokeny a přístupové klíče uložené v dotčených cloudech.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Vývojáři softwaru používající tuto knihovnu mohou nechtěně vystavit své servery riziku spuštění škodlivého kódu, pokud zpracovávají nedůvěryhodné definice parserů. Je nutné provést aktualizaci.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -328,26 +213,22 @@ Vývojáři ze společnosti Artifex opravili chybu ve verzi 10.08.0 dne 8. zář
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost Rackspace varovala zákazníky, že útočníci narušili její cloudovou platformu Rackspace Spot s využitím kompromitovaných přihlašovacích údajů, což jim umožnilo nasazovat neautorizované úlohy a přistupovat k tajemstvím Kubernetes v zákaznických clusterech.
+                        <p class="long-text">Kritická bezpečnostní chyba byla odhalena v široce používané knihovně binary-parser, která by mohla umožnit útočníku majícímu kontrolu nad definicemi parserů provést spuštění libovolného kódu. Zranitelnost vedená pod CVE-2026-134814 (CVSS skóre 9.2 / 8.1) představuje případ code injection ovlivňující verze binary-parser mladší než 2.3.1.
 
-Průnik proběhl 17. listopadu 2026 mezi 00:20 a 22:00 UTC. Rackspace zjistil neoprávněnou aktivitu 18. listopadu na základě hlášení zákazníka. Útočníci vystupovali jako legitimní uživatelé, vytvářeli nové pody v Kubernetes clusterech, četli sekce Kubernetes Secrets a vyčítali seznamy uzlů a svazků.
-
-Kubernetes Secrets obsahují citlivé informace jako hesla, autentizační tokeny a API klíče používané pro přístup k databázím a cloudovým službám. Rackspace zneplatnil dotčené tokeny, odstranil neautorizované pody a provedl rotaci klíčů. Aby eliminoval další rizika, dočasně odstavil správcovskou konzoli Spot, přičemž plný provoz byl obnoven 21. listopadu.</p>
+Podle nahlášení v databázi NVD obsahuje knihovna kód, který vrací string-typed volby předávané bez validace metodou Context.generateOption(). Útočníci mohou dodávat upravené délky, klíče, tagy či offsety k provedení arbitrárního JavaScriptu v procesu Node.js při kompilaci parseru. Udržovatel knihovny Keichi Takahashi vydal záplatu ve verzi 2.3.1, která vynucuje validaci jakožto identifikátorových cest.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Útočníci získali platné API tokeny a přihlašovací údaje k platformě Rackspace Spot. Díky tomu se autentizovali vůči řídicí rovině (Control Plane) Kubernetes clusterů zákazníků s oprávněními kompromitovaných účtů. Pomocí standardních příkazů Kubernetes API (vytváření objektů Pod, čtení zdrojů Secret) nasadili neautorizované kontejnery a vyextrahovali uložená hesla a klíče k návazným databázím a úložištím.</p>
+                        <p>Vstupy od uživatele pro parametry délky a klíčů byly vkládány přímo do dynamicky generovaného JavaScriptového kódu bez adekvátní sanitizace. Během kompilace parseru dochází k vyhodnocení těchto řetězců jako kódu (např. skrze dynamické vyhodnocení), což vede k RCE v kontextu Node.js.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Vygenerujte nové Spot API tokeny a nahraďte obnovovací refresh tokeny v automatizačních nástrojích.</li><li>Stáhněte nové konfigurační soubory pro Kubernetes (kubeconfig).</li><li>Proveďte rotaci všech přístupových údajů, databázových hesel a klíčů uložených v Kubernetes Secrets.</li><li>Analyzujte přístupové protokoly (audit logy) databází, Git repozitářů a cloudových úložišť od 17. listopadu 2026.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1078</code></li><li><code>T1609</code></li><li><code>T1552</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 Zneužití in the wild (potvrzený neoprávněný průnik útočníků a manipulace s clustery)
-+2 Dopad na enterprise software / kritickou infrastrukturu (cloudová platforma Rackspace Spot pro správa Kubernetes clusterů)
-+1 Umožňuje Privilege Escalation nebo Lateral Movement (útočníci vytvářeli podové kontejnery a četli Kubernetes Secrets)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat knihovnu binary-parser na verzi 2.3.1 nebo novější.</li><li>Zamezit zpracování nedůvěryhodných definic parserů pocházejících od externích uživatelů.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1059</code></li><li><code>T1190</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Chybí patch (částečně opraveno)</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Kubernetes:</strong> Open-source orchestrační platforma pro automatizaci nasazování, škálování a správy kontejnerizovaných aplikací.</div><div class='glossary-item'><strong>Kubernetes Secrets:</strong> Objekt v prostředí Kubernetes určený k bezpečnému ukládání malého množství citlivých dat, jako jsou hesla či API klíče.</div><div class='glossary-item'><strong>pod:</strong> Základní spouštěcí jednotka v Kubernetes, která obsahuje jeden nebo více propojených kontejnerů s aplikací.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Node.js:</strong> Běhové prostředí umožňující spouštět JavaScriptový kód mimo webový prohlížeč (například na serveru).</div><div class='glossary-item'><strong>code injection:</strong> Typ zranitelnosti, kdy útočník vkládá škodlivý kód do zranitelné aplikace, která jej následně provede.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/rackspace-spot-breach-let-hackers-access-customer-kubernetes-secrets/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/critical-binary-parser-flaw-enables.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         </main>
     </div>

@@ -1,0 +1,209 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická RCE zranitelnost v Cisco Expressway zneužívaná v reálných útocích",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-76466",
+        "CVE-2026-7646",
+        "CVE-2026-20320"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-flags-critical-cisco-expressway-rce-flaw-as-actively-exploited/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci aktivně zneužívají kritickou zranitelnost v bránách Cisco Expressway, která umožňuje neautentizovaným útočníkům vzdálené spuštění příkazů s oprávněním root.",
+        "cil": "Enterprise brány Cisco Expressway-C a Cisco Expressway-E spojené do clusteru.",
+        "dopad_laici": "Firmy a organizace používající tyto systémy pro zabezpečenou komunikaci mohou čelit kompletnímu převzetí zařízení útočníky, což ohrožuje celou vnitřní síť. Je nutné okamžitě aplikovat bezpečnostní aktualizace."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Americká agentura CISA varovala federální úřady, že útočníci nyní v reálném světě aktivně zneužívají nedávno opravenou kritickou zranitelnost v produktech Cisco Expressway. Zařízení Cisco Expressway Series jsou podnikové kolaborativní brány (nasazené jako virtuální stroje nebo fyzický hardware), které propojují interní hlasové a video systémy s vnějšími sítěmi a vzdálenými uživateli pomocí zabezpečeného připojení.\n\nTato bezpečnostní trhlina, označená jako CVE-2026-76466, pramení z použití napevno zapsaných přihlašovacích údajů (hard-coded credentials) a selhání při úplné validaci klientských certifikátů. To umožňuje neautentizovaným útočníkům vzdáleně spouštět libovolné příkazy operačního systému jako root na dotčených zařízeních Cisco Expressway-C a Cisco Expressway-E nakonfigurovaných v clusteru.\n\nAčkoliv společnost Cisco uvedla, že její tým PSIRT nezaznamenal aktivní zneužívání v přírodě ani veřejně dostupné exploity v době vydání záplat koncem října, CISA označila zranitelnost za aktivně zneužívanou a zařadila ji do katalogu známých zneužívaných zranitelností (KEV). Využití této chyby umožňuje získat plná oprávnění root a provádět další laterální pohyb v síti pomocí skriptů pro skenování SMB, SQL Serveru, WinRM nebo GitLab repozitářů.",
+        "jak_to_funguje": "Zranitelnost kombinuje absenci řádné validace klientských certifikátů a přítomnost hard-coded credentials. Útočník mající platné session cookies může navázat spojení databázovou službu a volat specifické Remote Procedure Call (RPC) příkazy. Tím obejde autentizaci a provede arbitrážní příkazy s oprávněním root na základním operačním systému zařízení.",
+        "mitre": [
+          "T1190",
+          "T1078",
+          "T1059",
+          "T1021"
+        ],
+        "mitigace": [
+          "Okamžitě aplikovat oficiální bezpečnostní záplaty vydané společností Cisco.",
+          "Izolovat internetově vystavená zařízení Cisco Expressway a omezit přístup k administraci."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému."
+        },
+        {
+          "pojem": "root",
+          "vysvetleni": "Hlavní administrátorský účet v unixových operačních systémech s neomezenými oprávněními."
+        },
+        {
+          "pojem": "RPC",
+          "vysvetleni": "Remote Procedure Call – protokol umožňující programu vyvolat provedení procedury na jiném počítači."
+        },
+        {
+          "pojem": "hard-coded credentials",
+          "vysvetleni": "Přihlašovací údaje natvrdo zapsané ve zdrojovém kódu aplikace."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Kritická zranitelnost v ConnectWise ScreenConnect zneužívaná k útokům na MSP techniky",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild, +2 Remote exploit bez autentizace, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-84869"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/hackers-exploit-critical-screenconnect.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci aktivně zneužívají zranitelnost v ConnectWise ScreenConnect, která umožňuje vzdálenému hostu nahrát a spustit škodlivý soubor na klientské stanici technika.",
+        "cil": "Pracovní stanice a servery poskytovatelů spravovaných IT služeb (MSP).",
+        "dopad_laici": "Útočníci mohou skrze vzdálenou relaci ovládnout počítače IT správců, což jim otevírá cestu k přístupu do sítí všech klientů dané firmy. Doporučuje se okamžitá aktualizace softwaru."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní výzkumníci zaznamenali aktivní zneužívání bezpečnostní trhliny v nástroji ConnectWise ScreenConnect, která je evidována pod označením CVE-2026-84869 s CVSS skóre 9.9. Jedná se o klientskou zranitelnost umožňující hostu přenést a spustit škodlivou payload na klientské stanici připojujícího se technika bez jeho vědomí.\n\nBěhem října a listopadu 2026 sledovali bezpečnostní experti z firmy Huntress masivní vlnu pokusů, kdy útočníci hromadně zasílali požadavky na spuštění dávkových souborů (batch skriptů) typu update.bat. Tyto skripty po spuštění dekódovaly Telegram bot tokeny, stahovaly instalační soubory vydávající se za aktualizace systému Windows a registrovaly rogue klienty ScreenConnect na útočníkův vlastní relay server.\n\nTento typ útoku představuje obrovské riziko, jelikož stanice techniků spravovaných služeb (MSP) disponují přístupy k RMM nástrojům, uloženým přihlašovacím údajům a celé infrastruktuře koncových zákazníků. Jako mitigaci výrobce doporučuje aktualizaci na verzi 26.6.5 nebo novější, případně dočasné odebrání oprávnění TransferFiles pro role hostů.",
+        "jak_to_funguje": "Zranitelnost spočívá v chybějící validaci souborů přenášených během relace ze strany hosta. Maligní host dokáže skrze protokol ScreenConnect přinutit klientskou aplikaci hostitelského technika k automatickému provedení staženého binárního souboru, čímž dochází k eskalaci oprávnění a spuštění kódu v kontextu uživatele.",
+        "mitre": [
+          "T1204",
+          "T1059",
+          "T1563",
+          "T1078"
+        ],
+        "mitigace": [
+          "Aktualizovat ScreenConnect host klienty na verzi 26.6.5 nebo novější.",
+          "Odebrat oprávnění TransferFiles pro skupinu relací a role hostů, pokud patch není dostupný."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "MSP",
+          "vysvetleni": "Managed Service Provider – firma poskytující externí správu IT infrastruktury pro jiné podniky."
+        },
+        {
+          "pojem": "payload",
+          "vysvetleni": "Škodlivá část kódu, která je doručena na oběť a provádí zamýšlenou nekalou činnost."
+        },
+        {
+          "pojem": "relay",
+          "vysvetleni": "Zprostředkovatelský server zajišťující síťové propojení mezi dvěma body v situaci, kdy nelze navázat přímé spojení."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Zranitelnost v N-able Mail Assure umožňující SSRF útoky na vnitřní sítě",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-134624",
+        "CVE-2026-133968"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Společnost N-able opravila kritickou SSRF zranitelnost v e-mailovém filtrovacím řešení Mail Assure, která umožňovala skenovat a napadat vnitřní síťové služby.",
+        "cil": "Služba N-able Mail Assure a SpamExperts Hosted Cloud.",
+        "dopad_laici": "Poskytovatelé IT služeb a jejich zákazníci byli vystaveni riziku, že útočníci skrze e-mailovou bránu proniknou do interních podnikových systémů. Výrobce aplikoval záplatu na hostované verzi."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost N-able zveřejnila podrobnosti o kritické chybě zabezpečení, kterou objevila během vyšetřování narušení své služby Mail Assure a SpamExperts Hosted Cloud, což je e-mailové filtrovací řešení provozované pro poskytovatele spravovaných služeb (MSP).\n\nZranitelnost, označená jako CVE-2026-134624, je typu Server-Side Request Forgery (SSRF) s hodnocením CVSS 9.3. Umožňovala uživateli s vysokou úrovní API přístup otevírat spojení na interní systémy podle vlastního výběru na serverech platformy. Chyba se nacházela v kontrolním mechanismu připojení pro LDAP synchronizaci. Před vydáním opravy neexistovalo žádné omezení cílové destinace tohoto ověření.\n\nFirma reagovala odstavením systémů, rotací interních pověření, zneplatněním API a OAuth tokenů a resetováním hesel. Pro uživatele Hosted Cloud verze byla nasazena záplata (build 20261121.1943), zatímco provozovatelé Local Cloud verzí musí aplikovat týdenní aktualizace sami.",
+        "jak_to_funguje": "Aplikace prováděla interní ověření síťového spojení pro LDAP bez validace cílové IP adresy či portu. Autentizovaný uživatel API mohl donutit server k navázání spojení s libovolnými vnitřními uzly v síti, mapovat otevřené porty a zasílat data na interní služby.",
+        "mitre": [
+          "T1190",
+          "T1046",
+          "T1595"
+        ],
+        "mitigace": [
+          "Aktualizovat software na verzi build 20261121.1943 nebo novější.",
+          "Pravidelně kontrolovat platnost a rotovat API klíče a OAuth tokeny."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "SSRF",
+          "vysvetleni": "Server-Side Request Forgery – zranitelnost umožňující přimět server, aby odeslal HTTP požadavek na libovolné destinace včetně vnitřní sítě."
+        },
+        {
+          "pojem": "LDAP",
+          "vysvetleni": "Lightweight Directory Access Protocol – síťový protokol pro vyhledávání a správu informací v adresářových službách."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 4,
+      "titulek": "Kritická zranitelnost code injection v knihovně binary-parser pro Node.js",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Chybí patch (částečně opraveno)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-134814",
+        "CVE-2026-1245"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/critical-binary-parser-flaw-enables.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "V populární knihovně binary-parser pro JavaScript byla objevena zranitelnost umožňující injektáž kódu a spuštění libovolného JavaScriptu v prostředí Node.js.",
+        "cil": "Vývojářské projekty a aplikace využívající knihovnu binary-parser ve verzích nižších než 2.3.1.",
+        "dopad_laici": "Vývojáři softwaru používající tuto knihovnu mohou nechtěně vystavit své servery riziku spuštění škodlivého kódu, pokud zpracovávají nedůvěryhodné definice parserů. Je nutné provést aktualizaci."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Kritická bezpečnostní chyba byla odhalena v široce používané knihovně binary-parser, která by mohla umožnit útočníku majícímu kontrolu nad definicemi parserů provést spuštění libovolného kódu. Zranitelnost vedená pod CVE-2026-134814 (CVSS skóre 9.2 / 8.1) představuje případ code injection ovlivňující verze binary-parser mladší než 2.3.1.\n\nPodle nahlášení v databázi NVD obsahuje knihovna kód, který vrací string-typed volby předávané bez validace metodou Context.generateOption(). Útočníci mohou dodávat upravené délky, klíče, tagy či offsety k provedení arbitrárního JavaScriptu v procesu Node.js při kompilaci parseru. Udržovatel knihovny Keichi Takahashi vydal záplatu ve verzi 2.3.1, která vynucuje validaci jakožto identifikátorových cest.",
+        "jak_to_funguje": "Vstupy od uživatele pro parametry délky a klíčů byly vkládány přímo do dynamicky generovaného JavaScriptového kódu bez adekvátní sanitizace. Během kompilace parseru dochází k vyhodnocení těchto řetězců jako kódu (např. skrze dynamické vyhodnocení), což vede k RCE v kontextu Node.js.",
+        "mitre": [
+          "T1059",
+          "T1190"
+        ],
+        "mitigace": [
+          "Aktualizovat knihovnu binary-parser na verzi 2.3.1 nebo novější.",
+          "Zamezit zpracování nedůvěryhodných definic parserů pocházejících od externích uživatelů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Node.js",
+          "vysvetleni": "Běhové prostředí umožňující spouštět JavaScriptový kód mimo webový prohlížeč (například na serveru)."
+        },
+        {
+          "pojem": "code injection",
+          "vysvetleni": "Typ zranitelnosti, kdy útočník vkládá škodlivý kód do zranitelné aplikace, která jej následně provede."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
