@@ -11,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CTI Svodka">
-    <title>Threat Intel Svodka | 23.11.2026</title>
+    <title>Threat Intel Svodka | 26.11.2026</title>
     <style>
         :root { --bg-main: #0d1117; --bg-card: #161b22; --bg-acc: #090d13; --border: #30363d; --text-main: #e6edf3; --text-muted: #8b949e; --accent: #58a6ff; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,25 +58,25 @@
     <div class="container">
         <header class="site-header">
             <div><h1>🛡️ Cyber Threat Intelligence</h1></div>
-            <span style="color: var(--accent); font-family: monospace;">23.11.2026 • 4 hrozeb</span>
+            <span style="color: var(--accent); font-family: monospace;">26.11.2026 • 10 hrozeb</span>
         </header>
         <main>
-        <article class="card sev-high" style="--sev-color: #ff9500;">
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
             <header class="card-header">
                 <div class="score-box">
-                    <span class="score-num">8<small>/10</small></span>
-                    <span class="score-word">VYSOKÁ</span>
+                    <span class="score-num">10<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76466" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76466</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-7646" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-7646</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-20320" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-20320</a></div>
-                    <h2>#1 Kritická RCE zranitelnost v Cisco Expressway zneužívaná v reálných útocích</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-132165" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-132165</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-136716" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-136716</a></div>
+                    <h2>#1 Kritická RCE zranitelnost v Drupalu aktivně zneužívána k převzetí webů</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Enterprise brány Cisco Expressway-C a Cisco Expressway-E spojené do clusteru.</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci aktivně zneužívají kritickou zranitelnost v bránách Cisco Expressway, která umožňuje neautentizovaným útočníkům vzdálené spuštění příkazů s oprávněním root.</p>
+                <p><strong>🎯 Cíl:</strong> Serverová infrastruktura a webové aplikace běžící na redakčním systému Drupal využívané vládními subjekty a podniky.</p>
+                <p><strong>⚡ Podstata:</strong> Neznámí útočníci aktivně zneužívají kritickou RCE zranitelnost v instalátoru redakčního systému Drupal k plnému převzetí webových stránek.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Firmy a organizace používající tyto systémy pro zabezpečenou komunikaci mohou čelit kompletnímu převzetí zařízení útočníky, což ohrožuje celou vnitřní síť. Je nutné okamžitě aplikovat bezpečnostní aktualizace.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Hacker může zcela ovládnout webové stránky organizace a vložit do nich škodlivý kód. Správci webů musí okamžitě aktualizovat systém nebo zabezpečit instalační skript.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -84,24 +84,65 @@
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Americká agentura CISA varovala federální úřady, že útočníci nyní v reálném světě aktivně zneužívají nedávno opravenou kritickou zranitelnost v produktech Cisco Expressway. Zařízení Cisco Expressway Series jsou podnikové kolaborativní brány (nasazené jako virtuální stroje nebo fyzický hardware), které propojují interní hlasové a video systémy s vnějšími sítěmi a vzdálenými uživateli pomocí zabezpečeného připojení.
+                        <p class="long-text">Tým pro bezpečnost Drupalu potvrdil, že kritická zranitelnost umožňující útočníkům převzít neopravené weby je aktivně zneužívána od čtvrtka. Drupal je systém pro správu obsahu (CMS), který běžně využívají velké organizace, včetně vládních institucí, významných výzkumných univerzit a předních podnikových a mediálních subjektů. Bezpečnostní nedostatek, označený jako CVE-2026-132165, byl objeven skenerem OSS společnosti Anthropic a může být zneužit anonymními uživateli k získání vzdáleného spuštění kódu nebo k převzetí zranitelných stránek zneužitím instalačního programu Drupalu.
 
-Tato bezpečnostní trhlina, označená jako CVE-2026-76466, pramení z použití napevno zapsaných přihlašovacích údajů (hard-coded credentials) a selhání při úplné validaci klientských certifikátů. To umožňuje neautentizovaným útočníkům vzdáleně spouštět libovolné příkazy operačního systému jako root na dotčených zařízeních Cisco Expressway-C a Cisco Expressway-E nakonfigurovaných v clusteru.
+Jádro Drupalu obsahuje soubor install.php určený k instalaci jádra. Za specifických podmínek může útočník tento instalační program využít k pokusu o reinstalaci Drupalu, což může vést k převzetí webu nebo vzdálenému spuštění kódu. Některé cesty útoku jsou mírněno, pokud webový server nemůže zapisovat do souboru settings.php nebo měnit jeho oprávnění. Ačkoliv zpočátku nebylo hlášeno zneužití v reálném světě, v aktualizaci původního bezpečnostního doporučení Drupal varoval, že tato chyba byla zneužita na živých webech již 19. listopadu 2026 v 19:00 UTC.
 
-Ačkoliv společnost Cisco uvedla, že její tým PSIRT nezaznamenal aktivní zneužívání v přírodě ani veřejně dostupné exploity v době vydání záplat koncem října, CISA označila zranitelnost za aktivně zneužívanou a zařadila ji do katalogu známých zneužívaných zranitelností (KEV). Využití této chyby umožňuje získat plná oprávnění root a provádět další laterální pohyb v síti pomocí skriptů pro skenování SMB, SQL Serveru, WinRM nebo GitLab repozitářů.</p>
+Webové stránky využívající placenou službu Drupal Steward WAF jsou již před známými vektory útoků chráněny, správcům se však přesto doporučuje aktualizovat na nejnovější dostupnou verzi pro případ objevení dalších vektorů. Ti, kteří nemohou okamžitě provést aktualizaci, by měli v konfiguraci webového serveru nebo v souboru .htaccess v kořenovém adresáři zablokovat přístup k /core/install.php.
+
+Agentura CISA navíc zařadila tuto zranitelnost do svého katalogu zneužívaných zranitelností (KEV) a nařídila federálním úřadům zabezpečit systémy do pátku 27. listopadu. Od listopadu 2021 označila CISA již pět zranitelností v Drupalu jako aktivně zneužívaných, přičemž dvě z nich byly zneužity i ransomware skupinami.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost kombinuje absenci řádné validace klientských certifikátů a přítomnost hard-coded credentials. Útočník mající platné session cookies může navázat spojení databázovou službu a volat specifické Remote Procedure Call (RPC) příkazy. Tím obejde autentizaci a provede arbitrážní příkazy s oprávněním root na základním operačním systému zařízení.</p>
+                        <p>Útok využívá vyčerpání systémových limitů (např. omezení otevřených souborů EMFILE, vyčerpání připojení k databázi nebo TCP portů), což způsobí selhání ověření existence databáze. Drupal v takovém stavu vyhodnotí situaci tak, že web ještě nebyl nainstalován, a povolí spuštění instalačního skriptu install.php. Útočník následně může podstrčit vlastní databázové parametry nebo při volbě SQLite databáze vytvořit soubor s příponou .php, kam zapíše spustitelný kód (RCE).</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aplikovat oficiální bezpečnostní záplaty vydané společností Cisco.</li><li>Izolovat internetově vystavená zařízení Cisco Expressway a omezit přístup k administraci.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1078</code></li><li><code>T1059</code></li><li><code>T1021</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Chybí patch</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aktualizovat Drupal na nejnovější opravné verze (např. 11.4.14, 11.3.23, 10.6.23).</li><li>Zablokovat přístup k souboru /core/install.php na webovém serveru nebo v .htaccess.</li><li>Spustit skript update.php pro zajištění konzistence stavu databáze a produkčních stránek.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1505.003</code></li><li><code>T1068</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (aktivně zneužíváno), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software (CMS Drupal), +1 Veřejný PoC exploit, +1 Umožňuje Privilege Escalation / RCE, +1 Chybí patch na starších verzích</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>root:</strong> Hlavní administrátorský účet v unixových operačních systémech s neomezenými oprávněními.</div><div class='glossary-item'><strong>RPC:</strong> Remote Procedure Call – protokol umožňující programu vyvolat provedení procedury na jiném počítači.</div><div class='glossary-item'><strong>hard-coded credentials:</strong> Přihlašovací údaje natvrdo zapsané ve zdrojovém kódu aplikace.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>RCE:</strong> Remote Code Execution – schopnost útočníka vzdáleně spustit libovolný kód na napadeném systému.</div><div class='glossary-item'><strong>CMS:</strong> Content Management System – software pro správu a publikaci obsahu na webu.</div><div class='glossary-item'><strong>WAF:</strong> Web Application Firewall – bezpečnostní prvek filtrující provoz směřující na webové aplikace.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-flags-critical-cisco-expressway-rce-flaw-as-actively-exploited/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/drupal-warns-of-new-highly-critical.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a> • <a href="https://thehackernews.com/2026/11/drupal-warns-of-new-highly-critical.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-critical" style="--sev-color: #ff3b30;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">10<small>/10</small></span>
+                    <span class="score-word">KRITICKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120704" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120704</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-120705" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-120705</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129242" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129242</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129243" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129243</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129244" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129244</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129245" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129245</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76904" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76904</a></div>
+                    <h2>#2 Kritická RCE zranitelnost a řetězení chyb ohrožují serverové prostředí GeoServer</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> GeoServer – open-source server pro sdílení geoprostorových dat využívaný v enterprise sféře.</p>
+                <p><strong>⚡ Podstata:</strong> Útočníci aktivně zneužívají zranitelnosti v softwaru GeoServer k neautentizovanému čtení souborů a řetězení chyb vedoucím k RCE.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou získat plnou kontrolu nad servery pro geografická data, krást citlivá data nebo spouštět škodlivý kód. Je nutné bezodkladně aktualizovat software.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Hrozba spočívá v aktivním zneužívání dvou nově opravených chyb v GeoServeru (CVE-2026-120705 a CVE-2026-129243) firmou watchTowr a dalšími útočníky. První z nich představuje čtení libovolných souborů a druhá obcházení autorizace. Bezpečnostní experti popsali, že tyto chyby lze kombinovat do plnohodnotného řetězce vedoucího k neautentizovanému vzdálenému spuštění kódu (RCE). Útočníci nejprve odesílají chybové sondy k ověření zranitelnosti serveru a následně mohou číst konfigurační soubory, získat hashe hesel z &#x27;users.xml&#x27; a statický podepisovací klíč. Pomocí předvídatelného klíče v mechanizmu &#x27;remember me&#x27; (CVE-2026-129245) dokážou zfalšovat platný administrátorský soubor cookie a následně přes JDBC konfiguraci (CVE-2026-120704) spustit libovolný kód na Linuxu i Windows.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Útok kombinuje zneužití WFS požadavků pro čtení systémových souborů, extrakci hashů hesel a statického kryptografického klíče, který slouží k podepisování relací. S tímto klíčem útočník zfalšuje relaci administrátora bez znalosti hesla a skrze JDBC rozhraní nahraje a spustí nativní knihovnu s právy aplikace.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat GeoServer a související knihovny na opravené verze (3.0.2, 2.28.6, 2.27.7 a novější).</li><li>Omezit přístup k rozhraní WFS a OWS z nedůvěryhodných sítí a internetu.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1550.002</code></li><li><code>T1059</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (aktivně zneužíváno), +2 Remote exploit bez autentizace, +2 Dopad na enterprise software, +1 Veřejný PoC exploit, +1 Umožňuje Privilege Escalation / RCE, +1 Chybí patch u řady nasazení</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>JDBC:</strong> Java Database Connectivity – standardní rozhraní pro připojení k databázím v jazyce Java.</div><div class='glossary-item'><strong>WFS:</strong> Web Feature Service – standardní protokol pro výměnu geografických dat po síti.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploit-two-geoserver-flaws-as.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-high" style="--sev-color: #ff9500;">
@@ -111,15 +152,15 @@ Ačkoliv společnost Cisco uvedla, že její tým PSIRT nezaznamenal aktivní zn
                     <span class="score-word">VYSOKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-84869" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-84869</a></div>
-                    <h2>#2 Kritická zranitelnost v ConnectWise ScreenConnect zneužívaná k útokům na MSP techniky</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-103406" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-103406</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-114625" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-114625</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-19868" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-19868</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-46300" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-46300</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76418" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76418</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-76466" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-76466</a></div>
+                    <h2>#3 Zranitelnosti v síťových prvcích Firewall a KEV katalog zneužívané v kampaních</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Pracovní stanice a servery poskytovatelů spravovaných IT služeb (MSP).</p>
-                <p><strong>⚡ Podstata:</strong> Útočníci aktivně zneužívají zranitelnost v ConnectWise ScreenConnect, která umožňuje vzdálenému hostu nahrát a spustit škodlivý soubor na klientské stanici technika.</p>
+                <p><strong>🎯 Cíl:</strong> Podnikové firewally, VPN brány a síťová zařízení s rozhraními vystavenými do internetu.</p>
+                <p><strong>⚡ Podstata:</strong> Útočníci řetězí zranitelnosti (včetně Fragnesia a PHP2Shell) k napadání podnikových a vládních síťových prvků od firem Palo Alto Networks, Cisco či SonicWall.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou skrze vzdálenou relaci ovládnout počítače IT správců, což jim otevírá cestu k přístupu do sítí všech klientů dané firmy. Doporučuje se okamžitá aktualizace softwaru.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Hakeři mohou získat plnou kontrolu nad firemními bezpečnostními branami a proniknout do vnitřní sítě organizací. Je nutné okamžitě instalovat bezpečnostní aktualizace.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -127,24 +168,98 @@ Ačkoliv společnost Cisco uvedla, že její tým PSIRT nezaznamenal aktivní zn
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Bezpečnostní výzkumníci zaznamenali aktivní zneužívání bezpečnostní trhliny v nástroji ConnectWise ScreenConnect, která je evidována pod označením CVE-2026-84869 s CVSS skóre 9.9. Jedná se o klientskou zranitelnost umožňující hostu přenést a spustit škodlivou payload na klientské stanici připojujícího se technika bez jeho vědomí.
-
-Během října a listopadu 2026 sledovali bezpečnostní experti z firmy Huntress masivní vlnu pokusů, kdy útočníci hromadně zasílali požadavky na spuštění dávkových souborů (batch skriptů) typu update.bat. Tyto skripty po spuštění dekódovaly Telegram bot tokeny, stahovaly instalační soubory vydávající se za aktualizace systému Windows a registrovaly rogue klienty ScreenConnect na útočníkův vlastní relay server.
-
-Tento typ útoku představuje obrovské riziko, jelikož stanice techniků spravovaných služeb (MSP) disponují přístupy k RMM nástrojům, uloženým přihlašovacím údajům a celé infrastruktuře koncových zákazníků. Jako mitigaci výrobce doporučuje aktualizaci na verzi 26.6.5 nebo novější, případně dočasné odebrání oprávnění TransferFiles pro role hostů.</p>
+                        <p class="long-text">Útočníci řetězí exploity pro zranitelnosti PHP2Shell (CVE-2026-109618, CVE-2026-109619) a chybu Fragnesia (CVE-2026-46300 v linuxovém jádře v XFRM ESP-in-TCP subsystému), čímž cílí na zařízení Palo Alto Networks s vystavenými administrátorskými rozhraními. Zpráva agentury CISA a společnosti Eclypsium (InfraTrust) potvrzuje, že řada dodavatelů síťových zařízení využívá zranitelné dodavatelské komponenty (PHP, Node.js, OpenSSH). Mezi další prioritně zneužívané a patchované položky v KEV katalogu patří Cisco Expressway (CVE-2026-76466), Arista VeloCloud Orchestrator (CVE-2026-114625), Cisco Secure Firewall ASA/FTD (CVE-2026-76418) a SonicWall SonicOS (CVE-2026-19868).</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Zranitelnost spočívá v chybějící validaci souborů přenášených během relace ze strany hosta. Maligní host dokáže skrze protokol ScreenConnect přinutit klientskou aplikaci hostitelského technika k automatickému provedení staženého binárního souboru, čímž dochází k eskalaci oprávnění a spuštění kódu v kontextu uživatele.</p>
+                        <p>Útočníci zneužijí PHP zranitelnosti k nahrání webshellu a následně eskalují oprávnění na úroveň root prostřednictvím linuxové chyby v subsystému správy síťového provozu.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat ScreenConnect host klienty na verzi 26.6.5 nebo novější.</li><li>Odebrat oprávnění TransferFiles pro skupinu relací a role hostů, pokud patch není dostupný.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1204</code></li><li><code>T1059</code></li><li><code>T1563</code></li><li><code>T1078</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild, +2 Remote exploit bez autentizace, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě aplikovat bezpečnostní záplaty od výrobců pro PAN-OS, Cisco, SonicWall a další.</li><li>Odstranit administrátorská rozhraní z veřejného internetu a omezit přístup pouze na důvěryhodné interní IP adresy.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1068</code></li><li><code>T1505.003</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (potvrzené útoky CISA), +2 Remote exploit bez autentizace, +2 Dopad na enterprise firewall infrastrukturu, +1 Chybí patch / nutnost prioritního nasazení</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>MSP:</strong> Managed Service Provider – firma poskytující externí správu IT infrastruktury pro jiné podniky.</div><div class='glossary-item'><strong>payload:</strong> Škodlivá část kódu, která je doručena na oběť a provádí zamýšlenou nekalou činnost.</div><div class='glossary-item'><strong>relay:</strong> Zprostředkovatelský server zajišťující síťové propojení mezi dvěma body v situaci, kdy nelze navázat přímé spojení.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Webshell:</strong> Skript umístěný na webovém serveru, který umožňuje útočníkovi vzdálenou správu systému přes webový prohlížeč.</div><div class='glossary-item'><strong>KEV:</strong> Known Exploited Vulnerabilities – katalog CISA obsahující zranitelnosti, u nichž je potvrzeno aktivní zneužívání.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-screenconnect.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-fragnesia-flaw-exploited-in-pan-os-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://www.bleepingcomputer.com/news/security/infratrust-warns-of-exploited-supply-chain-flaws-in-network-appliances/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-high" style="--sev-color: #ff9500;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133275" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133275</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133303" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133303</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133311" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133311</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133323" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133323</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133324" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133324</a></div>
+                    <h2>#4 Kritická zranitelnost v Mitel MiCollab zneužívána k rychlému získání root práv</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Komunikační platforma Mitel MiCollab spojená se službami jako Active Directory.</p>
+                <p><strong>⚡ Podstata:</strong> CISA zařadila pětici závažných zranitelností v Mitel MiCollab do katalogu KEV kvůli probíhajícím útokům a nasazení webshellů.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou skrze komunikační server proniknout do podnikové sítě, získat administrátorská oprávnění a krást firemní data. Je nutné provést aktualizaci.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Americká agentura CISA přidala do katalogu KEV celkem 5 chyb ovlivňujících Mitel MiCollab verze 10.3 a starší. Mezi ně patří injekce příkazů OS (CVE-2026-133323), XML injekce (CVE-2026-133303), neautorizovaný přístup k souborům a obcházení ověřování. Podle výzkumníků z Accenture Apex Labs útočníci využili tyto chyby k nasazení webshellu, přičemž během 30 minut dosáhli root oprávnění na serveru a následně využili uložené LDAP přihlašovací údaje k průniku do doménového řadiče.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Zranitelnosti v komponentě AWV (Audio, Web and Video Conferencing) umožňují nahrávání souborů a injekci příkazů, což v kombinaci vede ke vzdálenému spuštění kódu v kontextu systému a rychlému postupu v síti.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat Mitel MiCollab na verzi 10.3.0.18 nebo novější.</li><li>Omezit externí přístup k AWV komponentě v případě nemožnosti okamžitého záplatování.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1078</code></li><li><code>T1210</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (potvrzeno CISA a Accenture), +2 Remote exploit bez autentizace / nízká autentizace, +2 Dopad na enterprise komunikační platformu, +1 Veřejný PoC / aktivní zneužití</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>LDAP:</strong> Lightweight Directory Access Protocol – protokol pro správu a vyhledávání v uživatelských adresářích (např. Active Directory).</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/hackers-exploit-10-vulnerabilities.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a> • <a href="https://www.cisa.gov/news-events/alerts/2026/11/25/cisa-adds-10-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer">CISA Advisories ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-high" style="--sev-color: #ff9500;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">8<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2020-1472" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2020-1472</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-25914" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2023-25914</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-25915" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2023-25915</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-41450" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2025-41450</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-129713" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-129713</a></div>
+                    <h2>#5 Kritická buffer overflow zranitelnost v chladicích systémech Danfoss bez záplaty</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Řídicí jednotky Danfoss AK-SM 8xxA Series v obchodech, skladech a průmyslu.</p>
+                <p><strong>⚡ Podstata:</strong> Neznámí útočníci zneužívají nezáplatovanou buffer overflow zranitelnost v chladicích kontrolérech Danfoss k vypínání mrazicích boxů v supermarketech.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou vzdáleně manipulovat s teplotami v komerčních chladicích systémech a způsobit obrovské škody na potravinách či zdravotnickém materiálu. Zařízení nesmí být připojena k veřejnému internetu.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Americká agentura CISA a výrobce Danfoss varují před kritickou zranitelností CVE-2026-129713 (skóre CVSS 9.8), což je přetečení zásobníku (stack-based buffer overflow) v serveru kontrolérů AK-SM 8xxA Series. Chyba umožňuje neautentizovanému útočníkovi restartovat server a potenciálně dosáhnout RCE. Tyto jednotky byly nedávno zneužity v řadě útoků v Evropě (Francie, Belgie, Nizozemsko, Švédsko a další), kde útočníci vzdáleně měnili nastavení odmrazování nebo vypínali chlazení v supermarketech a zařízeních pro krevní plazmu. Výrobce plánuje vydat verzi 5.5.x, v současnosti však patch plně dostupný není.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Odesláním speciálně crafted požadavku na webový server kontroléru dojde k přetečení vyrovnávací paměti na zásobníku, což vede k pádu zařízení nebo spuštění libovolného kódu s právy webového serveru.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Okamžitě odpojit řídicí jednotky od veřejného internetu.</li><li>Izolovat kontroléry za firewally a pro vzdálený přístup používat výhradně zabezpečené VPN.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1210</code></li><li><code>T1499</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +3 In the wild (evropské supermarkety napadeny), +2 Remote exploit bez autentizace, +2 Dopad na průmyslovou kritickou infrastrukturu (HVAC/chlazení), +1 Chybí patch (chybí oficiální oprava v době zprávy)</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Buffer Overflow:</strong> Chyba správy paměti, kdy program zapisuje data za hranice alokovaného bufferu, což může přepsat sousední paměť.</div><div class='glossary-item'><strong>HVAC:</strong> Heating, Ventilation and Air Conditioning – systémy vytápění, ventilace a klimatizace.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/cisa-warns-of-critical-unpatched-flaw-in-danfoss-refrigeration-controllers/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
         </article>
         
         <article class="card sev-high" style="--sev-color: #ff9500;">
@@ -154,15 +269,15 @@ Tento typ útoku představuje obrovské riziko, jelikož stanice techniků sprav
                     <span class="score-word">VYSOKÁ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-134624" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-134624</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-133968" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-133968</a></div>
-                    <h2>#3 Zranitelnost v N-able Mail Assure umožňující SSRF útoky na vnitřní sítě</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><span class="badge badge-itw">🔥 IN THE WILD</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-135202" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-135202</a></div>
+                    <h2>#6 Kritická zranitelnost v pluginech WP Connect pro WordPress umožňuje kompletní převzetí webů</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Služba N-able Mail Assure a SpamExperts Hosted Cloud.</p>
-                <p><strong>⚡ Podstata:</strong> Společnost N-able opravila kritickou SSRF zranitelnost v e-mailovém filtrovacím řešení Mail Assure, která umožňovala skenovat a napadat vnitřní síťové služby.</p>
+                <p><strong>🎯 Cíl:</strong> Webové stránky na platformě WordPress využívající pluginy pro integraci s Notion a Airtable.</p>
+                <p><strong>⚡ Podstata:</strong> Neznámí útočníci zkompromitovali vývojářský účet WP Connect a do šesti populárních pluginů pro WordPress vložili backdoor umožňující RCE.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Poskytovatelé IT služeb a jejich zákazníci byli vystaveni riziku, že útočníci skrze e-mailovou bránu proniknou do interních podnikových systémů. Výrobce aplikoval záplatu na hostované verzi.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohli skrze podvržené aktualizace ovládnout tisíce webů. WordPress útok včas zachytil a instalaci zablokoval, správci by však měli ověřit své weby.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -170,24 +285,59 @@ Tento typ útoku představuje obrovské riziko, jelikož stanice techniků sprav
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Společnost N-able zveřejnila podrobnosti o kritické chybě zabezpečení, kterou objevila během vyšetřování narušení své služby Mail Assure a SpamExperts Hosted Cloud, což je e-mailové filtrovací řešení provozované pro poskytovatele spravovaných služeb (MSP).
-
-Zranitelnost, označená jako CVE-2026-134624, je typu Server-Side Request Forgery (SSRF) s hodnocením CVSS 9.3. Umožňovala uživateli s vysokou úrovní API přístup otevírat spojení na interní systémy podle vlastního výběru na serverech platformy. Chyba se nacházela v kontrolním mechanismu připojení pro LDAP synchronizaci. Před vydáním opravy neexistovalo žádné omezení cílové destinace tohoto ověření.
-
-Firma reagovala odstavením systémů, rotací interních pověření, zneplatněním API a OAuth tokenů a resetováním hesel. Pro uživatele Hosted Cloud verze byla nasazena záplata (build 20261121.1943), zatímco provozovatelé Local Cloud verzí musí aplikovat týdenní aktualizace sami.</p>
+                        <p class="long-text">Tým WordPressu odstranil šest pluginů od společnosti WP Connect po jejich zjištěné kompromitaci dne 22. listopadu 2026. Útočníci vložili do verzí (např. Air WP Sync 2.9.1–2.9.4 či WP Sync for Notion 1.7.4) zadní vrátka. Tyto pluginy byly nainstalovány na více než 3 600 webech. Incident je evidován jako CVE-2026-135202 s CVSS skóre 9.8. Každé spuštění tajně obsahovalo modul &#x27;includes/airwp-online.php&#x27;, který odesílal data na server útočníka a spouštěl kód přes eval(). Vzhledem k tomu, že WordPress škodlivé verze včas zablokoval, je dopad minimalizován.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Aplikace prováděla interní ověření síťového spojení pro LDAP bez validace cílové IP adresy či portu. Autentizovaný uživatel API mohl donutit server k navázání spojení s libovolnými vnitřními uzly v síti, mapovat otevřené porty a zasílat data na interní služby.</p>
+                        <p>Zadní vrátka se spouštějí s každým požadavkem na web, odesílají systémové informace na C2 server a umožňují spouštění příkazů, čtení souborů, mazání a dump databáze nebo vytvoření trvalého webshellu.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat software na verzi build 20261121.1943 nebo novější.</li><li>Pravidelně kontrolovat platnost a rotovat API klíče a OAuth tokeny.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1190</code></li><li><code>T1046</code></li><li><code>T1595</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Privilege Escalation / Lateral Movement, +1 Chybí patch</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Zkontrolovat instalované pluginy a ujistit se, že na webu neběžící kompromitované verze zadaných balíčků WP Connect.</li><li>Okamžitě odstranit podezřelé pluginy a provést forenzní audit.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1195.002</code></li><li><code>T1505.003</code></li><li><code>T1059.004</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise publikační systémy, +1 Chybí patch / kompromitovaný repozitář, +1 Umožňuje RCE a nasazení webshellu, +1 Aktivní distribuce podvrženého kódu</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>SSRF:</strong> Server-Side Request Forgery – zranitelnost umožňující přimět server, aby odeslal HTTP požadavek na libovolné destinace včetně vnitřní sítě.</div><div class='glossary-item'><strong>LDAP:</strong> Lightweight Directory Access Protocol – síťový protokol pro vyhledávání a správu informací v adresářových službách.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Backdoor:</strong> Zadní vrátka – skrytý mechanismus umožňující obcházet standardní bezpečnostní ověření a ovládnout systém.</div><div class='glossary-item'><strong>Eval:</strong> Funkce v programovacích jazycích, která vyhodnocuje a spouští řetězec jako dynamický kód.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/wordpress-blocks-six-backdoored-wp.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-high" style="--sev-color: #ff9500;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">7<small>/10</small></span>
+                    <span class="score-word">VYSOKÁ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">DATA-BREACH</span></div>
+                    <h2>#7 1Password utrpěl únik dat po kompromitaci firemního GitHub účtu zaměstnance</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Backendové systémy, CI/CD prostředí a zákaznická databáze společnosti 1Password.</p>
+                <p><strong>⚡ Podstata:</strong> Společnost 1Password potvrdila únik zákaznických metadat poté, co útočník zneužil napadený GitHub účet zaměstnance k vložení škodlivého kódu do backendových služeb.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Samotná hesla ani šifrované trezory uživatelů kompromitovány nebyly. Útočníci však získali jména, e-maily a pozvánkové tokeny, které mohou zneužít k věrohodným phishingovým útokům.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Společnost 1Password odhalila bezpečnostní incident, při němž útočník 19. listopadu 2026 kompromitoval firemní GitHub účet zaměstnance. Získaný přístup využil k injektáži škodlivého kódu do backendových služeb, což vedlo ke stažení záznamů zákaznických účtů. Ukradená data obsahují jména, e-mailové adresy, identifikátory uživatelů, veřejné klíče, parametry SRP protokolu a tokeny v odkazech pro obnovení účtu či pozvánky. Trezory hesel a šifrovací klíče uživatelů zůstaly bezpečné, protože jsou chráněny šifrováním na straně klienta. Útočníci však získali i interní zdrojový kód a přístup do CI/CD prostředí.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Útočník zneužil oprávnění k privátním repozitářům na GitHubu, odkud pushnul kód modifikující backendové služby tak, aby exportovaly administrativní metadata a uživatelské záznamy.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Prodloužit ověřovací kódy a tokeny z 6 číslic na 10 alfanumerických znaků.</li><li>Zvýšená ostražitost uživatelů vůči phishingovým zprávám zneužívajícím zprávy o obnovení účtů.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1078.004</code></li><li><code>T1562</code></li><li><code>T1588.002</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na enterprise software a správce hesel, +2 Únik citlivých metadat a tokenů, +1 Ohrožení CI/CD a zdrojového kódu, +1 Riziko následných cílených phishingových kampaní, +1 Neoprávněný přístup do backendu</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>CI/CD:</strong> Continuous Integration / Continuous Deployment – automatizované procesy pro sestavování a nasazování softwaru.</div><div class='glossary-item'><strong>SRP:</strong> Secure Remote Password – kryptografický protokol pro ověřování hesel bez jejich přenosu po síti.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://thehackernews.com/2026/11/1password-hacked-customer-data-and.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
         </article>
         
         <article class="card sev-medium" style="--sev-color: #ffcc00;">
@@ -197,15 +347,15 @@ Firma reagovala odstavením systémů, rotací interních pověření, zneplatn�
                     <span class="score-word">STŘEDNÍ</span>
                 </div>
                 <div class="title-box">
-                    <div class="meta-tags"><span class="badge badge-cat">ZERO-DAY</span><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-134814" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-134814</a><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-1245" target="_blank" rel="noopener noreferrer" class="badge badge-cve">CVE-2026-1245</a></div>
-                    <h2>#4 Kritická zranitelnost code injection v knihovně binary-parser pro Node.js</h2>
+                    <div class="meta-tags"><span class="badge badge-cat">MALWARE</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
+                    <h2>#8 Kampaně infostealerů Remus a SYS010 zneužívají falešná rozšíření pro sledování Gmailu a Outlooku</h2>
                 </div>
             </header>
             <section class="quick-summary">
-                <p><strong>🎯 Cíl:</strong> Vývojářské projekty a aplikace využívající knihovnu binary-parser ve verzích nižších než 2.3.1.</p>
-                <p><strong>⚡ Podstata:</strong> V populární knihovně binary-parser pro JavaScript byla objevena zranitelnost umožňující injektáž kódu a spuštění libovolného JavaScriptu v prostředí Node.js.</p>
+                <p><strong>🎯 Cíl:</strong> Operační systémy Windows, webové prohlížeče Chrome, Edge a Firefox.</p>
+                <p><strong>⚡ Podstata:</strong> Škodlivé infostealery Remus a SYS010 instalují do prohlížečů obětí neautorizovaná rozšíření maskující se za kancelářské nástroje za účelem čtení schránek Gmail a Outlook.</p>
                 <div class="layman-impact">
-                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Vývojáři softwaru používající tuto knihovnu mohou nechtěně vystavit své servery riziku spuštění škodlivého kódu, pokud zpracovávají nedůvěryhodné definice parserů. Je nutné provést aktualizaci.</p>
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci mohou číst vaše e-maily, mazat zprávy nebo krást ověřovací kódy k účtům. Stahujte software pouze z ověřených zdrojů.</p>
                 </div>
             </section>
             <details class="tech-accordion">
@@ -213,22 +363,98 @@ Firma reagovala odstavením systémů, rotací interních pověření, zneplatn�
                 <div class="accordion-content">
                     <div class="section-block">
                         <h3>📄 Překlad článku</h3>
-                        <p class="long-text">Kritická bezpečnostní chyba byla odhalena v široce používané knihovně binary-parser, která by mohla umožnit útočníku majícímu kontrolu nad definicemi parserů provést spuštění libovolného kódu. Zranitelnost vedená pod CVE-2026-134814 (CVSS skóre 9.2 / 8.1) představuje případ code injection ovlivňující verze binary-parser mladší než 2.3.1.
-
-Podle nahlášení v databázi NVD obsahuje knihovna kód, který vrací string-typed volby předávané bez validace metodou Context.generateOption(). Útočníci mohou dodávat upravené délky, klíče, tagy či offsety k provedení arbitrárního JavaScriptu v procesu Node.js při kompilaci parseru. Udržovatel knihovny Keichi Takahashi vydal záplatu ve verzi 2.3.1, která vynucuje validaci jakožto identifikátorových cest.</p>
+                        <p class="long-text">Bezpečnostní experti z GenDigital, Invoke RE a Bitdefender Labs popsali nové kampaně infostealerů Remus a SYS010. Malware se šíří např. přes falešné animované tapety (vydávající se za Wallpaper Engine) nebo škodlivé DLL knihovny. Systém následně zneužívá podnikové nástroje správy prohlížečů (Google admin konzole, Firefox ExtensionSettings, MDM servery) nebo zapíná vývojářský režim v Chrome kynutím do profilu, aby vynutil instalaci škodlivých rozšíření maskujících se za &#x27;Google Sheets&#x27; či &#x27;Docs Helper&#x27;. Tato rozšíření čtou neprečtené e-maily v Gmailu a Outlooku, odesílají je na C2 server a umožňují mazání zpráv, čímž útočníci mohou skrýt bezpečnostní upozornění.</p>
                     </div>
                     <div class="section-block">
                         <h3>⚙️ Jak to funguje</h3>
-                        <p>Vstupy od uživatele pro parametry délky a klíčů byly vkládány přímo do dynamicky generovaného JavaScriptového kódu bez adekvátní sanitizace. Během kompilace parseru dochází k vyhodnocení těchto řetězců jako kódu (např. skrze dynamické vyhodnocení), což vede k RCE v kontextu Node.js.</p>
+                        <p>Malware upravuje politiky prohlížečů nebo konfigurační soubory profilu uživatele, čímž obchází standardní ochranu proti instalaci neoficiálních doplňků. Získaná rozšíření následně v reálném čase parsují DOM strukturu otevřených e-mailových schránek a odesílají citlivá data útočníkovi.</p>
                     </div>
                     <div class="grid-2col">
-                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Aktualizovat knihovnu binary-parser na verzi 2.3.1 nebo novější.</li><li>Zamezit zpracování nedůvěryhodných definic parserů pocházejících od externích uživatelů.</li></ul></div>
-                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1059</code></li><li><code>T1190</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Remote exploit bez autentizace, +2 Dopad na enterprise software / kritickou infrastrukturu, +1 Veřejný PoC exploit, +1 Chybí patch (částečně opraveno)</p></div>
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Pravidelně kontrolovat seznam nainstalovaných rozšíření v prohlížeči (chrome://extensions).</li><li>Ověřit, zda v prohlížeči není bezdůvodně aktivován vývojářský režim nebo vynucená podniková správa.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1176</code></li><li><code>T1539</code></li><li><code>T1056.001</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na správu prohlížečů a enterprise uživatele, +1 Šíření skrze infostealery v reálném světě, +1 Krádež citlivých e-mailů a relací, +1 Obcházení bezpečnostních mechanismů prohlížečů přes developer mode / MDM</p></div>
                     </div>
-                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Node.js:</strong> Běhové prostředí umožňující spouštět JavaScriptový kód mimo webový prohlížeč (například na serveru).</div><div class='glossary-item'><strong>code injection:</strong> Typ zranitelnosti, kdy útočník vkládá škodlivý kód do zranitelné aplikace, která jej následně provede.</div></div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>Infostealer:</strong> Malware určený ke krádeži citlivých údajů, přihlašovacích údajů, souborů cookie a relací z napadeného zařízení.</div><div class='glossary-item'><strong>MDM:</strong> Mobile Device Management – software pro centrální správu, zabezpečení a konfiguraci zařízení v organizacích.</div></div>
                 </div>
             </details>
-            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/critical-binary-parser-flaw-enables.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a> • <a href="https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-medium" style="--sev-color: #ffcc00;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">6<small>/10</small></span>
+                    <span class="score-word">STŘEDNÍ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">MALWARE</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
+                    <h2>#9 Škodlivé NuGet balíčky a GitHub repozitáře šíří malware cílící na .NET vývojáře</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Vývojáři v .NET prostředí, repozitáře NuGet a GitHub.</p>
+                <p><strong>⚡ Podstata:</strong> Útočníci zneužívají falešné úkoly pro .NET vývojáře k distribuci 13 škodlivých NuGet balíčků a infikování vývojářských stanic malwarem.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Náborové podvody cílící na programátory instalují do jejich počítačů škodlivý software při sestavování kódu. Vývojáři by měli pečlivě ověřovat externí balíčky a repozitáře.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Bezpečnostní výzkumníci objevili 13 škodlivých NuGet balíčků (např. WinUI.Button, VS_Builder.MSBuildAnalyzer, HappyOne) maskovaných za ovládací prvky WinUI 3 a WPF. Tyto balíčky byly šířeny v rámci falešných náborových testů na GitHubu. Při sestavování projektu stahují soubory z GitHubu, využívají DLL sideloading kolem systémové klávesnice (osk.exe) nebo stahují spustitelné soubory, čímž útočníkům otevírají plný přístup k vývojářské stanici. Souběžně probíhají kampaně spojené s朝鲜skupinami (PolinRider), které otravují repozitáře Python balíčky a kryptografickými peněženkami.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>Škodlivé balíčky obsahují MSBuild skripty či spouštěcí rutiny, které se provedou ihned po sestavení projektu (build) v .NET aplikaci a dočasně stáhnou a spustí externí binární payload či infostealer.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Provádět audit závislostí a NuGet balíčků před jejich použitím v projektech.</li><li>Ověřovat důvěryhodnost zadání a repozitářů při pohovorech a testovacích úkolech.</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1195.001</code></li><li><code>T1574.002</code></li><li><code>T1204.002</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na vývojářské prostředí a softwarový dodavatelský řetězec, +1 Šíření skrze falešné pracovní pohovory, +1 Umožňuje spuštění kódu a sideloading, +2 Využití škodlivých NuGet balíčků</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>NuGet:</strong> Oficiální správce balíčků pro vývojářskou platformu .NET.</div><div class='glossary-item'><strong>DLL Sideloading:</strong> Technika, kdy legitimní aplikace načte škodlivou knihovnu DLL namísto té originální kvůli chybě v cestě hledání souborů.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://thehackernews.com/2026/11/north-korea-linked-polinrider-poisons.html" target="_blank" rel="noopener noreferrer">The Hacker News ↗</a></span></footer>
+        </article>
+        
+        <article class="card sev-medium" style="--sev-color: #ffcc00;">
+            <header class="card-header">
+                <div class="score-box">
+                    <span class="score-num">6<small>/10</small></span>
+                    <span class="score-word">STŘEDNÍ</span>
+                </div>
+                <div class="title-box">
+                    <div class="meta-tags"><span class="badge badge-cat">APT</span><span class="badge badge-itw">🔥 IN THE WILD</span></div>
+                    <h2>#10 Autonomní AI agenti a pentestační frameworky zneužíváni k útokům na kritickou infrastrukturu</h2>
+                </div>
+            </header>
+            <section class="quick-summary">
+                <p><strong>🎯 Cíl:</strong> Kritická infrastruktura, vládní agentury, systémy pro analýzu OSINT a finanční úřady.</p>
+                <p><strong>⚡ Podstata:</strong> Kybernetické agentury ve Švýcarsku a Itálii varují před útoky řízenými autonomními AI agenty, kteří automatizovaně řetězí zranitelnosti v kritické infrastruktuře.</p>
+                <div class="layman-impact">
+                    <p><strong>🌍 Co to znamená pro běžné lidi:</strong> Útočníci nasazují umělou inteligenci, která dokáže sama prohledávat systémy, hledat slabiny a provádět útoky mnohem rychleji než dříve. Organizace musí posílit zabezpečení svých bran.</p>
+                </div>
+            </section>
+            <details class="tech-accordion">
+                <summary>Rozbalit přeložený článek a technický rozbor</summary>
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <h3>📄 Překlad článku</h3>
+                        <p class="long-text">Švýcarské a italské kybernetické agentury (NCSC a CSIRT Italia) varují před vlnou útoků poháněných AI agenty a frameworky jako ARTEX AI, CyberStrikeAI, DeepSeek Harness a PentAGI. Agenti pracují paralelně, skenují internetová rozhraní, řetězí nízkozávažné chyby a dynamicky vytvářejí kód pro obranu před endpointovými systémy. Podobné frameworky byly údajně použity i při útocích na open-source zpravodajský systém CIA či finanční úřad FinCEN, což vedlo k preventivnímu odpojení některých systémů.</p>
+                    </div>
+                    <div class="section-block">
+                        <h3>⚙️ Jak to funguje</h3>
+                        <p>AI agenti přebírají kontrolu nad fázemi průzkumu, exploatace a persistence, přičemž samostatně vyhodnocují chybové hlášky, vytvářejí obchcházení pro detekční systémy a horizontálně se šíří v napadené síti.</p>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="section-block"><h3>🛡️ Mitigace</h3><ul><li>Prioritně záplatovat internetem vystavené systémy do 24 hodin od vydání záplat.</li><li>Zavedení silného vícefaktorového ověřování (MFA) a passkey ochrany, dodržování principu nejnižších oprávnění (least-privilege).</li></ul></div>
+                        <div class="section-block"><h3>🎯 MITRE ATT&amp;CK</h3><ul><li><code>T1588.002</code></li><li><code>T1078</code></li><li><code>T1046</code></li></ul><p class="score-reason"><strong>Skóre:</strong> +2 Dopad na kritickou infrastrukturu a vládní systémy, +1 Využití autonomních AI agentů v reálných útocích (Itálie, Švýcarsko), +2 Útoky na citlivé zpravodajské a finanční systémy (CIA, FinCEN), +1 Rychlá automatizovaná exploatace</p></div>
+                    </div>
+                    <div class="section-block glossary"><h3>📖 Slovníček pojmů</h3><div class='glossary-item'><strong>OSINT:</strong> Open-Source Intelligence – zpravodajská činnost využívající veřejně dostupné zdroje informací.</div><div class='glossary-item'><strong>FinCEN:</strong> Financial Crimes Enforcement Network – americká vládní agentura bojující proti praní špinavých peněz.</div></div>
+                </div>
+            </details>
+            <footer class="card-footer"><span>🔗 Zdroje: <a href="https://www.bleepingcomputer.com/news/security/hackers-reportedly-breached-cia-intelligence-analysis-system/" target="_blank" rel="noopener noreferrer">BleepingComputer ↗</a></span></footer>
         </article>
         </main>
     </div>
