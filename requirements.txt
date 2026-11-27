@@ -2,4 +2,4 @@ feedparser==6.0.11
 trafilatura==2.0.0
 google-genai==1.49.0
 pydantic==2.11.7
-urllib3>=2.5.0,<3.0.0
+urllib3>=2.5.0,<3.0.0  # záměrně rozsah: bezpečnostní patche + kompatibilita s trafilatura/google-genai
