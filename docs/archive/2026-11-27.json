@@ -2,11 +2,82 @@
   "zpravy": [
     {
       "poradi": 1,
-      "titulek": "Kritická zranitelnost v Drupalu umožňuje převzetí webů aktivně zneužívaných v praxi",
+      "titulek": "Kritická zranitelnost v Mitel MiCollab zneužívaná v reálných útocích",
       "kategorie": "zero-day",
       "zavaznost_skore": 9,
       "zavaznost_slova": "KRITICKÁ",
-      "zavaznost_zduvodneni": "+3 In the wild (aktivně zneužíváno) +2 Remote exploit bez autentizace +2 Dopad na enterprise software / kritickou infrastrukturu +1 Veřejný PoC exploit +1 Chybí patch (neopravený zero-day)",
+      "zavaznost_zduvodneni": "+3 zneužití in the wild, +2 remote exploit bez autentizace, +2 dopad na enterprise software, +1 veřejný PoC exploit, +1 umožňuje Privilege Escalation nebo Lateral Movement, +1 chybí patch (součet 10, max. 9)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2023-25914",
+        "CVE-2023-25915",
+        "CVE-2025-41450",
+        "CVE-2026-103406",
+        "CVE-2026-129713",
+        "CVE-2026-133275",
+        "CVE-2026-133303",
+        "CVE-2026-133311",
+        "CVE-2026-133323",
+        "CVE-2026-133324",
+        "CVE-2026-133469"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/hackers-exploit-10-vulnerabilities.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Agentura CISA přidala do katalogu zneužívaných chyb 10 zranitelností včetně pěti chyb v Mitel MiCollab, které útočníci využívají k rychlému proniknutí do podnikových sítí a kradení citlivých dat.",
+        "cil": "Podnikové komunikační servery Mitel MiCollab a další enterprise systémy",
+        "dopad_laici": "Útočníci mohou napadnout firemní komunikační systémy, získat administrátorská práva a dostat se k citlivým datům firmy. Firmy by měly neprodleně aktualizovat software nebo omezit přístup z internetu."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Americká agentura pro kybernetickou bezpečnost CISA přidala ve středu 10 bezpečnostních chyb do svého katalogu zneužívaných zranitelností (KEV), přičemž pět z nich se týká platformy Mitel MiCollab. Tyto zranitelnosti v komponentě Audio, Web and Video Conferencing (AWV) zahrnují například libovolný nahrávání souborů, XML injekci, obcházení autentizace a injekci příkazů, které umožňují útočníkům vzdálené spuštění kódu. Problémy postihují MiCollab verze 10.3 a starší, přičemž společnost Mitel vydala opravu pro verzi 10.3.0.18. Zpráva od bezpečnostní firmy Accenture ukazuje, že neznámý útočník tyto chyby aktivně zneužíval jako zero-day v rámci kampaně zaměřené na krádež dat pomocí AI nástrojů. Útočníci byli schopni dosáhnout root oprávnění na serveru MiCollab do 30 minut od prvního požadavku a následně se pomocí uložených LDAP přihlašovacích údajů připojit k doménovému řadiči.",
+        "jak_to_funguje": "Útočník využívá kombinaci chyb v ověřování vstupů, XML injekce a command injection v konferenční komponentě AWV. Skrze webové rozhraní nahraje škodlivý skript nebo webshell, který spustí příkazy s oprávněním běžícího serveru. Odtud provádí Privilege Escalation na lokální root účet a následně využívá uložené adresářové kredientály (LDAP) k Lateral Movement do vnitřní podnikové sféry přes Active Directory.",
+        "mitre": [
+          "T1190",
+          "T1059",
+          "T1078",
+          "T1555"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat Mitel MiCollab na verzi 10.3.0.18 nebo novější.",
+          "Omezit vnější přístup k VoIP a konferenční komponentě AWV (Audio, Web and Video Conferencing) pouze na důvěryhodné sítě.",
+          "Prověřit systémové protokoly na přítomnost webshellů a podezřelých procesů spuštěných v kontextu webového serveru."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Zero-day",
+          "vysvetleni": "Zranitelnost v software, o které výrobce ještě neví a neexistuje na ni oficiální oprava."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Technika útočníka vedoucí k získání vyšších oprávnění v systému (např. z běžného uživatele na administrátora)."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Pohyb útočníka napříč vnitřní sítí firmy po počátečním kompromitování jednoho stroje."
+        },
+        {
+          "pojem": "Webshell",
+          "vysvetleni": "Škodlivý skript nahraný na webový server, který útočníkovi umožňuje vzdáleně ovládat systém přes webový prohlížeč."
+        },
+        {
+          "pojem": "LDAP",
+          "vysvetleni": "Protokol pro správu a dotazování uživatelských účtů a oprávnění v centrálních adresářových službách."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Drupal varuje před druhou kritickou chybou vedoucí k převzetí webů",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 zneužití in the wild, +2 remote exploit bez autentizace, +2 dopad na enterprise software, +1 chybí patch (u starších verzí) (součet 8)",
       "aktivne_zneuzivano": true,
       "cve": [
         "CVE-2026-132165",
@@ -23,46 +94,46 @@
         }
       ],
       "rychly_vycuc": {
-        "podstata": "Útočníci zneužívají nezaložené a neúplné stavy instalátoru redakčního systému Drupal k úplnému převzetí webových stránek.",
-        "cil": "Webové servery a produkční systémy běžící na redakčním systému Drupal.",
-        "dopad_laici": "Hrozí kompletní ztráta kontroly nad webovými stránkami a únik dat uživatelů. Provozovatelé webů na Drupalu musí ihned provést aktualizaci a zabezpečit instalační skripty."
+        "podstata": "Redakční systém Drupal vydal varování a opravu pro novou vysoce kritickou zranitelnost, kterou útočníci aktivně zneužívají k úplnému převzetí neopravených webových stránek.",
+        "cil": "Webové stránky běžící na redakčním systému Drupal (verze 10 a 11)",
+        "dopad_laici": "Útočníci mohou kompletně ovládnout webové stránky a pozměnit jejich obsah. Správci webů musí okamžitě provést aktualizaci systému a zablokovat přístup k instalačnímu skriptu."
       },
       "technicky_kontext": {
-        "detailni_preklad": "The Drupal security team says attackers are exploiting a second critical vulnerability that lets them breach and hijack unpatched websites.\n\nLast week, Drupal patched a remote code execution (RCE) flaw (tracked as CVE-2026-132165 / Fail2Install) that lets anonymous users take over vulnerable sites by abusing the Drupal installer.\n\nWhile the security issue wasn't initially flagged as being abused in the wild, an update to the original security advisory warned that threat actors began exploiting it one day after patches were released.\n\nThe new security issue (CVE-2026-136716), patched one week later, addresses attack vectors that were left unpatched and also lets attackers hijack vulnerable Drupal sites.\n\n\"However, certain sites in unusual or incomplete install states remain vulnerable to site takeover following that advisory, including production sites. It is not apparent in the user interface if a site is in the affected vulnerable state, and sites that are already compromised may no longer be in the vulnerable state,\" Drupal said on Wednesday.",
-        "jak_to_funguje": "Zranitelnost spočívá v nedostatečné kontrole výjimečných či neúplných stavů v instalačním jádru Drupalu (core installer). Anonymní útočník může skrze vzdáleně dostupný soubor install.php obejít autentizaci a převzít kontrolu nad systémovým účtem 'user 1', což umožňuje kompletní site takeover a případnou RCE.",
+        "detailni_preklad": "Tým redakčního systému Drupal vydal varování ohledně nové vysoce kritické zranitelnosti označené jako CVE-2026-136716, kterou útočníci aktivně zneužívají v reálném prostředí. Tato chyba navazuje na dřívější problém CVE-2026-132165 (známý jako Fail2Install), jenž umožňoval anonymním uživatelům provádět Remote Code Execution skrze instalační skript Drupalu. Nová zranitelnost řeší případy, kdy webové stránky zůstaly v neúplném či neobvyklém instalačním stavu a útočníci je mohou zneužít k hijackingu. Zranitelné jsou produkční weby, u kterých po opravě předchozí chyby zůstal vzdáleně přístupný instalační skript core/install.php. Bezpečnostní tým doporučuje aktualizovat na verze Drupal 10.6.23, 11.3.23 nebo 11.4.14, spustit skript update.php a ručně zablokovat přístup k souboru install.php v konfiguračním souboru webserveru či přes .htaccess.",
+        "jak_to_funguje": "Chyba spočívá v nesprávné kontrole výjimečných stavů v instalačním jádru Drupalu. Pokud je instalační soubor install.php přístupný zvenčí na produkčním webu, útočník může obejít kontrolu přístupu a provést akce vedoucí k vytvoření administrátorského účtu nebo modifikaci primárního uživatele (user 1), čímž získá plnou kontrolu nad aplikací a databází.",
         "mitre": [
           "T1190",
-          "T1078"
+          "T1588.006"
         ],
         "mitigace": [
-          "Aktualizujte Drupal na verze 10.6.23, 11.3.23 nebo 11.4.14.",
-          "Zablokujte přístup k souboru /core/install.php v konfiguraci webového serveru nebo pomocí souboru .htaccess.",
-          "Zkontrolujte systémové logy na neautorizované změny účtu user 1."
+          "Aktualizovat Drupal na verze 10.6.23, 11.3.23 nebo 11.4.14.",
+          "Zablokovat HTTP přístup k souboru /core/install.php na webovém serveru (Nginx/Apache) nebo pomocí .htaccess.",
+          "Zkontrolovat systémové logy na neautorizovaný přístup a ověřit platnost přihlašovacích údajů hlavního administrátorského účtu (user 1)."
         ]
       },
       "slovnicek": [
         {
-          "pojem": "RCE",
-          "vysvetleni": "Remote Code Execution – vzdálené spuštění kódu útočníkem na napadeném serveru."
+          "pojem": "Remote Code Execution",
+          "vysvetleni": "Schopnost útočníka vzdáleně spouštět libovolný kód na napadeném serveru."
         },
         {
-          "pojem": "PoC",
-          "vysvetleni": "Proof of Concept – důkaz o koncepci, tedy ukázkový kód demonstrující zranitelnost."
+          "pojem": ".htaccess",
+          "vysvetleni": "Konfigurační soubor webového serveru Apache umožňující řídit přístup a přesměrování."
         },
         {
-          "pojem": "Zero-day",
-          "vysvetleni": "Zranitelnost, která je aktivně zneužívána dříve, než o ní výrobce ví nebo než vydá opravu."
+          "pojem": "Nginx",
+          "vysvetleni": "Vysokovýkonný webový server a reverzní proxy server."
         }
       ],
       "jistota_extrakce": "VYSOKÁ"
     },
     {
-      "poradi": 2,
-      "titulek": "Kritická Linuxová zranitelnost v NFS serveru umožňuje získání root oprávnění",
+      "poradi": 3,
+      "titulek": "Dvanáct let stará chyba v Linuxovém jádře NFS2ROOT umožňuje získání root práv",
       "kategorie": "zero-day",
-      "zavaznost_skore": 8,
+      "zavaznost_skore": 7,
       "zavaznost_slova": "VYSOKÁ",
-      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace +2 Dopad na enterprise software / kritickou infrastrukturu +1 Veřejný PoC exploit +1 Umožňuje Privilege Escalation nebo Lateral Movement +1 Chybí patch (neopravený zero-day)",
+      "zavaznost_zduvodneni": "+2 remote exploit bez autentizace, +2 dopad na enterprise software, +1 veřejný PoC exploit, +1 umožňuje Privilege Escalation nebo Lateral Movement, +1 chybí patch (součet 7)",
       "aktivne_zneuzivano": false,
       "cve": [
         "CVE-2026-99362"
@@ -74,35 +145,36 @@
         }
       ],
       "rychly_vycuc": {
-        "podstata": "Dvanáct let stará chyba v linuxovém jaderném subsystému NFS (Network File System) umožňuje vzdáleným útočníkům přepsat paměť jádra a získat plná root oprávnění.",
-        "cil": "Servery s Linuxovým jádrem starším než 6.12.117, 6.18.61, 7.3.2 nebo 7.4-rc1 se spuštěnou službou nfsd a vystaveným portem 2049.",
-        "dopad_laici": "Ohroženy jsou podnikové souborové servery a datová úložiště. Útočník může bez přihlášení převzít plnou kontrolu nad serverem. Je nutné co nejdříve aktualizovat systém."
+        "podstata": "V linuxovém jádře byla odhalena 12 let stará kritická zranitelnost v síťovém souborovém systému NFS, která umožňuje vzdáleným útočníkům bez ověření získat nejvyšší administrátorská oprávnění (root).",
+        "cil": "Servery s Linuxovým jádrem starším než 6.12.117, 6.18.61, 7.3.2 nebo 7.4-rc1 se spuštěnou službou nfsd",
+        "dopad_laici": "Ohroženy jsou podnikové souborové servery a datová úložiště přístupná z internetu. Útočníci mohou převzít plnou kontrolu nad systémem. Je nutné aktualizovat operační systém."
       },
       "technicky_kontext": {
-        "detailni_preklad": "A 12-year-old critical vulnerability in the Linux kernel's Network File System (NFS) server, tracked as CVE-2026-99362, allows remote attackers to gain root privileges.\n\nFound by ANSSI's Jérémy Jean (who submitted a fix in August), the flaw has been dubbed NFS2ROOT by cybersecurity firm OpenSec, which shared a full remote-root exploit and a patch with the NFSD maintainers in late September.\n\nThe vulnerability has existed since Linux kernel version 3.16 (released in March 2014), and it stems from a heap buffer overflow weakness in the Linux NFS server (nfsd).\n\nNFS2ROOT affects systems with a Linux kernel older than 6.12.117, 6.18.61, 7.3.2, or 7.4-rc1 if nfsd (v4.1 or 4.2) is loaded and running and TCP port 2049 is reachable over the Internet.",
-        "jak_to_funguje": "Zranitelnost typu heap buffer overflow v modulu nfsd umožňuje odeslání speciálně vytvořených požadavků na port 2049, čímž dochází k zápisu dat mimo vyhrazenou alokovanou paměť. Tím lze obejít mechanismus KASLR, zkorumpovat paměť jádra a při uzavření NFS spojení spustit příkaz s nejvyššími právy roota.",
+        "detailni_preklad": "Bezpečnostní výzkumníci objevili kritickou zranitelnost v síťovém souborovém systému NFS (Network File System) v linuxovém jádře, která dostala označení NFS2ROOT a je sledována pod CVE-2026-99362. Chyba existuje již od verze 3.16 z roku 2014 a spočívá v přetečení haldy (heap buffer overflow) v serveru nfsd. Zranitelnost postihuje systémy s jádrem starším než 6.12.117, 6.18.61, 7.3.2 nebo 7.4-rc1, pokud mají aktivní server nfsd (verze 4.1 nebo 4.2) a otevřený TCP port 2049 směrem do internetu. Útočník bez oprávnění může odeslat speciálně upravené požadavky, které poškodí paměť jádra, obejdou ochranu KASLR a umožní spuštění příkazu s root oprávněním při uzavření NFS spojení. Ačkoliv neexistují hlášení o aktivním zneužití v praxi, firma OpenSec zveřejnila plnohodnotný exploit.",
+        "jak_to_funguje": "Útočník přes otevřený TCP port 2049 zasílá malformované požadavky na NFS server (nfsd), čímž způsobuje zápis dat za hranice alokovaného vyrovnávacího paměťového prostoru (heap overflow). Tím přepisuje struktury v paměti jádra, obchází mechanismus KASLR (Kernel Address Space Layout Randomization) a připravuje callback proceduru. Po ukončení spojení jádro vykoná vložený příkaz v kontextu administrátora (root).",
         "mitre": [
           "T1211",
-          "T1068"
+          "T1068",
+          "T1190"
         ],
         "mitigace": [
-          "Nainstalujte nejnovější bezpečnostní aktualizace linuxového jádra od svého distribuce a proveďte restart systému.",
-          "Omezte přístup k NFS serveru na TCP portu 2049 pouze na důvěryhodné sítě.",
-          "Pokud službu NFS nevyužíváte, zastavte a zakažte službu nfs-server."
+          "Okamžitě aktualizovat linuxové jádro na nejnovější verzi poskytovanou distributorem a restartovat systém.",
+          "Omezit přístup k TCP portu 2049 pouze na důvěryhodné interní sítě pomocí firewallu.",
+          "V případě, že se služba NFS nevyužívá, zcela ji zastavit a zakázat příkazem v /etc/nfs.conf."
         ]
       },
       "slovnicek": [
         {
           "pojem": "Heap Buffer Overflow",
-          "vysvetleni": "Chyba správy paměti, kdy program zapisuje data za hranice alokovaného bloku v haldě (heap)."
+          "vysvetleni": "Chyba správy paměti, kdy program zapisuje data za vyhrazený prostor v haldě a přepisuje sousední data."
         },
         {
           "pojem": "KASLR",
-          "vysvetleni": "Kernel Address Space Layout Randomization – bezpečnostní mechanismus náhodného rozmisťování adres jádra v paměti."
+          "vysvetleni": "Bezpečnostní mechanizmus operačního systému, který náhodně rozmísťuje adresy jádra v paměti za účelem ztížení útoků."
         },
         {
-          "pojem": "Privilege Escalation",
-          "vysvetleni": "Zvyšování oprávnění z běžného uživatele na administrátora nebo root."
+          "pojem": "TCP port 2049",
+          "vysvetleni": "Síťový port standardně používaný protokolem NFS pro sdílení souborů v síti."
         }
       ],
       "jistota_extrakce": "VYSOKÁ"
