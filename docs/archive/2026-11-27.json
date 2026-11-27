@@ -1,0 +1,111 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Kritická zranitelnost v Drupalu umožňuje převzetí webů aktivně zneužívaných v praxi",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 In the wild (aktivně zneužíváno) +2 Remote exploit bez autentizace +2 Dopad na enterprise software / kritickou infrastrukturu +1 Veřejný PoC exploit +1 Chybí patch (neopravený zero-day)",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-132165",
+        "CVE-2026-136716"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/drupal-warns-of-new-access-bypass-flaw-exploited-in-attacks/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/drupal-warns-of-new-highly-critical.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci zneužívají nezaložené a neúplné stavy instalátoru redakčního systému Drupal k úplnému převzetí webových stránek.",
+        "cil": "Webové servery a produkční systémy běžící na redakčním systému Drupal.",
+        "dopad_laici": "Hrozí kompletní ztráta kontroly nad webovými stránkami a únik dat uživatelů. Provozovatelé webů na Drupalu musí ihned provést aktualizaci a zabezpečit instalační skripty."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "The Drupal security team says attackers are exploiting a second critical vulnerability that lets them breach and hijack unpatched websites.\n\nLast week, Drupal patched a remote code execution (RCE) flaw (tracked as CVE-2026-132165 / Fail2Install) that lets anonymous users take over vulnerable sites by abusing the Drupal installer.\n\nWhile the security issue wasn't initially flagged as being abused in the wild, an update to the original security advisory warned that threat actors began exploiting it one day after patches were released.\n\nThe new security issue (CVE-2026-136716), patched one week later, addresses attack vectors that were left unpatched and also lets attackers hijack vulnerable Drupal sites.\n\n\"However, certain sites in unusual or incomplete install states remain vulnerable to site takeover following that advisory, including production sites. It is not apparent in the user interface if a site is in the affected vulnerable state, and sites that are already compromised may no longer be in the vulnerable state,\" Drupal said on Wednesday.",
+        "jak_to_funguje": "Zranitelnost spočívá v nedostatečné kontrole výjimečných či neúplných stavů v instalačním jádru Drupalu (core installer). Anonymní útočník může skrze vzdáleně dostupný soubor install.php obejít autentizaci a převzít kontrolu nad systémovým účtem 'user 1', což umožňuje kompletní site takeover a případnou RCE.",
+        "mitre": [
+          "T1190",
+          "T1078"
+        ],
+        "mitigace": [
+          "Aktualizujte Drupal na verze 10.6.23, 11.3.23 nebo 11.4.14.",
+          "Zablokujte přístup k souboru /core/install.php v konfiguraci webového serveru nebo pomocí souboru .htaccess.",
+          "Zkontrolujte systémové logy na neautorizované změny účtu user 1."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RCE",
+          "vysvetleni": "Remote Code Execution – vzdálené spuštění kódu útočníkem na napadeném serveru."
+        },
+        {
+          "pojem": "PoC",
+          "vysvetleni": "Proof of Concept – důkaz o koncepci, tedy ukázkový kód demonstrující zranitelnost."
+        },
+        {
+          "pojem": "Zero-day",
+          "vysvetleni": "Zranitelnost, která je aktivně zneužívána dříve, než o ní výrobce ví nebo než vydá opravu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Kritická Linuxová zranitelnost v NFS serveru umožňuje získání root oprávnění",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace +2 Dopad na enterprise software / kritickou infrastrukturu +1 Veřejný PoC exploit +1 Umožňuje Privilege Escalation nebo Lateral Movement +1 Chybí patch (neopravený zero-day)",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-99362"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/new-nfs2root-linux-flaw-can-let-attackers-gain-root-privileges/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Dvanáct let stará chyba v linuxovém jaderném subsystému NFS (Network File System) umožňuje vzdáleným útočníkům přepsat paměť jádra a získat plná root oprávnění.",
+        "cil": "Servery s Linuxovým jádrem starším než 6.12.117, 6.18.61, 7.3.2 nebo 7.4-rc1 se spuštěnou službou nfsd a vystaveným portem 2049.",
+        "dopad_laici": "Ohroženy jsou podnikové souborové servery a datová úložiště. Útočník může bez přihlášení převzít plnou kontrolu nad serverem. Je nutné co nejdříve aktualizovat systém."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "A 12-year-old critical vulnerability in the Linux kernel's Network File System (NFS) server, tracked as CVE-2026-99362, allows remote attackers to gain root privileges.\n\nFound by ANSSI's Jérémy Jean (who submitted a fix in August), the flaw has been dubbed NFS2ROOT by cybersecurity firm OpenSec, which shared a full remote-root exploit and a patch with the NFSD maintainers in late September.\n\nThe vulnerability has existed since Linux kernel version 3.16 (released in March 2014), and it stems from a heap buffer overflow weakness in the Linux NFS server (nfsd).\n\nNFS2ROOT affects systems with a Linux kernel older than 6.12.117, 6.18.61, 7.3.2, or 7.4-rc1 if nfsd (v4.1 or 4.2) is loaded and running and TCP port 2049 is reachable over the Internet.",
+        "jak_to_funguje": "Zranitelnost typu heap buffer overflow v modulu nfsd umožňuje odeslání speciálně vytvořených požadavků na port 2049, čímž dochází k zápisu dat mimo vyhrazenou alokovanou paměť. Tím lze obejít mechanismus KASLR, zkorumpovat paměť jádra a při uzavření NFS spojení spustit příkaz s nejvyššími právy roota.",
+        "mitre": [
+          "T1211",
+          "T1068"
+        ],
+        "mitigace": [
+          "Nainstalujte nejnovější bezpečnostní aktualizace linuxového jádra od svého distribuce a proveďte restart systému.",
+          "Omezte přístup k NFS serveru na TCP portu 2049 pouze na důvěryhodné sítě.",
+          "Pokud službu NFS nevyužíváte, zastavte a zakažte službu nfs-server."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Heap Buffer Overflow",
+          "vysvetleni": "Chyba správy paměti, kdy program zapisuje data za hranice alokovaného bloku v haldě (heap)."
+        },
+        {
+          "pojem": "KASLR",
+          "vysvetleni": "Kernel Address Space Layout Randomization – bezpečnostní mechanismus náhodného rozmisťování adres jádra v paměti."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Zvyšování oprávnění z běžného uživatele na administrátora nebo root."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
