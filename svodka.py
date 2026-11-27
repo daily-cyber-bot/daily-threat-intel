@@ -82,7 +82,11 @@ CONNECT_TIMEOUT = 5              # s
 READ_TIMEOUT = 10                # s (na jedno čtení ze socketu)
 TOTAL_TIMEOUT = 20               # s (celkový strop na jedno stažení včetně redirectů)
 MAX_ARTICLE_BYTES = 2 * 1024 * 1024
-MAX_FEED_BYTES = 5 * 1024 * 1024
+DEFAULT_MAX_FEED_BYTES = 5 * 1024 * 1024
+FEED_BYTE_OVERRIDES = {
+    # CISA publikuje v all.xml kompletní archiv advisories, který překračuje 5 MB limit.
+    "https://www.cisa.gov/cybersecurity-advisories/all.xml": 15 * 1024 * 1024,
+}
 MAX_ZPRAV = 25
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -200,7 +204,7 @@ def safe_fetch(url: str, max_bytes: int = MAX_ARTICLE_BYTES) -> bytes | None:
         logger.warning("HTTP status %s pro %s", resp.status, url[:120])
         return None
       ctype = resp.headers.get("Content-Type", "").lower()
-      if ctype and not any(t in ctype for t in ("html", "xml", "text/", "rss", "atom", "octet-stream")):
+      if ctype and not any(t in ctype for t in ("html", "xml", "text/", "rss", "atom")):
         logger.warning("Nepovolený Content-Type '%s' pro %s", ctype, url[:120])
         return None
       clen = resp.headers.get("Content-Length")
@@ -210,8 +214,11 @@ def safe_fetch(url: str, max_bytes: int = MAX_ARTICLE_BYTES) -> bytes | None:
       chunks, size = [], 0
       for chunk in resp.stream(65536, decode_content=True):
         size += len(chunk)
-        if size > max_bytes or time.monotonic() > deadline:
-          logger.warning("Překročen limit velikosti/času při čtení: %s", url[:120])
+        if size > max_bytes:
+          logger.warning("Překročen limit velikosti (%d B > %d B) při čtení: %s", size, max_bytes, url[:120])
+          return None
+        if time.monotonic() > deadline:
+          logger.warning("Vypršel časový limit při čtení: %s", url[:120])
           return None
         chunks.append(chunk)
       return b"".join(chunks)
@@ -382,8 +389,9 @@ def fetch_articles() -> list[dict]:
   with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
     for source_name, feed_url in RSS_FEEDS.items():
       logger.info("Stahuji RSS: %s (%s)", source_name, feed_url)
+      max_bytes = FEED_BYTE_OVERRIDES.get(feed_url, DEFAULT_MAX_FEED_BYTES)
       try:
-        feed_bytes = safe_fetch(feed_url, MAX_FEED_BYTES)
+        feed_bytes = safe_fetch(feed_url, max_bytes)
       except Exception as e:
         logger.error("Nelze stáhnout feed %s: %s", source_name, e)
         continue
@@ -506,11 +514,10 @@ def analyze_with_gemini(raw_rss_text: str, today_display: str) -> DenniSvodka:
           raise RuntimeError(f"Neretriovatelná chyba Gemini API (kód {code}).") from e
         if code == 404:
           logger.warning("Model %s nebyl nalezen (404), přeskakuji na další model v kaskádě...", model_name)
-          continue
-        if _is_retryable(e):
+        elif _is_retryable(e):
           logger.info("Dočasná chyba u %s, zkouším další model v kaskádě...", model_name)
-          continue
-        logger.warning("Neočekávaný stav API (%s) u %s, zkouším další model...", code, model_name)
+        else:
+          logger.warning("Neočekávaný stav API (%s) u %s, zkouším další model...", code, model_name)
 
       except (ValidationError, ValueError, OSError) as e:
         last_error = e
@@ -553,6 +560,7 @@ def finalize_svodka(svodka: DenniSvodka, articles: list[dict]) -> DenniSvodka:
 
   kept = []
   for z in svodka.zpravy[:MAX_ZPRAV]:
+    raw_urls = [s.url for s in z.zdroje]
     verified = []
     for s in z.zdroje:
       canonical = url_map.get(_norm_url(s.url))
@@ -561,7 +569,10 @@ def finalize_svodka(svodka: DenniSvodka, articles: list[dict]) -> DenniSvodka:
         verified.append(s)
     z.zdroje = verified
     if not z.zdroje:
-      logger.warning("Zahazuji zprávu bez ověřitelného zdroje: %r", z.titulek[:80])
+      logger.warning(
+          "Zahazuji zprávu bez ověřitelného zdroje: %r (vrácené URL: %s)",
+          z.titulek[:80], raw_urls,
+      )
       continue
     z.cve = [c for c in z.cve if c in allowed_cves]
     z.zavaznost_slova = score_to_word(z.zavaznost_skore)
@@ -724,8 +735,8 @@ def save_outputs(svodka: DenniSvodka, today_iso: str, today_display: str) -> Non
 
 def main() -> None:
   now = datetime.now(timezone.utc)
-  today_iso = now.strftime("%Y-%m-%d")       # archiv: 2026-11-07.json
-  today_display = now.strftime("%d.%m.%Y")   # web: 07.11.2026
+  today_iso = now.strftime("%Y-%m-%d")
+  today_display = now.strftime("%d.%m.%Y")
   logger.info("Spouštím Threat Intelligence pipeline pro den %s (%s)...", today_display, today_iso)
 
   articles = fetch_articles()
