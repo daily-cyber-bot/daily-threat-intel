@@ -6,7 +6,6 @@ on:
     - cron: '40 5 * * *'
   workflow_dispatch:
 
-# Výchozí oprávnění pro celý workflow: jen čtení.
 permissions:
   contents: read
 
@@ -16,8 +15,6 @@ concurrency:
 
 jobs:
   generate:
-    # Job má přístup k GEMINI_API_KEY a zpracovává nedůvěryhodná data z internetu,
-    # ale NEMÁ právo zapisovat do repozitáře (contents: read, persist-credentials: false) ani nasazovat Pages.
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -37,7 +34,7 @@ jobs:
       - name: Instalace závislostí
         run: |
           python -m pip install --upgrade pip
-          pip install -rRequirements.txt 2>/dev/null || pip install -r requirements.txt
+          pip install -r requirements.txt
 
       - name: Spuštění Threat Intel skriptu
         env:
@@ -45,7 +42,7 @@ jobs:
         run: python svodka.py
 
       - name: Upload vygenerovaného docs/ (bez API klíče)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4 # TODO: připni na 40znakový commit SHA z Releases
         with:
           name: docs-output
           path: docs/
@@ -53,8 +50,6 @@ jobs:
           retention-days: 1
 
   commit:
-    # Samostatný job s právem zápisu do repozitáře, který ale nevidí GEMINI_API_KEY
-    # a nespouští žádný externí Python kód z PyPI.
     needs: generate
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -65,7 +60,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Stažení vygenerovaného docs/
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4 # TODO: připni na 40znakový commit SHA z Releases
         with:
           name: docs-output
           path: docs/
@@ -89,7 +84,6 @@ jobs:
           path: ./docs
 
   deploy:
-    # Samostatný job jen pro nasazení na GitHub Pages.
     needs: commit
     runs-on: ubuntu-latest
     timeout-minutes: 5
