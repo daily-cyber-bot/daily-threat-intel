@@ -1,0 +1,545 @@
+{
+  "zpravy": [
+    {
+      "poradi": 1,
+      "titulek": "Narušení cloudové platformy US Air Force a rozsáhlé autonomní AI útoky na kritickou infrastrukturu",
+      "kategorie": "apt",
+      "zavaznost_skore": 9,
+      "zavaznost_slova": "KRITICKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzené průniky do Cloud One, švýcarské kritické infrastruktury a Evropské komise), +2 Remote exploit bez autentizace (autonomní skenování a zneužívání neopravených rozhraní), +2 Dopad na enterprise software a kritickou infrastrukturu (americká armáda, energetika, vodárenství), +1 Umožňuje Privilege Escalation a Lateral Movement (rychlý přechod od kompromitace k vyšším oprávněním do 3 hodin), +1 Chybí patch (zneužití neidentifikovaných zranitelností).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/switzerland-confirms-ai-assisted.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci pronikli do cloudové platformy Cloud One spravované US Air Force a do systémů kritické infrastruktury ve Švýcarsku za použití autonomních AI agentů. Útoky využívají pokročilé nástroje jako ARTEX k automatizovanému vyhledávání zranitelností a zřízení přístupu během několika hodin.",
+        "cil": "Cloudová infrastruktura US Air Force (Cloud One), orgány státní správy USA a švýcarští provozovatelé kritické infrastruktury (dodavatelé elektřiny, pitné vody a telekomunikací).",
+        "dopad_laici": "Útočníci napadli klíčové počítačové systémy armády a správců základních služeb, jako je dodávka vody či elektřiny. Pro běžné občany to zatím nezpůsobilo výpadky služeb, ale ukazuje to, že útočníci dokáží pomocí umělé inteligence velmi rychle napadat i ty nejdůležitější státní systémy."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Podle zprávy agentury Reuters došlo k narušení výpočetní platformy Cloud One, kterou spravuje US Air Force. Neoprávněný přístup byl odhalen během plánovaného upgradu cloudové platformy v uplynulém měsíci, což způsobil narušení migrace aplikací a softwarových aktualizací. Platforma Cloud One byla spuštěna v roce 2017 a slouží složkám Ministerstva obrany USA k hostování a správě aplikací podporujících vojenské operace, řízení personálu, logistiku a údržbu. Útočníci podle jednoho ze zdrojů zneužili neidentifikovanou softwarovou zranitelnost, čímž mohli získat přístup k citlivým vojenským operativním a logistickým datům. Do posouzení dopadů byl zapojen orgán US Cyber Command.\n\nTento incident navazuje na sérii nedávných průniků do amerických federálních institucí, včetně FBI, CIA a Ministerstva financí. Dne 21. listopadu bylo odhaleno narušení databáze NCIC v FBI, a dříve v září skupina ShinyHunters zneužila neopravenou zranitelnost v aplikaci Oracle PeopleSoft na náborovém webu FBIJobs.gov. Tento týden byl rovněž nahlášen průnik do systému pro analýzu otevřených zdrojů (OSINT) v CIA, který zasáhl také ODNI a NGA. V návaznosti na to oznámila vyšetřování neoprávněného přístupu i jednotka FinCEN spadající pod Ministerstvo financí USA.\n\nŠvýcarské národní centrum kybernetické bezpečnosti (NCSC) zároveň potvrdilo pět případů útoků vedených autonomními AI agenty, přičemž ve čtyřech případech došlo k úspěšnému kompromitování IT systémů. Tři z těchto útoků mířily přímo na provozovatele kritické infrastruktury v odvětvích energetiky, vodárenství a telekomunikací. K útokům byly využity útočné AI rámce jako ARTEX nebo CyberStrikeAI, které autonomně skenují síťová rozhraní, řetězí zranitelnosti a adaptují své metody v řádu sekund. Italský národní bezpečnostní tým CSIRT Italia a britské centrum NCSC rovněž varují před masivním nárůstem autonomních útoků využívajících AI agenty, jako jsou ARTEX, PentAGI či DeepSeek Harness v režimu Red Team Mode, které dokáží projít cestu od počátečního skenování po získání nejvyšších oprávnění za méně než tři hodiny.",
+        "jak_to_funguje": "Útočníci nasazují takzvané agentní útočné frameworky (např. ARTEX), které využívají LLM modely (Claude, GPT, DeepSeek) k automatizaci celého útočného řetězce. Agent provádí rekonstrukci cílů skenováním veřejných IP adres a volně přístupných API rozhraní. Po odhalení zranitelnosti (např. neopravený software, chybějící autentizace nebo vyzrazené přístupové údaje v kódových repozitářích) vytvoří dynamický payload a provede exploit. Po získání počátečního přístupu (Initial Access) autonomně spouští příkazy pro Privilege Escalation a Lateral Movement. Pokud bezpečnostní prvky (např. WAF nebo IDS) pokus zablokují, AI agent v reálném čase změní strukturu požadavku nebo útočný vektor. Interakce vypadá jako běžný legitimní provoz uživatelů nebo API volání, což ztěžuje detekci tradičními signature-based systémy.",
+        "mitre": [
+          "T1190",
+          "T1078",
+          "T1068",
+          "T1021"
+        ],
+        "mitigace": [
+          "Aplikovat kritické bezpečnostní opravy na systémy přístupné z internetu do 24 hodin od vydání.",
+          "Zavedení striktní Multi-Factor Authentication (MFA) nebo passkeys na všech vnějších rozhraních.",
+          "Omezit exponovaná rozhraní na internetu pomocí IP allowlistů a geo-blockingu.",
+          "Monitorovat anomálie v posloupnosti API volání a neobvyklé objemy přenesených dat z interních sítí."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "ARTEX",
+          "vysvetleni": "Open-source penetrační nástroj využívající AI agenty k automatizovanému vyhledávání zranitelností, získávání oprávnění a exfiltraci dat."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Technika, při které útočník zneužije chybu v systému k získání vyšších uživatelských práv (např. správce nebo root)."
+        },
+        {
+          "pojem": "Lateral Movement",
+          "vysvetleni": "Postup útočníka uvnitř kompromitované sítě, kdy přechází z jednoho systému na druhý s cílem najít klíčová data."
+        },
+        {
+          "pojem": "Initial Access",
+          "vysvetleni": "První fáze kybernetického útoku, při které útočník získá neoprávněný vstup do sítě nebo systému oběti."
+        },
+        {
+          "pojem": "OSINT",
+          "vysvetleni": "Získávání informací z veřejně dostupných otevřených zdrojů (Open Source Intelligence)."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 2,
+      "titulek": "Aktivně zneužívaná zranitelnost v Drupalu umožňuje útočníkům převzít kontrolu nad webovými portály",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzeno Drupal Security týmem i CISA KEV katalogem), +2 Remote exploit bez autentizace (zneužití přístupného instalátoru anonymním uživatelem), +2 Dopad na enterprise software (podnikový CMS systém Drupal), +1 Umožňuje Privilege Escalation (převzetí nejvyššího účtu user 1).",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2026-120705",
+        "CVE-2026-129243",
+        "CVE-2026-132165",
+        "CVE-2026-136716"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/drupal-warns-of-new-access-bypass-flaw-exploited-in-attacks/"
+        },
+        {
+          "nazev": "CISA Advisories",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/11/27/cisa-adds-three-known-exploited-vulnerabilities-catalog"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Bezpečnostní tým Drupalu varuje před aktivně zneužívanou zranitelností CVE-2026-136716, která navazuje na předchozí chybu v instalátoru. Útočníci mohou neautentizovaným přístupem převzít plnou kontrolu nad zasaženými webovými stránkami a změnit účet správce.",
+        "cil": "Webové portály a aplikace provozované na redakčním systému Drupal (verze Drupal 10 a 11).",
+        "dopad_laici": "Pokud organizace používá systém Drupal pro své webové stránky a neaktualizovala jej, útočníci mohou nad webem převzít kontrolu, změnit jeho obsah nebo ukrást uložená data. Správci webů musí okamžitě nainstalovat vydanou opravu."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní tým Drupalu varuje před aktivním zneužíváním druhé kritické zranitelnosti v krátké době, která útočníkům umožňuje kompromitovat a zcela převzít neopravené webové stránky. Minulý týden opavil Drupal zranitelnost typu Remote Code Execution (sledovanou jako CVE-2026-132165 / Fail2Install), která umožňovala anonymním uživatelům převzít kontrolu nad zranitelnými servery zneužitím instalátoru Drupalu. Přestože původně nebyla chyba označena jako aktivně zneužívaná, útočníci ji začali masivně zneužívat hned následující den po zveřejnění opravy.\n\nNová chyba CVE-2026-136716, opravená o týden později, řeší vektory útoků, které zůstaly v předchozí aktualizaci nepokryty. Drupal uvedl, že některé servery v neobvyklých nebo nedokončených stavech instalace (včetně produkčních prostředí) zůstávají zranitelné vůči převzetí. V uživatelském rozhraní přitom není patrné, zda se web v tomto zranitelném stavu nachází, a již kompromitované servery se v něm nemusejí dále zobrazovat.\n\nAmerická agentura CISA zařadila CVE-2026-136716 spolu se zranitelnostmi CVE-2026-120705 a CVE-2026-129243 v produktu OSGeo GeoServer do svého katalogu aktivně zneužívaných zranitelností (KEV Catalog) a nařídila federálním orgánům provedení neodkladné nápravy.",
+        "jak_to_funguje": "Chyba spočívá v nedostatečném ověření výjimečných stavů instalace během požadavků na skript `/core/install.php`. Pokud zůstane skript instalátoru přístupný z internetu a web se nachází v nedokončeném nebo specifickém nekonzistentním stavu relace, neautentizovaný útočník může odesláním přímých HTTP požadavků dokončit kroky instalace nebo resetovat konfiguraci databáze. Tím získá možnost přepsat pověření pro hlavního správcovského uživatele (user 1), čímž získá plný administrative access k aplikaci a systémové databázi.",
+        "mitre": [
+          "T1190",
+          "T1068",
+          "T1078.004"
+        ],
+        "mitigace": [
+          "Okamžitě aktualizovat Drupal na verze 10.6.23, 11.3.23 nebo 11.4.14.",
+          "Pokud nelze aktualizaci ihned provést, zablokovat přístup ke skriptu `/core/install.php` v konfiguraci webového serveru nebo v souboru `.htaccess`.",
+          "Zkontrolovat systémové logy na neoprávněné změny u správcovského účtu 'user 1' a provést kontrolu integrity databáze."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Remote Code Execution",
+          "vysvetleni": "Zranitelnost, která útočníkovi umožňuje vzdáleně spustit libovolný kód nebo příkazy na cílovém serveru bez fyzického přístupu."
+        },
+        {
+          "pojem": "KEV Catalog",
+          "vysvetleni": "Katalog známých zneužívaných zranitelností vedený americkou agenturou CISA, který vyžaduje prioritu při opravách."
+        },
+        {
+          "pojem": "Privilege Escalation",
+          "vysvetleni": "Získání vyšších přístupových práv v systému, než jaká byla původně uživateli přidělena."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 3,
+      "titulek": "Špionážní kampaň skupiny WeaveLotus zaměřená na vojenské a vládní cíle v jihovýchodní Asii",
+      "kategorie": "apt",
+      "zavaznost_skore": 8,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzené útoky v Thajsku a na Filipínách), +2 Remote exploit bez autentizace (zneužití zranitelnosti GeoServer CVE-2024-36401 a nekrytých rozhraní), +2 Dopad na enterprise software a kritickou infrastrukturu (vládní, vojenské a zákonodárné orgány), +1 Umožňuje Privilege Escalation a Lateral Movement (využití reverse SSH tunelů a password spraying).",
+      "aktivne_zneuzivano": true,
+      "cve": [
+        "CVE-2021-42235",
+        "CVE-2024-36401"
+      ],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/suspected-vietnam-linked-hackers-target.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Hrozbová skupina WeaveLotus spojená s Vietnamem provádí rozsáhlou špionážní kampaň RedOps v jihovýchodní Asii. Útočníci zneužívají známé zranitelnosti a výchozí přihlašovací údaje ve webových aplikacích k získání přístupu do vojenských a vládních sítí.",
+        "cil": "Vojenské, vládní a zákonodárné organizace v Thajsku, na Filipínách a v Indonésii.",
+        "dopad_laici": "Státem podporovaní útočníci se nabourali do počítačových sítí armády a vládních úřadů v jihovýchodní Asii, aby ukradli tajné vojenské dokumenty a informace o obranných dohodách. Pro běžné občany nevzniká přímé riziko, jde o geopolitickou špionáž."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Podle analýzy společnosti SOCRadar stojí za útoky na vojenské, vládní a zákonodárné organizace v jihovýchodní Asii státem podporovaná skupina označená jako WeaveLotus, napojená na Vietnam. Cílem kampaně RedOps, která probíhala mezi srpnem a zářím 2026, je získávání zpravodajských informací týkajících se obranných a vojenských dohod v oblasti Jihočínského moře. Útočníci úspěšně kompromitovali pět cílů v Thajsku a na Filipínách a prováděli průzkumné operace v Indonésii.\n\nPočáteční přístup byl získán zneužitím zranitelností ve webových aplikacích a výchozích přihlašovacích údajů v open-source softwaru, jako jsou GeoServer (CVE-2024-36401, CVSS 9.8), JasperReports, osTicket a nekryté vývojové konfigurace Laravelu. Po proniknutí vytvořili útočníci trvalé připojení pomocí reverse SSH tunelů a postupovali dále do interních sítí.\n\nPři útoku na thajskou vojenskou organizaci zneužili chybu v GeoServeru k nasazení SOCKS5 proxy a otevření reverse SSH tunelu. Následně stáhli záznamy z rozhraní Directus CMS API a použili technologie Optical Character Recognition (OCR) k vyextrahování textů v angličtině a thajštině z obrázků PNG. U thajské zákonodárné organizace zneužili výchozí administrátorské heslo (jasperadmin:jasperadmin) na serveru JasperReports, spustili SQL skripty přes `xp_cmdshell` na Microsoft SQL Serveru a stáhli kompletní adresář 1 502 uživatelů a 5 000 ZIP archivů s citlivými daty.",
+        "jak_to_funguje": "Útočníci nejprve provádí automatizovaný OSINT sběr dat. Po identifikaci zranitelného rozhraní (např. GeoServer s neopraveným RCE CVE-2024-36401) doručí exploit, který v operačním systému spustí příkaz pro vytvoření šifrovaného reverse SSH tunelu směřujícího na jejich C2 infrastrukturu (např. IP 172.235.245[.]49). Tím obchází firewallové restrikce pro příchozí spojení. Dále využívají vestavěné procedury databází (např. `xp_cmdshell` v MS SQL) pro spouštění systémových shellů, provádí password spraying s využitím jmen zaměstnanců a rodných čísel a nasazují skripty pro automatizované vyhledávání a exfiltraci dokumentů.",
+        "mitre": [
+          "T1190",
+          "T1078.001",
+          "T1572",
+          "T1110.003",
+          "T1005"
+        ],
+        "mitigace": [
+          "Okamžitá aktualizace GeoServeru a zakázání výchozích administrátorských účtů (např. v JasperReports).",
+          "Deaktivovat rozšíření `xp_cmdshell` na databázových serverech Microsoft SQL Server.",
+          "Blokovat odlétající SSH spojení z interních aplikačních serverů směrem do neznámých vnějších IP adres."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Reverse SSH tunnel",
+          "vysvetleni": "Technika, kdy oběť naváže odchozí šifrované SSH spojení na útočníkův server, což útočníkovi umožní procházet interní síť oběti směrem dovnitř."
+        },
+        {
+          "pojem": "Password spraying",
+          "vysvetleni": "Útočná technika zkoušení jednoho běžného hesla proti velkému množství různých uživatelských účtů, aby se předešlo zablokování účtů."
+        },
+        {
+          "pojem": "OCR",
+          "vysvetleni": "Optical Character Recognition - technologie pro automatické rozpoznávání a převod textu z obrázků nebo naskenovaných dokumentů do strojově čitelného textu."
+        },
+        {
+          "pojem": "C2",
+          "vysvetleni": "Command and Control server - řídící server řízený útočníky, ze kterého posílají příkazy malwaru v kompromitované síti."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 4,
+      "titulek": "Neopravená zero-day zranitelnost v nástroji Cacti umožňuje Remote Code Execution přes guest účet",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 7,
+      "zavaznost_slova": "VYSOKÁ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace (vyžaduje pouze 4 HTTP požadavky na guest rozhraní), +2 Dopad na enterprise software (monitoring síťové infrastruktury enterprise firem), +1 Veřejný PoC exploit (zveřejněný na GitHubu), +1 Umožňuje Privilege Escalation nebo Lateral Movement (vykonání příkazů a získání přístupu k síťovým prvkům), +1 Chybí patch (neopravený zero-day).",
+      "aktivne_zneuzivano": false,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/unpatched-cacti-zero-day-with-public-poc-gives-remote-code-execution/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/unpatched-cacti-zero-day-enables-rce-in.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "V nástroji pro monitorování sítě Cacti byla odhalena neopravená zero-day zranitelnost (označovaná jako 4HTTP2SHELL). Neautentizovaný útočník může odesláním pouhých čtyř HTTP požadavků na povolený účet hosta (guest) získat možnost vykonávat libovolné příkazy na serveru.",
+        "cil": "Servery provozující síťový monitorovací systém Cacti Core (ověřeno na verzi 1.2.31).",
+        "dopad_laici": "V softwaru, který firmy používají ke sledování stavu svých síťových prvků, byla nalezena vážná chyba. Útočník může bez přihlašovacích údajů ovládnout tento server a zneužít ho k proniknutí do zbytku firemní sítě. Výrobce zatím nevydal opravu."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "V platformě pro monitorování sítí Cacti byla veřejně odhalena neopravená zero-day zranitelnost spolu s funkčním proof-of-concept (PoC) exploitem, který neautentizovaným útočníkům umožňuje vykonávat příkazy na zranitelných serverech. Exploit s názvem '4HTTP2SHELL' (dříve 4HTTP2ROOT) zveřejnil bezpečnostní výzkumník vystupující pod přezdívkou ek0ms savi0r ze skupiny Church of Malware v GitHub repozitáři 'Sad Girls 0day Club'. Předvedl, že k ovládnutí serveru stačí odeslat pouhé čtyři HTTP požadavky bez nutnosti znalosti přihlašovacích údajů či API klíčů.\n\nCacti je open-source nástroj určený k monitorování výkonu serverů, routerů, switchů a firewallů. Vzhledem k tomu, že systém ukládá přihlašovací údaje a SNMP přístupová hesla k monitorovaným zařízením, může kompromitace Cacti serveru posloužit jako odrazový můstek pro přístup k dalším systémům v korporátní síti. Zranitelnost pramení ze slabé validace vstupů, která útočníkovi umožňuje vložit SQL příkazy do databáze a upravit nastavení realtime polleru.\n\nAnalýza společností watchTowr a RavenAI potvrdila, že attack vektor zneužívá předvolby zobrazení grafů u účtu hosta (guest). Útočník uloží nevalidní netextový řetězec do nastavení `preview_graphs_per_page` přes skript `auth_profile.php`. Při načtení stránky `graph_view.php` dojde k takzvané second-order SQL injection, která modifikuje tabulku polleru. Po vyvolání `graph_realtime.php` pak Cacti předá modifikovaný příkaz funkci `popen()`, čímž dojde k jeho spuštění v operačním systému.",
+        "jak_to_funguje": "Zranitelnost vzniká zřetězením čtyř chyb v aplikační logice Cacti:\n1. Skript `auth_profile.php?action=update_data` umožňuje nepřihlášenému uživateli se session hosta zapsat libovolný textový řetězec do parametru `preview_graphs_per_page`, aniž by aplikace ověřila, zda jde o celé číslo.\n2. Uložený textový řetězec neprojde sanací a při volání `graph_view.php` se vloží přímo do SQL klauzule `LIMIT`.\n3. Ovladač databáze PHP PDO přijímá skládané SQL dotazy (stacked queries), což útočníkovi umožňuje spustit příkaz `UPDATE` na tabulku polleru Cacti.\n4. Při spuštění realtime skriptu `graph_realtime.php` aplikace načte změněný řádek z databáze a předá nekontrolovaný řetězec do systémové funkce PHP `popen()`, což vede k neomezenému spuštění systémového příkazu s právy uživatele webového serveru.",
+        "mitre": [
+          "T1190",
+          "T1059.004",
+          "T1068"
+        ],
+        "mitigace": [
+          "Okamžitě zakázat účet hosta (guest account) v nastavení Cacti.",
+          "Omezit přístup k webovému rozhraní Cacti pouze z důvěryhodných IP adres pomocí firewallu.",
+          "Zkontrolovat záznamy v tabulce polleru v databázi na přítomnost neobvyklých systémových příkazů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Second-order SQL injection",
+          "vysvetleni": "Typ SQL injection, kdy nebezpečný vstup není spuštěn ihned, ale je bezpečně uložen do databáze a k jeho škodlivému vykonání dojde až při pozdějším zpracování jinou částí aplikace."
+        },
+        {
+          "pojem": "PoC",
+          "vysvetleni": "Proof of Concept - ukázkový kód či postup prokazující existenci a vyžitelnost zranitelnosti."
+        },
+        {
+          "pojem": "SNMP",
+          "vysvetleni": "Simple Network Management Protocol - síťový protokol používaný pro správy a monitorování síťových zařízení."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 5,
+      "titulek": "Zranitelnost NFS2ROOT v Linuxovém jádře umožňuje vzdálené získání root oprávnění",
+      "kategorie": "zero-day",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+2 Remote exploit bez autentizace (odeslání speciálně vytvořených NFS požadavků přes port 2049), +2 Dopad na enterprise software (Linux souborové servery, NAS a Kubernetes uložení), +1 Veřejný PoC exploit (zveřejněný společností OpenSec), +1 Umožňuje Privilege Escalation (přetéctí paměti jádra pro získání root přístupu).",
+      "aktivne_zneuzivano": false,
+      "cve": [
+        "CVE-2026-99362"
+      ],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/new-nfs2root-linux-flaw-can-let-attackers-gain-root-privileges/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "V Linuxovém jádře byla objevena 12 let stará kritická zranitelnost CVE-2026-99362 (označená jako NFS2ROOT). Vzdálený neautentizovaný útočník může přetéct paměť jádra Linuxu přes síťový protokol NFS a získat plná správcovská práva (root).",
+        "cil": "Linuxové servery, NAS úložiště a datové uzly Kubernetes s běžícím síťovým souborovým systémem nfsd (v4.1/v4.2) a otevřeným TCP portem 2049 s verzí jádra starší než 6.12.117, 6.18.61 nebo 7.3.2.",
+        "dopad_laici": "Chyba v operačním systému Linux umožňuje útočníkům přes síť zcela ovládnout datové servery firem. Je nutné, aby administrátoři neprodleně aktualizovali systémové jádro Linuxu na opravenou verzi."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "V serverové implementaci síťového souborového systému (NFS) v Linuxovém jádře byla odhalena 12 let stará kritická zranitelnost sledovaná jako CVE-2026-99362. Zranitelnost s názvem NFS2ROOT byla objevena Jérémym Jeanem z francouzské agentury ANSSI v srpnu a v září poskytla bezpečnostní společnost OpenSec kompletní vzdálený root exploit správcům subsystému NFSD.\n\nChyba existuje v jádře od verze 3.16 vydané v březnu 2014 a spočívá v přetečení haldy (heap buffer overflow) v serverovém procesu `nfsd`. Zasaženy jsou systémy s verzemi jádra staršími než 6.12.117, 6.18.61, 7.3.2 nebo 7.4-rc1, pokud mají načtený modul `nfsd` (verze 4.1 nebo 4.2) a z internetu je dostupný TCP port 2049.\n\nSpolečnost OpenSec upozornila, že port 2049 bývá běžně otevřen na souborových serverech, NAS zařízeních, sestavovacích farmách a paměťových uzlech Kubernetes. Úspěšné zneužití umožňuje neautentizovaným útočníkům zničit paměť jádra a spustit libovolný příkaz s root právy. Přestože dosud nebyly zaznamenány útoky v reálném prostředí, administrátorům se důrazně doporučuje provést aktualizaci jádra a restartovat systémy.",
+        "jak_to_funguje": "Chyba nastává při zpracování požadavků NFSv4.1/v4.2 serverovým procesem `nfsd`. Útočník pošle speciálně upravené síťové pakety, které způsobí zápis dat mimo alokovaný paměťový buffer v haldě jádra (heap buffer overflow). Tím útočník dokáže číst paměť jádra, obejít ochranu KASLR (Kernel Address Space Layout Randomization) a umístit ukazatel na zpětné volání (callback) do uvolněné oblasti paměti. Ve chvíli, kdy útočník ukončí NFS spojení, jádro zavolá funkci `call_usermodehelper` a vykoná vložený systémový příkaz s právy uživatele root.",
+        "mitre": [
+          "T1210",
+          "T1068",
+          "T1059.004"
+        ],
+        "mitigace": [
+          "Nainstalovat nejnovější bezpečnostní aktualizace jádra od dodavatele distribučního balíčku a restartovat server.",
+          "Pokud nelze patch aplikovat ihned, omezit přístup k TCP portu 2049 pomocí firewallu pouze na důvěryhodné klienty.",
+          "Zastavit a zakázat službu `nfs-server` v `/etc/nfs.conf`, pokud sdílení souborů přes NFS není vyžadováno."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Buffer Overflow",
+          "vysvetleni": "Přetečení vyrovnávací paměti - situace, kdy program zapíše více dat do paměťového bloku, než pro kolik byl dimenzován, což vede k přepsání sousedních paměťových struktur."
+        },
+        {
+          "pojem": "KASLR",
+          "vysvetleni": "Kernel Address Space Layout Randomization - bezpečnostní mechanismus operačního systému náhodně měnící umístění jádra v paměti pro ztížení exploatace."
+        },
+        {
+          "pojem": "Heap",
+          "vysvetleni": "Halda - oblast paměti používaná v operačním systému pro dynamické alokování paměti během běhu programu."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 6,
+      "titulek": "Bezpečnostní incident v SAP po kompromitaci účtů na GitHubu a úpravě zdrojových kódů",
+      "kategorie": "data-breach",
+      "zavaznost_skore": 6,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzená neoprávněná aktivita a únik autentizačních tokenů zaměstnanců), +2 Dopad na enterprise software (největší dodavatel podnikového softwaru SAP), +1 Umožňuje Privilege Escalation nebo Lateral Movement (využití ukradených tokenů k modifikaci kódů).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/sap-confirms-security-incident-after-suspicious-github-activity/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Německý softwarový gigant SAP potvrdil bezpečnostní incident označený interním kódovým názvem 'Project Granite'. Útočníci kompromitovali vývojové prostředí na GitHubu, odkud zcizili autentizační tokeny a modifikovali zdrojové kódy.",
+        "cil": "Repozitáře a vývojové prostředí společnosti SAP na platformě GitHub.",
+        "dopad_laici": "Jeden z největších světových dodavatelů firemního softwaru řešil neoprávněný zásah do svých zdrojových kódů na vývojářské platformě. Podle dosavadního vyšetřování nedošlo k úniku zákaznických dat ani k ohrožení samotných aplikací u klientů."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Německá společnost SAP potvrzuje bezpečnostní incident v reakci na detekci podezřelé aktivity ve svém IT prostředí. Výrobce podnikového softwaru uvádí, že dosavadní důkazy neukazují na kompromitaci zákaznických systémů nebo dat. SAP se sídlem v Walldorfu patří s více než 110 000 zaměstnanci a 300 miliony předplatitelů mezi největší enterprise dodavatele softwaru na světě.\n\nPodle informací deníku Der Spiegel, který vychází z interního memoranda, byl útok evidován pod kódovým označením 'Project Granite'. Útočníci pronikli do prostředí SAPu na GitHubu, pravděpodobně za využití AI nástrojů. Zdroje z prostředí společnosti uvádí, že útočníci dokázali získat autentizační tokeny zaměstnanců SAP a s jejich pomocí zkopírovali a rovněž upravili zdrojový kód v repozitářích GitHub.\n\nSpolečnost SAP potvrdila implementaci opatření na ochranu zákazníků a zachování bezpečnosti svých služeb, odmítla však uvést konkrétní prostředí nebo doporučení pro zákazníky stahující kód z jejích repozitářů. Německý spolkový úřad BSI v návaznosti na incident varoval před útočnými AI agenty.",
+        "jak_to_funguje": "Útočníci získali autentizační tokeny (Personal Access Tokens nebo OAuth tokens) patřící vývojářům SAPu. Tyto tokeny použili k autentizaci vůči GitHub API, což jim umožnilo získat přístup k soukromým repozitářům společnosti. Pomocí získaných přístupových práv provedli operace čtení kódů i zápisu (commit) neoprávněných změn do repozitářů zdrojových kódů. Útočníci k automatizaci průzkumu a obcházení kontrol mohli využít generativní AI útočné frameworky.",
+        "mitre": [
+          "T1078",
+          "T1552.001",
+          "T1195.001"
+        ],
+        "mitigace": [
+          "Provést okamžitou rotaci všech přístupových tokenů a SSH klíčů spojených s vývojovými účty na GitHubu.",
+          "Zavedení striktní detekce anomálií při volání GitHub API a audit změn v kódových repozitářích.",
+          "Vynutit podepisování commitů pomocí GPG klíčů pro ověření autentičnosti vloženého kódu."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Token",
+          "vysvetleni": "Digitální přístupový klíč sloužící k ověření identity uživatele nebo aplikace bez nutnosti opakovaně zadávat heslo."
+        },
+        {
+          "pojem": "Commit",
+          "vysvetleni": "Uložení schválených změn ve zdrojovém kódu do verzovacího systému (např. Git)."
+        },
+        {
+          "pojem": "OAuth",
+          "vysvetleni": "Otevřený standard pro autorizaci, který umožňuje aplikacím bezpečný přístup k datům uživatele bez sdílení jeho přihlašovacích údajů."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 7,
+      "titulek": "Útok na dodavatelský řetězec SoftwareOK šíří Python RAT prostřednictvím oficiálních instalátorů",
+      "kategorie": "malware",
+      "zavaznost_skore": 5,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (kompromitované oficiální instalátory Q-Dir a DesktopOK), +1 Umožňuje Privilege Escalation nebo Lateral Movement (vykonávání příkazů a sběr dat z obětí), +1 Chybí patch (v době detekce byly stažené soubory infikovány přímo z oficiálního webu).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/hackers-trojanize-official-q-dir-and.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Oficiální distribuční kanály populárních utilit Q-Dir a DesktopOK od vývojáře SoftwareOK byly kompromitovány. Útočníci nahradili legitimní instalátory trojanizovanými verzemi, které při instalaci tajně stahují a instalují škodlivý Python RAT.",
+        "cil": "Uživatelé a systémy stahující nebo aktualizující nástroje Q-Dir (verze 12.83.0.0 až 12.85.0.0) a DesktopOK (verze 12.82.0.0 a 12.85.0.0).",
+        "dopad_laici": "Pokud jste si v nedávné době stáhli nebo aktualizovali programy Q-Dir nebo DesktopOK z oficiálního webu, mohl se vám do počítače dostat virus pro vzdálené řízení. Je nutné provést kontrolu počítače antivirem a prověřit plánované úlohy."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Bezpečnostní výzkumníci ze jihokorejské společnosti AhnLab odhalili útok na dodavatelský řetězec, v rámci kterého došlo k modifikaci instalačních souborů utilit Q-Dir a DesktopOK šířených prostřednictvím oficiálního webu SoftwareOK. Kód byl podvržen nejen při přímém stažení z webu, ale také v rámci automatického procesu aktualizace dříve nainstalovaných legitimních aplikací.\n\nInfikované instalátory spustí legitimní program Q-Dir nebo DesktopOK, aby nevzbudily podezření uživatele, a současně ze serveru `mail.c1a2[.]top` stahují dva balíčky: nástroj `7zr.exe` (legitimní 7-Zip pro rozbalení) a `dsv2_py39_agent.7z` obsahující škodlivý kód a běhové prostředí Pythonu.\n\nMalware po rozbalení vytvoří plánovanou úlohu (Scheduled Task) maskovanou za prohlížeč Microsoft Edge, která zajišťuje trvalost v systému spouštěním skriptu `py_client_dsv2.py`. Malware naváže spojení s C2 serverem `8.210.69[.]51:9876`, provádí sběr informací o běžících antivirových procesech (AhnLab, CrowdStrike, SentinelOne, Avast a další) a umožňuje vzdálené spouštění shell příkazů, Python kódů, pořizování snímků obrazovky a přenosy souborů.",
+        "jak_to_funguje": "Útočníci zneužili nedostatečné zabezpečení webového serveru nebo sestavovacího řetězce (build pipeline) vývojáře SoftwareOK a zaměnili binární instalátory za trojanizované verze. Při spuštění instalátoru dojde k paralelnímu rozbalení legitimní aplikace a škodlivého downloaderu. Downloader stáhne archív s přenosnou verzí interpretu Python a RAT skriptem. Vytvořením položky v plánovači úloh s názvem imitujícím systémové komponenty se zabezpečí spuštění po restartu. RAT po spuštění provede profilování oběti a odešle seznam bezpečnostního softwaru na C2 server.",
+        "mitre": [
+          "T1195.002",
+          "T1053.005",
+          "T1059.006",
+          "T1518.001"
+        ],
+        "mitigace": [
+          "Ověřit hash (SHA-256) stažených instalačních souborů a porovnat je s oficiálními kontrolními součty.",
+          "Zkontrolovat plánované úlohy (Task Scheduler) na přítomnost podezřelých příkazů spouštějících Python prostředí.",
+          "Blokovat síťovou komunikaci směrem k adresám `mail.c1a2[.]top` a `8.210.69[.]51`."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "RAT",
+          "vysvetleni": "Remote Access Trojan - druh škodlivého softwaru, který útočníkovi umožňuje vzdáleně ovládat kompromitovaný počítač."
+        },
+        {
+          "pojem": "Supply chain attack",
+          "vysvetleni": "Útok na dodavatelský řetězec - útok zaměřený na zranitelnějšího dodavatele softwaru nebo služeb s cílem zasáhnout jeho koncovou zákaznickou základnu."
+        },
+        {
+          "pojem": "Scheduled Task",
+          "vysvetleni": "Plánovaná úloha - funkce operačního systému Windows umožňující automatické spouštění programů či skriptů ve stanovený čas nebo při startu systému."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 8,
+      "titulek": "Správce hesel pCloud Pass čelil kybernetickému útoku a pokusům o neoprávněné přihlášení",
+      "kategorie": "data-breach",
+      "zavaznost_skore": 5,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (potvrzený útok na pCloud Pass s pokusy o přihlášení a únikem e-mailů), +2 Dopad na enterprise software / bezpečnostní služby (správce hesel s šifrovanými trezory).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/pcloud-confirms-password-manager-hack-after-suspicious-login-alerts/"
+        },
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/pcloud-password-manager-hit-by-cyber.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Správce hesel pCloud Pass se stal terčem kybernetického útoku. Uživatelé hlásili upozornění na neznámá zařízení připojující se k jejich účtům ze systémové IP adresy v Lucembursku i při zapnutém dvoufázovém ověření (2FA).",
+        "cil": "Uživatelé a účty služby správce hesel pCloud Pass.",
+        "dopad_laici": "Uživatelé služby pCloud Pass obdrželi e-mailová varování o přihlášení neznámého zařízení. Společnost tvrdí, že samotné trezory s hesly nebyly kompromitovány, protože jsou šifrovány hlavním heslem. Uživatelé si přesto mají dát pozor na rybářské e-maily (phishing)."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Služba pCloud Pass potvrdila kybernetický útok poté, co uživatelé začali hromadně hlásit upozornění na přihlášení neznámých zařízení k jejich účtům, a to i v případech, kdy měli zapnuté dvoufázové ověření (2FA). Uživatelé z celého světa obdrželi e-mailové zprávy varující, že se k jejich účtu připojilo neznámé zařízení označené jako 'pd' z IP adresy 45.131.244.7 (případně 45.131.247.10) v Lucembursku, která patří přímo do infrastruktury pCloud.\n\nVe svém prohlášení pCloud uvedl: 'Došlo ke kybernetickému útoku zaměřenému na pCloud Pass, který byl týmem pCloud rychle izolován. Bohužel došlo k odhalení malého počtu e-mailových adres uživatelů pCloud Pass a k pokusům o přihlášení. Náš systém na tyto adresy automaticky odesílá oznámení.' Společnost zdůraznila, že šifrovaná hesla a poznámky nebyly kompromitovány, neboť jsou šifrovány na zařízení klienta a rozšifrovat je lze pouze znalostí hlavního hesla (Master Password).\n\nNěkteří uživatelé si všimli, že odkaz 'Open settings' v notifikačním e-mailu směroval na adresu `passqa1.pcloud.com`, což odpovídá testovacímu prostředí (QA). Incident je v krátké době již třetím útokem na správce hesel po nedávných událostech u mSecure a 1Password.",
+        "jak_to_funguje": "Útočníci získali seznam e-mailových adres spojených s účty pCloud Pass a zneužili interní rozhraní nebo QA prostředí (`passqa1.pcloud.com`) k provádění automatizovaných pokusů o přihlášení. Vzhledem k zásahu do backendu rozhraní systém odeslal legitimní bezpečnostní notifikace uživatelům. pCloud neupřesnil, zda útočníci stáhli šifrované databázové trezory (encrypted vaults). Pokud by útočníci šifrované trezory získali, mohli by se pokusit o jejich prolomení offline útokem hrubou silou bez omezení rychlosti či obcházení 2FA.",
+        "mitre": [
+          "T1110.001",
+          "T1586.002",
+          "T1595"
+        ],
+        "mitigace": [
+          "Změnit hlavní heslo (Master Password) k účtu pCloud Pass na silné a unikátní heslo.",
+          "Zkontrolovat seznam autorizovaných zařízení v nastavení účtu a odebrat neznámé relace.",
+          "Dát pozor na phishingové e-maily požadující zadání hlavního hesla nebo obnovovacích klíčů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "2FA",
+          "vysvetleni": "Two-Factor Authentication - dvoufázové ověření identity uživatele vyžadující dvě různé formy potvrzení (např. heslo a kód z mobilní aplikace)."
+        },
+        {
+          "pojem": "Master Password",
+          "vysvetleni": "Hlavní heslo - klíčové heslo sloužící k zašifrování a dešifrování celého trezoru s ostatními uloženými hesly."
+        },
+        {
+          "pojem": "Phishing",
+          "vysvetleni": "Podvodná technika v kyberprostoru sloužící k vylákání citlivých údajů (hesla, karty) od oběti pod přetvářkou důvěryhodné instituce."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 9,
+      "titulek": "Únik osobních a zdravotních dat ze systémů zdravotnického giganta Boston Scientific",
+      "kategorie": "data-breach",
+      "zavaznost_skore": 5,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (vishingový útok vedoucí k úniku dat 117 789 osob), +2 Dopad na enterprise software a zdravotnický sektor (jeden z největších výrobců zdravotnických prostředků).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/security/new-boston-scientific-data-breach-exposes-personal-medical-info/"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Zdravotnická společnost Boston Scientific rozesílá oznámení o úniku dat z cloudové infrastruktury, k němuž došlo po vishingovém útoku. Incident zasáhl 117 789 osob a způsobil únik osobních identifikačních a zdravotních údajů.",
+        "cil": "Cloudová infrastruktura společnosti Boston Scientific a osobní data zasažených pacientů a klientů.",
+        "dopad_laici": "Hacker vymámil po telefonu přístupové údaje od zaměstnance zdravotnické firmy a ukradl osobní i zdravotní údaje více než 117 tisíc lidí. Výroba a provoz lékařských přístrojů (jako jsou kardiostimulátory) nebyly útokem ovlivněny."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Společnost Boston Scientific zaměřená na zdravotnické technologie rozesílá oznámení o úniku dat osobám zasaženým kybernetickým útokem. Útočník použil metody sociálního inženýrství při telefonním phishingu (vishing) k získání neoprávněného přístupu do cloudové infrastruktury firmy. Útok vystavil riziku cloudové aplikace a uložená data v období mezi 1. a 7. květnem. Společnost zjistila neoprávněný přístup 12. května a vyšetřování potvrdilo únik dat 5. listopadu.\n\nPodle portálu generálního prokurátora státu Texas incident zasáhl 117 789 osob. Mezi uniklé informace patří jméno, adresa, číslo sociálního pojištění (SSN), číslo dokladu totožnosti, zdravotní informace, informace o zdravotním pojištění a datum narození. Zpráva upřesňuje, že zdravotní dokumentace pacientů a data ze vzdálených monitorovacích systémů či připojených zdravotnických prostředků zasaženy nebyly.\n\nJedná se již o druhý únik dat společnosti v tomto roce; v srpnu 2026 hlásila Boston Scientific výpadek sítě po kompromitaci síťového prvku, vyšetřování CrowdStrike však potvrdilo, že nejnovější květnový incident s předchozím nesouvisí.",
+        "jak_to_funguje": "Útočník prováděl cílený vishing (hlasový phishing), při kterém se po telefonu vydával za člena IT podpory nebo důvěryhodnou osobu a přesvědčil zaměstnance k poskytnutí přihlašovacích údajů a kódu dvoufázového ověření pro přístup do cloudové platformy (např. AWS nebo Azure). S těmito přístupovými údaji útočník přistupoval ke cloudovým aplikacím a vyexportoval citlivá databázová data obsahující zdravotní záznamy.",
+        "mitre": [
+          "T1566.004",
+          "T1078.004",
+          "T1530"
+        ],
+        "mitigace": [
+          "Zavedení školení zaměstnanců zaměřeného na odhalení vishingových technik a sociálního inženýrství.",
+          "Nasazení FIDO2/WebAuthn hardwarových bezpečnostních klíčů odolných vůči phishingu pro přístup do cloudových systémů.",
+          "Striktní omezení pravomocí identity and access managementu (IAM) v cloudovém prostředí."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "Vishing",
+          "vysvetleni": "Voice Phishing - podvodné telefonní hovory, při kterých se útočník vydává za autoritu a snaží se získat citlivé přístupové údaje."
+        },
+        {
+          "pojem": "SSN",
+          "vysvetleni": "Social Security Number - číslo sociálního pojištění používané v USA jako unikátní identifikátor obyvatel."
+        },
+        {
+          "pojem": "IAM",
+          "vysvetleni": "Identity and Access Management - systém pro správu identit a řízení přístupových práv uživatelů k IT zdrojům."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    },
+    {
+      "poradi": 10,
+      "titulek": "Falešná aplikace v Microsoft Store šířila škodlivý kód Vinci RAT pro vzdálenou kontrolu",
+      "kategorie": "malware",
+      "zavaznost_skore": 4,
+      "zavaznost_slova": "STŘEDNÍ",
+      "zavaznost_zduvodneni": "+3 Zneužití in the wild (aktivní kampaň využívající Microsoft Store k doručení malwaru), +1 Umožňuje Privilege Escalation nebo Lateral Movement (zřízení vzdáleného přístupu a persistence v systému).",
+      "aktivne_zneuzivano": true,
+      "cve": [],
+      "zdroje": [
+        {
+          "nazev": "The Hacker News",
+          "url": "https://thehackernews.com/2026/11/microsoft-store-app-found-delivering.html"
+        }
+      ],
+      "rychly_vycuc": {
+        "podstata": "Útočníci využili oficiální obchod Microsoft Store k distribuci nového škodlivého kódu Vinci RAT. Útok začíná přesměrováním na falešný web pro nástroj Snipping Tool a stažením aplikace publikované v obchodě Microsoftu.",
+        "cil": "Uživatelé operačního systému Windows stahující aplikace z neoficiálních odkazů přesměrovaných na Microsoft Store.",
+        "dopad_laici": "Útočníci dokázali dostat vir do oficiálního obchodu Microsoft Store pod záštitou pomocného nástroje. Pokud si jej uživatel stáhhl, útočník získal plný vzdálený přístup k jeho počítači a mohl provádět libovolné příkazy."
+      },
+      "technicky_kontext": {
+        "detailni_preklad": "Výzkumníci ze společnosti eSentire odhalili podrobnosti o kybernetickém útoku, ve kterém útočníci využili aplikaci v obchodě Microsoft Store k doručení nástroje pro vzdálený přístup (RAT) nazvaného Vinci RAT. Útok začíná přesměrováním na falešný web `snipp.codes-team[.]com`, odkud se stáhne podepsaný instalátor `Snipping-Tool.exe`. Spuštěním binárního souboru dojde k instalaci aplikace 'Setup Assistant' založené na prostředí Electron, kterou v Microsoft Store publikovala společnost ETPS Ltd.\n\nAplikace udržovala komunikaci s C2 infrastrukturou (`setup-assistant[.]com`), sledovala složku Downloads oběti a umožňovala spouštění PowerShellu a JavaScriptu z dálky. Přístup byl využit k načtení škodlivého stageru, zřízení trvalého přístupu pomocí plánované úlohy spouštěné každých 10 minut a stažení samotného Vinci RAT z adresy `monkeysholder[.]info/api.php`.\n\nVinci RAT provádí fingerprinting hostitele, vyhledává nainstalované bezpečnostní nástroje, vypíná rozhraní Windows AMSI a umožňuje vzdálený shell přístup i spouštění arbitrary DLL, EXE a PowerShell payloadů. Aplikace byla v obchodu přístupná od června 2026 a v současnosti již byla stažena.",
+        "jak_to_funguje": "Útočník využije legitimní kanál Microsoft Store pro obcházení bezpečnostních filtrů. Nainstalovaná Electron aplikace naváže spojení s C2 serverem. Následně stager spustí PowerShell příkaz, který provede bypass rozhraní AMSI (Antimalware Scan Interface) přepsáním paměťových struktur v procesu `amsi.dll`. Poté vytvoří plánovanou úlohu pro trvalost a stáhne z rozhraní C2 šifrovaný payload Vinci RAT, který se dešifruje přímo v paměti a spustí reverzní shell.",
+        "mitre": [
+          "T1204.002",
+          "T1566.002",
+          "T1059.001",
+          "T1562.001",
+          "T1053.005"
+        ],
+        "mitigace": [
+          "Blokovat domény spojené s kampaní: `codes-team[.]com`, `setup-assistant[.]com` a `monkeysholder[.]info`.",
+          "Omezit instalaci aplikací z Microsoft Store na firemních zařízeních pomocí zásad AppLocker nebo Windows Defender Application Control (WDAC).",
+          "Monitorovat pokusy o vypnutí nebo modifikaci rozhraní AMSI v paměti procesů."
+        ]
+      },
+      "slovnicek": [
+        {
+          "pojem": "AMSI",
+          "vysvetleni": "Antimalware Scan Interface - rozhraní ve Windows umožňující aplikacím předávat skripty (PowerShell, JavaScript) antivirovému programu k prověření před jejich spuštěním."
+        },
+        {
+          "pojem": "Electron",
+          "vysvetleni": "Softwarový framework umožňující vývoj desktopových aplikací za použití webových technologií (Node.js, HTML, JavaScript)."
+        },
+        {
+          "pojem": "Fingerprinting",
+          "vysvetleni": "Technika shromažďování detailních informací o konfiguraci systému, operačním systému a softwaru s cílem identifikovat oběť."
+        }
+      ],
+      "jistota_extrakce": "VYSOKÁ"
+    }
+  ]
+}
